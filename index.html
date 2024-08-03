@@ -3,50 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Website</title>
+    <title>Modern Recipe Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
+            background-color: #f0f0f0;
+            color: #333;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #FF6347;
             color: white;
             text-align: center;
             padding: 1em 0;
         }
         nav {
-            margin: 0;
-            padding: 0;
-            text-align: center;
+            display: flex;
+            justify-content: center;
             background-color: #333;
+            padding: 1em;
         }
         nav a {
-            display: inline-block;
-            padding: 1em;
             color: white;
             text-decoration: none;
+            margin: 0 1em;
+            padding: 0.5em 1em;
+            border-radius: 4px;
         }
         nav a:hover {
-            background-color: #ddd;
-            color: black;
+            background-color: #FF6347;
         }
         .container {
-            padding: 2em;
+            max-width: 1200px;
+            margin: 2em auto;
+            padding: 0 2em;
         }
         .recipe {
             background-color: white;
-            margin: 1em 0;
+            margin: 2em 0;
             padding: 1em;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row;
+        }
+        .recipe img {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-right: 1em;
         }
         .recipe h2 {
             margin-top: 0;
         }
-        .recipe p {
+        .recipe ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .recipe ul li {
             margin: 0.5em 0;
         }
         footer {
@@ -71,47 +85,53 @@
     </nav>
     <div class="container">
         <div class="recipe">
-            <h2>Spaghetti Carbonara</h2>
-            <p><strong>Ingredients:</strong></p>
-            <ul>
-                <li>200g Spaghetti</li>
-                <li>100g Pancetta</li>
-                <li>2 large eggs</li>
-                <li>50g Pecorino cheese</li>
-                <li>50g Parmesan cheese</li>
-                <li>2 cloves of garlic</li>
-                <li>Salt and black pepper</li>
-            </ul>
-            <p><strong>Instructions:</strong></p>
-            <p>1. Cook the spaghetti in a large pot of boiling salted water.</p>
-            <p>2. In a separate pan, fry the pancetta with the garlic until crispy.</p>
-            <p>3. Beat the eggs in a bowl, then mix in the cheeses.</p>
-            <p>4. Drain the spaghetti and mix with the pancetta and garlic. Remove from heat.</p>
-            <p>5. Quickly mix in the egg and cheese mixture, stirring well.</p>
-            <p>6. Season with salt and black pepper to taste. Serve immediately.</p>
+            <img src="https://via.placeholder.com/200" alt="Spaghetti Carbonara">
+            <div>
+                <h2>Spaghetti Carbonara</h2>
+                <p><strong>Ingredients:</strong></p>
+                <ul>
+                    <li>200g Spaghetti</li>
+                    <li>100g Pancetta</li>
+                    <li>2 large eggs</li>
+                    <li>50g Pecorino cheese</li>
+                    <li>50g Parmesan cheese</li>
+                    <li>2 cloves of garlic</li>
+                    <li>Salt and black pepper</li>
+                </ul>
+                <p><strong>Instructions:</strong></p>
+                <p>1. Cook the spaghetti in a large pot of boiling salted water.</p>
+                <p>2. In a separate pan, fry the pancetta with the garlic until crispy.</p>
+                <p>3. Beat the eggs in a bowl, then mix in the cheeses.</p>
+                <p>4. Drain the spaghetti and mix with the pancetta and garlic. Remove from heat.</p>
+                <p>5. Quickly mix in the egg and cheese mixture, stirring well.</p>
+                <p>6. Season with salt and black pepper to taste. Serve immediately.</p>
+            </div>
         </div>
 
         <div class="recipe">
-            <h2>Chicken Curry</h2>
-            <p><strong>Ingredients:</strong></p>
-            <ul>
-                <li>500g chicken breast</li>
-                <li>2 onions</li>
-                <li>3 cloves of garlic</li>
-                <li>1 tbsp ginger paste</li>
-                <li>2 tbsp curry powder</li>
-                <li>400ml coconut milk</li>
-                <li>2 tomatoes</li>
-                <li>Salt and pepper</li>
-                <li>Fresh coriander</li>
-            </ul>
-            <p><strong>Instructions:</strong></p>
-            <p>1. Dice the chicken breast and season with salt and pepper.</p>
-            <p>2. Fry the onions, garlic, and ginger paste until golden brown.</p>
-            <p>3. Add the chicken to the pan and cook until sealed.</p>
-            <p>4. Stir in the curry powder and cook for another minute.</p>
-            <p>5. Add the tomatoes and coconut milk, and simmer for 20 minutes.</p>
-            <p>6. Garnish with fresh coriander and serve with rice or naan bread.</p>
+            <img src="https://via.placeholder.com/200" alt="Chicken Curry">
+            <div>
+                <h2>Chicken Curry</h2>
+                <p><strong>Ingredients:</strong></p>
+                <ul>
+                    <li>500g chicken breast</li>
+                    <li>2 onions</li>
+                    <li>3 cloves of garlic</li>
+                    <li>1 tbsp ginger paste</li>
+                    <li>2 tbsp curry powder</li>
+                    <li>400ml coconut milk</li>
+                    <li>2 tomatoes</li>
+                    <li>Salt and pepper</li>
+                    <li>Fresh coriander</li>
+                </ul>
+                <p><strong>Instructions:</strong></p>
+                <p>1. Dice the chicken breast and season with salt and pepper.</p>
+                <p>2. Fry the onions, garlic, and ginger paste until golden brown.</p>
+                <p>3. Add the chicken to the pan and cook until sealed.</p>
+                <p>4. Stir in the curry powder and cook for another minute.</p>
+                <p>5. Add the tomatoes and coconut milk, and simmer for 20 minutes.</p>
+                <p>6. Garnish with fresh coriander and serve with rice or naan bread.</p>
+            </div>
         </div>
     </div>
     <footer>
