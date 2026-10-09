@@ -15,6 +15,7 @@ import {
   Package,
   Refrigerator,
   Salad,
+  ScrollText,
   Snowflake,
   Soup,
   Utensils,
@@ -105,9 +106,10 @@ export const EQUIPMENT_KINDS: Record<EquipmentKind, { label: string; icon: Lucid
   cookware: { label: 'Посуда', icon: CookingPot },
   tool: { label: 'Инструменты', icon: Utensils },
   container: { label: 'Тара', icon: Package },
+  consumable: { label: 'Расходники', icon: ScrollText },
 };
 
-export const EQUIPMENT_ORDER: EquipmentKind[] = ['oven', 'hob', 'appliance', 'cookware', 'tool', 'container'];
+export const EQUIPMENT_ORDER: EquipmentKind[] = ['oven', 'hob', 'appliance', 'cookware', 'tool', 'container', 'consumable'];
 
 /** Цвета блюд в техкарте: назначаются по порядку в dishes. */
 export const DISH_TONES = ['tomato', 'herb', 'saffron', 'plum', 'sky', 'olive', 'crust', 'butter'] as const;

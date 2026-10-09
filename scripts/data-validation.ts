@@ -217,12 +217,10 @@ export function checkUniqueTitles(docs: { doc: { title: string }; file: string }
 export function checkKitchen(k: Kitchen, file: string): Issue[] {
   const issues: Issue[] = [];
   const error = (path: string, message: string) => issues.push({ severity: 'error', file, path, message });
-  const warn = (path: string, message: string) => issues.push({ severity: 'warning', file, path, message });
   const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
 
   uniqueIds(k.people, '/people', error);
   uniqueIds(k.equipment, '/equipment', error);
-  uniqueIds(k.consumables, '/consumables', error);
   uniqueIds(k.storage, '/storage', error);
 
   k.people.forEach((person, i) => {
@@ -232,15 +230,6 @@ export function checkKitchen(k: Kitchen, file: string): Issue[] {
       seen.add(norm(a.item));
     });
   });
-
-  const pantry = new Map<string, string>();
-  k.pantry.forEach((group, i) =>
-    group.items.forEach((item, j) => {
-      const other = pantry.get(norm(item));
-      if (other) warn(`/pantry/${i}/items/${j}`, `«${item}» уже есть в группе «${other}»`);
-      else pantry.set(norm(item), group.title);
-    }),
-  );
 
   return issues;
 }

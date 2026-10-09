@@ -28,8 +28,8 @@
     { "id": "cutter", "name": "Стакан или выемка", "kind": "tool", "spec": "Ø 7 см", "note": "Кружки для вареников" },
     { "id": "boards", "name": "Доски для заморозки", "kind": "cookware", "count": 4, "spec": "40×30 см", "note": "Помещаются в морозилку по две на полку" },
     { "id": "freezer", "name": "Морозилка", "kind": "appliance", "spec": "2 свободные полки", "note": "Без шоковой заморозки: доска промерзает ≈ 45 минут" },
-    { "id": "film", "name": "Пищевая плёнка", "kind": "tool" },
-    { "id": "bags", "name": "Zip-пакеты 1 л", "kind": "container", "count": 19, "note": "13 — пельмени, 6 — вареники" }
+    { "id": "film", "name": "Пищевая плёнка", "kind": "consumable" },
+    { "id": "bags", "name": "Zip-пакеты 1 л", "kind": "consumable", "count": 19, "note": "13 — пельмени, 6 — вареники" }
   ],
   "dishes": [
     {

@@ -108,7 +108,7 @@ export function menuData(): Plugin {
 
       const pages: PageMeta[] = [
         { path: 'plans/', title: 'Техкарты', description: 'Готовые планы дней готовки под конкретные объёмы и технику.' },
-        { path: 'kitchen/', title: 'Кухня', description: 'Справочник для техкарт: кто что не ест, оборудование, расходники, хранение.' },
+        { path: 'kitchen/', title: 'Кухня', description: 'Справочник для техкарт: кто что не ест, оборудование, хранение.' },
         ...data.recipes.map((r) => ({ path: `recipes/${r.id}/`, title: r.title, description: r.description })),
         ...data.plans.map((p) => ({ path: `plans/${p.id}/`, title: p.title, description: p.summary })),
       ];

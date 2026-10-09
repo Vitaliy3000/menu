@@ -68,7 +68,7 @@
     "equipment": {
       "type": "array",
       "minItems": 1,
-      "description": "Техника и посуда, под которые адаптирован план.",
+      "description": "Техника, посуда и расходники, под которые адаптирован план. Расходники (kind: consumable) техкарта перечисляет сама: какие и сколько нужно на этот день.",
       "items": {
         "$ref": "#/$defs/Equipment"
       }
@@ -178,6 +178,7 @@
     },
     "EquipmentKind": {
       "title": "EquipmentKind",
+      "description": "oven — духовка, hob — плита, appliance — техника, cookware — посуда, tool — инструменты, container — многоразовая тара, consumable — расходники: одноразовые контейнеры, пакеты, фольга, плёнка, пергамент, маркировка.",
       "type": "string",
       "enum": [
         "oven",
@@ -185,7 +186,8 @@
         "appliance",
         "cookware",
         "tool",
-        "container"
+        "container",
+        "consumable"
       ]
     },
     "Equipment": {

@@ -1,20 +1,15 @@
-import { Check, Copy, FileJson, Flame, Info, Microwave, Snowflake } from 'lucide-preact';
-import { useState } from 'preact/hooks';
+import { Info } from 'lucide-preact';
 import { SectionNav } from '../components/SectionNav.tsx';
 import { kitchen } from '../data/index.ts';
-import { AVOID_LEVELS, AVOID_ORDER, CONSUMABLE_KINDS, CONSUMABLE_ORDER, kitchenToMarkdown, STORAGE_PLACES } from '../lib/kitchen.ts';
+import { AVOID_LEVELS, AVOID_ORDER, STORAGE_PLACES } from '../lib/kitchen.ts';
 import { DISH_TONES, EQUIPMENT_KINDS, EQUIPMENT_ORDER } from '../lib/labels.ts';
-import { href } from '../lib/router.tsx';
-import type { Consumable, Kitchen, Person } from '../types/kitchen.gen.ts';
+import type { Person } from '../types/kitchen.gen.ts';
 import { NotFoundPage } from './NotFoundPage.tsx';
 
 const SECTIONS = [
   { id: 'people', label: 'Кто что не ест' },
   { id: 'equipment', label: 'Оборудование' },
-  { id: 'consumables', label: 'Расходники' },
   { id: 'storage', label: 'Хранение' },
-  { id: 'pantry', label: 'Всегда дома' },
-  { id: 'rules', label: 'Правила' },
 ];
 
 export function KitchenPage() {
@@ -26,7 +21,7 @@ export function KitchenPage() {
       <header class="page-head">
         <h1 class="display h1">Кухня</h1>
         <p class="lead">
-          Справочник для составления техкарт: кто что не ест, чем готовим, во что фасуем и куда убираем. Техкарты на него не
+          Справочник для составления техкарт: кто что не ест, чем готовим и куда убираем. Техкарты на него не
           ссылаются — он нужен, чтобы не повторять всё это в каждом промпте.
         </p>
         {k.draft && (
@@ -39,8 +34,6 @@ export function KitchenPage() {
           </div>
         )}
       </header>
-
-      <PromptPanel kitchen={k} />
 
       <SectionNav label="Разделы справочника" sections={SECTIONS} always />
 
@@ -84,29 +77,6 @@ export function KitchenPage() {
         </div>
       </section>
 
-      <section id="consumables" class="kitchen-section">
-        <h2 class="display h2 section-heading">Расходники</h2>
-        <div class="consumable-groups">
-          {CONSUMABLE_ORDER.map((kind) => {
-            const items = k.consumables.filter((c) => c.kind === kind);
-            if (items.length === 0) return null;
-            const { label, icon: Icon } = CONSUMABLE_KINDS[kind];
-            return (
-              <section key={kind} class="card consumable-group">
-                <h3 class="info-title">
-                  <Icon aria-hidden="true" />
-                  {label}
-                </h3>
-                <ul>
-                  {items.map((c) => (
-                    <ConsumableRow key={c.id} item={c} />
-                  ))}
-                </ul>
-              </section>
-            );
-          })}
-        </div>
-      </section>
 
       <section id="storage" class="kitchen-section">
         <h2 class="display h2 section-heading">Хранение</h2>
@@ -133,36 +103,6 @@ export function KitchenPage() {
         </div>
       </section>
 
-      <section id="pantry" class="kitchen-section">
-        <h2 class="display h2 section-heading">Всегда дома</h2>
-        <p class="muted section-hint">В закупку техкарты не попадает — или помечается как «обычно есть дома».</p>
-        <div class="pantry-groups">
-          {k.pantry.map((g) => (
-            <div key={g.title} class="pantry-group">
-              <h3 class="info-title">{g.title}</h3>
-              <div class="chip-wrap">
-                {g.items.map((item) => (
-                  <span key={item} class="tag">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="rules" class="kitchen-section">
-        <h2 class="display h2 section-heading">Правила для техкарт</h2>
-        <ol class="rules">
-          {k.rules.map((rule, i) => (
-            <li key={i}>
-              <span class="rule-num num">{i + 1}</span>
-              <p>{rule}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
     </div>
   );
 }
@@ -197,94 +137,6 @@ function PersonCard({ person, tone }: { person: Person; tone: string }) {
         );
       })}
       {person.avoid.length === 0 && <p class="muted">Ест всё.</p>}
-      {person.notes && person.notes.length > 0 && (
-        <ul class="bullets person-notes">
-          {person.notes.map((n, i) => (
-            <li key={i}>{n}</li>
-          ))}
-        </ul>
-      )}
     </article>
-  );
-}
-
-function ConsumableRow({ item }: { item: Consumable }) {
-  const flags = [
-    item.freezer && { key: 'freezer', icon: Snowflake, label: 'Можно в морозилку' },
-    item.microwave && { key: 'microwave', icon: Microwave, label: 'Можно в микроволновку' },
-    item.oven && { key: 'oven', icon: Flame, label: 'Можно в духовку' },
-  ].filter((f): f is { key: string; icon: typeof Snowflake; label: string } => Boolean(f));
-
-  return (
-    <li class="consumable">
-      <span class="consumable-main">
-        <span class="consumable-name">{item.name}</span>
-        {item.spec && <span class="consumable-spec">{item.spec}</span>}
-        {item.note && <span class="consumable-note">{item.note}</span>}
-      </span>
-      <span class="consumable-side">
-        {item.stock && <span class="consumable-stock num">{item.stock}</span>}
-        {flags.length > 0 && (
-          <span class="consumable-flags">
-            {flags.map((f) => (
-              <span key={f.key} class={`flag flag-${f.key}`} title={f.label}>
-                <f.icon aria-label={f.label} />
-              </span>
-            ))}
-          </span>
-        )}
-      </span>
-    </li>
-  );
-}
-
-function PromptPanel({ kitchen: k }: { kitchen: Kitchen }) {
-  const [copied, setCopied] = useState(false);
-  const absolute = (path: string) => new URL(href(path), window.location.origin).href;
-  const links = { planSchema: absolute('/schemas/cook-plan.schema.json'), kitchenJson: absolute('/kitchen.json') };
-
-  const copy = async () => {
-    const text = kitchenToMarkdown(k, links);
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      // Старые браузеры и не-https: через скрытое поле.
-      const area = document.createElement('textarea');
-      area.value = text;
-      area.style.position = 'fixed';
-      area.style.opacity = '0';
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand('copy');
-      area.remove();
-    }
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <section class="prompt-panel" aria-label="Для промпта">
-      <div class="prompt-text">
-        <h2 class="display h3">Для промпта</h2>
-        <p>
-          Скопируйте справочник одним текстом и вставьте в запрос на составление техкарты. Или дайте ссылки на JSON справочника и
-          схему техкарты.
-        </p>
-      </div>
-      <div class="prompt-actions">
-        <button type="button" class="btn btn-primary" onClick={copy}>
-          {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
-          {copied ? 'Скопировано' : 'Скопировать для промпта'}
-        </button>
-        <a class="btn btn-quiet" href={href('/kitchen.json')} target="_blank" rel="noreferrer">
-          <FileJson aria-hidden="true" />
-          kitchen.json
-        </a>
-        <a class="btn btn-quiet" href={href('/schemas/cook-plan.schema.json')} target="_blank" rel="noreferrer">
-          <FileJson aria-hidden="true" />
-          Схема техкарты
-        </a>
-      </div>
-    </section>
   );
 }

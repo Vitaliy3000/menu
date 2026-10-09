@@ -28,7 +28,7 @@
     { "id": "frying-pan", "name": "Сковорода", "kind": "cookware", "spec": "Ø 24 см", "note": "Орехи" },
     { "id": "bowls", "name": "Миски", "kind": "tool", "count": 2, "note": "Крошка для крамбла, свёкла; банка с крышкой — для заправки" },
     { "id": "probe", "name": "Термощуп", "kind": "tool", "note": "Лучше с выносным датчиком — не придётся открывать духовку" },
-    { "id": "foil", "name": "Фольга", "kind": "tool" },
+    { "id": "foil", "name": "Фольга", "kind": "consumable" },
     { "id": "platters", "name": "Сервировочные блюда", "kind": "container", "count": 2, "spec": "плоское под салат, тёплое под мясо" }
   ],
   "dishes": [

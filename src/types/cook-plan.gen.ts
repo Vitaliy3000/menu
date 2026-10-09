@@ -8,10 +8,13 @@
  */
 export type LocalId = string;
 /**
+ * oven — духовка, hob — плита, appliance — техника, cookware — посуда, tool — инструменты, container — многоразовая тара, consumable — расходники: одноразовые контейнеры, пакеты, фольга, плёнка, пергамент, маркировка.
+ *
  * This interface was referenced by `CookPlan`'s JSON-Schema
  * via the `definition` "EquipmentKind".
  */
-export type EquipmentKind = 'oven' | 'hob' | 'appliance' | 'cookware' | 'tool' | 'container';
+export type EquipmentKind =
+  'oven' | 'hob' | 'appliance' | 'cookware' | 'tool' | 'container' | 'consumable';
 /**
  * Единица измерения. Отображается по-русски: g → г, tbsp → ст. л., clove → зубчик и т. д.
  *
@@ -84,7 +87,7 @@ export interface CookPlan {
   tags?: string[];
   conditions: Conditions;
   /**
-   * Техника и посуда, под которые адаптирован план.
+   * Техника, посуда и расходники, под которые адаптирован план. Расходники (kind: consumable) техкарта перечисляет сама: какие и сколько нужно на этот день.
    *
    * @minItems 1
    */

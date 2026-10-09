@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Kitchen",
-  "description": "Справочник кухни: кто что не ест, оборудование, расходники, места хранения, что всегда есть дома и правила. На него опираются при составлении техкарт (CookPlan) вне сайта — чтобы не повторять всё это в каждом промпте. Техкарты на справочник не ссылаются и остаются самодостаточными.",
+  "description": "Справочник кухни: кто что не ест, оборудование и места хранения. На него опираются при составлении техкарт (CookPlan) вне сайта — чтобы не повторять всё это в каждом промпте. Техкарты на справочник не ссылаются и остаются самодостаточными.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["people", "equipment", "consumables", "storage", "pantry", "rules"],
+  "required": ["people", "equipment", "storage"],
   "properties": {
     "$schema": {
       "type": "string",
@@ -25,25 +25,10 @@
       "description": "Техника и многоразовая посуда, которые есть на кухне.",
       "items": { "$ref": "#/$defs/KitchenEquipment" }
     },
-    "consumables": {
-      "type": "array",
-      "description": "Одноразовые расходники: контейнеры, пакеты, фольга, плёнка, пергамент, маркировка.",
-      "items": { "$ref": "#/$defs/Consumable" }
-    },
     "storage": {
       "type": "array",
       "description": "Где храним готовое и сколько там места.",
       "items": { "$ref": "#/$defs/StoragePlace" }
-    },
-    "pantry": {
-      "type": "array",
-      "description": "Что обычно уже есть дома — в закупку техкарты не попадает или помечается staple.",
-      "items": { "$ref": "#/$defs/PantryGroup" }
-    },
-    "rules": {
-      "type": "array",
-      "description": "Правила составления техкарт: ограничения по времени, порциям, заморозке, маркировке.",
-      "items": { "type": "string", "minLength": 5 }
     }
   },
   "$defs": {
@@ -92,11 +77,6 @@
         "avoid": {
           "type": "array",
           "items": { "$ref": "#/$defs/AvoidItem" }
-        },
-        "notes": {
-          "type": "array",
-          "description": "Прочее о питании: «обед с собой пн–пт», «не ест после 21:00».",
-          "items": { "type": "string", "minLength": 3 }
         }
       }
     },
@@ -127,37 +107,6 @@
         }
       }
     },
-    "ConsumableKind": {
-      "title": "ConsumableKind",
-      "description": "container — контейнеры и формы, bag — пакеты, wrap — фольга, плёнка, пергамент, label — маркировка, other — прочее.",
-      "type": "string",
-      "enum": ["container", "bag", "wrap", "label", "other"]
-    },
-    "Consumable": {
-      "title": "Consumable",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "name", "kind"],
-      "properties": {
-        "id": { "$ref": "#/$defs/LocalId" },
-        "name": { "type": "string", "minLength": 2, "maxLength": 60 },
-        "kind": { "$ref": "#/$defs/ConsumableKind" },
-        "spec": {
-          "type": "string",
-          "maxLength": 100,
-          "description": "Объём, размер, материал: «750 мл, PP, с крышкой»."
-        },
-        "stock": {
-          "type": "string",
-          "maxLength": 40,
-          "description": "Сколько обычно есть дома: «≈ 20 шт», «1 рулон 30 м»."
-        },
-        "freezer": { "type": "boolean", "description": "Можно в морозилку." },
-        "microwave": { "type": "boolean", "description": "Можно в микроволновку." },
-        "oven": { "type": "boolean", "description": "Можно в духовку." },
-        "note": { "type": "string", "maxLength": 160 }
-      }
-    },
     "StorageKind": {
       "title": "StorageKind",
       "type": "string",
@@ -183,21 +132,6 @@
           "description": "Сколько обычно свободно под заготовки."
         },
         "note": { "type": "string", "maxLength": 160 }
-      }
-    },
-    "PantryGroup": {
-      "title": "PantryGroup",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "items"],
-      "properties": {
-        "title": { "type": "string", "minLength": 2, "maxLength": 40 },
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": { "type": "string", "minLength": 2, "maxLength": 60 }
-        }
       }
     }
   }
