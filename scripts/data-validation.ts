@@ -98,6 +98,7 @@ export function validateSources(input: {
 
   for (const { doc, file } of recipes) issues.push(...checkRecipe(doc, file));
   for (const { doc, file } of plans) issues.push(...checkPlan(doc, file));
+  issues.push(...checkUniqueTitles(plans));
 
   return {
     recipes: recipes.map((r) => r.doc),
@@ -162,6 +163,19 @@ function describeAjvError(e: ErrorObject): string {
     default:
       return e.message ?? e.keyword;
   }
+}
+
+/** Названия техкарт уникальны (без учёта регистра и «ё»): по ним техкарты различают на сайте. */
+export function checkUniqueTitles(docs: { doc: { title: string }; file: string }[]): Issue[] {
+  const seen = new Map<string, string>();
+  const issues: Issue[] = [];
+  for (const { doc, file } of docs) {
+    const key = doc.title.trim().toLowerCase().replace(/ё/g, 'е');
+    const other = seen.get(key);
+    if (other) issues.push({ severity: 'error', file, path: '/title', message: `название «${doc.title}» уже есть в ${other}` });
+    else seen.set(key, file);
+  }
+  return issues;
 }
 
 /* ------------------------------------------------------------------ */

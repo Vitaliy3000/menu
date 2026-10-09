@@ -1,5 +1,5 @@
 import { Check, Info, Lightbulb, Users } from 'lucide-preact';
-import { addDays, countLabel, formatAmount, formatDayMonth, formatNumber, formatWeekdayShort, parseDate } from '../../lib/format.ts';
+import { addDays, countLabel, formatAmount, formatDayMonth, formatNumber, formatWeekdayShort } from '../../lib/format.ts';
 import { EQUIPMENT_KINDS, EQUIPMENT_ORDER, STORAGE } from '../../lib/labels.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
 import type { CookPlan, Dish, Packaging } from '../../types/cook-plan.gen.ts';
@@ -19,7 +19,7 @@ export function Overview({ plan, tones, progress, togglePrep }: Props) {
         <h2 class="display h2 section-heading">Что получится</h2>
         <div class="dish-grid">
           {plan.dishes.map((dish) => (
-            <DishCard key={dish.id} plan={plan} dish={dish} tone={tones.get(dish.id)!} />
+            <DishCard key={dish.id} dish={dish} tone={tones.get(dish.id)!} startedAt={progress.startedAt} />
           ))}
         </div>
       </section>
@@ -117,7 +117,7 @@ export function Overview({ plan, tones, progress, togglePrep }: Props) {
   );
 }
 
-function DishCard({ plan, dish, tone }: { plan: CookPlan; dish: Dish; tone: string }) {
+function DishCard({ dish, tone, startedAt }: { dish: Dish; tone: string; startedAt: number | null }) {
   return (
     <article class={`card dish-card tone-${tone}`}>
       <header class="dish-head">
@@ -143,7 +143,7 @@ function DishCard({ plan, dish, tone }: { plan: CookPlan; dish: Dish; tone: stri
       </dl>
       <ul class="packaging">
         {dish.packaging.map((p, i) => (
-          <PackagingRow key={i} plan={plan} pack={p} />
+          <PackagingRow key={i} pack={p} startedAt={startedAt} />
         ))}
       </ul>
       {(dish.reheat || dish.nutrition) && (
@@ -166,10 +166,8 @@ function DishCard({ plan, dish, tone }: { plan: CookPlan; dish: Dish; tone: stri
   );
 }
 
-function PackagingRow({ plan, pack }: { plan: CookPlan; pack: Packaging }) {
+function PackagingRow({ pack, startedAt }: { pack: Packaging; startedAt: number | null }) {
   const { label, icon: Icon } = STORAGE[pack.storage];
-  const until = pack.days !== undefined && pack.storage !== 'serve' ? addDays(parseDate(plan.date), pack.days) : null;
-  const long = pack.days !== undefined && pack.days > 45;
   return (
     <li class={`pack pack-${pack.storage}`}>
       <span class="pack-icon">
@@ -181,13 +179,18 @@ function PackagingRow({ plan, pack }: { plan: CookPlan; pack: Packaging }) {
         </span>
         <span class="pack-where">
           {label}
-          {until &&
-            (long
-              ? ` · ${countLabel(Math.round(pack.days! / 30), ['месяц', 'месяца', 'месяцев'])}`
-              : ` · до ${formatWeekdayShort(until)}, ${formatDayMonth(until)}`)}
+          {pack.storage !== 'serve' && pack.days !== undefined && ` · ${shelfLife(pack.days, startedAt)}`}
           {pack.note && ` · ${pack.note}`}
         </span>
       </span>
     </li>
   );
+}
+
+/** Срок хранения: после старта готовки — конкретная дата, до него — длительность. */
+function shelfLife(days: number, startedAt: number | null): string {
+  if (days > 45) return countLabel(Math.round(days / 30), ['месяц', 'месяца', 'месяцев']);
+  if (!startedAt) return countLabel(days, ['день', 'дня', 'дней']);
+  const until = addDays(new Date(startedAt), days);
+  return `до ${formatWeekdayShort(until)}, ${formatDayMonth(until)}`;
 }

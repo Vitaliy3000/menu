@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { checkMacros, checkPlan, checkRecipe, sumInUnit, validateProject, validateSources } from '../scripts/data-validation.ts';
+import { checkMacros, checkPlan, checkRecipe, checkUniqueTitles, sumInUnit, validateProject, validateSources } from '../scripts/data-validation.ts';
 import type { CookPlan } from '../src/types/cook-plan.gen.ts';
 import type { Recipe } from '../src/types/recipe.gen.ts';
 
@@ -15,7 +15,6 @@ const plan = (): CookPlan => ({
   id: 'test-day',
   title: 'Тестовый день',
   summary: 'Минимальная техкарта для тестов.',
-  date: '2026-10-11',
   start: '10:00',
   duration: { total: 60, active: 30 },
   conditions: { cooks: 1, kitchen: 'Плита и духовка' },
@@ -60,6 +59,10 @@ describe('JSON Schema', () => {
     expect(messages(errors)).toContain('лишнее поле «recipeId»');
     const stepErrors = validate({ ...plan(), steps: [{ ...plan().steps[0]!, recipe: 'borsch' }] }, 'plan');
     expect(messages(stepErrors)).toContain('лишнее поле «recipe»');
+  });
+
+  it('техкарта не привязана к дате', () => {
+    expect(messages(validate({ ...plan(), date: '2026-10-11' }, 'plan'))).toContain('лишнее поле «date»');
   });
 
   it('ловит невалидный JSON и неверные enum', () => {
@@ -119,6 +122,16 @@ describe('смысловые проверки CookPlan', () => {
     const text = messages(checkPlan(p, file));
     expect(text).toContain('«lime» не используется');
     expect(text).toContain('блюдо «bread» не упоминается');
+  });
+});
+
+describe('уникальные названия техкарт', () => {
+  it('повтор названия — ошибка, без учёта регистра и «ё»', () => {
+    const a = { doc: { title: 'Заготовки на неделю' }, file: 'data/plans/a.json' };
+    const b = { doc: { title: 'заготовки на неделю' }, file: 'data/plans/b.json' };
+    const c = { doc: { title: 'Ужин на шестерых' }, file: 'data/plans/c.json' };
+    expect(checkUniqueTitles([a, c])).toEqual([]);
+    expect(messages(checkUniqueTitles([a, b, c]))).toContain('уже есть в data/plans/a.json');
   });
 });
 

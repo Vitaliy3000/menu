@@ -259,21 +259,21 @@
   color: color-mix(in oklab, var(--bg) 70%, transparent);
 }
 
-.next-plan .date-badge {
+.next-plan .stat-badge {
   background: color-mix(in oklab, var(--bg) 10%, transparent);
   color: var(--bg);
 }
 
-.next-plan .date-dow,
-.next-plan .date-mon {
+.next-plan .stat-top,
+.next-plan .stat-bottom {
   color: color-mix(in oklab, var(--bg) 65%, transparent);
 }
 
 /* ------------------------------------------------------------------ */
-/* Дата-бейдж                                                          */
+/* Бейдж с числом слева от карточки                                    */
 /* ------------------------------------------------------------------ */
 
-.date-badge {
+.stat-badge {
   flex: none;
   display: grid;
   justify-items: center;
@@ -286,25 +286,25 @@
   line-height: 1;
 }
 
-.date-badge.is-muted {
+.stat-badge.is-muted {
   background: var(--surface-2);
   color: var(--ink-2);
 }
 
-.date-dow,
-.date-mon {
-  font-size: 0.72rem;
+.stat-top,
+.stat-bottom {
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: color-mix(in oklab, currentColor 75%, transparent);
 }
 
-.date-day {
+.stat-value {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin: 3px 0 2px;
+  margin: 4px 0 3px;
 }
 
 /* ------------------------------------------------------------------ */
@@ -342,7 +342,7 @@
   grid-column: 2;
 }
 
-.plan-card .date-badge {
+.plan-card .stat-badge {
   grid-row: 1 / span 5;
 }
 
@@ -351,14 +351,14 @@
     row-gap: 8px;
   }
 
-  .plan-card .date-badge {
+  .plan-card .stat-badge {
     grid-row: 1 / span 2;
-    width: 54px;
+    width: 56px;
     height: 62px;
   }
 
-  .plan-card .date-day {
-    font-size: 1.45rem;
+  .plan-card .stat-value {
+    font-size: 1.3rem;
   }
 
   .plan-card-body > :nth-child(n + 3) {
@@ -400,21 +400,9 @@
   gap: 6px;
 }
 
-.plan-card.is-past {
-  background: transparent;
-}
-
-.plan-card.is-past .plan-card-title {
-  color: var(--ink-2);
-}
-
 @media (min-width: 720px) {
   .plan-card {
     padding: 22px 24px;
     gap: 22px;
   }
-}
-
-.plans-heading {
-  margin-bottom: 12px;
 }

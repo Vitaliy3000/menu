@@ -29,12 +29,10 @@ export const recipes: Recipe[] = Object.values(recipeModules)
   .map(polish)
   .sort((a, b) => collator.compare(a.title, b.title));
 
-/** По дате, ближайшие сначала. */
-export const plans: CookPlan[] = Object.values(planModules)
-  .map(polish)
-  .sort(
-  (a, b) => a.date.localeCompare(b.date) || (a.start ?? '').localeCompare(b.start ?? ''),
-);
+/** В порядке файлов в data/plans — без сортировки. */
+export const plans: CookPlan[] = Object.entries(planModules)
+  .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+  .map(([, plan]) => polish(plan));
 
 const recipeById = new Map(recipes.map((r) => [r.id, r]));
 const planById = new Map(plans.map((p) => [p.id, p]));

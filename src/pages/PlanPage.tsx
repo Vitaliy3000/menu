@@ -1,7 +1,6 @@
-import { CalendarDays, ChefHat, ChevronLeft, Clock, Flame, Play, RotateCcw, Users, UtensilsCrossed } from 'lucide-preact';
-import { DateBadge } from '../components/DateBadge.tsx';
-import { countLabel, formatClock, formatDuration, formatLongDate, formatRelativeDay, parseDate } from '../lib/format.ts';
-import { currentStepIndex, dishTones, planBase, planWhen, totalPortions } from '../lib/plan.ts';
+import { ChefHat, Clock3, ChevronLeft, Clock, Flame, Play, RotateCcw, Users, UtensilsCrossed } from 'lucide-preact';
+import { countLabel, formatClock, formatDuration } from '../lib/format.ts';
+import { currentStepIndex, dishTones, doneStepCount, planBase, totalPortions } from '../lib/plan.ts';
 import { usePlanProgress } from '../lib/progress.ts';
 import { Link, navigate, setQuery, useLocation } from '../lib/router.tsx';
 import type { CookPlan } from '../types/cook-plan.gen.ts';
@@ -25,10 +24,7 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
   const cookStep = query.get('cook');
   const tones = dishTones(plan);
   const base = planBase(plan, progress.startedAt);
-  const date = parseDate(plan.date);
-  const when = planWhen(plan);
-
-  const doneCount = plan.steps.filter((s) => progress.done.includes(s.id)).length;
+  const doneCount = doneStepCount(plan, progress);
   const gotCount = plan.ingredients.filter((i) => progress.got.includes(i.id)).length;
   const current = plan.steps[currentStepIndex(plan.steps, progress.done)] ?? plan.steps[plan.steps.length - 1]!;
   const started = progress.startedAt !== null || doneCount > 0;
@@ -56,26 +52,25 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
       </Link>
 
       <header class="plan-hero">
-        <DateBadge date={plan.date} muted={when === 'past'} />
-        <div class="plan-hero-text">
-          <p class="eyebrow">
-            {formatLongDate(date)}
-            {plan.start && end && ` · ${plan.start}–${formatClock(end)}`}
-            {' · '}
-            {formatRelativeDay(date)}
-          </p>
-          <h1 class="display h1">{plan.title}</h1>
-          <p class="lead">{plan.summary}</p>
-          {plan.tags && plan.tags.length > 0 && (
-            <div class="chip-wrap">
-              {plan.tags.map((t) => (
-                <span key={t} class="tag">
-                  #{t}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
+        <p class="eyebrow">
+          Техкарта
+          {progress.startedAt && end
+            ? ` · начали в ${formatClock(new Date(progress.startedAt))}, по плану до ${formatClock(end)}`
+            : plan.start && end
+              ? ` · старт в ${plan.start}, готово к ${formatClock(end)}`
+              : ''}
+        </p>
+        <h1 class="display h1">{plan.title}</h1>
+        <p class="lead">{plan.summary}</p>
+        {plan.tags && plan.tags.length > 0 && (
+          <div class="chip-wrap">
+            {plan.tags.map((t) => (
+              <span key={t} class="tag">
+                #{t}
+              </span>
+            ))}
+          </div>
+        )}
       </header>
 
       <dl class="facts" style={{ '--facts': 4 }}>
@@ -135,7 +130,7 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
           )}
           {!started && plan.start && (
             <span class="faint plan-cta-hint">
-              <CalendarDays aria-hidden="true" />
+              <Clock3 aria-hidden="true" />
               Время шагов — от старта в {plan.start}; после «Начать» — от фактического.
             </span>
           )}

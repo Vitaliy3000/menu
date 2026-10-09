@@ -4,31 +4,8 @@
 
 .plan-hero {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 16px 22px;
-  align-items: start;
-  margin: 16px 0 28px;
-}
-
-.plan-hero .date-badge {
-  width: 68px;
-  height: 78px;
-  margin-top: 4px;
-}
-
-.plan-hero-text {
-  display: grid;
   gap: 12px;
-}
-
-@media (max-width: 559px) {
-  .plan-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .plan-hero .date-badge {
-    display: none;
-  }
+  margin: 16px 0 28px;
 }
 
 /* ------------------------------------------------------------------ */

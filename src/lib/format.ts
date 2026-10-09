@@ -119,7 +119,7 @@ export function formatDuration(minutes: number): string {
   if (m < 60) return `${m} мин`;
   const h = Math.floor(m / 60);
   const rest = m % 60;
-  return rest === 0 ? `${h} ч` : `${h} ч ${String(rest).padStart(2, '0')} мин`;
+  return rest === 0 ? `${h} ч` : `${h} ч ${String(rest).padStart(2, '0')} мин`;
 }
 
 /** Компактно для бейджей: 40′, 1:05 */
@@ -152,20 +152,6 @@ export function formatClock(date: Date): string {
 /* Даты                                                                */
 /* ------------------------------------------------------------------ */
 
-/** Локальная полночь для строки YYYY-MM-DD (без сдвига часового пояса). */
-export function parseDate(iso: string): Date {
-  const [y, m, d] = iso.split('-').map(Number);
-  return new Date(y!, m! - 1, d!);
-}
-
-/** Дата + время HH:MM в локальном часовом поясе. */
-export function parseDateTime(isoDate: string, clock: string): Date {
-  const date = parseDate(isoDate);
-  const [h, m] = clock.split(':').map(Number);
-  date.setHours(h!, m!, 0, 0);
-  return date;
-}
-
 export function addDays(date: Date, days: number): Date {
   const d = new Date(date);
   d.setDate(d.getDate() + days);
@@ -173,39 +159,12 @@ export function addDays(date: Date, days: number): Date {
 }
 
 const dayMonth = new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'long' });
-const weekdayLong = new Intl.DateTimeFormat('ru-RU', { weekday: 'long' });
 const weekdayShort = new Intl.DateTimeFormat('ru-RU', { weekday: 'short' });
-const monthShort = new Intl.DateTimeFormat('ru-RU', { month: 'short' });
-const fullDate = new Intl.DateTimeFormat('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 
+/** «15 октября» */
 export const formatDayMonth = (d: Date) => dayMonth.format(d);
-export const formatFullDate = (d: Date) => fullDate.format(d);
-export const formatWeekday = (d: Date) => weekdayLong.format(d);
+/** «чт» */
 export const formatWeekdayShort = (d: Date) => weekdayShort.format(d).replace('.', '');
-export const formatMonthShort = (d: Date) => monthShort.format(d).replace('.', '');
-
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-/** «Воскресенье, 11 октября» */
-export function formatLongDate(d: Date): string {
-  return `${capitalize(formatWeekday(d))}, ${formatDayMonth(d)}`;
-}
-
-export function daysBetween(from: Date, to: Date): number {
-  const a = new Date(from.getFullYear(), from.getMonth(), from.getDate());
-  const b = new Date(to.getFullYear(), to.getMonth(), to.getDate());
-  return Math.round((b.getTime() - a.getTime()) / 86_400_000);
-}
-
-/** «сегодня», «завтра», «через 3 дня», «вчера», «5 дней назад» */
-export function formatRelativeDay(date: Date, today: Date = new Date()): string {
-  const diff = daysBetween(today, date);
-  if (diff === 0) return 'сегодня';
-  if (diff === 1) return 'завтра';
-  if (diff === -1) return 'вчера';
-  const forms = ['день', 'дня', 'дней'] as const;
-  return diff > 0 ? `через ${countLabel(diff, forms)}` : `${countLabel(-diff, forms)} назад`;
-}
 
 export const MONTHS_SHORT = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'] as const;
 export const MONTHS_IN = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре', 'декабре'] as const;

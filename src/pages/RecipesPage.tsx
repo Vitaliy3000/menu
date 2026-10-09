@@ -1,12 +1,13 @@
 import { ArrowRight, Clock, Flame, Leaf, Search, SlidersHorizontal, Snowflake, Users, X } from 'lucide-preact';
 import { useEffect, useMemo, useState } from 'preact/hooks';
-import { DateBadge } from '../components/DateBadge.tsx';
 import { Plate } from '../components/Plate.tsx';
 import { Sheet } from '../components/Sheet.tsx';
+import { StatBadge } from '../components/StatBadge.tsx';
 import { plans, recipes } from '../data/index.ts';
-import { countLabel, formatDuration, formatRelativeDay, parseDate } from '../lib/format.ts';
+import { countLabel, formatDuration } from '../lib/format.ts';
 import { CATEGORIES, CATEGORY_ORDER, DIETS } from '../lib/labels.ts';
-import { nextUpcomingPlan, totalPortions } from '../lib/plan.ts';
+import { doneStepCount, isInProgress } from '../lib/plan.ts';
+import { peekProgress } from '../lib/progress.ts';
 import {
   applyFilters,
   extraFilterCount,
@@ -62,7 +63,7 @@ export function RecipesPage() {
         </p>
       </header>
 
-      <NextPlanBanner />
+      <ActivePlanBanner />
 
       <div class="catalog">
         <aside class="catalog-side" aria-label="Фильтры">
@@ -344,20 +345,19 @@ export function RecipeCard({ recipe: r, month }: { recipe: Recipe; month: number
   );
 }
 
-function NextPlanBanner() {
-  const plan = nextUpcomingPlan(plans);
+/** Если какую-то техкарту начали готовить и не закончили — быстрый возврат к ней. */
+function ActivePlanBanner() {
+  const plan = plans.find((p) => isInProgress(p, peekProgress(p.id)));
   if (!plan) return null;
-  const date = parseDate(plan.date);
+  const done = doneStepCount(plan, peekProgress(plan.id));
   return (
-    <Link to={`/plans/${plan.id}/`} class="next-plan">
-      <DateBadge date={plan.date} />
+    <Link to={`/plans/${plan.id}/?tab=steps`} class="next-plan">
+      <StatBadge top="шаг" value={String(Math.min(done + 1, plan.steps.length))} bottom={`из ${plan.steps.length}`} />
       <span class="next-plan-body">
-        <span class="eyebrow">Ближайшая техкарта · {formatRelativeDay(date)}</span>
+        <span class="eyebrow">Готовка в процессе</span>
         <span class="display next-plan-title">{plan.title}</span>
         <span class="next-plan-meta">
-          {plan.start && `${plan.start} · `}
-          {formatDuration(plan.duration.total)} · {countLabel(plan.dishes.length, ['блюдо', 'блюда', 'блюд'])} ·{' '}
-          {countLabel(totalPortions(plan), ['порция', 'порции', 'порций'])}
+          выполнено {done} из {plan.steps.length} · всего {formatDuration(plan.duration.total)}
         </span>
       </span>
       <ArrowRight class="next-plan-arrow" aria-hidden="true" />

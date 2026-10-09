@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatAmount, formatCountdown, formatDuration, formatRelativeDay, parseDate, plural, roundAmount, typograph } from '../src/lib/format.ts';
+import { addDays, formatAmount, formatCountdown, formatDayMonth, formatDuration, formatWeekdayShort, plural, roundAmount, typograph } from '../src/lib/format.ts';
 
 const NB = ' ';
 
@@ -50,7 +50,7 @@ describe('roundAmount', () => {
 describe('время и даты', () => {
   it('formatDuration', () => {
     expect(formatDuration(40)).toBe(`40${NB}мин`);
-    expect(formatDuration(65)).toBe(`1${NB}ч 05${NB}мин`);
+    expect(formatDuration(65)).toBe(`1${NB}ч${NB}05${NB}мин`);
     expect(formatDuration(120)).toBe(`2${NB}ч`);
   });
 
@@ -60,12 +60,9 @@ describe('время и даты', () => {
     expect(formatCountdown(-5)).toBe('0:00');
   });
 
-  it('formatRelativeDay', () => {
-    const today = parseDate('2026-10-09');
-    expect(formatRelativeDay(parseDate('2026-10-09'), today)).toBe('сегодня');
-    expect(formatRelativeDay(parseDate('2026-10-10'), today)).toBe('завтра');
-    expect(formatRelativeDay(parseDate('2026-10-11'), today)).toBe(`через 2${NB}дня`);
-    expect(formatRelativeDay(parseDate('2026-09-20'), today)).toBe(`19${NB}дней назад`);
+  it('дата «годен до» от момента старта', () => {
+    const until = addDays(new Date(2026, 9, 11, 10, 0), 4);
+    expect(`${formatWeekdayShort(until)}, ${formatDayMonth(until)}`).toBe('чт, 15 октября');
   });
 });
 
