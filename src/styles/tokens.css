@@ -1,0 +1,112 @@
+:root {
+  color-scheme: light;
+
+  --bg: #f6f2ea;
+  --bg-elevated: #fbf8f2;
+  --surface: #fffdf9;
+  --surface-2: #efe9de;
+  --surface-3: #e6dfd2;
+  --ink: #1e1a15;
+  --ink-2: #5c554b;
+  --ink-3: #8b8377;
+  --line: #e2dbce;
+  --line-strong: #cfc6b6;
+
+  --accent: #c2432a;
+  --accent-ink: #fffaf5;
+  --accent-hover: #a83822;
+  --accent-soft: color-mix(in oklab, var(--accent) 12%, var(--surface));
+
+  --done: #3e6b45;
+  --done-soft: color-mix(in oklab, var(--done) 13%, var(--surface));
+  --warn: #a8650c;
+  --warn-soft: color-mix(in oklab, var(--warn) 13%, var(--surface));
+  --info: #2f5f7e;
+  --info-soft: color-mix(in oklab, var(--info) 11%, var(--surface));
+
+  /* Тона для категорий и блюд */
+  --t-tomato: #c2432a;
+  --t-saffron: #b8700f;
+  --t-herb: #3e7347;
+  --t-butter: #9a7a0c;
+  --t-wheat: #94632a;
+  --t-plum: #8a3f72;
+  --t-crust: #8f4f2a;
+  --t-olive: #636a1f;
+  --t-sky: #2f6488;
+
+  --font-display: 'Literata Variable', 'Iowan Old Style', 'Georgia', serif;
+  --font-ui: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-s: 10px;
+  --radius-m: 14px;
+  --radius-l: 20px;
+  --radius-xl: 28px;
+
+  --shadow-pop: 0 1px 2px rgb(40 30 15 / 6%), 0 8px 28px -6px rgb(40 30 15 / 16%);
+  --shadow-sheet: 0 -8px 40px -8px rgb(30 20 10 / 22%);
+
+  --gutter: 16px;
+  --header-h: 60px;
+  --content-w: 1180px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 28px;
+    --header-h: 68px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg: #15130f;
+    --bg-elevated: #1b1814;
+    --surface: #1e1b16;
+    --surface-2: #27231d;
+    --surface-3: #312c25;
+    --ink: #f1ebe1;
+    --ink-2: #b9b0a2;
+    --ink-3: #8a8274;
+    --line: #322d26;
+    --line-strong: #463f35;
+
+    --accent: #ee7556;
+    --accent-ink: #1d100b;
+    --accent-hover: #f48c70;
+    --accent-soft: color-mix(in oklab, var(--accent) 16%, var(--surface));
+
+    --done: #8fc196;
+    --done-soft: color-mix(in oklab, var(--done) 15%, var(--surface));
+    --warn: #e5b358;
+    --warn-soft: color-mix(in oklab, var(--warn) 14%, var(--surface));
+    --info: #8cbbdc;
+    --info-soft: color-mix(in oklab, var(--info) 13%, var(--surface));
+
+    --t-tomato: #ee8065;
+    --t-saffron: #e8a54a;
+    --t-herb: #8cc595;
+    --t-butter: #e4c65a;
+    --t-wheat: #d9a868;
+    --t-plum: #d793c2;
+    --t-crust: #d99a72;
+    --t-olive: #bcc36b;
+    --t-sky: #86bde2;
+
+    --shadow-pop: 0 1px 2px rgb(0 0 0 / 30%), 0 10px 30px -6px rgb(0 0 0 / 50%);
+    --shadow-sheet: 0 -8px 40px -8px rgb(0 0 0 / 60%);
+  }
+}
+
+.tone-tomato { --tone: var(--t-tomato); }
+.tone-saffron { --tone: var(--t-saffron); }
+.tone-herb { --tone: var(--t-herb); }
+.tone-butter { --tone: var(--t-butter); }
+.tone-wheat { --tone: var(--t-wheat); }
+.tone-plum { --tone: var(--t-plum); }
+.tone-crust { --tone: var(--t-crust); }
+.tone-olive { --tone: var(--t-olive); }
+.tone-sky { --tone: var(--t-sky); }

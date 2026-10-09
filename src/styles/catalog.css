@@ -1,0 +1,420 @@
+/* ------------------------------------------------------------------ */
+/* Каталог рецептов                                                    */
+/* ------------------------------------------------------------------ */
+
+.catalog {
+  display: grid;
+  gap: 32px;
+}
+
+.catalog-side {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .catalog {
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+  }
+
+  .catalog-side {
+    display: block;
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    max-height: calc(100dvh - var(--header-h) - 48px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-bottom: 24px;
+  }
+
+  .catalog-filter-btn {
+    display: none !important;
+  }
+}
+
+.catalog-main {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.catalog-cats {
+  padding-block: 2px;
+}
+
+.catalog-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.catalog-total {
+  flex: 1;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+.catalog-total strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.filter-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.75rem;
+}
+
+.active-filters .active-pill {
+  height: 32px;
+  padding: 0 10px 0 12px;
+  background: var(--surface-2);
+  border-color: transparent;
+}
+
+.active-pill svg {
+  width: 14px;
+  height: 14px;
+  color: var(--ink-3);
+}
+
+.filter-panel {
+  display: grid;
+  gap: 24px;
+}
+
+.filter-group {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.filter-group legend {
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.filter-panel .chip {
+  height: 34px;
+  font-size: 0.9rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Карточка рецепта                                                    */
+/* ------------------------------------------------------------------ */
+
+.recipe-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .recipe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+.recipe-grid > li {
+  display: grid;
+}
+
+.recipe-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  transition: border-color 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pop);
+}
+
+.recipe-card:active {
+  transform: translateY(0);
+}
+
+.recipe-card-body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.recipe-card-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.recipe-card-title {
+  font-size: 1.22rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.recipe-card-desc {
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+  margin-top: 6px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.meta svg {
+  width: 15px;
+  height: 15px;
+  color: var(--ink-3);
+}
+
+.meta .meta-icon svg {
+  color: var(--info);
+}
+
+.meta .meta-icon.is-season svg {
+  color: var(--done);
+}
+
+/* ------------------------------------------------------------------ */
+/* Баннер ближайшей техкарты                                           */
+/* ------------------------------------------------------------------ */
+
+.next-plan {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 14px 18px 14px 14px;
+  border-radius: var(--radius-l);
+  background: var(--ink);
+  color: var(--bg);
+  transition: transform 0.2s var(--ease);
+}
+
+.next-plan:hover {
+  transform: translateY(-2px);
+}
+
+.next-plan .eyebrow {
+  color: color-mix(in oklab, var(--bg) 62%, transparent);
+}
+
+.next-plan-body {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.next-plan-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.next-plan-meta {
+  font-size: 0.88rem;
+  color: color-mix(in oklab, var(--bg) 72%, transparent);
+}
+
+.next-plan-arrow {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: color-mix(in oklab, var(--bg) 70%, transparent);
+}
+
+.next-plan .date-badge {
+  background: color-mix(in oklab, var(--bg) 10%, transparent);
+  color: var(--bg);
+}
+
+.next-plan .date-dow,
+.next-plan .date-mon {
+  color: color-mix(in oklab, var(--bg) 65%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Дата-бейдж                                                          */
+/* ------------------------------------------------------------------ */
+
+.date-badge {
+  flex: none;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  width: 62px;
+  height: 70px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  line-height: 1;
+}
+
+.date-badge.is-muted {
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.date-dow,
+.date-mon {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: color-mix(in oklab, currentColor 75%, transparent);
+}
+
+.date-day {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 3px 0 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Каталог техкарт                                                     */
+/* ------------------------------------------------------------------ */
+
+.plan-list {
+  display: grid;
+  gap: 12px;
+}
+
+.plan-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 16px;
+  align-items: start;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  transition: border-color 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+}
+
+.plan-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pop);
+}
+
+.plan-card-body {
+  display: contents;
+}
+
+.plan-card-body > * {
+  grid-column: 2;
+}
+
+.plan-card .date-badge {
+  grid-row: 1 / span 5;
+}
+
+@media (max-width: 559px) {
+  .plan-card {
+    row-gap: 8px;
+  }
+
+  .plan-card .date-badge {
+    grid-row: 1 / span 2;
+    width: 54px;
+    height: 62px;
+  }
+
+  .plan-card .date-day {
+    font-size: 1.45rem;
+  }
+
+  .plan-card-body > :nth-child(n + 3) {
+    grid-column: 1 / -1;
+  }
+}
+
+.plan-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.plan-card-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.plan-card-summary {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  max-width: 70ch;
+}
+
+.plan-card-dishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 2px;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.plan-card-dishes span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.plan-card.is-past {
+  background: transparent;
+}
+
+.plan-card.is-past .plan-card-title {
+  color: var(--ink-2);
+}
+
+@media (min-width: 720px) {
+  .plan-card {
+    padding: 22px 24px;
+    gap: 22px;
+  }
+}
+
+.plans-heading {
+  margin-bottom: 12px;
+}

@@ -1,0 +1,154 @@
+.timer-tray {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  animation: tray-in 0.25s var(--ease);
+}
+
+.timer-tray::-webkit-scrollbar {
+  display: none;
+}
+
+body[data-cook-mode] .timer-tray:not(.is-inline) {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .timer-tray:not(.is-inline) {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    flex-direction: column;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    overflow: visible;
+  }
+}
+
+.timer-tray.is-inline {
+  position: static;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 0;
+  animation: none;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+}
+
+@keyframes tray-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.timer-chip {
+  --p: 0;
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 220px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-pop);
+  overflow: hidden;
+}
+
+.timer-chip::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: var(--warn);
+  transform-origin: left;
+  transform: scaleX(var(--p));
+  transition: transform 0.25s linear;
+}
+
+.timer-chip.is-paused::before {
+  background: var(--ink-3);
+}
+
+.timer-chip.is-fired {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  animation: timer-pulse 1s ease-in-out infinite;
+}
+
+.timer-chip.is-fired::before {
+  display: none;
+}
+
+@keyframes timer-pulse {
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+}
+
+.timer-main {
+  flex: 1;
+  display: grid;
+  text-align: left;
+  min-width: 0;
+  padding: 2px 4px 2px 0;
+}
+
+.timer-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.75;
+}
+
+.timer-time {
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.timer-actions {
+  display: flex;
+}
+
+.timer-btn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.timer-btn:hover {
+  opacity: 1;
+  background: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+.timer-btn svg {
+  width: 18px;
+  height: 18px;
+}

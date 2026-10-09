@@ -1,0 +1,428 @@
+{
+  "$schema": "../../schemas/cook-plan.schema.json",
+  "id": "2026-10-17-autumn-dinner",
+  "title": "Осенний ужин на шестерых",
+  "summary": "Три подачи для шести гостей: салат с печёной свёклой и козьим сыром, свиная шея с горчицей и мёдом с картофельным гратеном, яблочный крамбл. Шея и гратен делят одну духовку, свёкла запечена накануне, к приходу гостей кухня уже чистая.",
+  "date": "2026-10-17",
+  "start": "16:00",
+  "duration": { "total": 230, "active": 162 },
+  "audience": "6 гостей: ужин из трёх подач",
+  "tags": ["гости", "ужин", "осень", "духовка"],
+  "conditions": {
+    "cooks": 1,
+    "kitchen": "Обычная духовка без конвекции, газовая плита на 4 конфорки, мало места на столе",
+    "notes": [
+      "Одна духовка: шея и гратен вместе при 170 °C, потом гриль для гратена, потом крамбл",
+      "Свёклу запекли накануне — в день ужина духовка занята",
+      "Гости приходят в 18:30"
+    ]
+  },
+  "equipment": [
+    { "id": "oven", "name": "Духовка", "kind": "oven", "spec": "без конвекции, верх-низ и гриль", "note": "Греется долго — дверцу открывать как можно реже" },
+    { "id": "hob", "name": "Газовая плита", "kind": "hob", "spec": "4 конфорки" },
+    { "id": "mandoline", "name": "Мандолина с держателем", "kind": "tool", "spec": "толщина 3 мм" },
+    { "id": "boards", "name": "Разделочные доски", "kind": "tool", "count": 2, "note": "Одна — под свёклу и мясо" },
+    { "id": "roasting-dish", "name": "Форма для запекания шеи", "kind": "cookware", "spec": "≈ 30×25 см, с высокими бортами" },
+    { "id": "gratin-dish", "name": "Форма для гратена", "kind": "cookware", "spec": "30×20 см, керамика", "note": "В ней же подать на стол" },
+    { "id": "crumble-dish", "name": "Форма для крамбла", "kind": "cookware", "spec": "Ø 24 см или 25×20 см" },
+    { "id": "saucepan", "name": "Сотейник 1,5 л", "kind": "cookware", "note": "Сливки для гратена, потом сок от шеи" },
+    { "id": "frying-pan", "name": "Сковорода", "kind": "cookware", "spec": "Ø 24 см", "note": "Орехи" },
+    { "id": "bowls", "name": "Миски", "kind": "tool", "count": 2, "note": "Крошка для крамбла, свёкла; банка с крышкой — для заправки" },
+    { "id": "probe", "name": "Термощуп", "kind": "tool", "note": "Лучше с выносным датчиком — не придётся открывать духовку" },
+    { "id": "foil", "name": "Фольга", "kind": "tool" },
+    { "id": "platters", "name": "Сервировочные блюда", "kind": "container", "count": 2, "spec": "плоское под салат, тёплое под мясо" }
+  ],
+  "dishes": [
+    {
+      "id": "salad",
+      "name": "Салат с печёной свёклой, козьим сыром и орехами",
+      "description": "Рукола, свёкла в медово-бальзамической заправке, мягкий козий сыр и подсушенные грецкие орехи.",
+      "yield": { "amount": 1.1, "unit": "kg" },
+      "portions": 6,
+      "portionSize": "≈ 180 г",
+      "packaging": [
+        { "container": "Плоское сервировочное блюдо", "count": 1, "storage": "serve", "note": "Заправленный салат не хранится; свёклу без руколы — до 2 дней в холодильнике" }
+      ],
+      "nutrition": { "kcal": 320, "protein": 9, "fat": 24, "carbs": 17 }
+    },
+    {
+      "id": "pork",
+      "name": "Свиная шея с горчицей и мёдом",
+      "description": "Цельный кусок 1,6 кг, ночь в маринаде, запечён на подушке из лука до 63–65 °C в центре.",
+      "yield": { "amount": 1.1, "unit": "kg" },
+      "portions": 6,
+      "portionSize": "≈ 180 г + печёный лук",
+      "packaging": [
+        { "container": "Тёплое сервировочное блюдо", "count": 1, "storage": "serve", "note": "Остатки — в контейнер, до 3 дней в холодильнике" }
+      ],
+      "reheat": "Остатки хороши холодными в сэндвичах. Тёплыми — под фольгой 10 минут при 160 °C.",
+      "nutrition": { "kcal": 560, "protein": 40, "fat": 42, "carbs": 6 }
+    },
+    {
+      "id": "gratin",
+      "name": "Картофельный гратен",
+      "description": "Картофель ломтиками 3 мм в сливках с чесноком и мускатом, под корочкой из грюйера.",
+      "yield": { "amount": 2, "unit": "kg" },
+      "portions": 6,
+      "portionSize": "≈ 330 г",
+      "packaging": [
+        { "container": "Форма 30×20 — прямо на стол", "count": 1, "storage": "serve", "note": "Остатки — в контейнер, до 3 дней в холодильнике" }
+      ],
+      "reheat": "Под фольгой 20 минут при 180 °C.",
+      "nutrition": { "kcal": 440, "protein": 13, "fat": 22, "carbs": 47 }
+    },
+    {
+      "id": "crumble",
+      "name": "Яблочный крамбл",
+      "description": "Кислые яблоки с корицей и лимоном под овсяной крошкой. Подаётся тёплым с пломбиром.",
+      "yield": { "amount": 1.4, "unit": "kg" },
+      "portions": 6,
+      "portionSize": "≈ 230 г + шарик пломбира",
+      "packaging": [
+        { "container": "Форма для крамбла — прямо на стол", "count": 1, "storage": "serve", "note": "Остатки — накрыть плёнкой, до 3 дней в холодильнике" }
+      ],
+      "reheat": "10 минут при 160 °C — крошка снова станет хрустящей.",
+      "nutrition": { "kcal": 415, "protein": 3, "fat": 15, "carbs": 67 }
+    }
+  ],
+  "ingredients": [
+    { "id": "pork-neck", "name": "Свиная шея", "amount": 1.6, "unit": "kg", "section": "meat", "note": "Одним куском" },
+    { "id": "potatoes", "name": "Картофель", "amount": 1.8, "unit": "kg", "section": "produce", "note": "≈ 1,5 кг после чистки; жёлтый, для запекания" },
+    { "id": "onions", "name": "Репчатый лук", "amount": 3, "unit": "pcs", "section": "produce" },
+    { "id": "garlic", "name": "Чеснок", "amount": 5, "unit": "clove", "section": "produce", "note": "3 — в маринад, 2 — в гратен" },
+    { "id": "beets", "name": "Свёкла", "amount": 4, "unit": "pcs", "section": "produce", "note": "≈ 800 г, средние, одного размера" },
+    { "id": "arugula", "name": "Рукола", "amount": 120, "unit": "g", "section": "produce" },
+    { "id": "apples", "name": "Кислые яблоки", "amount": 1.2, "unit": "kg", "section": "produce", "note": "Антоновка или гренни смит, ≈ 6 штук" },
+    { "id": "lemon", "name": "Лимон", "amount": 1, "unit": "pcs", "section": "produce" },
+    { "id": "cream", "name": "Сливки 20 %", "amount": 400, "unit": "ml", "section": "dairy" },
+    { "id": "milk", "name": "Молоко", "amount": 200, "unit": "ml", "section": "dairy" },
+    { "id": "butter", "name": "Сливочное масло", "amount": 120, "unit": "g", "section": "dairy", "note": "82 %; 100 г — в крошку, остальное — смазать формы" },
+    { "id": "gruyere", "name": "Твёрдый сыр (грюйер)", "amount": 120, "unit": "g", "section": "dairy", "note": "Подойдёт любой выдержанный" },
+    { "id": "goat-cheese", "name": "Мягкий козий сыр", "amount": 150, "unit": "g", "section": "dairy" },
+    { "id": "ice-cream", "name": "Пломбир", "amount": 500, "unit": "ml", "section": "frozen" },
+    { "id": "walnuts", "name": "Грецкие орехи", "amount": 80, "unit": "g", "section": "grocery" },
+    { "id": "balsamic", "name": "Бальзамический уксус", "amount": 2, "unit": "tbsp", "section": "grocery" },
+    { "id": "mustard", "name": "Дижонская горчица", "amount": 3, "unit": "tbsp", "section": "grocery", "note": "2 ст. л. — в маринад, 1 ч. л. — в заправку" },
+    { "id": "honey", "name": "Мёд", "amount": 3, "unit": "tbsp", "section": "grocery" },
+    { "id": "flour", "name": "Пшеничная мука", "amount": 120, "unit": "g", "section": "grocery" },
+    { "id": "oats", "name": "Овсяные хлопья", "amount": 60, "unit": "g", "section": "grocery" },
+    { "id": "starch", "name": "Кукурузный крахмал", "amount": 1, "unit": "tbsp", "section": "grocery" },
+    { "id": "sugar", "name": "Сахар", "amount": 150, "unit": "g", "section": "grocery", "staple": true },
+    { "id": "olive-oil", "name": "Оливковое масло", "amount": 100, "unit": "ml", "section": "grocery", "staple": true },
+    { "id": "cinnamon", "name": "Молотая корица", "amount": 1, "unit": "tsp", "section": "spices", "staple": true },
+    { "id": "nutmeg", "name": "Мускатный орех", "amount": 1, "unit": "pinch", "section": "spices", "staple": true, "note": "Молотый или натереть" },
+    { "id": "salt", "name": "Соль", "amount": 1, "unit": "tbsp", "section": "spices", "staple": true },
+    { "id": "black-pepper", "name": "Чёрный перец молотый", "amount": 1, "unit": "tsp", "section": "spices", "staple": true }
+  ],
+  "beforeStart": [
+    {
+      "id": "roast-beets",
+      "when": "накануне",
+      "text": "Свёклу вымыть, каждую завернуть в фольгу и запечь при 200 °C 70 минут, пока нож не начнёт входить легко. Остудить и убрать в холодильник прямо в фольге.",
+      "uses": [
+        { "ingredient": "beets" }
+      ]
+    },
+    {
+      "id": "marinate-pork",
+      "when": "накануне вечером",
+      "text": "Шею обсушить. Горчицу, мёд, давленый чеснок, ложку масла, соль и перец смешать, натереть мясо со всех сторон и убрать в плотном пакете в холодильник на ночь.",
+      "uses": [
+        { "ingredient": "pork-neck" },
+        { "ingredient": "mustard", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "honey", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "garlic", "amount": 3, "unit": "clove" },
+        { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp" },
+        { "ingredient": "salt", "toTaste": true },
+        { "ingredient": "black-pepper", "toTaste": true }
+      ]
+    },
+    {
+      "id": "pork-out",
+      "when": "за час до начала",
+      "text": "Достать шею из холодильника — к духовке она согреется и пропечётся ровнее."
+    }
+  ],
+  "steps": [
+    {
+      "id": "oven-on",
+      "at": 0,
+      "duration": 3,
+      "title": "Духовку — на 170 °C, верх-низ",
+      "details": "Решётки — на нижний и средний уровни. Без конвекции духовка греется долго, поэтому включаем сразу.",
+      "equipment": ["oven"],
+      "heat": "170 °C, верх-низ"
+    },
+    {
+      "id": "potatoes",
+      "at": 3,
+      "duration": 20,
+      "title": "Картофель почистить и нарезать мандолиной 3 мм",
+      "details": "Ломтики не мыть и не замачивать: крахмал загустит сливки.",
+      "dishes": ["gratin"],
+      "equipment": ["mandoline", "boards"],
+      "uses": [
+        { "ingredient": "potatoes" }
+      ],
+      "warning": "Мандолина — только с держателем. Последние сантиметры клубня не дорезать руками."
+    },
+    {
+      "id": "gratin-assemble",
+      "at": 23,
+      "duration": 12,
+      "title": "Гратен: прогреть сливки, выложить картофель слоями",
+      "details": "Сливки, молоко, раздавленный чеснок, мускат, соль и перец прогреть до первых пузырьков. Форму смазать маслом, картофель уложить внахлёст слоями, каждый слой поливая смесью. Накрыть фольгой.",
+      "dishes": ["gratin"],
+      "equipment": ["hob", "saucepan", "gratin-dish", "foil"],
+      "uses": [
+        { "ingredient": "cream" },
+        { "ingredient": "milk" },
+        { "ingredient": "garlic", "amount": 2, "unit": "clove" },
+        { "ingredient": "nutmeg" },
+        { "ingredient": "butter", "amount": 10, "unit": "g", "note": "смазать форму" },
+        { "ingredient": "salt", "toTaste": true },
+        { "ingredient": "black-pepper", "toTaste": true }
+      ],
+      "heat": "средний огонь",
+      "doneWhen": "Сливки почти покрывают верхний слой.",
+      "tip": "Солить смелее, чем кажется нужным: картофель заберёт соль."
+    },
+    {
+      "id": "pork-dish",
+      "at": 35,
+      "duration": 5,
+      "title": "Шею — в форму на лук, полить маринадом",
+      "details": "Лук нарезать крупными дольками и выложить на дно формы. Сверху — шею, вылить на неё маринад из пакета.",
+      "dishes": ["pork"],
+      "equipment": ["boards", "roasting-dish"],
+      "uses": [
+        { "ingredient": "onions" }
+      ]
+    },
+    {
+      "id": "roast",
+      "at": 40,
+      "duration": 105,
+      "passive": true,
+      "title": "Шею и гратен — в духовку на 1 ч 45 мин",
+      "details": "Шея — на нижний уровень, гратен — на средний. Через час — одна короткая отметка: снять фольгу с гратена и полить шею соком.",
+      "dishes": ["pork", "gratin"],
+      "equipment": ["oven", "roasting-dish", "gratin-dish", "probe"],
+      "heat": "170 °C, верх-низ",
+      "timer": { "minutes": 105, "label": "Шея и гратен" },
+      "doneWhen": "Шея — 63–65 °C в центре по термощупу. Гратен — нож входит без сопротивления."
+    },
+    {
+      "id": "apples",
+      "at": 45,
+      "duration": 15,
+      "title": "Крамбл: яблоки дольками — в форму",
+      "details": "Яблоки очистить от сердцевины, кожуру можно оставить, нарезать дольками 1,5 см. Перемешать прямо в смазанной маслом форме с сахаром, корицей, соком лимона и крахмалом. Накрыть плёнкой.",
+      "dishes": ["crumble"],
+      "equipment": ["boards", "crumble-dish"],
+      "uses": [
+        { "ingredient": "apples" },
+        { "ingredient": "sugar", "amount": 70, "unit": "g" },
+        { "ingredient": "cinnamon" },
+        { "ingredient": "lemon", "note": "сок" },
+        { "ingredient": "starch" },
+        { "ingredient": "butter", "amount": 10, "unit": "g", "note": "смазать форму" }
+      ],
+      "tip": "Лимонный сок не даст яблокам потемнеть до выпечки."
+    },
+    {
+      "id": "crumb",
+      "at": 60,
+      "duration": 10,
+      "title": "Крошка: мука, овсянка, сахар и холодное масло",
+      "details": "Масло прямо из холодильника нарезать кубиком 1 см и растереть с мукой, овсянкой и сахаром кончиками пальцев до крупной крошки. Миску — в холодильник до выпечки.",
+      "dishes": ["crumble"],
+      "equipment": ["bowls"],
+      "uses": [
+        { "ingredient": "flour" },
+        { "ingredient": "oats" },
+        { "ingredient": "sugar", "amount": 80, "unit": "g" },
+        { "ingredient": "butter", "amount": 100, "unit": "g", "note": "холодное" }
+      ],
+      "doneWhen": "Крошка размером с горошину, без мучной пыли и без кусков масла."
+    },
+    {
+      "id": "dressing-nuts",
+      "at": 70,
+      "duration": 12,
+      "title": "Заправка и орехи для салата",
+      "details": "В банке с крышкой встряхнуть масло, бальзамик, мёд, горчицу, соль и перец. Орехи прогреть на сухой сковороде 4 минуты, помешивая, остудить и крупно поломать руками.",
+      "dishes": ["salad"],
+      "equipment": ["hob", "frying-pan"],
+      "uses": [
+        { "ingredient": "olive-oil", "amount": 4, "unit": "tbsp" },
+        { "ingredient": "balsamic" },
+        { "ingredient": "honey", "amount": 1, "unit": "tbsp" },
+        { "ingredient": "mustard", "amount": 1, "unit": "tsp" },
+        { "ingredient": "salt", "toTaste": true },
+        { "ingredient": "black-pepper", "toTaste": true },
+        { "ingredient": "walnuts" }
+      ],
+      "heat": "средний огонь",
+      "tip": "Орехи горят за секунды — от сковороды не отходить."
+    },
+    {
+      "id": "clean-start",
+      "at": 82,
+      "duration": 18,
+      "title": "Чистый старт: помыть посуду, достать блюда",
+      "details": "Вымыть всё, что освободилось, протереть стол. Достать блюдо под салат, блюдо под мясо, нож для мяса и креманки для десерта.",
+      "equipment": ["platters"]
+    },
+    {
+      "id": "foil-off",
+      "at": 100,
+      "duration": 5,
+      "title": "Гратен — без фольги и под сыр, шею полить соком",
+      "details": "Сыр сначала натереть на крупной тёрке. Снять фольгу, посыпать гратен сыром, шею полить соком из формы. Дверцу держать открытой как можно меньше.",
+      "dishes": ["gratin", "pork"],
+      "equipment": ["oven"],
+      "uses": [
+        { "ingredient": "gruyere" }
+      ],
+      "heat": "170 °C, верх-низ"
+    },
+    {
+      "id": "beets-slice",
+      "at": 110,
+      "duration": 10,
+      "title": "Свёклу нарезать дольками и полить заправкой",
+      "details": "Кожица у печёной свёклы снимается руками. Дольки 1,5 см — в миску, полить половиной заправки и оставить при комнатной температуре.",
+      "dishes": ["salad"],
+      "equipment": ["boards", "bowls"],
+      "tip": "Свёкла красит всё вокруг — работайте в перчатках."
+    },
+    {
+      "id": "table",
+      "at": 120,
+      "duration": 15,
+      "title": "Накрыть на стол",
+      "details": "Тарелки, приборы, бокалы, вода. Потом — 10 свободных минут до шеи."
+    },
+    {
+      "id": "pork-out",
+      "at": 145,
+      "duration": 5,
+      "title": "Шею — под фольгу, духовку — на гриль 220 °C",
+      "details": "Проверить термощупом: 63–65 °C в центре. Шею — на доску и неплотно накрыть фольгой, пусть отдыхает до нарезки. Сок из формы слить в сотейник, лук оставить в форме под фольгой.",
+      "dishes": ["pork"],
+      "equipment": ["oven", "probe", "boards", "foil", "saucepan"],
+      "heat": "гриль 220 °C"
+    },
+    {
+      "id": "gratin-grill",
+      "at": 150,
+      "duration": 8,
+      "passive": true,
+      "title": "Гратен — под гриль на 8 минут",
+      "details": "Форма — на средний уровень, ближе к грилю.",
+      "dishes": ["gratin"],
+      "equipment": ["oven", "gratin-dish"],
+      "heat": "гриль 220 °C",
+      "timer": { "minutes": 8, "label": "Гратен под грилем" },
+      "doneWhen": "Сыр пузырится и покрылся золотисто-коричневой корочкой.",
+      "warning": "Не отходить: под грилем сыр за минуту превращается из золотого в горелый.",
+      "tip": "Гости приходят примерно сейчас — пусть дверь откроет кто-то другой."
+    },
+    {
+      "id": "gratin-out",
+      "at": 158,
+      "duration": 4,
+      "title": "Гратен достать, духовку — на 180 °C",
+      "details": "Гратен накрыть фольгой — подождёт горячим. Дверцу духовки приоткрыть на 2 минуты, затем закрыть и выставить 180 °C, верх-низ.",
+      "dishes": ["gratin"],
+      "equipment": ["oven", "foil"],
+      "heat": "180 °C, верх-низ"
+    },
+    {
+      "id": "salad-assemble",
+      "at": 162,
+      "duration": 8,
+      "title": "Собрать салат и подать",
+      "details": "Руколу — на блюдо, сверху свёклу, козий сыр кусочками и орехи. Полить оставшейся заправкой прямо перед подачей.",
+      "dishes": ["salad"],
+      "equipment": ["platters"],
+      "uses": [
+        { "ingredient": "arugula" },
+        { "ingredient": "goat-cheese" }
+      ],
+      "tip": "Козий сыр отщипывать руками или ложкой — нож его размазывает."
+    },
+    {
+      "id": "crumble-bake",
+      "at": 170,
+      "duration": 35,
+      "passive": true,
+      "title": "Крамбл: посыпать крошкой — в духовку на 35 минут",
+      "details": "Крошку распределить по яблокам рыхло, не утрамбовывать. Форма — на средний уровень.",
+      "dishes": ["crumble"],
+      "equipment": ["oven", "crumble-dish"],
+      "heat": "180 °C, верх-низ",
+      "timer": { "minutes": 35, "label": "Крамбл" },
+      "doneWhen": "Крошка золотистая, по краям пузырится густой сок."
+    },
+    {
+      "id": "gratin-rewarm",
+      "at": 183,
+      "duration": 10,
+      "passive": true,
+      "title": "Гратен — к крамблу в духовку на 10 минут",
+      "details": "На нижний уровень, под фольгой: корочка не подгорит, а гратен прогреется к подаче.",
+      "dishes": ["gratin"],
+      "equipment": ["oven", "gratin-dish", "foil"],
+      "heat": "180 °C, верх-низ",
+      "timer": { "minutes": 10, "label": "Гратен греется" }
+    },
+    {
+      "id": "pork-slice",
+      "at": 185,
+      "duration": 10,
+      "title": "Шею нарезать ломтями 1 см поперёк волокон",
+      "details": "Сок в сотейнике довести до кипения. Ломти выложить на тёплое блюдо вместе с печёным луком и полить горячим соком.",
+      "dishes": ["pork"],
+      "equipment": ["boards", "hob", "saucepan", "platters"],
+      "heat": "сильный огонь, только для сока"
+    },
+    {
+      "id": "serve-main",
+      "at": 195,
+      "duration": 5,
+      "title": "Подать горячее",
+      "details": "Шею — на стол, гратен — прямо в форме, на подставке.",
+      "dishes": ["pork", "gratin"]
+    },
+    {
+      "id": "crumble-rest",
+      "at": 205,
+      "duration": 20,
+      "passive": true,
+      "title": "Крамбл достать и дать постоять 20 минут",
+      "details": "Духовку выключить. Начинка загустеет и перестанет обжигать. Пломбир переложить из морозилки в холодильник — к подаче станет мягче.",
+      "dishes": ["crumble"],
+      "equipment": ["oven", "crumble-dish"],
+      "timer": { "minutes": 20, "label": "Крамбл остывает" }
+    },
+    {
+      "id": "serve-dessert",
+      "at": 225,
+      "duration": 5,
+      "title": "Подать крамбл с шариком пломбира",
+      "details": "Раскладывать ложкой прямо из формы, сверху — шарик пломбира.",
+      "dishes": ["crumble"],
+      "uses": [
+        { "ingredient": "ice-cream" }
+      ]
+    }
+  ],
+  "notes": [
+    "Подачи: салат ≈ 18:50, горячее ≈ 19:15, десерт ≈ 19:45.",
+    "Главная контрольная точка — шея: доставать при 63–65 °C в центре, за время отдыха дойдёт до 66–68 °C. Если готова раньше, накрыть фольгой и полотенцем — горячей продержится до часа.",
+    "Если гости задерживаются, сдвигайте всё, что после 18:30: шея спокойно отдохнёт и дольше, гратен подождёт под фольгой.",
+    "Крамбл можно собрать утром и держать в холодильнике — тогда в духовку на 40 минут."
+  ]
+}

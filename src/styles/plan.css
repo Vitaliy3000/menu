@@ -1,0 +1,1123 @@
+/* ------------------------------------------------------------------ */
+/* Шапка техкарты                                                      */
+/* ------------------------------------------------------------------ */
+
+.plan-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px 22px;
+  align-items: start;
+  margin: 16px 0 28px;
+}
+
+.plan-hero .date-badge {
+  width: 68px;
+  height: 78px;
+  margin-top: 4px;
+}
+
+.plan-hero-text {
+  display: grid;
+  gap: 12px;
+}
+
+@media (max-width: 559px) {
+  .plan-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-hero .date-badge {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Главная кнопка                                                      */
+/* ------------------------------------------------------------------ */
+
+.plan-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 20px 0 8px;
+}
+
+.plan-cta-main {
+  min-width: min(100%, 300px);
+}
+
+@media (max-width: 559px) {
+  .plan-cta-main {
+    width: 100%;
+  }
+}
+
+.plan-cta-side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.plan-cta-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+
+.plan-cta-progress .progress-line {
+  width: 90px;
+}
+
+.plan-cta-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.86rem;
+}
+
+.plan-cta-hint svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.progress-line {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.progress-line > span {
+  display: block;
+  height: 100%;
+  background: var(--done);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
+/* ------------------------------------------------------------------ */
+/* Вкладки                                                             */
+/* ------------------------------------------------------------------ */
+
+.plan-tabs {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 20;
+  margin: 16px calc(var(--gutter) * -1) 0;
+  padding: 10px var(--gutter);
+  background: var(--bg);
+}
+
+@media (max-width: 559px) {
+  .plan-tabs .tabs {
+    width: 100%;
+  }
+
+  .plan-tabs .tabs button {
+    flex: 1;
+    justify-content: center;
+    padding: 0 8px;
+    font-size: 0.9rem;
+  }
+}
+
+.plan-panel {
+  margin-top: 20px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Обзор: блюда                                                        */
+/* ------------------------------------------------------------------ */
+
+.dish-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .dish-grid {
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 16px;
+  }
+}
+
+.dish-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.dish-head {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding-left: 14px;
+}
+
+.dish-stripe {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--tone);
+}
+
+.dish-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.dish-desc {
+  font-size: 0.93rem;
+}
+
+.dish-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 12px 0;
+  border-block: 1px solid var(--line);
+}
+
+.dish-stats dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.dish-stats dd {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.packaging {
+  display: grid;
+  gap: 10px;
+}
+
+.pack {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.pack-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.pack-freezer .pack-icon {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+.pack-fridge .pack-icon {
+  background: var(--done-soft);
+  color: var(--done);
+}
+
+.pack-serve .pack-icon {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pack-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.pack-body {
+  display: grid;
+  line-height: 1.35;
+}
+
+.pack-what {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.pack-where {
+  font-size: 0.86rem;
+  color: var(--ink-2);
+}
+
+.dish-foot {
+  display: grid;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.dish-foot p {
+  display: flex;
+  gap: 8px;
+}
+
+.dish-foot svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  margin-top: 2px;
+  color: var(--ink-3);
+}
+
+/* Заранее */
+.prep-list {
+  display: grid;
+  gap: 8px;
+}
+
+.prep-list > li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+}
+
+.prep-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.prep-item .check {
+  margin-top: 2px;
+}
+
+.prep-body {
+  display: grid;
+  gap: 2px;
+}
+
+.prep-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.prep-item.is-checked .prep-text {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+
+.prep-uses {
+  padding: 0 18px 16px 58px;
+}
+
+/* Условия и техника */
+.conditions {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .conditions {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+.conditions-card {
+  display: grid;
+  gap: 12px;
+}
+
+.conditions-kitchen {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.conditions-cooks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.93rem;
+}
+
+.conditions-cooks svg {
+  width: 17px;
+  height: 17px;
+  color: var(--ink-3);
+}
+
+.bullets {
+  display: grid;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.equipment-groups {
+  columns: 2 240px;
+  column-gap: 12px;
+}
+
+.equipment-group {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  padding: 16px 18px;
+  border-radius: var(--radius-l);
+  background: var(--surface-2);
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.equipment-group ul {
+  display: grid;
+  gap: 8px;
+}
+
+.equipment-group li {
+  display: grid;
+  line-height: 1.35;
+}
+
+.equipment-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.equipment-spec {
+  font-size: 0.86rem;
+  color: var(--ink-2);
+}
+
+.equipment-note {
+  font-size: 0.84rem;
+  color: var(--ink-3);
+}
+
+/* ------------------------------------------------------------------ */
+/* Продукты                                                            */
+/* ------------------------------------------------------------------ */
+
+.products-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+
+.products-bar .progress-line {
+  order: 3;
+  flex: 1 1 100%;
+}
+
+@media (min-width: 720px) {
+  .products-bar .progress-line {
+    order: 0;
+    flex: 0 1 200px;
+  }
+}
+
+.products-hint {
+  margin: 10px 0 18px;
+  font-size: 0.93rem;
+}
+
+.product-groups {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .product-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+  }
+}
+
+.product-group {
+  padding: 16px 12px 8px 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.product-group .info-title {
+  padding-left: 4px;
+  margin-bottom: 4px;
+}
+
+.product {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 6px;
+  border-radius: 12px;
+  text-align: left;
+  min-height: 52px;
+}
+
+.product:hover {
+  background: var(--surface-2);
+}
+
+.product-name {
+  display: grid;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.product-note {
+  font-size: 0.84rem;
+  color: var(--ink-3);
+}
+
+.product-amount {
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.product.is-checked .product-name,
+.product.is-checked .product-amount {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ход работ                                                           */
+/* ------------------------------------------------------------------ */
+
+.timeline-filter {
+  margin-bottom: 18px;
+}
+
+.timeline {
+  display: grid;
+}
+
+.tl-step {
+  display: grid;
+  grid-template-columns: 52px 34px minmax(0, 1fr);
+  column-gap: 8px;
+}
+
+@media (min-width: 720px) {
+  .tl-step {
+    grid-template-columns: 64px 40px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+}
+
+.tl-time {
+  display: grid;
+  align-content: start;
+  justify-items: end;
+  padding-top: 14px;
+  line-height: 1.2;
+}
+
+.tl-clock {
+  font-weight: 650;
+  font-size: 0.98rem;
+}
+
+.tl-offset {
+  font-size: 0.78rem;
+  color: var(--ink-3);
+}
+
+.tl-rail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.tl-rail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--line);
+}
+
+.tl-step:first-child .tl-rail::before {
+  top: 24px;
+}
+
+.tl-step:last-child .tl-rail::before {
+  bottom: auto;
+  height: 24px;
+}
+
+.tl-check {
+  position: relative;
+  background: var(--bg);
+  --size: 28px;
+}
+
+.tl-step.is-current .tl-check {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent);
+}
+
+.tl-step.is-done .tl-check {
+  background: var(--done);
+  border-color: var(--done);
+  color: var(--surface);
+}
+
+.tl-step.is-passive .tl-check {
+  border-style: dashed;
+}
+
+.tl-card {
+  min-width: 0;
+  margin-bottom: 10px;
+  padding: 10px 14px 12px;
+  border-radius: var(--radius-l);
+  border: 1px solid transparent;
+  display: grid;
+  gap: 6px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.tl-step.is-open .tl-card {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.tl-step.is-current .tl-card {
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 10%, transparent);
+}
+
+.tl-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: left;
+}
+
+.tl-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.tl-step.is-passive .tl-title {
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.tl-step.is-done .tl-title {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.tl-chevron {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+  flex: none;
+  color: var(--ink-3);
+  transition: transform 0.2s;
+}
+
+.tl-step.is-open .tl-chevron {
+  transform: rotate(180deg);
+}
+
+.tl-details {
+  display: grid;
+  gap: 12px;
+  padding-top: 6px;
+  animation: fade-in 0.2s;
+}
+
+.tl-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.tl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.tl-now {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  column-gap: 8px;
+  align-items: center;
+  margin: 2px 0 12px;
+  color: var(--accent);
+  font-weight: 650;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 720px) {
+  .tl-now {
+    grid-template-columns: 64px 1fr;
+    column-gap: 12px;
+  }
+}
+
+.tl-now > span:first-child {
+  text-align: right;
+}
+
+.tl-now-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.tl-now-label::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+/* Бейджи шага */
+.step-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: 0.84rem;
+  color: var(--ink-2);
+}
+
+.dish-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 550;
+}
+
+.dish-tag .dot {
+  width: 8px;
+  height: 8px;
+}
+
+.step-dur {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink-3);
+}
+
+.step-dur svg {
+  width: 14px;
+  height: 14px;
+}
+
+.step-badges .badge {
+  height: 24px;
+  font-size: 0.78rem;
+}
+
+.step-equipment {
+  color: var(--ink-3);
+}
+
+/* Продукты шага */
+.uses {
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+}
+
+.uses li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px;
+  padding: 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.uses-amount {
+  font-weight: 650;
+}
+
+.uses.is-large {
+  padding: 14px 18px;
+}
+
+.uses.is-large li {
+  grid-template-columns: 112px minmax(0, 1fr);
+  font-size: 1.08rem;
+  padding: 6px 0;
+}
+
+.uses.is-large li + li {
+  border-top: 1px solid var(--line);
+}
+
+/* Кнопка таймера шага */
+.timer-btn-step {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 8px;
+  min-height: 40px;
+  padding: 6px 16px 6px 12px;
+  border-radius: 14px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-weight: 650;
+  font-size: 0.93rem;
+  text-align: left;
+}
+
+.timer-btn-step svg {
+  width: 18px;
+  height: 18px;
+  grid-row: span 2;
+}
+
+.timer-btn-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.timer-btn-step.is-running {
+  background: var(--warn);
+  color: var(--surface);
+}
+
+.timer-btn-step.is-fired {
+  background: var(--accent);
+  color: var(--accent-ink);
+  animation: timer-pulse 1s ease-in-out infinite;
+}
+
+.timer-btn-step.size-lg {
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 20px;
+  border-radius: var(--radius-l);
+  font-size: 1.2rem;
+  grid-template-columns: auto 1fr;
+}
+
+.timer-btn-step.size-lg svg {
+  width: 24px;
+  height: 24px;
+}
+
+.timer-btn-step.size-lg .timer-btn-label {
+  font-size: 0.85rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Режим готовки                                                       */
+/* ------------------------------------------------------------------ */
+
+.cook {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--bg);
+  animation: cook-in 0.25s var(--ease);
+}
+
+@keyframes cook-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.cook-top {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 8px;
+  padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cook-progress {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.cook-bar {
+  width: min(100%, 320px);
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.cook-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--done);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
+.cook-wake {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+  opacity: 0.5;
+}
+
+.cook-wake.is-on {
+  color: var(--warn);
+  opacity: 1;
+}
+
+.cook-wake svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cook-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cook-inner {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 18px var(--gutter) 28px;
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.cook-when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: 0.95rem;
+  color: var(--ink-3);
+}
+
+.cook-when strong {
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.cook-passive,
+.cook-lag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--info-soft);
+  color: var(--info);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cook-passive svg {
+  width: 14px;
+  height: 14px;
+}
+
+.cook-lag {
+  background: var(--done-soft);
+  color: var(--done);
+}
+
+.cook-lag.is-late {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.cook-title {
+  font-size: clamp(1.75rem, 1.3rem + 2.2vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.cook-title.is-done {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.cook-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.cook-callout {
+  font-size: 1.05rem;
+  padding: 14px 16px;
+}
+
+.cook-next {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  align-items: center;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border-radius: var(--radius-l);
+  border: 1px dashed var(--line-strong);
+  text-align: left;
+  color: var(--ink-2);
+}
+
+.cook-next .eyebrow {
+  grid-column: 1;
+}
+
+.cook-next-title {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 550;
+  line-height: 1.3;
+}
+
+.cook-next svg {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 22px;
+  height: 22px;
+  color: var(--ink-3);
+}
+
+.cook-finish {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  border-radius: var(--radius-l);
+  background: var(--done-soft);
+}
+
+.cook-finish > svg {
+  width: 32px;
+  height: 32px;
+  color: var(--done);
+}
+
+.cook-bottom {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 60px;
+  gap: 10px;
+  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: var(--bg-elevated);
+}
+
+@media (min-width: 760px) {
+  .cook-bottom {
+    padding-inline: calc((100% - 720px) / 2 + var(--gutter));
+  }
+}
+
+.cook-nav {
+  height: 60px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.cook-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.cook-nav svg {
+  width: 26px;
+  height: 26px;
+}
+
+.cook-done {
+  --btn-h: 60px;
+  border-radius: 18px;
+  background: var(--done);
+  color: var(--surface);
+  font-size: 1.12rem;
+}
+
+.cook-done svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.6;
+}
+
+.cook-done.is-done {
+  background: var(--surface-2);
+  color: var(--ink-2);
+}

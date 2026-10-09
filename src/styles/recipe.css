@@ -1,0 +1,733 @@
+/* ------------------------------------------------------------------ */
+/* Шапка рецепта / техкарты                                            */
+/* ------------------------------------------------------------------ */
+
+.recipe-hero {
+  display: grid;
+  gap: 24px;
+  margin-top: 16px;
+  margin-bottom: 28px;
+}
+
+.recipe-hero-text {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.recipe-hero-plate {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .recipe-hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .recipe-hero-plate {
+    display: block;
+  }
+}
+
+.recipe-tags {
+  margin-top: 4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ключевые цифры                                                      */
+/* ------------------------------------------------------------------ */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+@media (min-width: 720px) {
+  .facts {
+    grid-template-columns: repeat(var(--facts, 4), minmax(0, 1fr));
+  }
+}
+
+.fact {
+  padding: 16px 18px;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  box-shadow: -1px -1px 0 var(--line);
+}
+
+.fact dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 4px;
+}
+
+.fact dt svg {
+  width: 15px;
+  height: 15px;
+}
+
+.fact dd.display {
+  font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.fact-sub {
+  font-size: 0.86rem;
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------------------ */
+/* Навигация по разделам                                               */
+/* ------------------------------------------------------------------ */
+
+.section-nav {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 20;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 20px calc(var(--gutter) * -1) 0;
+  padding: 10px var(--gutter);
+  background: var(--bg);
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav a {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 0.9rem;
+  font-weight: 550;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.section-nav a:hover {
+  color: var(--ink);
+}
+
+@media (min-width: 1024px) {
+  .section-nav {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Тело рецепта                                                        */
+/* ------------------------------------------------------------------ */
+
+.recipe-body {
+  display: grid;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+@media (min-width: 1024px) {
+  .recipe-body {
+    grid-template-columns: 380px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+    margin-top: 40px;
+  }
+
+  .recipe-aside {
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+    max-height: calc(100dvh - var(--header-h) - 40px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    border-radius: var(--radius-l);
+  }
+}
+
+.ingredients {
+  display: grid;
+  gap: 18px;
+}
+
+.ingredients-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--surface-2);
+  padding: 3px;
+}
+
+.stepper span {
+  min-width: 92px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.stepper button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+}
+
+.stepper button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.stepper svg {
+  width: 16px;
+  height: 16px;
+}
+
+.scaled-note {
+  margin-top: -6px;
+  font-size: 0.85rem;
+  color: var(--warn);
+}
+
+.link-btn {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ingredient-group {
+  display: grid;
+  gap: 4px;
+}
+
+.ingredient-group h3 {
+  margin-bottom: 4px;
+}
+
+.ingredient {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 84px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 9px 4px;
+  border-radius: 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+li:last-child > .ingredient {
+  border-bottom: 0;
+}
+
+.ingredient:hover {
+  background: var(--surface-2);
+}
+
+.ingredient .check {
+  --size: 22px;
+  margin-top: 1px;
+}
+
+.ingredient-amount {
+  font-weight: 650;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.ingredient-name {
+  display: grid;
+  font-size: 0.97rem;
+  line-height: 1.45;
+}
+
+.ingredient-note {
+  font-size: 0.85rem;
+  color: var(--ink-3);
+}
+
+.ingredient.is-checked .ingredient-amount,
+.ingredient.is-checked .ingredient-name {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--ink-3) 60%, transparent);
+}
+
+.equipment-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: -6px 0 22px;
+  padding: 12px 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 0.93rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Шаги                                                                */
+/* ------------------------------------------------------------------ */
+
+.method-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.steps {
+  display: grid;
+  gap: 28px;
+}
+
+.step-group-title {
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.step-group ol {
+  display: grid;
+  gap: 6px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 14px;
+  padding: 14px 16px 16px 12px;
+  border-radius: var(--radius-l);
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.step.is-current {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.step-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  transition: background 0.15s, color 0.15s;
+}
+
+.step.is-current .step-num {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.step.is-done .step-num {
+  background: var(--done);
+  color: var(--surface);
+}
+
+.step-num svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 3;
+}
+
+.step-body {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding-top: 6px;
+}
+
+.step-text {
+  font-size: 1.06rem;
+  line-height: 1.6;
+  cursor: pointer;
+  text-wrap: pretty;
+}
+
+.step.is-done .step-text {
+  color: var(--ink-3);
+}
+
+.step.is-done .callout {
+  opacity: 0.6;
+}
+
+.step-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 0.86rem;
+  font-weight: 550;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.step-timer:hover {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.step-timer svg {
+  width: 16px;
+  height: 16px;
+}
+
+.step-timer.is-running {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: var(--surface);
+}
+
+/* Переключатель */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 550;
+  color: var(--ink-2);
+  padding: 6px 4px;
+}
+
+.switch-track {
+  width: 40px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  padding: 3px;
+  transition: background 0.2s;
+}
+
+.switch-thumb {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+  transition: transform 0.2s var(--ease);
+}
+
+.switch.is-on {
+  color: var(--ink);
+}
+
+.switch.is-on .switch-track {
+  background: var(--done);
+}
+
+.switch.is-on .switch-thumb {
+  transform: translateX(16px);
+}
+
+/* ------------------------------------------------------------------ */
+/* Советы                                                              */
+/* ------------------------------------------------------------------ */
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.tips {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .tips {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+.tips li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: var(--radius-l);
+  background: var(--warn-soft);
+  line-height: 1.55;
+}
+
+.tips svg {
+  width: 20px;
+  height: 20px;
+  color: var(--warn);
+  margin-top: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Карточки «хранение и подача»                                         */
+/* ------------------------------------------------------------------ */
+
+.info-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .info-wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1100px) {
+  .info-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .info-wide {
+    grid-column: span 2;
+  }
+}
+
+.info-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.info-title svg {
+  width: 16px;
+  height: 16px;
+}
+
+.info-big {
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.info-big span {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.info-foot {
+  font-size: 0.9rem;
+}
+
+.info-dl {
+  display: grid;
+  gap: 2px;
+  font-size: 0.95rem;
+}
+
+.info-dl dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.info-dl dt svg {
+  width: 14px;
+  height: 14px;
+}
+
+.info-dl dd {
+  color: var(--ink-2);
+}
+
+.reheat-list {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .reheat-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+.reheat-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.reheat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.reheat-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.reheat-title {
+  font-weight: 600;
+}
+
+.reheat-list .muted {
+  font-size: 0.93rem;
+}
+
+/* Месяцы */
+.months {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.month {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+
+.month-bar {
+  width: 100%;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.month.is-on .month-bar {
+  background: color-mix(in oklab, var(--done) 70%, var(--surface));
+}
+
+.month.is-now .month-bar {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink);
+}
+
+.month-label {
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.month.is-now .month-label {
+  color: var(--ink);
+}
+
+/* БЖУ */
+.macros {
+  display: grid;
+  gap: 12px;
+}
+
+.macro-bar {
+  display: flex;
+  gap: 3px;
+  height: 12px;
+}
+
+.macro-seg {
+  border-radius: 4px;
+  min-width: 4px;
+}
+
+.macro-protein {
+  background: var(--t-tomato);
+}
+
+.macro-fat {
+  background: var(--t-saffron);
+}
+
+.macro-carbs {
+  background: var(--t-herb);
+}
+
+.macro-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.macro-legend dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+.macro-legend dd {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.macro-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.recipe-source {
+  margin-top: 32px;
+  font-size: 0.9rem;
+}
+
+.recipe-source a {
+  text-decoration: underline;
+}

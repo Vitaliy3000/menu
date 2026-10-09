@@ -1,0 +1,50 @@
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .site-header,
+  .site-footer,
+  .timer-tray,
+  .section-nav,
+  .plan-tabs,
+  .plan-cta,
+  .back-link,
+  .switch,
+  .stepper,
+  .step-timer,
+  .timer-btn-step,
+  .tl-actions,
+  .timeline-filter,
+  .catalog-side,
+  .next-plan {
+    display: none !important;
+  }
+
+  .page {
+    padding: 0;
+  }
+
+  .card,
+  .facts,
+  .tl-card {
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .recipe-body {
+    grid-template-columns: 1fr 2fr !important;
+  }
+
+  .recipe-aside {
+    position: static !important;
+    max-height: none !important;
+  }
+}

@@ -1,0 +1,639 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CookPlan",
+  "description": "Техкарта конкретного дня готовки. Полностью самодостаточна: свои продукты с итоговыми объёмами, своя техника, свои блюда и пошаговый таймлайн. Не ссылается на рецепты (Recipe) и не зависит от них. Таймлайн рассчитывается заранее — сайт его только показывает.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "summary",
+    "date",
+    "duration",
+    "conditions",
+    "equipment",
+    "dishes",
+    "ingredients",
+    "steps"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Путь к схеме для подсказок в редакторе. На сайт не влияет."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 80,
+      "description": "Уникальный идентификатор и часть URL. Должен совпадать с именем файла без .json."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400,
+      "description": "Что получится в итоге и в чём логика дня. 1–2 предложения."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "День готовки, YYYY-MM-DD."
+    },
+    "start": {
+      "type": "string",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+      "description": "Плановое время начала, HH:MM. Если задано, к шагам добавляются часы."
+    },
+    "duration": {
+      "$ref": "#/$defs/PlanDuration"
+    },
+    "audience": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "Для кого и на какой срок: «2 взрослых, обеды и ужины пн–пт»."
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 32,
+        "pattern": "^[^A-ZА-ЯЁ]+$"
+      }
+    },
+    "conditions": {
+      "$ref": "#/$defs/Conditions"
+    },
+    "equipment": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Техника и посуда, под которые адаптирован план.",
+      "items": {
+        "$ref": "#/$defs/Equipment"
+      }
+    },
+    "dishes": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Что получится на выходе: блюда, выход, фасовка и хранение.",
+      "items": {
+        "$ref": "#/$defs/Dish"
+      }
+    },
+    "ingredients": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Итоговая закупка на весь день, уже в нужных объёмах.",
+      "items": {
+        "$ref": "#/$defs/PlanIngredient"
+      }
+    },
+    "beforeStart": {
+      "type": "array",
+      "description": "Что сделать заранее: накануне, утром, за час до начала.",
+      "items": {
+        "$ref": "#/$defs/PrepTask"
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Таймлайн, отсортированный по at. Параллельные шаги имеют пересекающиеся интервалы.",
+      "items": {
+        "$ref": "#/$defs/PlanStep"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "description": "Общие замечания к дню: что критично, что можно сдвинуть.",
+      "items": {
+        "type": "string",
+        "minLength": 5
+      }
+    }
+  },
+  "$defs": {
+    "LocalId": {
+      "title": "LocalId",
+      "description": "Идентификатор внутри этой техкарты.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "PlanDuration": {
+      "title": "PlanDuration",
+      "description": "Длительность дня готовки, минут.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "active"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "От первого шага до последнего."
+        },
+        "active": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Сколько из них заняты руки."
+        }
+      }
+    },
+    "Conditions": {
+      "title": "Conditions",
+      "description": "Условия, под которые составлен план.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cooks",
+        "kitchen"
+      ],
+      "properties": {
+        "cooks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Сколько человек готовит."
+        },
+        "kitchen": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 200,
+          "description": "Кухня одной строкой: плита, духовка, место."
+        },
+        "notes": {
+          "type": "array",
+          "description": "Ограничения и допущения: «морозилка: свободно ~25 л».",
+          "items": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      }
+    },
+    "EquipmentKind": {
+      "title": "EquipmentKind",
+      "type": "string",
+      "enum": [
+        "oven",
+        "hob",
+        "appliance",
+        "cookware",
+        "tool",
+        "container"
+      ]
+    },
+    "Equipment": {
+      "title": "Equipment",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "kind": {
+          "$ref": "#/$defs/EquipmentKind"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Сколько штук нужно."
+        },
+        "spec": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Характеристики: «60 л, конвекция», «Ø 28 см»."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 160
+        }
+      }
+    },
+    "Unit": {
+      "title": "Unit",
+      "description": "Единица измерения. Отображается по-русски: g → г, tbsp → ст. л., clove → зубчик и т. д.",
+      "type": "string",
+      "enum": [
+        "g",
+        "kg",
+        "ml",
+        "l",
+        "pcs",
+        "tsp",
+        "tbsp",
+        "cup",
+        "pinch",
+        "clove",
+        "bunch",
+        "can",
+        "slice",
+        "sprig",
+        "leaf",
+        "pack",
+        "handful"
+      ]
+    },
+    "Quantity": {
+      "title": "Quantity",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "$ref": "#/$defs/Unit"
+        }
+      }
+    },
+    "StorageKind": {
+      "title": "StorageKind",
+      "description": "fridge — холодильник, freezer — морозилка, pantry — шкаф, serve — подать сразу.",
+      "type": "string",
+      "enum": [
+        "fridge",
+        "freezer",
+        "pantry",
+        "serve"
+      ]
+    },
+    "Packaging": {
+      "title": "Packaging",
+      "description": "Одна позиция фасовки.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "container",
+        "count",
+        "storage"
+      ],
+      "properties": {
+        "container": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Тара: «Стеклянный контейнер 750 мл»."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "storage": {
+          "$ref": "#/$defs/StorageKind"
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Сколько дней хранится с даты готовки. Сайт покажет дату «годен до»."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 160
+        }
+      }
+    },
+    "PlanNutrition": {
+      "title": "PlanNutrition",
+      "description": "Пищевая ценность одной порции (приблизительно).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kcal",
+        "protein",
+        "fat",
+        "carbs"
+      ],
+      "properties": {
+        "kcal": {
+          "type": "number",
+          "minimum": 0
+        },
+        "protein": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "carbs": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "Dish": {
+      "title": "Dish",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "yield",
+        "portions",
+        "packaging"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "yield": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "portions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "portionSize": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Размер порции: «≈ 450 мл», «2 бедра + 180 г гарнира»."
+        },
+        "packaging": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Packaging"
+          }
+        },
+        "reheat": {
+          "type": "string",
+          "maxLength": 240,
+          "description": "Как разогревать именно эту партию."
+        },
+        "nutrition": {
+          "$ref": "#/$defs/PlanNutrition"
+        }
+      },
+      "description": "Блюдо на выходе техкарты: выход (yield), порции, фасовка и хранение именно этой партии."
+    },
+    "ShopSection": {
+      "title": "ShopSection",
+      "description": "Отдел магазина — для группировки закупки.",
+      "type": "string",
+      "enum": [
+        "produce",
+        "meat",
+        "fish",
+        "dairy",
+        "bakery",
+        "grocery",
+        "frozen",
+        "spices",
+        "other"
+      ]
+    },
+    "PlanIngredient": {
+      "title": "PlanIngredient",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "amount",
+        "unit",
+        "section"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "amount": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Сколько купить/взять на весь день (брутто)."
+        },
+        "unit": {
+          "$ref": "#/$defs/Unit"
+        },
+        "section": {
+          "$ref": "#/$defs/ShopSection"
+        },
+        "staple": {
+          "type": "boolean",
+          "description": "Обычно уже есть дома (соль, масло, специи)."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Уточнение: «нетто после чистки ≈ 1,8 кг», «любая жирность»."
+        }
+      }
+    },
+    "PrepTask": {
+      "title": "PrepTask",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "when",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "when": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40,
+          "description": "Когда: «накануне вечером», «за час до начала»."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 5
+        },
+        "uses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IngredientUse"
+          }
+        }
+      }
+    },
+    "IngredientUse": {
+      "title": "IngredientUse",
+      "description": "Продукт, который берём на этом шаге. ingredient — id из ingredients этой техкарты. amount+unit — сколько именно; toTaste — по вкусу; без них — вся позиция из закупки.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ingredient"
+      ],
+      "properties": {
+        "ingredient": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "amount": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "$ref": "#/$defs/Unit"
+        },
+        "toTaste": {
+          "type": "boolean",
+          "description": "По вкусу (соль, перец)."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 60
+        }
+      },
+      "dependentRequired": {
+        "amount": [
+          "unit"
+        ],
+        "unit": [
+          "amount"
+        ]
+      }
+    },
+    "Timer": {
+      "title": "Timer",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minutes",
+        "label"
+      ],
+      "properties": {
+        "minutes": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1440
+        },
+        "label": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 32,
+          "description": "Короткая подпись на таймере: «Тыква в духовке»."
+        }
+      }
+    },
+    "PlanStep": {
+      "title": "PlanStep",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "at",
+        "duration",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "at": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Начало шага: минут от старта дня."
+        },
+        "duration": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Сколько минут занимает шаг (для пассивных — ожидание)."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 90,
+          "description": "Короткая команда: «Тыкву — в духовку»."
+        },
+        "details": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Подробности: как именно, на что смотреть."
+        },
+        "passive": {
+          "type": "boolean",
+          "description": "Руки свободны: варится, запекается, остывает."
+        },
+        "dishes": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "id блюд из dishes, к которым относится шаг.",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          }
+        },
+        "equipment": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "id техники из equipment, которая занята шагом.",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          }
+        },
+        "uses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IngredientUse"
+          }
+        },
+        "heat": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Нагрев: «200 °C, конвекция», «средний огонь, 6/9»."
+        },
+        "timer": {
+          "$ref": "#/$defs/Timer"
+        },
+        "doneWhen": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Признак готовности."
+        },
+        "warning": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Критичный момент или техника безопасности."
+        },
+        "tip": {
+          "type": "string",
+          "minLength": 5
+        }
+      }
+    }
+  }
+}
