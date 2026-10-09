@@ -2,7 +2,7 @@
   "$schema": "../../schemas/cook-plan.schema.json",
   "id": "netherlands-october-2026",
   "title": "Нидерланды-Октябрь-2026",
-  "summary": "Итальянское меню на 14 дней для двоих: ригатони болоньезе, курица по-охотничьи, говядина с грибами и полентой, курица с лимоном и лосось. Всё разложено по контейнерам — на неделе только разогреть в микроволновке, лосось запечь в духовке. Завтраки и перекусы — из закупки, без готовки.",
+  "summary": "Итальянское меню на 14 дней для двоих: ригатони болоньезе, курица по-охотничьи, говядина с грибами и полентой, курица с лимоном и лосось. Всё разложено по контейнерам — на неделе только разогреть в микроволновке, лосось запечь в духовке. Завтраки — 7 разных, утром до 15 минут; перекусы — из закупки.",
   "start": "10:00",
   "duration": { "total": 210, "active": 200 },
   "audience": "2 взрослых: завтраки, обеды, ужины и перекусы на 14 дней",
@@ -342,10 +342,10 @@
     {
       "id": "peppers",
       "name": "Красный сладкий перец",
-      "amount": 12,
+      "amount": 7,
       "unit": "pcs",
       "section": "produce",
-      "note": "Paprika rood: 4 — курица по-охотничьи, 8 — к завтракам"
+      "note": "Paprika rood: 4 — курица по-охотничьи, 3 — к тости"
     },
     {
       "id": "potatoes",
@@ -361,40 +361,45 @@
     { "id": "rosemary", "name": "Розмарин", "amount": 6, "unit": "sprig", "section": "produce", "note": "Rozemarijn — 1 упаковка" },
     { "id": "parsley", "name": "Петрушка листовая", "amount": 1, "unit": "bunch", "section": "produce", "note": "Bladpeterselie, ≈ 30 г" },
     { "id": "lemons", "name": "Лимоны", "amount": 4, "unit": "pcs", "section": "produce", "note": "Citroenen: 3 — курица, 1 — гремолата" },
-    {
-      "id": "apples",
-      "name": "Яблоки",
-      "amount": 28,
-      "unit": "pcs",
-      "section": "produce",
-      "note": "Elstar или Jonagold — к кварку и в перекусы Светы"
-    },
+    { "id": "apples", "name": "Яблоки", "amount": 14, "unit": "pcs", "section": "produce", "note": "Elstar или Jonagold — перекусы Светы" },
     {
       "id": "pears",
       "name": "Груши",
-      "amount": 14,
+      "amount": 16,
       "unit": "pcs",
       "section": "produce",
-      "note": "Conference, твёрдые — перекусы Виталия, дозревают в холодильнике"
+      "note": "Conference, твёрдые — перекусы Виталия и к йогурту, дозревают в холодильнике"
     },
+    { "id": "cucumbers", "name": "Огурцы", "amount": 2, "unit": "pcs", "section": "produce", "note": "Komkommer — по одному на неделю, к лососю" },
+    { "id": "cherry", "name": "Помидоры черри", "amount": 500, "unit": "g", "section": "produce", "note": "Cherrytomaten, 2 по 250 г — к яичнице" },
+    { "id": "chives", "name": "Шнитт-лук", "amount": 1, "unit": "bunch", "section": "produce", "note": "Bieslook — в омлет" },
+    { "id": "dill", "name": "Укроп", "amount": 1, "unit": "bunch", "section": "produce", "note": "Dille — к бутербродам с лососем" },
     { "id": "kiwi", "name": "Киви", "amount": 14, "unit": "pcs", "section": "produce", "note": "Только Виталию — по 1 в день" },
     {
       "id": "mandarins",
       "name": "Мандарины",
-      "amount": 28,
+      "amount": 32,
       "unit": "pcs",
       "section": "produce",
-      "note": "Mandarijnen или clementines, ≈ 2 кг — Свете по 2 в день"
+      "note": "Mandarijnen или clementines, ≈ 2,3 кг — перекусы Светы и к завтраку"
     },
     {
       "id": "milk",
       "name": "Молоко 1,5 %",
-      "amount": 1,
+      "amount": 0.5,
       "unit": "l",
       "section": "dairy",
-      "note": "Halfvolle melk: 250 мл — рагу, остальное — к яйцам"
+      "note": "Halfvolle melk: 250 мл — рагу, немного — в омлет"
     },
-    { "id": "butter", "name": "Сливочное масло", "amount": 140, "unit": "g", "section": "dairy", "staple": true, "note": "Roomboter" },
+    {
+      "id": "butter",
+      "name": "Сливочное масло",
+      "amount": 200,
+      "unit": "g",
+      "section": "dairy",
+      "staple": true,
+      "note": "Roomboter: 140 г — готовка, 60 г — завтраки"
+    },
     {
       "id": "parmesan",
       "name": "Пармезан куском",
@@ -406,13 +411,63 @@
     {
       "id": "kwark",
       "name": "Обезжиренный кварк",
-      "amount": 6.5,
+      "amount": 4.6,
       "unit": "kg",
       "section": "dairy",
-      "note": "Magere kwark, 13 по 500 г — с самым длинным сроком"
+      "note": "Magere kwark, 10 по 500 г — перекусы, с самым длинным сроком"
     },
-    { "id": "eggs", "name": "Яйца", "amount": 40, "unit": "pcs", "section": "dairy", "note": "Eieren, 4 упаковки по 10 — к завтракам" },
-    { "id": "cheese", "name": "Сыр 30+ куском", "amount": 750, "unit": "g", "section": "dairy", "note": "30+ kaas, stuk — завтраки и тосты" },
+    { "id": "eggs", "name": "Яйца", "amount": 30, "unit": "pcs", "section": "dairy", "note": "Eieren, 3 упаковки по 10 — завтраки" },
+    { "id": "cheese", "name": "Сыр 30+ ломтиками", "amount": 600, "unit": "g", "section": "dairy", "note": "30+ kaas plakken — завтраки и тосты" },
+    {
+      "id": "greek-yogurt",
+      "name": "Греческий йогурт 5 %",
+      "amount": 1,
+      "unit": "kg",
+      "section": "dairy",
+      "note": "Griekse yoghurt, 2 по 500 г — по одной на неделю"
+    },
+    {
+      "id": "cream-cheese",
+      "name": "Творожный сыр",
+      "amount": 110,
+      "unit": "g",
+      "section": "dairy",
+      "note": "Roomkaas naturel, 2 маленькие упаковки — по одной на неделю"
+    },
+    { "id": "ricotta", "name": "Рикотта", "amount": 250, "unit": "g", "section": "dairy", "note": "Ricotta, 1 упаковка — завтраки дней 7 и 8" },
+    {
+      "id": "protein-yogurt",
+      "name": "Протеиновый йогурт",
+      "amount": 2,
+      "unit": "pcs",
+      "section": "dairy",
+      "note": "Arla Protein или YoPRO, по 200 г — Виталию"
+    },
+    { "id": "fruit-yogurt", "name": "Йогурт на вкус Светы", "amount": 2, "unit": "pcs", "section": "dairy", "note": "≈ 150 г, любой" },
+    {
+      "id": "ham",
+      "name": "Ветчина нарезкой",
+      "amount": 220,
+      "unit": "g",
+      "section": "meat",
+      "note": "Achterham, 2 упаковки — вторую сразу в морозилку"
+    },
+    {
+      "id": "bacon",
+      "name": "Бекон нарезкой",
+      "amount": 100,
+      "unit": "g",
+      "section": "meat",
+      "note": "Ontbijtspek, 1 упаковка — половину сразу в морозилку"
+    },
+    {
+      "id": "smoked-salmon",
+      "name": "Копчёный лосось",
+      "amount": 250,
+      "unit": "g",
+      "section": "fish",
+      "note": "Gerookte zalm, 2 по 125 г — вторую сразу в морозилку"
+    },
     {
       "id": "soy-milk",
       "name": "Соевое молоко без сахара",
@@ -423,11 +478,11 @@
     },
     {
       "id": "bread",
-      "name": "Цельнозерновой хлеб, не нарезанный",
+      "name": "Цельнозерновой хлеб нарезкой",
       "amount": 2,
       "unit": "kg",
       "section": "bakery",
-      "note": "Volkorenbrood ongesneden: 2 целые буханки + половинка"
+      "note": "Volkorenbrood gesneden: 2 буханки по 800 г + половинка"
     },
     { "id": "rigatoni", "name": "Ригатони", "amount": 1, "unit": "kg", "section": "grocery", "note": "Нужно 850 г" },
     {
@@ -475,8 +530,8 @@
       "section": "grocery",
       "note": "Bouillonblokjes: 1 говяжий, 1 куриный"
     },
-    { "id": "oats", "name": "Овсяные хлопья", "amount": 500, "unit": "g", "section": "grocery", "note": "Havermout — к завтракам" },
-    { "id": "walnuts", "name": "Грецкие орехи", "amount": 500, "unit": "g", "section": "grocery", "note": "Walnoten ongebrand — завтраки и перекусы" },
+    { "id": "granola", "name": "Гранола", "amount": 140, "unit": "g", "section": "grocery", "note": "Granola — пачка ≈ 375 г, к йогурту" },
+    { "id": "walnuts", "name": "Грецкие орехи", "amount": 600, "unit": "g", "section": "grocery", "note": "Walnoten ongebrand — завтраки и перекусы" },
     {
       "id": "olive-oil",
       "name": "Оливковое масло",
@@ -487,12 +542,11 @@
       "note": "Olijfolie extra vergine"
     },
     { "id": "flour", "name": "Пшеничная мука", "amount": 5, "unit": "tbsp", "section": "grocery", "staple": true, "note": "Bloem" },
-    { "id": "honey", "name": "Мёд", "amount": 250, "unit": "g", "section": "grocery", "staple": true, "note": "Honing — к кварку" },
+    { "id": "honey", "name": "Мёд", "amount": 250, "unit": "g", "section": "grocery", "staple": true, "note": "Honing — к йогурту, рикотте и кварку" },
     { "id": "salt", "name": "Соль", "amount": 1, "unit": "pack", "section": "spices", "staple": true },
     { "id": "pepper", "name": "Чёрный перец", "amount": 1, "unit": "pack", "section": "spices", "staple": true },
     { "id": "nutmeg", "name": "Мускатный орех", "amount": 1, "unit": "pinch", "section": "spices", "staple": true },
     { "id": "bay", "name": "Лавровый лист", "amount": 3, "unit": "leaf", "section": "spices", "staple": true },
-    { "id": "cinnamon", "name": "Корица", "amount": 1, "unit": "pack", "section": "spices", "staple": true, "note": "К кварку" },
     {
       "id": "protein",
       "name": "Сывороточный протеин",
@@ -1175,22 +1229,34 @@
       "duration": 10,
       "title": "Продукты для завтраков и перекусов — по местам",
       "role": "helper",
-      "details": "Хлеб нарезать ломтиками 1,5 см и заморозить в пакете из-под хлеба — утром ломтики идут прямо в тостер. Сыр нарезать ломтиками по 20 г, переложить пергаментом. Кварк, яйца, сыр, перец, фрукты — в холодильник; груши — на нижнюю полку, пусть дозревают. Орехи, овсянку, мёд, корицу, протеин и соевое молоко — в шкаф.",
+      "details": "Хлеб — в морозилку в пакете: утром ломтики идут прямо в тостер. Вторую упаковку ветчины и лосося и половину бекона — в морозилку: это завтраки второй недели, накануне переложить в холодильник. Йогурты, кварк, сыры, яйца, овощи и фрукты — в холодильник; груши — на нижнюю полку, пусть дозревают. Орехи, гранолу, мёд, протеин и соевое молоко — в шкаф.",
       "uses": [
         { "ingredient": "bread", "amount": 2, "unit": "kg" },
-        { "ingredient": "kwark", "amount": 6.5, "unit": "kg" },
-        { "ingredient": "eggs", "amount": 40, "unit": "pcs" },
-        { "ingredient": "cheese", "amount": 750, "unit": "g" },
-        { "ingredient": "peppers", "amount": 8, "unit": "pcs" },
-        { "ingredient": "apples", "amount": 28, "unit": "pcs" },
-        { "ingredient": "pears", "amount": 14, "unit": "pcs" },
+        { "ingredient": "kwark", "amount": 4.6, "unit": "kg" },
+        { "ingredient": "eggs", "amount": 30, "unit": "pcs" },
+        { "ingredient": "cheese", "amount": 600, "unit": "g" },
+        { "ingredient": "greek-yogurt", "amount": 1, "unit": "kg" },
+        { "ingredient": "cream-cheese", "amount": 110, "unit": "g" },
+        { "ingredient": "ricotta", "amount": 250, "unit": "g" },
+        { "ingredient": "protein-yogurt", "amount": 2, "unit": "pcs" },
+        { "ingredient": "fruit-yogurt", "amount": 2, "unit": "pcs" },
+        { "ingredient": "ham", "amount": 220, "unit": "g" },
+        { "ingredient": "bacon", "amount": 100, "unit": "g" },
+        { "ingredient": "smoked-salmon", "amount": 250, "unit": "g" },
+        { "ingredient": "peppers", "amount": 3, "unit": "pcs" },
+        { "ingredient": "cucumbers", "amount": 2, "unit": "pcs" },
+        { "ingredient": "cherry", "amount": 500, "unit": "g" },
+        { "ingredient": "chives", "amount": 1, "unit": "bunch" },
+        { "ingredient": "dill", "amount": 1, "unit": "bunch" },
+        { "ingredient": "apples", "amount": 14, "unit": "pcs" },
+        { "ingredient": "pears", "amount": 16, "unit": "pcs" },
         { "ingredient": "kiwi", "amount": 14, "unit": "pcs" },
-        { "ingredient": "mandarins", "amount": 28, "unit": "pcs" },
-        { "ingredient": "walnuts", "amount": 500, "unit": "g" },
-        { "ingredient": "oats", "amount": 500, "unit": "g" },
+        { "ingredient": "mandarins", "amount": 32, "unit": "pcs" },
+        { "ingredient": "walnuts", "amount": 600, "unit": "g" },
+        { "ingredient": "granola", "amount": 140, "unit": "g" },
         { "ingredient": "honey", "amount": 250, "unit": "g" },
-        { "ingredient": "cinnamon", "toTaste": true },
-        { "ingredient": "milk", "amount": 750, "unit": "ml", "note": "к яйцам" },
+        { "ingredient": "milk", "amount": 50, "unit": "ml", "note": "в омлет" },
+        { "ingredient": "butter", "amount": 60, "unit": "g", "note": "завтраки" },
         { "ingredient": "soy-milk", "amount": 7, "unit": "l" },
         { "ingredient": "protein", "amount": 850, "unit": "g" }
       ]
@@ -1239,36 +1305,86 @@
     ],
     "extras": [
       {
-        "id": "bf-kwark",
-        "name": "Кварк с овсянкой и яблоком",
+        "id": "bf-omelet",
+        "name": "Омлет с сыром и шнитт-луком, тост",
         "meal": "breakfast",
         "servings": [
           {
             "person": "vitaly",
-            "text": "250 г кварка, 40 г овсянки, яблоко кубиками, 15 г грецких орехов, 1 ч. л. мёда, корица",
-            "kcal": 491,
-            "protein": 33
+            "text": "3 яйца с ложкой молока на сливочном масле, на слабом огне; внутрь 20 г сыра и шнитт-лук; тост с маслом",
+            "kcal": 448,
+            "protein": 31
           },
-          {
-            "person": "sveta",
-            "text": "200 г кварка, 30 г овсянки, яблоко кубиками, 10 г грецких орехов, 1 ч. л. мёда, корица",
-            "kcal": 392,
-            "protein": 26
-          }
+          { "person": "sveta", "text": "2 яйца, 15 г сыра, шнитт-лук; тост с маслом", "kcal": 354, "protein": 22 }
         ]
       },
       {
-        "id": "bf-eggs",
-        "name": "Яйца из микроволновки с тостами",
+        "id": "bf-yogurt",
+        "name": "Греческий йогурт с гранолой и грушей",
+        "meal": "breakfast",
+        "servings": [
+          { "person": "vitaly", "text": "250 г йогурта, 40 г гранолы, 1 ч. л. мёда, половина груши ломтиками", "kcal": 491, "protein": 27 },
+          { "person": "sveta", "text": "200 г йогурта, 30 г гранолы, 1 ч. л. мёда, половина груши ломтиками", "kcal": 399, "protein": 21 }
+        ]
+      },
+      {
+        "id": "bf-tosti",
+        "name": "Тости с ветчиной и сыром",
         "meal": "breakfast",
         "servings": [
           {
             "person": "vitaly",
-            "text": "3 яйца с ложкой молока: 1 минута, перемешать, ещё 30–40 секунд; 2 тоста, 20 г сыра, половина перца",
-            "kcal": 485,
-            "protein": 35
+            "text": "2 ломтика хлеба, 40 г ветчины, 30 г сыра; на сковороде с каплей масла под крышкой по 2–3 минуты с каждой стороны; половина перца",
+            "kcal": 349,
+            "protein": 25
           },
-          { "person": "sveta", "text": "2 яйца с ложкой молока, 2 тоста, 20 г сыра, половина перца", "kcal": 407, "protein": 28 }
+          { "person": "sveta", "text": "2 ломтика хлеба, 30 г ветчины, 20 г сыра; половина перца", "kcal": 311, "protein": 20 }
+        ]
+      },
+      {
+        "id": "bf-salmon",
+        "name": "Бутерброды с творожным сыром и копчёным лососем",
+        "meal": "breakfast",
+        "servings": [
+          { "person": "vitaly", "text": "2 ломтика хлеба, 30 г творожного сыра, 75 г лосося, огурец ломтиками, укроп", "kcal": 375, "protein": 26 },
+          { "person": "sveta", "text": "2 ломтика хлеба, 25 г творожного сыра, 50 г лосося, огурец, укроп", "kcal": 319, "protein": 20 }
+        ]
+      },
+      {
+        "id": "bf-bacon",
+        "name": "Яичница с беконом, тост и черри",
+        "meal": "breakfast",
+        "servings": [
+          { "person": "vitaly", "text": "30 г бекона до хруста, на его жире — 3 яйца; тост, 100 г черри", "kcal": 432, "protein": 29 },
+          { "person": "sveta", "text": "20 г бекона, 2 яйца, тост, 100 г черри", "kcal": 320, "protein": 21 }
+        ]
+      },
+      {
+        "id": "bf-ready",
+        "name": "Готовый йогурт и бутерброд с ветчиной",
+        "meal": "breakfast",
+        "servings": [
+          { "person": "vitaly", "text": "Протеиновый йогурт 200 г; ломтик хлеба, 20 г ветчины, 20 г сыра; мандарин", "kcal": 318, "protein": 34 },
+          { "person": "sveta", "text": "Йогурт на вкус ≈ 150 г; ломтик хлеба, 20 г ветчины, 20 г сыра; мандарин", "kcal": 337, "protein": 19 }
+        ]
+      },
+      {
+        "id": "bf-ricotta",
+        "name": "Тост с рикоттой, мёдом и орехами, яйца",
+        "meal": "breakfast",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "2 тоста, 75 г рикотты, 2 ч. л. мёда, 15 г грецких орехов; 2 яйца всмятку — 6 минут в кипятке",
+            "kcal": 548,
+            "protein": 30
+          },
+          {
+            "person": "sveta",
+            "text": "1 тост, 50 г рикотты, 1 ч. л. мёда, 10 г орехов; 2 яйца вкрутую — 9 минут в кипятке",
+            "kcal": 393,
+            "protein": 23
+          }
         ]
       },
       {
@@ -1333,100 +1449,101 @@
     "days": [
       {
         "day": 1,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-omelet",
         "lunch": "bolognese",
         "dinner": "cacciatora",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
       },
       {
         "day": 2,
-        "breakfast": "bf-eggs",
+        "breakfast": "bf-yogurt",
         "lunch": "lemon-chicken",
         "dinner": "beef",
         "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
       },
       {
         "day": 3,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-tosti",
         "lunch": "cacciatora",
         "dinner": "bolognese",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
       },
       {
         "day": 4,
-        "breakfast": "bf-eggs",
+        "breakfast": "bf-salmon",
         "lunch": "beef",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "v-toast", "s-fruit", "s-kwark", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
       },
       {
         "day": 5,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-bacon",
         "lunch": "bolognese",
         "dinner": "lemon-chicken",
-        "snacks": ["shakes", "v-fruit", "v-toast", "s-fruit", "s-kwark", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "s-fruit", "s-kwark", "s-nuts"]
       },
       {
         "day": 6,
-        "breakfast": "bf-eggs",
+        "breakfast": "bf-ready",
         "lunch": "cacciatora",
         "dinner": "beef",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
       },
       {
         "day": 7,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-ricotta",
         "lunch": "lemon-chicken",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "v-toast", "s-fruit", "s-kwark", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-kwark", "s-fruit", "s-kwark", "s-toast"]
       },
       {
         "day": 8,
-        "breakfast": "bf-eggs",
+        "breakfast": "bf-ricotta",
         "lunch": "beef",
         "dinner": "bolognese",
-        "snacks": ["shakes", "v-fruit", "v-toast", "s-fruit", "s-kwark", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-kwark", "s-fruit", "s-kwark", "s-toast"]
       },
       {
         "day": 9,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-omelet",
         "lunch": "cacciatora",
         "dinner": "lemon-chicken",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
       },
-      { "day": 10, "breakfast": "bf-eggs", "lunch": "bolognese", "dinner": "salmon", "snacks": ["shakes", "v-fruit", "s-fruit", "s-toast"] },
+      { "day": 10, "breakfast": "bf-yogurt", "lunch": "bolognese", "dinner": "salmon", "snacks": ["shakes", "v-fruit", "s-fruit", "s-kwark"] },
       {
         "day": 11,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-tosti",
         "lunch": "lemon-chicken",
         "dinner": "cacciatora",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
       },
       {
         "day": 12,
-        "breakfast": "bf-eggs",
+        "breakfast": "bf-salmon",
         "lunch": "beef",
         "dinner": "bolognese",
-        "snacks": ["shakes", "v-fruit", "v-toast", "s-fruit", "s-kwark", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
       },
       {
         "day": 13,
-        "breakfast": "bf-kwark",
+        "breakfast": "bf-bacon",
         "lunch": "cacciatora",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-nuts", "s-toast"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
       },
       {
         "day": 14,
-        "breakfast": "bf-eggs",
+        "breakfast": "bf-ready",
         "lunch": "lemon-chicken",
         "dinner": "beef",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
+        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"]
       }
     ],
     "notes": [
       "Каждый вечер — переложить из морозилки в холодильник контейнеры на завтра: обед Виталия, обед Светы и ужин. Утром Виталий берёт контейнер 1 л на работу и кладёт в холодильник до обеда.",
-      "Плиту не включаем: всё греем в микроволновке, лосось — в духовке. Камера одна — духовкой и микроволновкой одновременно не пользоваться.",
+      "Обеды и ужины — без плиты: всё греем в микроволновке, лосось — в духовке. Камера одна — духовкой и микроволновкой одновременно не пользоваться. Утром плиту можно — для завтрака.",
+      "Завтраки — 7 разных, каждый не дольше 15 минут. Рикотта стоит в дни 7 и 8 подряд: открытая упаковка дольше не живёт. Ветчину, лосось и бекон на вторую неделю — накануне из морозилки в холодильник.",
       "Размораживать только в холодильнике. Размороженное съесть в течение суток и повторно не замораживать.",
       "Перекусы подобраны под обед и ужин дня: в дни с пастой и лососем их меньше, в дни с курицей по-охотничьи — больше. Итог каждого дня — в пределах 3 % от цели.",
       "Обед и ужин одного дня можно поменять местами — итог дня не изменится.",
