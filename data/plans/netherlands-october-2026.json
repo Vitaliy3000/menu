@@ -1,0 +1,1038 @@
+{
+  "$schema": "../../schemas/cook-plan.schema.json",
+  "id": "netherlands-october-2026",
+  "title": "Нидерланды-Октябрь-2026",
+  "summary": "Итальянское меню на 14 дней для двоих: ригатони болоньезе, курица по-охотничьи, говядина с грибами и полентой, курица с лимоном и лосось. Всё разложено по контейнерам — на неделе только разогреть в микроволновке, лосось запечь в духовке. Завтраки и перекусы — из закупки, без готовки.",
+  "start": "10:00",
+  "duration": { "total": 210, "active": 200 },
+  "audience": "2 взрослых: завтраки, обеды, ужины и перекусы на 14 дней",
+  "tags": ["на две недели", "итальянская", "заморозка", "обеды с собой", "сезонное"],
+  "conditions": {
+    "cooks": 2,
+    "kitchen": "Индукция на 4 конфорки (заняты 3), одна камера духовки с СВЧ, морозилка 80 л и ларь 198 л",
+    "notes": [
+      "Готовят двое: повар (опытный) ведёт плиту, помощник (начинающий) режет, собирает формы и фасует. Шаги помощника начинаются со слова «Помощник».",
+      "Накануне вечером помощник чистит и режет овощи и говядину — ≈ 1 час.",
+      "Духовка весь день на 200 °C: овощи к лососю → курица по-охотничьи → брокколи → рис. Пока она работает, микроволновкой не пользоваться — камера одна.",
+      "Заморозить нужно ≈ 21 кг, а морозилка и ларь вместе берут ≈ 12,5 кг в сутки — часть контейнеров ночует в холодильнике (см. последний шаг).",
+      "Ничего нарезанного не покупаем — всё режем сами."
+    ]
+  },
+  "equipment": [
+    {
+      "id": "oven",
+      "name": "Духовка с микроволновкой",
+      "kind": "oven",
+      "spec": "Конвекция, 2 уровня",
+      "note": "Весь день 200 °C; камера одна — микроволновкой не пользоваться"
+    },
+    { "id": "hob", "name": "Индукционная панель", "kind": "hob", "spec": "4 конфорки, заняты максимум 3" },
+    { "id": "pot-12", "name": "Кастрюля 12 л с крышкой", "kind": "cookware", "note": "Курица с лимоном, потом паста" },
+    { "id": "pot-4", "name": "Кастрюля 4 л с крышкой", "kind": "cookware", "note": "Говядина с грибами" },
+    { "id": "saute", "name": "Сотейник с крышкой", "kind": "cookware", "spec": "Ø 28 см", "note": "Рагу болоньезе, потом полента" },
+    {
+      "id": "pyrex",
+      "name": "Формы Pyrex",
+      "kind": "cookware",
+      "count": 2,
+      "spec": "Прямоугольная и овальная, ≈ 25 × 35 см",
+      "note": "Курица по-охотничьи, потом рис"
+    },
+    { "id": "tray", "name": "Стеклянный противень", "kind": "cookware", "note": "Овощи к лососю, потом брокколи" },
+    { "id": "colander", "name": "Дуршлаг", "kind": "tool", "note": "Для пасты" },
+    { "id": "kettle", "name": "Чайник", "kind": "appliance", "note": "Кипяток для риса" },
+    { "id": "scale", "name": "Кухонные весы", "kind": "tool", "note": "Фасовка по граммам" },
+    { "id": "probe", "name": "Термощуп", "kind": "tool", "note": "Курица — 75 °C в толстой части" },
+    { "id": "knives", "name": "Ножи", "kind": "tool" },
+    { "id": "boards", "name": "Разделочные доски", "kind": "tool", "count": 3, "note": "Одна — только для сырого мяса, одна — для рыбы" },
+    { "id": "graters", "name": "Тёрка Microplane", "kind": "tool", "note": "Пармезан и лимонная цедра" },
+    { "id": "bowls", "name": "Миски", "kind": "tool", "count": 3 },
+    { "id": "box-1", "name": "Контейнеры 1 л", "kind": "container", "count": 14, "note": "Обеды Виталия: для СВЧ и заморозки, с плотной крышкой" },
+    { "id": "box-075", "name": "Контейнеры 0,75 л", "kind": "container", "count": 14, "note": "Обеды Светы" },
+    { "id": "box-15", "name": "Контейнеры 1,5 л", "kind": "container", "count": 10, "note": "Ужины на двоих" },
+    {
+      "id": "glass-2",
+      "name": "Стеклянные контейнеры 2 л",
+      "kind": "container",
+      "count": 4,
+      "note": "Ужины с лососем — только стекло, которое можно в духовку"
+    },
+    { "id": "foil", "name": "Фольга", "kind": "consumable", "spec": "≈ 3 м", "note": "Рис в духовке и лосось дома" },
+    { "id": "film", "name": "Пищевая плёнка", "kind": "consumable", "note": "Завернуть 8 стейков лосося" },
+    { "id": "labels", "name": "Малярный скотч и маркер", "kind": "consumable", "note": "Подписать 42 контейнера: блюдо, кто, день" }
+  ],
+  "dishes": [
+    {
+      "id": "bolognese",
+      "name": "Ригатони с рагу болоньезе",
+      "description": "Фарш из говядины и свинины, томлённый полтора часа с соффритто, белым вином, молоком и томатами. Смешан с ригатони и Parmigiano Reggiano.",
+      "yield": { "amount": 4.2, "unit": "kg" },
+      "portions": 12,
+      "portionSize": "Виталий 400 г · Света 290 г",
+      "packaging": [
+        { "container": "Контейнер 1 л — обед Виталия", "count": 1, "storage": "fridge", "days": 3, "note": "Обед, день 1" },
+        { "container": "Контейнер 0,75 л — обед Светы", "count": 1, "storage": "fridge", "days": 3, "note": "День 1. Порция Светы: ≈ 540 ккал, Б 30" },
+        { "container": "Контейнер 1,5 л — ужин на двоих", "count": 1, "storage": "fridge", "days": 3, "note": "Ужин, день 3: 690 г" },
+        { "container": "Контейнер 1 л — обед Виталия", "count": 2, "storage": "freezer", "days": 90, "note": "Обед, дни 5 и 10" },
+        { "container": "Контейнер 0,75 л — обед Светы", "count": 2, "storage": "freezer", "days": 90, "note": "Дни 5 и 10" },
+        { "container": "Контейнер 1,5 л — ужин на двоих", "count": 2, "storage": "freezer", "days": 90, "note": "Ужин, дни 8 и 12" }
+      ],
+      "reheat": "Накануне — из морозилки в холодильник. Сбрызнуть 1–2 ст. л. воды, крышка приоткрыта: 1 л — 3–4 минуты, 1,5 л — 5–6 минут, на середине перемешать.",
+      "nutrition": { "kcal": 740, "protein": 41, "fat": 31, "carbs": 67 }
+    },
+    {
+      "id": "cacciatora",
+      "name": "Курица по-охотничьи с картофелем",
+      "description": "Бёдра, запечённые в одной форме с картофелем, сладким перцем, луком, томатами, оливками, розмарином и белым вином. Гарнир уже внутри.",
+      "yield": { "amount": 4.5, "unit": "kg" },
+      "portions": 12,
+      "portionSize": "Виталий 440 г · Света 310 г",
+      "packaging": [
+        { "container": "Контейнер 1,5 л — ужин на двоих", "count": 1, "storage": "fridge", "days": 3, "note": "Ужин, день 1: 750 г" },
+        { "container": "Контейнер 1 л — обед Виталия", "count": 1, "storage": "fridge", "days": 3, "note": "Обед, день 3" },
+        { "container": "Контейнер 0,75 л — обед Светы", "count": 1, "storage": "fridge", "days": 3, "note": "День 3. Порция Светы: ≈ 385 ккал, Б 30" },
+        { "container": "Контейнер 1 л — обед Виталия", "count": 3, "storage": "freezer", "days": 90, "note": "Обед, дни 6, 9 и 13" },
+        { "container": "Контейнер 0,75 л — обед Светы", "count": 3, "storage": "freezer", "days": 90, "note": "Дни 6, 9 и 13" },
+        { "container": "Контейнер 1,5 л — ужин на двоих", "count": 1, "storage": "freezer", "days": 90, "note": "Ужин, день 11" }
+      ],
+      "reheat": "Накануне — в холодильник. Крышка приоткрыта: 1 л — 3–4 минуты, 1,5 л — 5–6 минут, перемешать на середине.",
+      "nutrition": { "kcal": 545, "protein": 43, "fat": 22, "carbs": 36 }
+    },
+    {
+      "id": "beef",
+      "name": "Говядина с грибами в красном вине и полента",
+      "description": "Говядина, тушённая почти два часа с морковью, шампиньонами, розмарином и красным вином, соус собран сливочным маслом. Кремовая полента с пармезаном.",
+      "yield": { "amount": 5.5, "unit": "kg" },
+      "portions": 12,
+      "portionSize": "Виталий 545 г · Света 370 г",
+      "packaging": [
+        {
+          "container": "Контейнер 1,5 л — ужин на двоих",
+          "count": 1,
+          "storage": "fridge",
+          "days": 3,
+          "note": "Ужин, день 2: 415 г говядины + 500 г поленты"
+        },
+        {
+          "container": "Контейнер 1 л — обед Виталия",
+          "count": 3,
+          "storage": "freezer",
+          "days": 90,
+          "note": "Обед, дни 4, 8 и 12: 245 г говядины + 300 г поленты"
+        },
+        {
+          "container": "Контейнер 0,75 л — обед Светы",
+          "count": 3,
+          "storage": "freezer",
+          "days": 90,
+          "note": "Дни 4, 8 и 12: 170 + 200 г. Порция Светы: ≈ 450 ккал, Б 29"
+        },
+        { "container": "Контейнер 1,5 л — ужин на двоих", "count": 2, "storage": "freezer", "days": 90, "note": "Ужин, дни 6 и 14" }
+      ],
+      "reheat": "Накануне — в холодильник. Поленту сбрызнуть 2 ст. л. воды или молока, крышка приоткрыта: 1 л — 4 минуты, 1,5 л — 6 минут; на середине перемешать поленту — снова станет кремовой.",
+      "nutrition": { "kcal": 660, "protein": 41, "fat": 26, "carbs": 52 }
+    },
+    {
+      "id": "lemon-chicken",
+      "name": "Курица с лимоном и каперсами, рис и брокколи",
+      "description": "Бёдра, обжаренные до корочки, в соусе из лимона, чеснока, белого вина и сливочного масла с каперсами и петрушкой. Басмати и брокколи, запечённая с чесноком.",
+      "yield": { "amount": 4.1, "unit": "kg" },
+      "portions": 12,
+      "portionSize": "Виталий 480 г · Света 330 г",
+      "packaging": [
+        {
+          "container": "Контейнер 1 л — обед Виталия",
+          "count": 1,
+          "storage": "fridge",
+          "days": 3,
+          "note": "Обед, день 2: 160 г курицы с соусом, 200 г риса, 120 г брокколи"
+        },
+        {
+          "container": "Контейнер 0,75 л — обед Светы",
+          "count": 1,
+          "storage": "fridge",
+          "days": 3,
+          "note": "День 2: 110 + 140 + 80 г. Порция Светы: ≈ 455 ккал, Б 29"
+        },
+        { "container": "Контейнер 1 л — обед Виталия", "count": 3, "storage": "freezer", "days": 90, "note": "Обед, дни 7, 11 и 14" },
+        { "container": "Контейнер 0,75 л — обед Светы", "count": 3, "storage": "freezer", "days": 90, "note": "Дни 7, 11 и 14" },
+        { "container": "Контейнер 1,5 л — ужин на двоих", "count": 2, "storage": "freezer", "days": 90, "note": "Ужин, дни 5 и 9" }
+      ],
+      "reheat": "Накануне — в холодильник. Сбрызнуть рис ложкой воды, крышка приоткрыта: 1 л — 3–4 минуты, 1,5 л — 5 минут.",
+      "nutrition": { "kcal": 660, "protein": 42, "fat": 25, "carbs": 62 }
+    },
+    {
+      "id": "salmon",
+      "name": "Лосось с гремолатой, запечёнными овощами и рисом",
+      "description": "Сырые стейки с гремолатой (петрушка, лимонная цедра, чеснок) лежат поверх запечённых фенхеля, моркови и красного лука с рисом. Дома — 25 минут в духовке, руки заняты минуту.",
+      "yield": { "amount": 8, "unit": "pcs" },
+      "portions": 8,
+      "portionSize": "Стейк: Виталий 180 г · Света 140 г",
+      "packaging": [
+        {
+          "container": "Стеклянный контейнер 2 л — ужин на двоих",
+          "count": 4,
+          "storage": "freezer",
+          "days": 60,
+          "note": "Ужин, дни 4, 7, 10 и 13: 350 г овощей, 280 г риса и 2 стейка в плёнке. Порция Светы: ≈ 570 ккал, Б 33"
+        }
+      ],
+      "reheat": "Накануне — в холодильник. Стейки отложить, контейнер без крышки накрыть фольгой — в духовку на 200 °C на 10 минут. Снять фольгу, развернуть стейки и выложить сверху — ещё 12–15 минут.",
+      "nutrition": { "kcal": 770, "protein": 43, "fat": 35, "carbs": 61 }
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "hoh-mince",
+      "name": "Фарш говядина + свинина",
+      "amount": 1.5,
+      "unit": "kg",
+      "section": "meat",
+      "note": "Half-om-half gehakt, 3 упаковки по 500 г"
+    },
+    {
+      "id": "beef",
+      "name": "Говядина для тушения",
+      "amount": 1.6,
+      "unit": "kg",
+      "section": "meat",
+      "note": "Runderriblappen или sukadelappen — куском, режем сами"
+    },
+    {
+      "id": "chicken",
+      "name": "Куриное филе бедра",
+      "amount": 3.7,
+      "unit": "kg",
+      "section": "meat",
+      "note": "Kipdijfilet, целые филе: 2 кг — по-охотничьи, 1,7 кг — с лимоном"
+    },
+    {
+      "id": "salmon",
+      "name": "Филе лосося без кожи",
+      "amount": 1.3,
+      "unit": "kg",
+      "section": "fish",
+      "note": "Zalmfilet zonder vel, одним куском — порционируем сами"
+    },
+    {
+      "id": "onions",
+      "name": "Репчатый лук",
+      "amount": 6,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "Uien: по 2 — рагу, курица по-охотничьи, говядина"
+    },
+    { "id": "red-onions", "name": "Красный лук", "amount": 3, "unit": "pcs", "section": "produce", "note": "Rode uien — к лососю" },
+    {
+      "id": "carrots",
+      "name": "Морковь",
+      "amount": 1.4,
+      "unit": "kg",
+      "section": "produce",
+      "note": "Winterpeen: 200 г — рагу, 500 г — говядина, 700 г — к лососю"
+    },
+    {
+      "id": "celery",
+      "name": "Стеблевой сельдерей",
+      "amount": 1,
+      "unit": "bunch",
+      "section": "produce",
+      "note": "Bleekselderij — нужно 3 стебля, остальное — в перекус"
+    },
+    { "id": "garlic", "name": "Чеснок", "amount": 20, "unit": "clove", "section": "produce", "note": "Knoflook — 2 головки" },
+    {
+      "id": "peppers",
+      "name": "Красный сладкий перец",
+      "amount": 12,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "Paprika rood: 4 — курица по-охотничьи, 8 — к завтракам"
+    },
+    {
+      "id": "potatoes",
+      "name": "Картофель, не разваривающийся",
+      "amount": 2,
+      "unit": "kg",
+      "section": "produce",
+      "note": "Vastkokende aardappelen — ≈ 1,8 кг после чистки"
+    },
+    { "id": "mushrooms", "name": "Коричневые шампиньоны", "amount": 600, "unit": "g", "section": "produce", "note": "Kastanjechampignons, целые" },
+    { "id": "broccoli", "name": "Брокколи", "amount": 1.5, "unit": "kg", "section": "produce", "note": "Broccoli — 3–4 кочана" },
+    { "id": "fennel", "name": "Фенхель", "amount": 3, "unit": "pcs", "section": "produce", "note": "Venkel, ≈ 750 г" },
+    { "id": "rosemary", "name": "Розмарин", "amount": 6, "unit": "sprig", "section": "produce", "note": "Rozemarijn — 1 упаковка" },
+    { "id": "parsley", "name": "Петрушка листовая", "amount": 1, "unit": "bunch", "section": "produce", "note": "Bladpeterselie, ≈ 30 г" },
+    { "id": "lemons", "name": "Лимоны", "amount": 4, "unit": "pcs", "section": "produce", "note": "Citroenen: 3 — курица, 1 — гремолата" },
+    { "id": "apples", "name": "Яблоки", "amount": 21, "unit": "pcs", "section": "produce", "note": "Elstar или Jonagold — завтраки и перекусы" },
+    { "id": "pears", "name": "Груши", "amount": 21, "unit": "pcs", "section": "produce", "note": "Conference, твёрдые — дозревают в холодильнике" },
+    { "id": "kiwi", "name": "Киви", "amount": 14, "unit": "pcs", "section": "produce", "note": "Только Виталию — по 1 в день" },
+    {
+      "id": "mandarins",
+      "name": "Мандарины",
+      "amount": 28,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "Mandarijnen или clementines, ≈ 2 кг — Свете по 2 в день"
+    },
+    {
+      "id": "milk",
+      "name": "Молоко 1,5 %",
+      "amount": 1,
+      "unit": "l",
+      "section": "dairy",
+      "note": "Halfvolle melk: 250 мл — рагу, остальное — к яйцам"
+    },
+    { "id": "butter", "name": "Сливочное масло", "amount": 140, "unit": "g", "section": "dairy", "staple": true, "note": "Roomboter" },
+    {
+      "id": "parmesan",
+      "name": "Пармезан куском",
+      "amount": 200,
+      "unit": "g",
+      "section": "dairy",
+      "note": "Parmigiano Reggiano: 110 г — паста, 60 г — полента"
+    },
+    {
+      "id": "kwark",
+      "name": "Обезжиренный кварк",
+      "amount": 6,
+      "unit": "kg",
+      "section": "dairy",
+      "note": "Magere kwark, 12 по 500 г — с самым длинным сроком"
+    },
+    { "id": "eggs", "name": "Яйца", "amount": 40, "unit": "pcs", "section": "dairy", "note": "Eieren, 4 упаковки по 10 — к завтракам" },
+    { "id": "cheese", "name": "Сыр 30+ куском", "amount": 300, "unit": "g", "section": "dairy", "note": "30+ kaas, stuk — к завтракам" },
+    {
+      "id": "soy-milk",
+      "name": "Соевое молоко без сахара",
+      "amount": 7,
+      "unit": "l",
+      "section": "dairy",
+      "note": "Sojadrink ongezoet — для коктейлей Виталия"
+    },
+    {
+      "id": "bread",
+      "name": "Цельнозерновой хлеб, не нарезанный",
+      "amount": 1.2,
+      "unit": "kg",
+      "section": "bakery",
+      "note": "Volkorenbrood ongesneden: целая буханка + половинка"
+    },
+    { "id": "rigatoni", "name": "Ригатони", "amount": 1, "unit": "kg", "section": "grocery", "note": "Нужно 850 г" },
+    {
+      "id": "polenta",
+      "name": "Полента быстрого приготовления",
+      "amount": 600,
+      "unit": "g",
+      "section": "grocery",
+      "note": "Polenta istantanea, 2 пачки"
+    },
+    { "id": "rice", "name": "Рис басмати", "amount": 1.1, "unit": "kg", "section": "grocery", "note": "Basmatirijst: 1 кг + 500 г" },
+    { "id": "passata", "name": "Пассата", "amount": 700, "unit": "g", "section": "grocery", "note": "Passata di pomodoro, бутылка 680–700 г" },
+    {
+      "id": "pelati",
+      "name": "Томаты целые очищенные",
+      "amount": 2,
+      "unit": "can",
+      "section": "grocery",
+      "note": "Gepelde tomaten (pelati), 2 банки по 400 г"
+    },
+    { "id": "tomato-paste", "name": "Томатная паста", "amount": 4, "unit": "tbsp", "section": "grocery", "note": "Tomatenpuree" },
+    { "id": "white-wine", "name": "Сухое белое вино", "amount": 650, "unit": "ml", "section": "grocery", "note": "Droge witte wijn — бутылка 0,75 л" },
+    {
+      "id": "red-wine",
+      "name": "Сухое красное вино",
+      "amount": 375,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "Droge rode wijn: Chianti или Sangiovese — полбутылки"
+    },
+    {
+      "id": "olives",
+      "name": "Чёрные оливки без косточки",
+      "amount": 100,
+      "unit": "g",
+      "section": "grocery",
+      "note": "Zwarte olijven zonder pit, целые"
+    },
+    { "id": "capers", "name": "Каперсы", "amount": 2, "unit": "tbsp", "section": "grocery", "note": "Kappertjes" },
+    {
+      "id": "stock-cubes",
+      "name": "Бульонные кубики",
+      "amount": 2,
+      "unit": "pcs",
+      "section": "grocery",
+      "note": "Bouillonblokjes: 1 говяжий, 1 куриный"
+    },
+    { "id": "oats", "name": "Овсяные хлопья", "amount": 500, "unit": "g", "section": "grocery", "note": "Havermout — к завтракам" },
+    { "id": "walnuts", "name": "Грецкие орехи", "amount": 1, "unit": "kg", "section": "grocery", "note": "Walnoten ongebrand — завтраки и перекусы" },
+    {
+      "id": "olive-oil",
+      "name": "Оливковое масло",
+      "amount": 300,
+      "unit": "ml",
+      "section": "grocery",
+      "staple": true,
+      "note": "Olijfolie extra vergine"
+    },
+    { "id": "flour", "name": "Пшеничная мука", "amount": 5, "unit": "tbsp", "section": "grocery", "staple": true, "note": "Bloem" },
+    { "id": "honey", "name": "Мёд", "amount": 200, "unit": "g", "section": "grocery", "staple": true, "note": "Honing — к кварку" },
+    { "id": "salt", "name": "Соль", "amount": 1, "unit": "pack", "section": "spices", "staple": true },
+    { "id": "pepper", "name": "Чёрный перец", "amount": 1, "unit": "pack", "section": "spices", "staple": true },
+    { "id": "nutmeg", "name": "Мускатный орех", "amount": 1, "unit": "pinch", "section": "spices", "staple": true },
+    { "id": "bay", "name": "Лавровый лист", "amount": 3, "unit": "leaf", "section": "spices", "staple": true },
+    { "id": "cinnamon", "name": "Корица", "amount": 1, "unit": "pack", "section": "spices", "staple": true, "note": "К кварку" },
+    {
+      "id": "protein",
+      "name": "Сывороточный протеин",
+      "amount": 850,
+      "unit": "g",
+      "section": "other",
+      "staple": true,
+      "note": "2 мерные ложки по 30 г в день — коктейли Виталия"
+    }
+  ],
+  "beforeStart": [
+    {
+      "id": "buy",
+      "when": "за 1–2 дня",
+      "text": "Купить всё по списку закупки. У кварка, молока и яиц брать самый длинный срок — их едим все две недели. Груши — твёрдые: дозревают в холодильнике."
+    },
+    {
+      "id": "space",
+      "when": "накануне вечером",
+      "text": "Освободить в холодильнике две полки (≈ 45 л), в ларе — ≈ 45 л. Если у морозилок есть режим быстрой заморозки — включить его."
+    },
+    {
+      "id": "boxes",
+      "when": "накануне вечером",
+      "text": "Помыть и пересчитать контейнеры: 14 по 1 л, 14 по 0,75 л, 10 по 1,5 л и 4 стеклянных по 2 л, которые можно в духовку. Приготовить скотч и маркер."
+    },
+    {
+      "id": "veg",
+      "when": "накануне вечером",
+      "text": "Помощник: почистить и нарезать, каждое — в свой контейнер в холодильник. Рагу: 2 луковицы, 200 г моркови и 3 стебля сельдерея — мелким кубиком 5 мм. Курица по-охотничьи: 2 луковицы — перьями, 4 перца — полосками 1,5 см. Говядина: 2 луковицы — крупно, 500 г моркови — кружками 1 см. Лосось: 700 г моркови — брусками 1,5 см, 3 красные луковицы — дольками. Очистить 2 головки чеснока."
+    },
+    {
+      "id": "potatoes",
+      "when": "накануне вечером",
+      "text": "Помощник: почистить 2 кг картофеля, нарезать кубиками 3 см, залить холодной водой и убрать в холодильник."
+    },
+    {
+      "id": "beef-cut",
+      "when": "накануне вечером",
+      "text": "Помощник: говядину (1,6 кг) нарезать кубиками 4 см, срезав плёнки и крупные куски жира. Доска — только для сырого мяса. В контейнере — в холодильник."
+    }
+  ],
+  "steps": [
+    {
+      "id": "oven-on",
+      "at": 0,
+      "duration": 1,
+      "title": "Помощник: духовку — на 200 °C, конвекция",
+      "details": "Решётки — на два уровня. Духовка останется на 200 °C весь день.",
+      "equipment": ["oven"],
+      "heat": "200 °C, конвекция"
+    },
+    {
+      "id": "soffritto",
+      "at": 0,
+      "duration": 12,
+      "title": "Рагу: соффритто",
+      "details": "В сотейнике разогреть 2 ст. л. оливкового масла с 20 г сливочного, выложить лук, морковь и сельдерей, щепотку соли. Томить на среднем огне, помешивая, пока овощи не станут мягкими и прозрачными.",
+      "dishes": ["bolognese"],
+      "equipment": ["saute", "hob"],
+      "uses": [
+        { "ingredient": "onions", "amount": 2, "unit": "pcs", "note": "нарезан накануне" },
+        { "ingredient": "carrots", "amount": 200, "unit": "g", "note": "нарезана накануне" },
+        { "ingredient": "celery", "note": "3 стебля, нарезаны накануне" },
+        { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "butter", "amount": 20, "unit": "g" },
+        { "ingredient": "salt", "toTaste": true }
+      ],
+      "heat": "средний огонь, 5/9",
+      "doneWhen": "Лук прозрачный, морковь мягкая, ничего не подрумянилось."
+    },
+    {
+      "id": "beef-brown",
+      "at": 1,
+      "duration": 24,
+      "title": "Говядина: обжарить до корочки в 3 приёма",
+      "details": "Кубики обсушить бумажным полотенцем, посолить. В кастрюле 4 л разогреть 2 ст. л. оливкового масла и обжарить говядину в 3 приёма, не перекладывая, по 3–4 минуты с каждой стороны. Готовые куски — в миску.",
+      "dishes": ["beef"],
+      "equipment": ["pot-4", "hob", "bowls"],
+      "uses": [
+        { "ingredient": "beef", "amount": 1.6, "unit": "kg", "note": "нарезана накануне" },
+        { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "salt", "toTaste": true }
+      ],
+      "heat": "сильный огонь, 8/9",
+      "tip": "Корочка — это и есть ресторанный вкус. Если положить всё сразу, мясо пустит сок и будет тушиться, а не жариться."
+    },
+    {
+      "id": "veg-tray",
+      "at": 1,
+      "duration": 14,
+      "title": "Помощник: овощи к лососю — на противень",
+      "details": "Фенхель разрезать пополам, вырезать жёсткую кочерыжку, нарезать дольками 1,5 см. Вместе с морковью и красным луком выложить на противень в один слой, полить 3 ст. л. оливкового масла, посолить, поперчить, перемешать руками.",
+      "dishes": ["salmon"],
+      "equipment": ["tray", "boards", "knives"],
+      "uses": [
+        { "ingredient": "fennel", "amount": 3, "unit": "pcs" },
+        { "ingredient": "carrots", "amount": 700, "unit": "g", "note": "нарезана накануне" },
+        { "ingredient": "red-onions", "amount": 3, "unit": "pcs", "note": "нарезан накануне" },
+        { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp" },
+        { "ingredient": "salt", "toTaste": true },
+        { "ingredient": "pepper", "toTaste": true }
+      ]
+    },
+    {
+      "id": "ragu-mince",
+      "at": 12,
+      "duration": 10,
+      "title": "Рагу: фарш — до лёгкой корочки",
+      "details": "Огонь прибавить, выложить фарш к овощам и жарить, разбивая лопаткой на мелкие крошки, пока он не перестанет быть розовым и местами не подрумянится.",
+      "dishes": ["bolognese"],
+      "equipment": ["saute", "hob"],
+      "uses": [
+        { "ingredient": "hoh-mince", "amount": 1.5, "unit": "kg" },
+        { "ingredient": "salt", "amount": 1, "unit": "tsp" }
+      ],
+      "heat": "средний-сильный огонь, 7/9"
+    },
+    {
+      "id": "veg-roast",
+      "at": 15,
+      "duration": 35,
+      "passive": true,
+      "title": "Помощник: противень с овощами — в духовку на 35 минут",
+      "details": "Верхний уровень. Через 20 минут перемешать лопаткой.",
+      "dishes": ["salmon"],
+      "equipment": ["oven", "tray"],
+      "heat": "200 °C, конвекция",
+      "timer": { "minutes": 35, "label": "Овощи к лососю" },
+      "doneWhen": "Края подрумянились, морковь и фенхель мягкие."
+    },
+    {
+      "id": "chicken-halve",
+      "at": 15,
+      "duration": 15,
+      "title": "Помощник: курицу для «по-охотничьи» разрезать пополам",
+      "details": "Доска для сырого мяса. 2 кг филе бедра: каждое филе — поперёк на 2 части. Сложить в большую миску. Оставшиеся 1,7 кг — не трогать, они для курицы с лимоном.",
+      "dishes": ["cacciatora"],
+      "equipment": ["boards", "knives", "bowls"],
+      "uses": [
+        { "ingredient": "chicken", "amount": 2, "unit": "kg" }
+      ],
+      "warning": "После сырой курицы — вымыть руки, нож и доску с мылом."
+    },
+    {
+      "id": "ragu-wine",
+      "at": 22,
+      "duration": 6,
+      "title": "Рагу: белое вино — выпарить",
+      "details": "Влить 250 мл вина и, помешивая, выпарить почти полностью.",
+      "dishes": ["bolognese"],
+      "equipment": ["saute", "hob"],
+      "uses": [
+        { "ingredient": "white-wine", "amount": 250, "unit": "ml" }
+      ],
+      "doneWhen": "Запах спирта ушёл, на дне почти нет жидкости."
+    },
+    {
+      "id": "beef-base",
+      "at": 25,
+      "duration": 15,
+      "title": "Говядина: лук, морковь, вино, бульон",
+      "details": "В той же кастрюле на среднем огне 5 минут обжарить лук и морковь, соскребая пригарки. Добавить 3 раздавленных зубчика чеснока, 2 ст. л. томатной пасты и 2 ст. л. муки — 1 минута. Влить красное вино, выпарить наполовину. Вернуть мясо с соком, влить 400 мл горячей воды с говяжьим кубиком, положить розмарин и лавр.",
+      "dishes": ["beef"],
+      "equipment": ["pot-4", "hob", "kettle"],
+      "uses": [
+        { "ingredient": "onions", "amount": 2, "unit": "pcs", "note": "нарезан накануне" },
+        { "ingredient": "carrots", "amount": 500, "unit": "g", "note": "нарезана накануне" },
+        { "ingredient": "garlic", "amount": 3, "unit": "clove" },
+        { "ingredient": "tomato-paste", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "flour", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "red-wine", "amount": 375, "unit": "ml" },
+        { "ingredient": "stock-cubes", "amount": 1, "unit": "pcs", "note": "говяжий" },
+        { "ingredient": "rosemary", "amount": 2, "unit": "sprig" },
+        { "ingredient": "bay", "amount": 2, "unit": "leaf" }
+      ],
+      "tip": "Пригарки со дна, растворённые вином, — главный источник вкуса соуса."
+    },
+    {
+      "id": "ragu-simmer-start",
+      "at": 28,
+      "duration": 3,
+      "title": "Рагу: молоко, пассата — и томить",
+      "details": "Влить 250 мл молока, дать ему почти выкипеть, затем пассату и 2 ст. л. томатной пасты, натереть щепотку мускатного ореха, положить лавровый лист. Довести до слабого кипения и убавить огонь до минимума.",
+      "dishes": ["bolognese"],
+      "equipment": ["saute", "hob"],
+      "uses": [
+        { "ingredient": "milk", "amount": 250, "unit": "ml" },
+        { "ingredient": "passata", "amount": 700, "unit": "g" },
+        { "ingredient": "tomato-paste", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "nutmeg", "toTaste": true },
+        { "ingredient": "bay", "amount": 1, "unit": "leaf" }
+      ],
+      "tip": "Молоко до томатов делает рагу нежным — так готовят в Болонье."
+    },
+    {
+      "id": "cacc-assemble",
+      "at": 30,
+      "duration": 18,
+      "title": "Помощник: курицу по-охотничьи — в две формы",
+      "details": "В миску к курице: картофель (слить воду), лук, перец, томаты — раздавить руками прямо в миске, оливки, 4 раздавленных зубчика чеснока, иголки с 4 веточек розмарина, 200 мл белого вина, 3 ст. л. оливкового масла, 2 ч. л. соли, перец. Перемешать руками и разложить поровну в две формы Pyrex, курицу — сверху.",
+      "dishes": ["cacciatora"],
+      "equipment": ["pyrex", "bowls"],
+      "uses": [
+        { "ingredient": "potatoes", "amount": 1.8, "unit": "kg", "note": "нарезан накануне" },
+        { "ingredient": "onions", "amount": 2, "unit": "pcs", "note": "нарезан накануне" },
+        { "ingredient": "peppers", "amount": 4, "unit": "pcs", "note": "нарезаны накануне" },
+        { "ingredient": "pelati", "amount": 2, "unit": "can" },
+        { "ingredient": "olives", "amount": 100, "unit": "g" },
+        { "ingredient": "garlic", "amount": 4, "unit": "clove" },
+        { "ingredient": "rosemary", "amount": 4, "unit": "sprig" },
+        { "ingredient": "white-wine", "amount": 200, "unit": "ml" },
+        { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp" },
+        { "ingredient": "salt", "amount": 2, "unit": "tsp" },
+        { "ingredient": "pepper", "toTaste": true }
+      ],
+      "tip": "Курица сверху подрумянится, а картофель снизу пропитается соком и вином."
+    },
+    {
+      "id": "ragu-simmer",
+      "at": 31,
+      "duration": 89,
+      "passive": true,
+      "title": "Рагу томится полтора часа",
+      "details": "Под приоткрытой крышкой на минимальном огне. Раз в 20 минут помешать; если загустело слишком рано — подлить 100 мл воды.",
+      "dishes": ["bolognese"],
+      "equipment": ["saute", "hob"],
+      "heat": "минимальный огонь, 2/9",
+      "timer": { "minutes": 89, "label": "Рагу" },
+      "doneWhen": "Соус густой, жир собирается по краям, вкус мягкий, без кислоты."
+    },
+    {
+      "id": "beef-simmer",
+      "at": 40,
+      "duration": 110,
+      "passive": true,
+      "title": "Говядина томится под крышкой",
+      "details": "Огонь — минимальный, крышка закрыта. Раз в полчаса помешать.",
+      "dishes": ["beef"],
+      "equipment": ["pot-4", "hob"],
+      "heat": "минимальный огонь, 2/9",
+      "timer": { "minutes": 110, "label": "Говядина" },
+      "doneWhen": "Мясо легко разламывается ложкой."
+    },
+    {
+      "id": "mushrooms-cut",
+      "at": 40,
+      "duration": 10,
+      "title": "Шампиньоны — на четвертинки",
+      "details": "Протереть влажным полотенцем, не мыть. Крупные — на четвертинки, мелкие — пополам.",
+      "dishes": ["beef"],
+      "equipment": ["boards", "knives"],
+      "uses": [
+        { "ingredient": "mushrooms", "amount": 600, "unit": "g" }
+      ]
+    },
+    {
+      "id": "cacc-oven",
+      "at": 50,
+      "duration": 60,
+      "passive": true,
+      "title": "Помощник: овощи — из духовки, курицу по-охотничьи — в духовку на час",
+      "details": "Противень с овощами — на плиту остывать. Обе формы с курицей — на два уровня. Через 30 минут поменять формы местами.",
+      "dishes": ["cacciatora", "salmon"],
+      "equipment": ["oven", "pyrex", "tray"],
+      "heat": "200 °C, конвекция",
+      "timer": { "minutes": 60, "label": "Курица по-охотничьи" },
+      "doneWhen": "Курица подрумянилась, картофель мягкий, в толстой части 75 °C."
+    },
+    {
+      "id": "lemon-chicken-prep",
+      "at": 50,
+      "duration": 10,
+      "title": "Курица с лимоном: подготовить",
+      "details": "Оставшиеся 1,7 кг филе обсушить, посолить, поперчить и обвалять в 3 ст. л. муки, стряхнув лишнее. С 3 лимонов снять цедру Microplane и выжать сок (≈ 120 мл). Мелко порубить 8 зубчиков чеснока и половину петрушки.",
+      "dishes": ["lemon-chicken"],
+      "equipment": ["boards", "knives", "graters", "bowls"],
+      "uses": [
+        { "ingredient": "chicken", "amount": 1.7, "unit": "kg" },
+        { "ingredient": "flour", "amount": 3, "unit": "tbsp" },
+        { "ingredient": "lemons", "amount": 3, "unit": "pcs" },
+        { "ingredient": "garlic", "amount": 8, "unit": "clove" },
+        { "ingredient": "parsley", "note": "половина пучка" },
+        { "ingredient": "salt", "toTaste": true },
+        { "ingredient": "pepper", "toTaste": true }
+      ],
+      "warning": "Доска для сырого мяса. После — помыть руки, нож и доску с мылом."
+    },
+    {
+      "id": "veg-pack",
+      "at": 51,
+      "duration": 9,
+      "title": "Помощник: овощи к лососю — в 4 стеклянных контейнера",
+      "details": "По 350 г в каждый, ровным слоем на одну половину. Без крышек — пусть остывают.",
+      "dishes": ["salmon"],
+      "equipment": ["glass-2", "scale"]
+    },
+    {
+      "id": "broccoli-tray",
+      "at": 60,
+      "duration": 15,
+      "title": "Помощник: брокколи — на противень",
+      "details": "Вымыть противень. Брокколи разобрать на соцветия ≈ 4 см, ножку очистить и нарезать кружками. Выложить на противень, добавить 2 раздавленных зубчика чеснока, 2 ст. л. оливкового масла, соль, перемешать. Ждёт до своей очереди в духовку.",
+      "dishes": ["lemon-chicken"],
+      "equipment": ["tray", "boards", "knives"],
+      "uses": [
+        { "ingredient": "broccoli", "amount": 1.5, "unit": "kg" },
+        { "ingredient": "garlic", "amount": 2, "unit": "clove" },
+        { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "salt", "toTaste": true }
+      ]
+    },
+    {
+      "id": "lemon-chicken-brown",
+      "at": 60,
+      "duration": 25,
+      "title": "Курица с лимоном: обжарить в 3 приёма",
+      "details": "В кастрюле 12 л разогреть 2 ст. л. оливкового масла и 20 г сливочного. Обжарить курицу в 3 приёма по 4 минуты с каждой стороны до золотистой корочки, выложить в миску. Между приёмами добавлять немного масла.",
+      "dishes": ["lemon-chicken"],
+      "equipment": ["pot-12", "hob", "bowls"],
+      "uses": [
+        { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "butter", "amount": 20, "unit": "g" }
+      ],
+      "heat": "средний-сильный огонь, 7/9"
+    },
+    {
+      "id": "gremolata",
+      "at": 75,
+      "duration": 10,
+      "title": "Помощник: гремолата и пармезан",
+      "details": "Гремолата: оставшуюся петрушку мелко порубить, смешать с цедрой 1 лимона, 1 зубчиком чеснока через пресс и 1 ст. л. оливкового масла — в холодильник до лосося. Пармезан натереть на Microplane: 110 г — для пасты, 60 г — для поленты, в две миски.",
+      "dishes": ["salmon", "bolognese", "beef"],
+      "equipment": ["graters", "boards", "knives", "bowls"],
+      "uses": [
+        { "ingredient": "parsley", "note": "вторая половина пучка" },
+        { "ingredient": "lemons", "amount": 1, "unit": "pcs" },
+        { "ingredient": "garlic", "amount": 1, "unit": "clove" },
+        { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp" },
+        { "ingredient": "parmesan", "amount": 170, "unit": "g" }
+      ]
+    },
+    {
+      "id": "cacc-swap",
+      "at": 80,
+      "duration": 2,
+      "title": "Помощник: формы с курицей поменять местами",
+      "details": "Верхнюю — вниз, нижнюю — наверх, чтобы обе подрумянились одинаково.",
+      "dishes": ["cacciatora"],
+      "equipment": ["oven", "pyrex"]
+    },
+    {
+      "id": "lemon-chicken-sauce",
+      "at": 85,
+      "duration": 12,
+      "title": "Курица с лимоном: соус и доведение",
+      "details": "Огонь убавить, обжарить чеснок 30 секунд. Влить 200 мл белого вина и выпарить наполовину, соскребая пригарки. Добавить лимонный сок, 200 мл горячей воды с куриным кубиком и каперсы. Вернуть курицу с соком, накрыть и томить 8 минут. Снять с огня, вмешать 30 г холодного сливочного масла, цедру и петрушку.",
+      "dishes": ["lemon-chicken"],
+      "equipment": ["pot-12", "hob", "kettle", "probe"],
+      "uses": [
+        { "ingredient": "white-wine", "amount": 200, "unit": "ml" },
+        { "ingredient": "stock-cubes", "amount": 1, "unit": "pcs", "note": "куриный" },
+        { "ingredient": "capers", "amount": 2, "unit": "tbsp" },
+        { "ingredient": "butter", "amount": 30, "unit": "g" }
+      ],
+      "heat": "средний огонь, 5/9",
+      "doneWhen": "В толстой части 75 °C, соус блестит и обволакивает ложку.",
+      "tip": "Холодное масло в самом конце делает соус глянцевым и бархатным — ресторанный приём."
+    },
+    {
+      "id": "wash-1",
+      "at": 85,
+      "duration": 15,
+      "title": "Помощник: помыть посуду, остывшие овощи к лососю — в холодильник",
+      "details": "Доски, ножи, миски; миску из-под сырой курицы — отдельно, с мылом. Контейнеры с овощами к лососю, уже остывшие, закрыть и убрать в холодильник — рис добавим в конце дня.",
+      "dishes": ["salmon"],
+      "equipment": ["bowls", "boards", "glass-2"]
+    },
+    {
+      "id": "lemon-chicken-pack",
+      "at": 97,
+      "duration": 10,
+      "title": "Курица с лимоном — по контейнерам",
+      "details": "Курицу с соусом: по 160 г — в 4 контейнера 1 л, по 110 г — в 4 контейнера 0,75 л, по 270 г — в 2 контейнера 1,5 л. Сдвинуть к одному краю: потом добавим рис и брокколи.",
+      "dishes": ["lemon-chicken"],
+      "equipment": ["box-1", "box-075", "box-15", "scale"]
+    },
+    {
+      "id": "pasta-water",
+      "at": 107,
+      "duration": 18,
+      "title": "Помощник: кастрюлю 12 л помыть, налить 7 л воды — на огонь",
+      "details": "Накрыть крышкой, сильный огонь. Когда закипит — 2 ст. л. соли.",
+      "dishes": ["bolognese"],
+      "equipment": ["pot-12", "hob"],
+      "uses": [
+        { "ingredient": "salt", "amount": 2, "unit": "tbsp" }
+      ],
+      "heat": "максимум"
+    },
+    {
+      "id": "mushrooms-in",
+      "at": 110,
+      "duration": 2,
+      "title": "Говядина: добавить шампиньоны",
+      "details": "Вмешать грибы, снова накрыть. Если соус слишком жидкий — дальше томить с приоткрытой крышкой.",
+      "dishes": ["beef"],
+      "equipment": ["pot-4"]
+    },
+    {
+      "id": "cacc-out",
+      "at": 110,
+      "duration": 2,
+      "passive": true,
+      "title": "Помощник: курицу по-охотничьи — из духовки, брокколи — в духовку на 15 минут",
+      "details": "Формы с курицей — на плиту или доску. Противень с брокколи — на средний уровень.",
+      "dishes": ["cacciatora", "lemon-chicken"],
+      "equipment": ["oven", "tray", "pyrex"],
+      "heat": "200 °C, конвекция",
+      "timer": { "minutes": 15, "label": "Брокколи" },
+      "doneWhen": "Соцветия с подпалинами по краям, ножка мягкая, но с хрустом."
+    },
+    {
+      "id": "cacc-pack",
+      "at": 112,
+      "duration": 13,
+      "title": "Помощник: курицу по-охотничьи — по контейнерам",
+      "details": "Перемешать в формах и разложить: по 440 г — в 4 контейнера 1 л, по 310 г — в 4 контейнера 0,75 л, по 750 г — в 2 контейнера 1,5 л. Сок из форм поделить поровну. Без крышек — остывать.",
+      "dishes": ["cacciatora"],
+      "equipment": ["box-1", "box-075", "box-15", "scale"]
+    },
+    {
+      "id": "ragu-off",
+      "at": 120,
+      "duration": 2,
+      "title": "Рагу готово — снять с огня",
+      "details": "Вынуть лавровый лист, попробовать соль.",
+      "dishes": ["bolognese"],
+      "equipment": ["saute"]
+    },
+    {
+      "id": "rice-oven",
+      "at": 125,
+      "duration": 7,
+      "title": "Помощник: брокколи — из духовки, рис — в духовку",
+      "details": "Помыть обе формы Pyrex. Вскипятить чайник дважды. Рис промыть в дуршлаге до прозрачной воды. В овальную форму — 600 г риса и 900 мл кипятка, в прямоугольную — 500 г и 750 мл, в каждую по 1 ч. л. соли. Плотно закрыть фольгой — в духовку на 30 минут.",
+      "dishes": ["lemon-chicken", "salmon"],
+      "equipment": ["oven", "pyrex", "kettle", "colander", "foil"],
+      "uses": [
+        { "ingredient": "rice", "amount": 1.1, "unit": "kg" },
+        { "ingredient": "salt", "amount": 2, "unit": "tsp" }
+      ]
+    },
+    {
+      "id": "pasta-cook",
+      "at": 125,
+      "duration": 10,
+      "title": "Ригатони — варить на 2 минуты меньше, чем на пачке",
+      "details": "Всыпать 850 г ригатони в кипящую подсоленную воду, помешать в первую минуту.",
+      "dishes": ["bolognese"],
+      "equipment": ["pot-12", "hob"],
+      "uses": [
+        { "ingredient": "rigatoni", "amount": 850, "unit": "g" }
+      ],
+      "heat": "сильный огонь",
+      "timer": { "minutes": 9, "label": "Ригатони" },
+      "tip": "Паста доготовится при разогреве — если сварить до готовности сейчас, через неделю она будет мягкой."
+    },
+    {
+      "id": "rice-bake",
+      "at": 132,
+      "duration": 30,
+      "passive": true,
+      "title": "Рис печётся под фольгой",
+      "details": "Не открывать.",
+      "dishes": ["lemon-chicken", "salmon"],
+      "equipment": ["oven", "pyrex"],
+      "heat": "200 °C, конвекция",
+      "timer": { "minutes": 30, "label": "Рис" }
+    },
+    {
+      "id": "broccoli-pack",
+      "at": 132,
+      "duration": 10,
+      "title": "Помощник: брокколи — в контейнеры к курице с лимоном",
+      "details": "По 120 г — в контейнеры 1 л, по 80 г — 0,75 л, по 200 г — 1,5 л.",
+      "dishes": ["lemon-chicken"],
+      "equipment": ["scale"]
+    },
+    {
+      "id": "pasta-toss",
+      "at": 135,
+      "duration": 7,
+      "title": "Ригатони смешать с рагу и пармезаном",
+      "details": "Отлить стакан воды от пасты, слить ригатони в дуршлаг и вернуть в кастрюлю. Выложить рагу и 110 г пармезана, перемешать, подливая воду от пасты, пока соус не обволочёт каждую ригатони.",
+      "dishes": ["bolognese"],
+      "equipment": ["pot-12", "colander"],
+      "tip": "Крахмалистая вода связывает соус с пастой — так он не стекает на дно контейнера."
+    },
+    {
+      "id": "pasta-pack",
+      "at": 142,
+      "duration": 12,
+      "title": "Пасту — по контейнерам",
+      "details": "По 400 г — в 3 контейнера 1 л, по 290 г — в 3 контейнера 0,75 л, по 690 г — в 3 контейнера 1,5 л. Без крышек — остывать.",
+      "dishes": ["bolognese"],
+      "equipment": ["box-1", "box-075", "box-15", "scale"]
+    },
+    {
+      "id": "salmon-portion",
+      "at": 142,
+      "duration": 18,
+      "title": "Помощник: лосось — на стейки с гремолатой",
+      "details": "Чистая доска для рыбы. Нарезать филе на 4 куска по 180 г и 4 по 140 г, проверяя весами. Посолить, поперчить, сверху намазать гремолату. Каждый стейк плотно завернуть в плёнку и убрать в холодильник.",
+      "dishes": ["salmon"],
+      "equipment": ["boards", "knives", "scale", "film"],
+      "uses": [
+        { "ingredient": "salmon", "amount": 1.3, "unit": "kg" },
+        { "ingredient": "salt", "toTaste": true },
+        { "ingredient": "pepper", "toTaste": true }
+      ]
+    },
+    {
+      "id": "polenta-water",
+      "at": 145,
+      "duration": 7,
+      "title": "Полента: вскипятить воду в сотейнике",
+      "details": "Помыть сотейник, налить 2,4 л воды и 2 ч. л. соли, накрыть, сильный огонь.",
+      "dishes": ["beef"],
+      "equipment": ["saute", "hob"],
+      "uses": [
+        { "ingredient": "salt", "amount": 2, "unit": "tsp" }
+      ]
+    },
+    {
+      "id": "beef-finish",
+      "at": 150,
+      "duration": 3,
+      "title": "Говядина готова — собрать соус маслом",
+      "details": "Снять с огня, вынуть розмарин и лавр, вмешать 30 г холодного сливочного масла. Попробовать соль.",
+      "dishes": ["beef"],
+      "equipment": ["pot-4"],
+      "uses": [
+        { "ingredient": "butter", "amount": 30, "unit": "g" }
+      ]
+    },
+    {
+      "id": "polenta-cook",
+      "at": 153,
+      "duration": 7,
+      "title": "Полента: всыпать и варить, мешая",
+      "details": "Огонь убавить до среднего, всыпать поленту тонкой струйкой, непрерывно мешая венчиком. Варить по времени на пачке, помешивая. Снять с огня, вмешать 40 г сливочного масла и 60 г пармезана.",
+      "dishes": ["beef"],
+      "equipment": ["saute", "hob"],
+      "uses": [
+        { "ingredient": "polenta", "amount": 600, "unit": "g" },
+        { "ingredient": "butter", "amount": 40, "unit": "g" }
+      ],
+      "heat": "средний огонь",
+      "warning": "Полента плюётся — мешать длинной ложкой или венчиком, руку держать сбоку."
+    },
+    {
+      "id": "beef-pack",
+      "at": 160,
+      "duration": 12,
+      "title": "Поленту и говядину — по контейнерам",
+      "details": "Сразу, пока полента жидкая: по 300 г — в 3 контейнера 1 л, по 200 г — в 3 контейнера 0,75 л, по 500 г — в 3 контейнера 1,5 л. Рядом — говядину с соусом: 245, 170 и 415 г.",
+      "dishes": ["beef"],
+      "equipment": ["box-1", "box-075", "box-15", "scale"],
+      "tip": "Полента в контейнере застынет — это нормально: при разогреве с ложкой воды и перемешиванием она снова станет кремовой."
+    },
+    {
+      "id": "rice-out",
+      "at": 162,
+      "duration": 10,
+      "passive": true,
+      "title": "Помощник: рис — из духовки, дать постоять под фольгой",
+      "details": "Выключить духовку. Рис 10 минут не открывать, потом взрыхлить вилкой.",
+      "dishes": ["lemon-chicken", "salmon"],
+      "equipment": ["oven", "pyrex"],
+      "timer": { "minutes": 10, "label": "Рис отдыхает" }
+    },
+    {
+      "id": "rice-pack",
+      "at": 172,
+      "duration": 13,
+      "title": "Рис — по контейнерам",
+      "details": "К курице с лимоном: по 200 г — в контейнеры 1 л, по 140 г — 0,75 л, по 340 г — 1,5 л. К лососю: по 280 г — во вторую половину стеклянных контейнеров. Взрыхлить, не утрамбовывать.",
+      "dishes": ["lemon-chicken", "salmon"],
+      "equipment": ["box-1", "box-075", "box-15", "glass-2", "scale"]
+    },
+    {
+      "id": "wash-2",
+      "at": 172,
+      "duration": 15,
+      "title": "Помощник: помыть посуду",
+      "details": "Кастрюли, формы, сотейник. Доску для рыбы — отдельно, с мылом.",
+      "equipment": ["pot-12", "saute", "pyrex"]
+    },
+    {
+      "id": "salmon-pack",
+      "at": 187,
+      "duration": 5,
+      "title": "Стейки лосося — в контейнеры",
+      "details": "Когда рис остынет до комнатной температуры: в каждый стеклянный контейнер — по стейку 180 г и 140 г в плёнке, поверх овощей и риса. Закрыть крышками.",
+      "dishes": ["salmon"],
+      "equipment": ["glass-2"]
+    },
+    {
+      "id": "breakfast-stock",
+      "at": 187,
+      "duration": 10,
+      "title": "Помощник: продукты для завтраков и перекусов — по местам",
+      "details": "Хлеб нарезать ломтиками 1,5 см и заморозить в пакете из-под хлеба — утром ломтики идут прямо в тостер. Кварк, яйца, сыр, перец, фрукты — в холодильник; груши — на нижнюю полку, пусть дозревают. Орехи, овсянку, мёд, корицу, протеин и соевое молоко — в шкаф.",
+      "uses": [
+        { "ingredient": "bread", "amount": 1.2, "unit": "kg" },
+        { "ingredient": "kwark", "amount": 6, "unit": "kg" },
+        { "ingredient": "eggs", "amount": 40, "unit": "pcs" },
+        { "ingredient": "cheese", "amount": 300, "unit": "g" },
+        { "ingredient": "peppers", "amount": 8, "unit": "pcs" },
+        { "ingredient": "apples", "amount": 21, "unit": "pcs" },
+        { "ingredient": "pears", "amount": 21, "unit": "pcs" },
+        { "ingredient": "kiwi", "amount": 14, "unit": "pcs" },
+        { "ingredient": "mandarins", "amount": 28, "unit": "pcs" },
+        { "ingredient": "walnuts", "amount": 1, "unit": "kg" },
+        { "ingredient": "oats", "amount": 500, "unit": "g" },
+        { "ingredient": "honey", "amount": 200, "unit": "g" },
+        { "ingredient": "cinnamon", "toTaste": true },
+        { "ingredient": "milk", "amount": 750, "unit": "ml", "note": "к яйцам" },
+        { "ingredient": "soy-milk", "amount": 7, "unit": "l" },
+        { "ingredient": "protein", "amount": 850, "unit": "g" }
+      ]
+    },
+    {
+      "id": "store",
+      "at": 192,
+      "duration": 18,
+      "title": "Подписать и разложить по местам",
+      "details": "Каждый контейнер подписать: блюдо, кто, день. В холодильник — обеды и ужины дней 1–3 (9 контейнеров). Когда остынут до комнатной температуры: в ларь — 4 контейнера с лососем и курицу по-охотничьи (≈ 7 кг), в морозилку холодильника — пасту (≈ 2,8 кг). Курицу с лимоном и говядину (≈ 8,7 кг) — на ночь в холодильник, завтра — в ларь: морозилки вместе берут ≈ 12,5 кг в сутки.",
+      "equipment": ["labels"],
+      "warning": "Горячее не закрывать и не убирать: остудить без крышек, но в холодильник — не позже чем через 2 часа после готовности."
+    }
+  ],
+  "notes": [
+    "Меню, дни 1–7 (обед / ужин): 1 — паста / курица по-охотничьи; 2 — курица с лимоном / говядина; 3 — курица по-охотничьи / паста; 4 — говядина / лосось; 5 — паста / курица с лимоном; 6 — курица по-охотничьи / говядина; 7 — курица с лимоном / лосось.",
+    "Меню, дни 8–14 (обед / ужин): 8 — говядина / паста; 9 — курица по-охотничьи / курица с лимоном; 10 — паста / лосось; 11 — курица с лимоном / курица по-охотничьи; 12 — говядина / паста; 13 — курица по-охотничьи / лосось; 14 — курица с лимоном / говядина.",
+    "Каждый вечер — переложить из морозилки в холодильник контейнеры на завтра: обед Виталия, обед Светы и ужин. Утром Виталий берёт контейнер 1 л на работу и кладёт в холодильник до обеда.",
+    "Плиту на неделе не включаем: всё греем в микроволновке, лосось — в духовке. Камера одна — духовкой и микроволновкой одновременно не пользоваться.",
+    "Завтраки, нечётные дни, 2 минуты: Виталию — 250 г кварка, 40 г овсянки, яблоко или груша кубиками, 15 г грецких орехов, 1 ч. л. мёда, корица; Свете — 200 г кварка, 30 г овсянки, фрукт, 10 г орехов, мёд.",
+    "Завтраки, чётные дни, 5 минут: яйца взбить с ложкой молока и солью, в микроволновку на 1 минуту, перемешать, ещё 30–40 секунд. Виталию 3 яйца, Свете 2; обоим по 2 тоста из замороженного хлеба, 20 г сыра и половина сладкого перца.",
+    "Перекусы: Виталию — груша, киви и 30 г грецких орехов; Свете — фрукт, 2 мандарина, 200 г кварка с мёдом и 25 г орехов.",
+    "Коктейли Виталия — 2 в день: 30 г протеина на 250 мл соевого молока, ≈ 205 ккал и 32 г белка каждый.",
+    "В среднем за день: Виталий ≈ 2580 ккал и 187 г белка (с коктейлями), Света ≈ 1820 ккал и 112 г белка. В дни с лососем и пастой — на ~100–150 ккал больше, в дни с курицей по-охотничьи — меньше.",
+    "Витамины: C — перец, брокколи, фрукты и мандарины; A — морковь; кальций — кварк и сыр; омега-3 и витамин D — лосось."
+  ]
+}

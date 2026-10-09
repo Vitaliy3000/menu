@@ -125,6 +125,29 @@
   color: var(--ink-2);
 }
 
+/* Правила техкарт */
+.rules-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .rules-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+}
+
+.rules-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.rules-card .bullets {
+  line-height: 1.45;
+}
+
 /* Хранение */
 .storage-grid {
   display: grid;

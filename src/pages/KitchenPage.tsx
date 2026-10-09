@@ -6,22 +6,23 @@ import { DISH_TONES, EQUIPMENT_KINDS, EQUIPMENT_ORDER } from '../lib/labels.ts';
 import type { Person } from '../types/kitchen.gen.ts';
 import { NotFoundPage } from './NotFoundPage.tsx';
 
-const SECTIONS = [
-  { id: 'people', label: 'Кто что не ест' },
-  { id: 'equipment', label: 'Оборудование' },
-  { id: 'storage', label: 'Хранение' },
-];
-
 export function KitchenPage() {
   if (!kitchen) return <NotFoundPage />;
   const k = kitchen;
+  const sections = [
+    { id: 'people', label: 'Кто что не ест' },
+    ...(k.planRules?.length ? [{ id: 'rules', label: 'Правила техкарт' }] : []),
+    { id: 'equipment', label: 'Оборудование' },
+    { id: 'storage', label: 'Хранение' },
+  ];
 
   return (
     <div class="container page kitchen">
       <header class="page-head">
         <h1 class="display h1">Кухня</h1>
         <p class="lead">
-          Справочник для составления техкарт: кто что не ест, чем готовим и куда убираем. Техкарты на него не
+          Справочник для составления техкарт: кто что не ест, по каким правилам составляем, чем готовим и куда
+          убираем. Техкарты на него не
           ссылаются — он нужен, чтобы не повторять всё это в каждом промпте.
         </p>
         {k.draft && (
@@ -35,7 +36,7 @@ export function KitchenPage() {
         )}
       </header>
 
-      <SectionNav label="Разделы справочника" sections={SECTIONS} always />
+      <SectionNav label="Разделы справочника" sections={sections} always />
 
       <section id="people" class="kitchen-section">
         <h2 class="display h2 section-heading">Кто что не ест</h2>
@@ -45,6 +46,24 @@ export function KitchenPage() {
           ))}
         </div>
       </section>
+
+      {k.planRules && k.planRules.length > 0 && (
+        <section id="rules" class="kitchen-section">
+          <h2 class="display h2 section-heading">Правила техкарт</h2>
+          <div class="rules-grid">
+            {k.planRules.map((group) => (
+              <article key={group.title} class="card card-pad rules-card">
+                <h3 class="info-title">{group.title}</h3>
+                <ul class="bullets">
+                  {group.rules.map((rule) => (
+                    <li key={rule}>{rule}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section id="equipment" class="kitchen-section">
         <h2 class="display h2 section-heading">Оборудование</h2>

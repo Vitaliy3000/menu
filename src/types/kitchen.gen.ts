@@ -26,7 +26,7 @@ export type EquipmentKind = 'oven' | 'hob' | 'appliance' | 'cookware' | 'tool' |
 export type StorageKind = 'fridge' | 'freezer' | 'pantry';
 
 /**
- * Справочник кухни: кто что не ест, оборудование и места хранения. На него опираются при составлении техкарт (CookPlan) вне сайта — чтобы не повторять всё это в каждом промпте. Техкарты на справочник не ссылаются и остаются самодостаточными.
+ * Справочник кухни: кто что не ест, правила составления техкарт, оборудование и места хранения. На него опираются при составлении техкарт (CookPlan) вне сайта — чтобы не повторять всё это в каждом промпте. Техкарты на справочник не ссылаются и остаются самодостаточными.
  */
 export interface Kitchen {
   /**
@@ -43,6 +43,10 @@ export interface Kitchen {
    * @minItems 1
    */
   people: [Person, ...Person[]];
+  /**
+   * Правила составления техкарт по темам: продукты, питание, приёмы пищи, время и техника, фасовка.
+   */
+  planRules?: RuleGroup[];
   /**
    * Техника и многоразовая посуда, которые есть на кухне.
    */
@@ -75,6 +79,24 @@ export interface AvoidItem {
    * Чем заменить, в каком виде всё-таки можно.
    */
   note?: string;
+}
+/**
+ * Группа правил на одну тему.
+ *
+ * This interface was referenced by `Kitchen`'s JSON-Schema
+ * via the `definition` "RuleGroup".
+ */
+export interface RuleGroup {
+  /**
+   * Тема: «Питание», «Время и техника».
+   */
+  title: string;
+  /**
+   * Правила — по одному на строку.
+   *
+   * @minItems 1
+   */
+  rules: [string, ...string[]];
 }
 /**
  * This interface was referenced by `Kitchen`'s JSON-Schema
