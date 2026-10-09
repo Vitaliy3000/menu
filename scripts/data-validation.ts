@@ -366,6 +366,14 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
 
   p.dishes.forEach((dish, i) => {
     if (!usedDishes.has(dish.id)) warn(`/dishes/${i}`, `блюдо «${dish.id}» не упоминается ни в одном шаге`);
+    const packs = new Set<string>();
+    dish.packaging.forEach((pack, j) => {
+      const key = JSON.stringify([pack.container, pack.storage, pack.days]);
+      if (packs.has(key)) {
+        warn(`/dishes/${i}/packaging/${j}`, `«${pack.container}» (${pack.storage}) уже есть в фасовке — объедините строки через count`);
+      }
+      packs.add(key);
+    });
   });
 
   p.ingredients.forEach((ing, i) => {

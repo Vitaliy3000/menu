@@ -124,6 +124,15 @@ describe('смысловые проверки CookPlan', () => {
     expect(text).toContain('«lime» не используется');
     expect(text).toContain('блюдо «bread» не упоминается');
   });
+
+  it('предупреждает о повторяющейся таре в фасовке', () => {
+    const p = plan();
+    const pack = p.dishes[0]!.packaging[0]!;
+    p.dishes[0]!.packaging.push({ ...pack, count: 1, note: 'Обед, день 3' });
+    const issues = checkPlan(p, file);
+    expect(issues.every((i) => i.severity === 'warning')).toBe(true);
+    expect(messages(issues)).toContain('«Банка 1 л» (fridge) уже есть в фасовке');
+  });
 });
 
 describe('роли поваров', () => {

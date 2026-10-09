@@ -75,5 +75,6 @@ describe('typograph', () => {
   it('привязывает число к следующему слову', () => {
     expect(typograph('на 3 гостя')).toBe(`на${NB}3${NB}гостя`);
     expect(typograph('шаг 2 из 5')).toBe(`шаг 2${NB}из${NB}5`);
+    expect(typograph('обед д. 5, ужин д. 8')).toBe(`обед д.${NB}5, ужин д.${NB}8`);
   });
 });
