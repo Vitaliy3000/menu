@@ -10,6 +10,7 @@ import Ajv2020, { type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.
 import addFormats from 'ajv-formats';
 import type { Recipe } from '../src/types/recipe.gen.ts';
 import type { CookPlan, IngredientUse, Unit } from '../src/types/cook-plan.gen.ts';
+import type { Kitchen } from '../src/types/kitchen.gen.ts';
 
 export type Severity = 'error' | 'warning';
 
@@ -25,6 +26,7 @@ export interface Issue {
 export interface DataSet {
   recipes: Recipe[];
   plans: CookPlan[];
+  kitchen: Kitchen | null;
   issues: Issue[];
 }
 
@@ -42,7 +44,11 @@ export const DATA_DIRS = {
 export const SCHEMA_FILES = {
   recipes: 'schemas/recipe.schema.json',
   plans: 'schemas/cook-plan.schema.json',
+  kitchen: 'schemas/kitchen.schema.json',
 } as const;
+
+/** Справочник кухни — один файл. */
+export const KITCHEN_FILE = 'data/kitchen.json';
 
 type Kind = keyof typeof DATA_DIRS;
 
@@ -51,15 +57,18 @@ type Kind = keyof typeof DATA_DIRS;
 /* ------------------------------------------------------------------ */
 
 export async function validateProject(root: string): Promise<DataSet> {
-  const [recipeSchema, planSchema] = await Promise.all([
+  const [recipeSchema, planSchema, kitchenSchema] = await Promise.all([
     readJson(join(root, SCHEMA_FILES.recipes)),
     readJson(join(root, SCHEMA_FILES.plans)),
+    readJson(join(root, SCHEMA_FILES.kitchen)),
   ]);
-  const [recipeFiles, planFiles] = await Promise.all([
+  const [recipeFiles, planFiles, kitchenText] = await Promise.all([
     readSources(root, DATA_DIRS.recipes),
     readSources(root, DATA_DIRS.plans),
+    readFile(join(root, KITCHEN_FILE), 'utf8').catch(() => null),
   ]);
-  return validateSources({ recipeSchema, planSchema, recipeFiles, planFiles });
+  const kitchenFile = kitchenText === null ? null : { file: KITCHEN_FILE, text: kitchenText };
+  return validateSources({ recipeSchema, planSchema, kitchenSchema, recipeFiles, planFiles, kitchenFile });
 }
 
 async function readJson(path: string): Promise<object> {
@@ -86,6 +95,10 @@ export function validateSources(input: {
   planSchema: object;
   recipeFiles: SourceFile[];
   planFiles: SourceFile[];
+  /** Без схемы справочник не проверяется (удобно в тестах рецептов и техкарт). */
+  kitchenSchema?: object;
+  /** null — файла нет. */
+  kitchenFile?: SourceFile | null;
 }): DataSet {
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
@@ -100,9 +113,24 @@ export function validateSources(input: {
   for (const { doc, file } of plans) issues.push(...checkPlan(doc, file));
   issues.push(...checkUniqueTitles(plans));
 
+  let kitchen: Kitchen | null = null;
+  if (input.kitchenSchema) {
+    if (!input.kitchenFile) {
+      issues.push({ severity: 'error', file: KITCHEN_FILE, path: '', message: 'Нет справочника кухни' });
+    } else {
+      const validateKitchen = ajv.compile<Kitchen>(input.kitchenSchema);
+      const [parsed] = parseFiles([input.kitchenFile], validateKitchen, issues);
+      if (parsed) {
+        kitchen = parsed.doc;
+        issues.push(...checkKitchen(parsed.doc, parsed.file));
+      }
+    }
+  }
+
   return {
     recipes: recipes.map((r) => r.doc),
     plans: plans.map((p) => p.doc),
+    kitchen,
     issues,
   };
 }
@@ -113,6 +141,13 @@ function parseAll<T>(
   validate: ValidateFunction<T>,
   issues: Issue[],
 ): { doc: T; file: string }[] {
+  if (files.length === 0) {
+    issues.push({ severity: 'warning', file: DATA_DIRS[kind], path: '', message: 'Нет ни одного файла' });
+  }
+  return parseFiles(files, validate, issues);
+}
+
+function parseFiles<T>(files: SourceFile[], validate: ValidateFunction<T>, issues: Issue[]): { doc: T; file: string }[] {
   const ok: { doc: T; file: string }[] = [];
   for (const { file, text } of files) {
     let doc: unknown;
@@ -129,9 +164,6 @@ function parseAll<T>(
       continue;
     }
     ok.push({ doc, file });
-  }
-  if (files.length === 0) {
-    issues.push({ severity: 'warning', file: DATA_DIRS[kind], path: '', message: 'Нет ни одного файла' });
   }
   return ok;
 }
@@ -175,6 +207,41 @@ export function checkUniqueTitles(docs: { doc: { title: string }; file: string }
     if (other) issues.push({ severity: 'error', file, path: '/title', message: `название «${doc.title}» уже есть в ${other}` });
     else seen.set(key, file);
   }
+  return issues;
+}
+
+/* ------------------------------------------------------------------ */
+/* Смысловые проверки: справочник кухни                                */
+/* ------------------------------------------------------------------ */
+
+export function checkKitchen(k: Kitchen, file: string): Issue[] {
+  const issues: Issue[] = [];
+  const error = (path: string, message: string) => issues.push({ severity: 'error', file, path, message });
+  const warn = (path: string, message: string) => issues.push({ severity: 'warning', file, path, message });
+  const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
+
+  uniqueIds(k.people, '/people', error);
+  uniqueIds(k.equipment, '/equipment', error);
+  uniqueIds(k.consumables, '/consumables', error);
+  uniqueIds(k.storage, '/storage', error);
+
+  k.people.forEach((person, i) => {
+    const seen = new Set<string>();
+    person.avoid.forEach((a, j) => {
+      if (seen.has(norm(a.item))) error(`/people/${i}/avoid/${j}`, `«${a.item}» у ${person.name} указан дважды`);
+      seen.add(norm(a.item));
+    });
+  });
+
+  const pantry = new Map<string, string>();
+  k.pantry.forEach((group, i) =>
+    group.items.forEach((item, j) => {
+      const other = pantry.get(norm(item));
+      if (other) warn(`/pantry/${i}/items/${j}`, `«${item}» уже есть в группе «${other}»`);
+      else pantry.set(norm(item), group.title);
+    }),
+  );
+
   return issues;
 }
 

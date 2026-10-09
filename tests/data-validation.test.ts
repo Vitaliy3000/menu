@@ -35,10 +35,11 @@ const messages = (issues: { message: string }[]) => issues.map((i) => i.message)
 
 describe('данные проекта', () => {
   it('все рецепты и техкарты проходят проверку без ошибок и предупреждений', async () => {
-    const { recipes, plans, issues } = await validateProject(root);
+    const { recipes, plans, kitchen, issues } = await validateProject(root);
     expect(messages(issues)).toBe('');
     expect(recipes.length).toBeGreaterThan(0);
     expect(plans.length).toBeGreaterThan(0);
+    expect(kitchen).not.toBeNull();
   });
 });
 

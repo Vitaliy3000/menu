@@ -12,6 +12,7 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const targets = [
   { schema: 'schemas/recipe.schema.json', out: 'src/types/recipe.gen.ts' },
   { schema: 'schemas/cook-plan.schema.json', out: 'src/types/cook-plan.gen.ts' },
+  { schema: 'schemas/kitchen.schema.json', out: 'src/types/kitchen.gen.ts' },
 ];
 
 const check = process.argv.includes('--check');

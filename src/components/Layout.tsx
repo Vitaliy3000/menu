@@ -8,7 +8,7 @@ export function Layout({ children }: { children: ComponentChildren }) {
   useTimerAlarm();
   const { path } = useLocation();
   const scrolled = useScrolled();
-  const section = path.startsWith('/plans') ? 'plans' : 'recipes';
+  const section = path.startsWith('/plans') ? 'plans' : path.startsWith('/kitchen') ? 'kitchen' : 'recipes';
 
   return (
     <>
@@ -16,7 +16,7 @@ export function Layout({ children }: { children: ComponentChildren }) {
         <div class="container">
           <Link to="/" class="brand" aria-label="Меню — на главную">
             <span class="brand-mark" aria-hidden="true" />
-            Меню
+            <span class="brand-name">Меню</span>
           </Link>
           <nav class="nav" aria-label="Разделы">
             <Link to="/" aria-current={section === 'recipes' ? 'page' : undefined}>
@@ -24,6 +24,9 @@ export function Layout({ children }: { children: ComponentChildren }) {
             </Link>
             <Link to="/plans/" aria-current={section === 'plans' ? 'page' : undefined}>
               Техкарты
+            </Link>
+            <Link to="/kitchen/" aria-current={section === 'kitchen' ? 'page' : undefined}>
+              Кухня
             </Link>
           </nav>
         </div>

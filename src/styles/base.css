@@ -867,15 +867,21 @@ button.tag:hover {
   gap: 8px;
 }
 
+/* Три пункта меню: на телефоне от логотипа остаётся значок */
+@media (max-width: 479px) {
+  .brand-name {
+    display: none;
+  }
+
+  .nav a {
+    padding: 7px 12px;
+  }
+}
+
 /* Очень узкие экраны (320–359 px) */
 @media (max-width: 359px) {
   :root {
     --gutter: 12px;
-  }
-
-  .brand {
-    font-size: 1.25rem;
-    gap: 8px;
   }
 
   .brand-mark {
@@ -884,7 +890,7 @@ button.tag:hover {
   }
 
   .nav a {
-    padding: 7px 10px;
+    padding: 7px 9px;
     font-size: 0.88rem;
   }
 

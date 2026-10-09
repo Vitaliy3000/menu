@@ -1,0 +1,371 @@
+/* ------------------------------------------------------------------ */
+/* Справочник кухни                                                    */
+/* ------------------------------------------------------------------ */
+
+.kitchen-draft {
+  max-width: 62ch;
+  margin-top: 4px;
+}
+
+.kitchen-draft code {
+  font-size: 0.9em;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: color-mix(in oklab, var(--info) 12%, transparent);
+}
+
+.kitchen-section {
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.section-hint {
+  margin: -8px 0 16px;
+  font-size: 0.95rem;
+}
+
+/* Для промпта */
+.prompt-panel {
+  display: grid;
+  gap: 16px;
+  padding: clamp(18px, 2.5vw, 26px);
+  border-radius: var(--radius-l);
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.prompt-text {
+  display: grid;
+  gap: 6px;
+}
+
+.prompt-text p {
+  color: color-mix(in oklab, var(--bg) 72%, transparent);
+  max-width: 60ch;
+  font-size: 0.95rem;
+}
+
+.prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prompt-panel .btn-quiet {
+  background: color-mix(in oklab, var(--bg) 12%, transparent);
+  color: var(--bg);
+}
+
+.prompt-panel .btn-quiet:hover {
+  background: color-mix(in oklab, var(--bg) 20%, transparent);
+}
+
+@media (min-width: 900px) {
+  .prompt-panel {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+}
+
+.kitchen .section-nav {
+  margin-top: 24px;
+}
+
+/* Кто что не ест */
+.people-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .people-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+}
+
+.person-card {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.person-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.person-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  background: color-mix(in oklab, var(--tone) 16%, var(--surface));
+  color: var(--tone);
+}
+
+.avoid-group {
+  display: grid;
+  gap: 8px;
+}
+
+.avoid-level {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  font-size: 0.82rem;
+}
+
+.avoid-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-weight: 650;
+  font-size: 0.78rem;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.avoid-allergy .avoid-badge {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.avoid-never .avoid-badge {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.avoid-dislike .avoid-badge {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.avoid-group ul {
+  display: grid;
+  gap: 6px;
+}
+
+.avoid-group li {
+  display: grid;
+  padding-left: 12px;
+  border-left: 2px solid var(--line);
+  line-height: 1.4;
+}
+
+.avoid-allergy li {
+  border-left-color: var(--accent);
+}
+
+.avoid-item {
+  font-weight: 600;
+}
+
+.avoid-note {
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.person-notes {
+  padding-top: 12px;
+  border-top: 1px dashed var(--line-strong);
+}
+
+/* Расходники */
+.consumable-groups {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .consumable-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+  }
+}
+
+.consumable-group {
+  padding: 16px 18px 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.consumable {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.consumable:last-child {
+  border-bottom: 0;
+}
+
+.consumable-main {
+  display: grid;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.consumable-name {
+  font-weight: 600;
+}
+
+.consumable-spec {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.consumable-note {
+  font-size: 0.85rem;
+  color: var(--ink-3);
+}
+
+.consumable-side {
+  flex: none;
+  display: grid;
+  justify-items: end;
+  align-content: start;
+  gap: 6px;
+}
+
+.consumable-stock {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.consumable-flags {
+  display: flex;
+  gap: 4px;
+}
+
+.flag {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+
+.flag svg {
+  width: 14px;
+  height: 14px;
+}
+
+.flag-freezer {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+.flag-oven {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Хранение */
+.storage-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .storage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+}
+
+.storage-card {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.storage-fridge .pack-icon {
+  background: var(--done-soft);
+  color: var(--done);
+}
+
+.storage-freezer .pack-icon {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+.storage-capacity {
+  font-weight: 600;
+}
+
+.storage-free {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  font-size: 0.93rem;
+}
+
+.storage-note {
+  font-size: 0.9rem;
+}
+
+/* Всегда дома */
+.pantry-groups {
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 900px) {
+  .pantry-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 32px;
+  }
+}
+
+.pantry-group {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+/* Правила */
+.rules {
+  display: grid;
+  gap: 8px;
+  max-width: 820px;
+}
+
+.rules li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 14px 16px;
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  line-height: 1.5;
+}
+
+.rule-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  background: var(--surface-2);
+  color: var(--ink-2);
+}

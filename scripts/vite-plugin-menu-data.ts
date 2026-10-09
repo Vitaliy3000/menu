@@ -4,15 +4,26 @@
  *  - в dev-режиме перепроверяет данные на лету и показывает ошибки в оверлее браузера;
  *  - после сборки кладёт index.html в папку каждого маршрута (recipes/<id>/, plans/<id>/),
  *    чтобы прямые ссылки на GitHub Pages отдавались с кодом 200 и правильными <title>/description,
- *    а 404.html ловит всё остальное.
+ *    а 404.html ловит всё остальное;
+ *  - публикует справочник кухни и схемы как обычные файлы (kitchen.json, schemas/*.json),
+ *    чтобы их можно было отдать LLM по ссылке при составлении техкарт.
  */
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve } from 'node:path';
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite';
-import { formatIssue, validateProject, type DataSet, type Issue } from './data-validation.ts';
+import { formatIssue, KITCHEN_FILE, validateProject, type DataSet, type Issue } from './data-validation.ts';
 
 export const SITE_NAME = 'Меню';
 const SITE_DESCRIPTION = 'Рецепты и техкарты дней готовки.';
+
+/** Файлы данных, которые публикуются как есть: путь на сайте → путь в репозитории. */
+async function publishedFiles(root: string): Promise<Map<string, string>> {
+  const files = new Map([['kitchen.json', KITCHEN_FILE]]);
+  for (const name of await readdir(join(root, 'schemas'))) {
+    if (name.endsWith('.json')) files.set(`schemas/${name}`, `schemas/${name}`);
+  }
+  return files;
+}
 
 interface PageMeta {
   /** Путь относительно base, без ведущего слэша: «recipes/borsch/». */
@@ -75,6 +86,15 @@ export function menuData(): Plugin {
         setTimeout(sendErrors, 300);
       };
 
+      // В dev отдаём те же файлы, что попадут в сборку.
+      server.middlewares.use(async (req, res, next) => {
+        const path = decodeURIComponent((req.url ?? '').split('?')[0]!).replace(config.base, '');
+        const source = (await publishedFiles(config.root)).get(path);
+        if (!source) return next();
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.end(await readFile(join(config.root, source)));
+      });
+
       server.watcher.on('change', revalidate);
       server.watcher.on('add', revalidate);
       server.watcher.on('unlink', revalidate);
@@ -88,6 +108,7 @@ export function menuData(): Plugin {
 
       const pages: PageMeta[] = [
         { path: 'plans/', title: 'Техкарты', description: 'Готовые планы дней готовки под конкретные объёмы и технику.' },
+        { path: 'kitchen/', title: 'Кухня', description: 'Справочник для техкарт: кто что не ест, оборудование, расходники, хранение.' },
         ...data.recipes.map((r) => ({ path: `recipes/${r.id}/`, title: r.title, description: r.description })),
         ...data.plans.map((p) => ({ path: `plans/${p.id}/`, title: p.title, description: p.summary })),
       ];
@@ -100,7 +121,19 @@ export function menuData(): Plugin {
         }),
       );
       await writeFile(join(outDir, '404.html'), withMeta(template, 'Страница не найдена', SITE_DESCRIPTION));
-      config.logger.info(`menu-data: ${pages.length} страниц + 404.html`);
+
+      const files = await publishedFiles(config.root);
+      for (const [target, source] of files) {
+        await mkdir(dirname(join(outDir, target)), { recursive: true });
+        if (target === 'kitchen.json') {
+          // На сайте схема лежит рядом: schemas/kitchen.schema.json, а не ../schemas/.
+          const text = await readFile(join(config.root, source), 'utf8');
+          await writeFile(join(outDir, target), text.replace('"../schemas/', '"schemas/'));
+        } else {
+          await copyFile(join(config.root, source), join(outDir, target));
+        }
+      }
+      config.logger.info(`menu-data: ${pages.length} страниц + 404.html, файлы: ${[...files.keys()].join(', ')}`);
     },
   };
 }

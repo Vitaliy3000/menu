@@ -3,6 +3,7 @@ import { useEffect } from 'preact/hooks';
 import { Layout } from './components/Layout.tsx';
 import { getPlan, getRecipe } from './data/index.ts';
 import { match, useLocation } from './lib/router.tsx';
+import { KitchenPage } from './pages/KitchenPage.tsx';
 import { NotFoundPage } from './pages/NotFoundPage.tsx';
 import { PlanPage } from './pages/PlanPage.tsx';
 import { PlansPage } from './pages/PlansPage.tsx';
@@ -25,6 +26,7 @@ const notFound = { title: 'Страница не найдена', view: <NotFoun
 function route(path: string): { title: string | null; view: JSX.Element } {
   if (path === '/') return { title: null, view: <RecipesPage /> };
   if (path === '/plans') return { title: 'Техкарты', view: <PlansPage /> };
+  if (path === '/kitchen') return { title: 'Кухня', view: <KitchenPage /> };
 
   const recipeId = match('/recipes/:id', path)?.id;
   if (recipeId) {

@@ -4,6 +4,7 @@
  * только типизированный доступ.
  */
 import type { CookPlan } from '../types/cook-plan.gen.ts';
+import type { Kitchen } from '../types/kitchen.gen.ts';
 import type { Recipe } from '../types/recipe.gen.ts';
 import { typograph } from '../lib/format.ts';
 
@@ -33,6 +34,11 @@ export const recipes: Recipe[] = Object.values(recipeModules)
 export const plans: CookPlan[] = Object.entries(planModules)
   .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
   .map(([, plan]) => polish(plan));
+
+const kitchenModules = import.meta.glob<Kitchen>('/data/kitchen.json', { eager: true, import: 'default' });
+
+/** Справочник кухни (data/kitchen.json) — для составления техкарт. */
+export const kitchen: Kitchen | null = Object.values(kitchenModules).map(polish)[0] ?? null;
 
 const recipeById = new Map(recipes.map((r) => [r.id, r]));
 const planById = new Map(plans.map((p) => [p.id, p]));
