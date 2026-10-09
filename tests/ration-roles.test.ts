@@ -26,7 +26,7 @@ const plan: CookPlan = {
     { id: 'wash', at: 10, duration: 10, title: 'Помыть посуду', role: 'helper' },
   ],
   ration: {
-    people: [{ id: 'ann', name: 'Аня', target: { kcal: 900 }, portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20 }] }],
+    people: [{ id: 'ann', name: 'Аня', target: { kcal: 900 }, portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25 }] }],
     extras: [
       { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
       { id: 'shake', name: 'Коктейль', meal: 'snack', servings: [{ person: 'bob', text: '30 г протеина', kcal: 120, protein: 24 }] },

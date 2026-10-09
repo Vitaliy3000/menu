@@ -332,7 +332,7 @@
     },
     "PlanNutrition": {
       "title": "PlanNutrition",
-      "description": "Пищевая ценность одной порции (приблизительно).",
+      "description": "Пищевая ценность одной порции (приблизительно) — если порция одна на всех. Если блюдо есть в рационе, КБЖУ берутся из порций людей, а это поле у блюда не задаётся.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -761,7 +761,9 @@
         "dish",
         "size",
         "kcal",
-        "protein"
+        "protein",
+        "fat",
+        "carbs"
       ],
       "properties": {
         "dish": {
@@ -781,8 +783,17 @@
         "protein": {
           "type": "number",
           "minimum": 0
+        },
+        "fat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "carbs": {
+          "type": "number",
+          "minimum": 0
         }
-      }
+      },
+      "description": "Порция человека из блюда. Её КБЖУ показываются и в рационе, и в карточке блюда."
     },
     "RationExtra": {
       "title": "RationExtra",

@@ -2,7 +2,7 @@ import { Check, Info, Lightbulb, Users } from 'lucide-preact';
 import { addDays, countLabel, formatAmount, formatDayMonth, formatNumber, formatWeekdayShort } from '../../lib/format.ts';
 import { EQUIPMENT_KINDS, EQUIPMENT_ORDER, STORAGE } from '../../lib/labels.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
-import type { CookPlan, Dish, Packaging } from '../../types/cook-plan.gen.ts';
+import type { CookPlan, Dish, Packaging, PlanNutrition } from '../../types/cook-plan.gen.ts';
 import { UsesList } from './StepParts.tsx';
 
 interface Props {
@@ -19,7 +19,7 @@ export function Overview({ plan, tones, progress, togglePrep }: Props) {
         <h2 class="display h2 section-heading">Что получится</h2>
         <div class="dish-grid">
           {plan.dishes.map((dish) => (
-            <DishCard key={dish.id} dish={dish} tone={tones.get(dish.id)!} startedAt={progress.startedAt} />
+            <DishCard key={dish.id} dish={dish} nutrition={dishNutrition(plan, dish)} tone={tones.get(dish.id)!} startedAt={progress.startedAt} />
           ))}
         </div>
       </section>
@@ -118,7 +118,23 @@ export function Overview({ plan, tones, progress, togglePrep }: Props) {
   );
 }
 
-function DishCard({ dish, tone, startedAt }: { dish: Dish; tone: string; startedAt: number | null }) {
+interface PortionNutrition {
+  /** Чья порция: имя из рациона или «На порцию», если порция одна на всех. */
+  who: string;
+  n: PlanNutrition;
+}
+
+/** КБЖУ блюда: по строке на порцию каждого человека из рациона, без рациона — одна из dish.nutrition. */
+function dishNutrition(plan: CookPlan, dish: Dish): PortionNutrition[] {
+  const portions = (plan.ration?.people ?? []).flatMap((person) => {
+    const portion = person.portions.find((p) => p.dish === dish.id);
+    return portion ? [{ who: person.name, n: portion }] : [];
+  });
+  if (portions.length > 0) return portions;
+  return dish.nutrition ? [{ who: 'На порцию', n: dish.nutrition }] : [];
+}
+
+function DishCard({ dish, nutrition, tone, startedAt }: { dish: Dish; nutrition: PortionNutrition[]; tone: string; startedAt: number | null }) {
   return (
     <article class={`card dish-card tone-${tone}`}>
       <header class="dish-head">
@@ -147,7 +163,7 @@ function DishCard({ dish, tone, startedAt }: { dish: Dish; tone: string; started
           <PackagingRow key={i} pack={p} startedAt={startedAt} />
         ))}
       </ul>
-      {(dish.reheat || dish.nutrition) && (
+      {(dish.reheat || nutrition.length > 0) && (
         <footer class="dish-foot">
           {dish.reheat && (
             <p>
@@ -155,12 +171,11 @@ function DishCard({ dish, tone, startedAt }: { dish: Dish; tone: string; started
               {dish.reheat}
             </p>
           )}
-          {dish.nutrition && (
-            <p class="faint num">
-              На порцию: {dish.nutrition.kcal} ккал · Б {formatNumber(dish.nutrition.protein)} · Ж {formatNumber(dish.nutrition.fat)} · У{' '}
-              {formatNumber(dish.nutrition.carbs)}
+          {nutrition.map(({ who, n }) => (
+            <p key={who} class="faint num">
+              {who}: {n.kcal} ккал · Б {formatNumber(n.protein)} · Ж {formatNumber(n.fat)} · У {formatNumber(n.carbs)}
             </p>
-          )}
+          ))}
         </footer>
       )}
     </article>

@@ -415,7 +415,16 @@ function checkRation(
       if (!dishes.has(portion.dish)) error(`${path}/dish`, `нет блюда с id «${portion.dish}»`);
       if (seen.has(portion.dish)) error(`${path}/dish`, `порция «${portion.dish}» у ${person.name} указана дважды`);
       seen.add(portion.dish);
+      const kcalIssue = checkMacros(portion);
+      if (kcalIssue) warn(path, kcalIssue);
     });
+  });
+
+  // КБЖУ порций рациона показываются в карточке блюда — второе значение в dish.nutrition разойдётся с ними.
+  p.dishes.forEach((dish, i) => {
+    if (dish.nutrition && ration.people.some((person) => person.portions.some((x) => x.dish === dish.id))) {
+      warn(`/dishes/${i}/nutrition`, `КБЖУ блюда «${dish.id}» уже заданы в порциях рациона — nutrition лишний`);
+    }
   });
 
   ration.extras.forEach((extra, i) => {

@@ -179,7 +179,7 @@ describe('рацион техкарты', () => {
   const withRation = (): CookPlan => ({
     ...plan(),
     ration: {
-      people: [{ id: 'ann', name: 'Аня', target: { kcal: 1000, protein: 60 }, portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20 }] }],
+      people: [{ id: 'ann', name: 'Аня', target: { kcal: 1000, protein: 60 }, portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25 }] }],
       extras: [
         { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
         { id: 'yogurt', name: 'Йогурт', meal: 'snack', servings: [{ person: 'ann', text: '200 г', kcal: 150, protein: 15 }] },
@@ -209,7 +209,7 @@ describe('рацион техкарты', () => {
 
   it('требует порцию каждого блюда дня у каждого человека', () => {
     const p = withRation();
-    p.ration!.people[0]!.portions = [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20 }];
+    p.ration!.people[0]!.portions = [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25 }];
     p.dishes.push({ ...p.dishes[0]!, id: 'stew', name: 'Рагу' });
     p.steps[0] = { ...p.steps[0]!, dishes: ['soup', 'stew'] };
     p.ration!.days[0] = { ...p.ration!.days[0]!, dinner: 'stew' };
@@ -224,6 +224,15 @@ describe('рацион техкарты', () => {
     expect(issues.every((i) => i.severity === 'warning')).toBe(true);
     expect(messages(issues)).toContain('день 1, Аня: 850 ккал при цели 1200 (-29 %)');
     expect(messages(issues)).toContain('белка 50 г при цели 80 г');
+  });
+
+  it('проверяет КБЖУ порций и не даёт задать их второй раз в блюде', () => {
+    const p = withRation();
+    p.ration!.people[0]!.portions[0]!.fat = 40;
+    p.dishes[0]!.nutrition = { kcal: 300, protein: 20, fat: 12, carbs: 25 };
+    const text = messages(checkPlan(p, file));
+    expect(text).toContain('калорийность 300 ккал не сходится с БЖУ');
+    expect(text).toContain('КБЖУ блюда «soup» уже заданы в порциях рациона');
   });
 });
 

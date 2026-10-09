@@ -277,7 +277,7 @@ export interface Packaging {
   note?: string;
 }
 /**
- * Пищевая ценность одной порции (приблизительно).
+ * Пищевая ценность одной порции (приблизительно) — если порция одна на всех. Если блюдо есть в рационе, КБЖУ берутся из порций людей, а это поле у блюда не задаётся.
  *
  * This interface was referenced by `CookPlan`'s JSON-Schema
  * via the `definition` "PlanNutrition".
@@ -465,6 +465,8 @@ export interface RationTarget {
   protein?: number;
 }
 /**
+ * Порция человека из блюда. Её КБЖУ показываются и в рационе, и в карточке блюда.
+ *
  * This interface was referenced by `CookPlan`'s JSON-Schema
  * via the `definition` "RationPortion".
  */
@@ -476,6 +478,8 @@ export interface RationPortion {
   size: string;
   kcal: number;
   protein: number;
+  fat: number;
+  carbs: number;
 }
 /**
  * This interface was referenced by `CookPlan`'s JSON-Schema
