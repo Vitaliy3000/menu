@@ -262,6 +262,8 @@ li:last-child > .ingredient {
 }
 
 .ingredient-name {
+  overflow-wrap: break-word;
+  hyphens: auto;
   display: grid;
   font-size: 0.97rem;
   line-height: 1.45;

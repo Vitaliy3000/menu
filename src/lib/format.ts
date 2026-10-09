@@ -13,7 +13,7 @@ export function plural(n: number, forms: PluralForms): string {
   return forms[2];
 }
 
-export const countLabel = (n: number, forms: PluralForms) => `${formatNumber(n)} ${plural(n, forms)}`;
+export const countLabel = (n: number, forms: PluralForms) => `${formatNumber(n)}\u00a0${plural(n, forms)}`;
 
 const numberFormat = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 2 });
 export const formatNumber = (n: number) => numberFormat.format(n).replace(/ /g, ' ');
@@ -24,7 +24,7 @@ export const formatNumber = (n: number) => numberFormat.format(n).replace(/ /g,
  */
 export function typograph(text: string): string {
   return text
-    .replace(/(\d) (?=°|%|×|(?:г|кг|мл|л|мин|сек|ч|см|мм|шт|ст\.|ч\.)(?![а-яё]))/giu, '$1\u00a0')
+    .replace(/(\d) (?=[а-яё°%×])/giu, '$1\u00a0')
     .replace(/ (—|–) /g, '\u00a0$1 ')
     .replace(/(^|\s)(в|и|с|к|о|у|на|не|по|до|за|из|от|без) /giu, '$1$2\u00a0');
 }

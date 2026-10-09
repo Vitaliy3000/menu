@@ -213,7 +213,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 12px;
-  align-items: center;
+  align-items: start;
 }
 
 .pack-icon {
@@ -497,6 +497,8 @@
 }
 
 .product-name {
+  overflow-wrap: break-word;
+  hyphens: auto;
   display: grid;
   font-size: 1rem;
   line-height: 1.35;
@@ -611,6 +613,7 @@
 
 .tl-card {
   min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
   margin-bottom: 10px;
   padding: 10px 14px 12px;
   border-radius: var(--radius-l);
@@ -730,6 +733,7 @@
 
 /* Бейджи шага */
 .step-badges {
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -738,16 +742,32 @@
   color: var(--ink-2);
 }
 
-.dish-tag {
+.dish-tags {
+  flex: 1 1 0;
+  min-width: 120px;
+  max-width: 100%;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-weight: 550;
 }
 
-.dish-tag .dot {
+.dish-dots {
+  display: inline-flex;
+  gap: 3px;
+  flex: none;
+}
+
+.dish-dots .dot {
   width: 8px;
   height: 8px;
+}
+
+.dish-names {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .step-dur {
@@ -763,18 +783,26 @@
 }
 
 .step-badges .badge {
-  height: 24px;
+  height: auto;
+  min-height: 24px;
+  max-width: 100%;
+  padding-block: 3px;
+  white-space: normal;
   font-size: 0.78rem;
+  line-height: 1.3;
 }
 
 .step-equipment {
+  flex-basis: 100%;
   color: var(--ink-3);
 }
 
 /* Продукты шага */
 .uses {
   display: grid;
-  gap: 2px;
+  grid-template-columns: minmax(56px, max-content) minmax(0, 1fr);
+  column-gap: 14px;
+  row-gap: 2px;
   padding: 10px 14px;
   border-radius: var(--radius-m);
   background: var(--surface-2);
@@ -782,8 +810,8 @@
 
 .uses li {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
   padding: 4px 0;
   font-size: 0.95rem;
   line-height: 1.4;
@@ -791,14 +819,24 @@
 
 .uses-amount {
   font-weight: 650;
+  white-space: nowrap;
+}
+
+.uses-name {
+  min-width: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .uses.is-large {
   padding: 14px 18px;
 }
 
+.uses.is-large {
+  column-gap: 18px;
+}
+
 .uses.is-large li {
-  grid-template-columns: 112px minmax(0, 1fr);
   font-size: 1.08rem;
   padding: 6px 0;
 }
@@ -945,6 +983,7 @@
 }
 
 .cook-inner {
+  grid-template-columns: minmax(0, 1fr);
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
@@ -1120,4 +1159,20 @@
 .cook-done.is-done {
   background: var(--surface-2);
   color: var(--ink-2);
+}
+
+@media (max-width: 359px) {
+  .tl-step,
+  .tl-now {
+    grid-template-columns: 44px 28px minmax(0, 1fr);
+    column-gap: 6px;
+  }
+
+  .tl-now {
+    grid-template-columns: 44px 1fr;
+  }
+
+  .tl-card {
+    padding-inline: 10px;
+  }
 }

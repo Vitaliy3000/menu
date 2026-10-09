@@ -39,6 +39,7 @@ export function StepBadges(props: { plan: CookPlan; step: PlanStep; tones: Map<s
     .map((id) => plan.equipment.find((e) => e.id === id)?.name)
     .filter(Boolean)
     .join(', ');
+  const dishes = plan.dishes.filter((d) => step.dishes?.includes(d.id));
   return (
     <div class="step-badges">
       <span class="step-dur num">
@@ -51,15 +52,16 @@ export function StepBadges(props: { plan: CookPlan; step: PlanStep; tones: Map<s
           {step.heat}
         </span>
       )}
-      {step.dishes?.map((id) => {
-        const dish = plan.dishes.find((d) => d.id === id);
-        return (
-          <span key={id} class={`dish-tag tone-${tones.get(id)}`}>
-            <span class="dot" />
-            {dish?.name}
+      {dishes.length > 0 && (
+        <span class="dish-tags" title={dishes.map((d) => d.name).join(', ')}>
+          <span class="dish-dots">
+            {dishes.map((d) => (
+              <span key={d.id} class={`dot tone-${tones.get(d.id)}`} />
+            ))}
           </span>
-        );
-      })}
+          <span class="dish-names">{dishes.map((d) => d.name).join(', ')}</span>
+        </span>
+      )}
       {showEquipment && equipment && <span class="step-equipment">{equipment}</span>}
     </div>
   );

@@ -98,6 +98,8 @@ ol {
 /* ------------------------------------------------------------------ */
 
 .display {
+  overflow-wrap: break-word;
+  hyphens: auto;
   font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 560;
@@ -863,4 +865,30 @@ button.tag:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px;
+}
+
+/* Очень узкие экраны (320–359 px) */
+@media (max-width: 359px) {
+  :root {
+    --gutter: 12px;
+  }
+
+  .brand {
+    font-size: 1.25rem;
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav a {
+    padding: 7px 10px;
+    font-size: 0.88rem;
+  }
+
+  .tabs .tab-count {
+    display: none;
+  }
 }

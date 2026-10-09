@@ -379,7 +379,7 @@ function Steps({ recipe: r }: { recipe: Recipe }) {
                         <span>{step.tip}</span>
                       </div>
                     )}
-                    {step.minutes && (
+                    {step.minutes !== undefined && step.minutes >= 2 && (
                       <button
                         type="button"
                         class={`step-timer${running ? ' is-running' : ''}`}

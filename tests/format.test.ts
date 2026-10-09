@@ -64,8 +64,8 @@ describe('время и даты', () => {
     const today = parseDate('2026-10-09');
     expect(formatRelativeDay(parseDate('2026-10-09'), today)).toBe('сегодня');
     expect(formatRelativeDay(parseDate('2026-10-10'), today)).toBe('завтра');
-    expect(formatRelativeDay(parseDate('2026-10-11'), today)).toBe('через 2 дня');
-    expect(formatRelativeDay(parseDate('2026-09-20'), today)).toBe('19 дней назад');
+    expect(formatRelativeDay(parseDate('2026-10-11'), today)).toBe(`через 2${NB}дня`);
+    expect(formatRelativeDay(parseDate('2026-09-20'), today)).toBe(`19${NB}дней назад`);
   });
 });
 
@@ -75,7 +75,8 @@ describe('typograph', () => {
     expect(typograph('варить 35 мин и 2 ст. л.')).toBe(`варить 35${NB}мин и${NB}2${NB}ст. л.`);
   });
 
-  it('не трогает слова, начинающиеся как единицы', () => {
-    expect(typograph('3 гостя')).toBe('3 гостя');
+  it('привязывает число к следующему слову', () => {
+    expect(typograph('на 3 гостя')).toBe(`на${NB}3${NB}гостя`);
+    expect(typograph('шаг 2 из 5')).toBe(`шаг 2${NB}из${NB}5`);
   });
 });
