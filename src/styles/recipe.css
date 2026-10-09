@@ -111,7 +111,8 @@
   display: none;
 }
 
-.section-nav a {
+.section-nav button {
+  flex: none;
   padding: 7px 14px;
   border-radius: 999px;
   background: var(--surface-2);
@@ -119,14 +120,20 @@
   font-weight: 550;
   color: var(--ink-2);
   white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
 }
 
-.section-nav a:hover {
+.section-nav button:hover {
   color: var(--ink);
 }
 
+.section-nav button[aria-current='true'] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
 @media (min-width: 1024px) {
-  .section-nav {
+  .section-nav:not(.is-always) {
     display: none;
   }
 }

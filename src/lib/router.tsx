@@ -27,8 +27,9 @@ if (typeof window !== 'undefined') {
   window.history.scrollRestoration = 'manual';
   window.addEventListener('popstate', (e) => {
     notify();
-    const y = (e.state as { scrollY?: number } | null)?.scrollY ?? 0;
-    requestAnimationFrame(() => window.scrollTo(0, y));
+    // Переход по якорю (#раздел) тоже вызывает popstate, но без нашего state — прокрутку не трогаем.
+    const y = (e.state as { scrollY?: unknown } | null)?.scrollY;
+    if (typeof y === 'number') requestAnimationFrame(() => window.scrollTo(0, y));
   });
 }
 

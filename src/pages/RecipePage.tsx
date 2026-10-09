@@ -19,6 +19,7 @@ import { useState } from 'preact/hooks';
 import { MacroBar } from '../components/MacroBar.tsx';
 import { MonthStrip } from '../components/MonthStrip.tsx';
 import { Plate } from '../components/Plate.tsx';
+import { SectionNav } from '../components/SectionNav.tsx';
 import { countLabel, formatAmount, formatDuration, formatNumber, MONTHS_IN, roundAmount } from '../lib/format.ts';
 import { CATEGORIES, DIETS, DIFFICULTY, REHEAT } from '../lib/labels.ts';
 import { isSeasonal } from '../lib/recipeFilters.ts';
@@ -120,12 +121,15 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
         </div>
       </dl>
 
-      <nav class="section-nav" aria-label="Разделы рецепта">
-        <a href="#ingredients">Ингредиенты</a>
-        <a href="#method">Приготовление</a>
-        {r.tips && r.tips.length > 0 && <a href="#tips">Советы</a>}
-        <a href="#storage">Хранение</a>
-      </nav>
+      <SectionNav
+        label="Разделы рецепта"
+        sections={[
+          { id: 'ingredients', label: 'Ингредиенты' },
+          { id: 'method', label: 'Приготовление' },
+          ...(r.tips && r.tips.length > 0 ? [{ id: 'tips', label: 'Советы' }] : []),
+          { id: 'storage', label: 'Хранение' },
+        ]}
+      />
 
       <div class="recipe-body">
         <aside class="recipe-aside">
