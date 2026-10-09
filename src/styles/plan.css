@@ -30,6 +30,33 @@
   }
 }
 
+.plan-cta-roles {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  max-width: 100%;
+  gap: 10px;
+}
+
+.plan-cta-roles .plan-cta-main {
+  min-width: 0;
+}
+
+@media (max-width: 559px) {
+  .plan-cta-roles {
+    width: 100%;
+  }
+
+  .plan-cta-roles .plan-cta-main {
+    flex: 1 1 100%;
+  }
+}
+
+.plan-cta-role {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
 .plan-cta-side {
   display: flex;
   flex-wrap: wrap;
@@ -398,6 +425,18 @@
 .equipment-spec {
   font-size: 0.86rem;
   color: var(--ink-2);
+}
+
+.buy-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  vertical-align: 1px;
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  color: var(--accent);
 }
 
 .equipment-note {
@@ -1152,4 +1191,208 @@
   .tl-card {
     padding-inline: 10px;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Рацион                                                              */
+/* ------------------------------------------------------------------ */
+
+.ration-people {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .ration-people {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+}
+
+.ration-person {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.ration-target {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.ration-target svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ration-note {
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+.ration-list,
+.ration-meals {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ration-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ration-list .dot {
+  transform: translateY(-1px);
+}
+
+.ration-item {
+  display: grid;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.ration-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.ration-detail {
+  font-size: 0.86rem;
+  color: var(--ink-2);
+}
+
+.ration-macros {
+  font-size: 0.86rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.ration-hint {
+  max-width: 70ch;
+  margin-bottom: 16px;
+}
+
+.ration-days {
+  display: grid;
+  gap: 10px;
+}
+
+.ration-day summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  align-items: center;
+  padding: 14px clamp(16px, 2.2vw, 22px);
+  cursor: pointer;
+  list-style: none;
+}
+
+.ration-day summary::-webkit-details-marker {
+  display: none;
+}
+
+.ration-day.is-today {
+  border-color: var(--accent);
+}
+
+.ration-day-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ration-day-num {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.ration-day-dishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+}
+
+.ration-day-dishes > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ration-day-totals {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ration-chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.ration-chip.is-ok {
+  background: var(--done-soft);
+  color: var(--done);
+}
+
+.ration-chip.is-off {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.ration-day-body {
+  display: grid;
+  gap: 18px;
+  padding: 0 clamp(16px, 2.2vw, 22px) 18px;
+}
+
+@media (min-width: 860px) {
+  .ration-day-body {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .ration-day summary {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .ration-day-totals {
+    grid-column: auto;
+  }
+}
+
+.ration-meals li {
+  display: grid;
+  grid-template-columns: 4.6em 1fr auto;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ration-meal {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.ration-sum {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.ration-sum .ration-macros {
+  font-weight: 600;
+  color: var(--ink);
 }

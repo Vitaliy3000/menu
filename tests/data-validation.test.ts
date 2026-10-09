@@ -126,6 +126,98 @@ describe('смысловые проверки CookPlan', () => {
   });
 });
 
+describe('роли поваров', () => {
+  const withRoles = (): CookPlan => {
+    const p = plan();
+    return {
+      ...p,
+      conditions: { ...p.conditions, cooks: 2 },
+      roles: [
+        { id: 'chef', name: 'Повар' },
+        { id: 'helper', name: 'Помощник' },
+      ],
+      steps: [
+        { ...p.steps[0]!, role: 'helper' },
+        { ...p.steps[1]!, role: 'chef' },
+      ],
+    };
+  };
+
+  it('техкарта с ролями — без замечаний', () => {
+    expect(checkPlan(withRoles(), file)).toEqual([]);
+  });
+
+  it('с ролями у каждого шага должна быть существующая роль', () => {
+    const p = withRoles();
+    delete p.steps[0]!.role;
+    p.steps[1] = { ...p.steps[1]!, role: 'sous' };
+    const text = messages(checkPlan(p, file));
+    expect(text).toContain('у шага «s1» нет роли');
+    expect(text).toContain('нет роли с id «sous»');
+  });
+
+  it('роль без списка ролей и несовпадение с числом поваров', () => {
+    const p = plan();
+    p.steps[0] = { ...p.steps[0]!, role: 'chef' };
+    expect(messages(checkPlan(p, file))).toContain('есть роль, но в техкарте нет roles');
+    const q = withRoles();
+    q.conditions.cooks = 3;
+    expect(messages(checkPlan(q, file))).toContain('ролей 2, а поваров в conditions.cooks — 3');
+  });
+});
+
+describe('рацион техкарты', () => {
+  const withRation = (): CookPlan => ({
+    ...plan(),
+    ration: {
+      people: [{ id: 'ann', name: 'Аня', target: { kcal: 1000, protein: 60 }, portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20 }] }],
+      extras: [
+        { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
+        { id: 'yogurt', name: 'Йогурт', meal: 'snack', servings: [{ person: 'ann', text: '200 г', kcal: 150, protein: 15 }] },
+      ],
+      days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: ['yogurt'] }],
+    },
+  });
+
+  it('валидный рацион — без замечаний', () => {
+    expect(checkPlan(withRation(), file)).toEqual([]);
+    const { issues } = validateSources({ ...schemas, recipeFiles: [], planFiles: [{ file, text: JSON.stringify(withRation()) }] });
+    expect(issues.filter((i) => i.severity === 'error')).toEqual([]);
+  });
+
+  it('ловит ссылки на несуществующие блюда, перекусы и людей', () => {
+    const p = withRation();
+    p.ration!.days[0] = { day: 2, breakfast: 'yogurt', lunch: 'stew', dinner: 'soup', snacks: ['cake'] };
+    p.ration!.extras[1]!.servings.push({ person: 'bob', text: '100 г', kcal: 50, protein: 5 });
+    const text = messages(checkPlan(p, file));
+    expect(text).toContain('дни должны идти подряд с 1-го');
+    expect(text).toContain('«yogurt» — перекус, а стоит в завтраке');
+    expect(text).toContain('нет блюда с id «stew»');
+    expect(text).toContain('нет завтрака или перекуса с id «cake»');
+    expect(text).toContain('нет человека с id «bob»');
+    expect(text).toContain('«porridge» не стоит ни в одном дне');
+  });
+
+  it('требует порцию каждого блюда дня у каждого человека', () => {
+    const p = withRation();
+    p.ration!.people[0]!.portions = [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20 }];
+    p.dishes.push({ ...p.dishes[0]!, id: 'stew', name: 'Рагу' });
+    p.steps[0] = { ...p.steps[0]!, dishes: ['soup', 'stew'] };
+    p.ration!.days[0] = { ...p.ration!.days[0]!, dinner: 'stew' };
+    expect(messages(checkPlan(p, file))).toContain('у Аня нет порции блюда «stew»');
+  });
+
+  it('предупреждает, если день далеко от цели по калориям и белку', () => {
+    const p = withRation();
+    p.ration!.days[0]!.snacks = [];
+    p.ration!.people[0]!.target = { kcal: 1200, protein: 80 };
+    const issues = checkPlan(p, file);
+    expect(issues.every((i) => i.severity === 'warning')).toBe(true);
+    expect(messages(issues)).toContain('день 1, Аня: 850 ккал при цели 1200 (-29 %)');
+    expect(messages(issues)).toContain('белка 50 г при цели 80 г');
+  });
+});
+
 describe('уникальные названия техкарт', () => {
   it('повтор названия — ошибка, без учёта регистра и «ё»', () => {
     const a = { doc: { title: 'Заготовки на неделю' }, file: 'data/plans/a.json' };

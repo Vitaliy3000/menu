@@ -2,7 +2,7 @@ import { Check, ChevronLeft, ChevronRight, Eye, Hourglass, Lightbulb, PartyPoppe
 import { useEffect, useRef } from 'preact/hooks';
 import { TimerTray } from '../../components/TimerTray.tsx';
 import { formatClock, formatOffset } from '../../lib/format.ts';
-import { stepTime } from '../../lib/plan.ts';
+import { activeRole, mySteps, stepTime } from '../../lib/plan.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
 import { findTimer, startTimer, useNow } from '../../lib/timers.ts';
 import { useWakeLock } from '../../lib/wakeLock.ts';
@@ -22,7 +22,10 @@ interface Props {
 
 /** Полноэкранный пошаговый режим для телефона у плиты. */
 export function CookMode({ plan, tones, progress, base, stepId, onNavigate, onToggleDone, onClose }: Props) {
-  const steps = plan.steps;
+  // Свои шаги, если на устройстве выбрана роль; шаг чужой роли (открыт из «Все шаги») листается по всем.
+  const own = mySteps(plan, progress);
+  const role = activeRole(plan, progress);
+  const steps = own.some((s) => s.id === stepId) ? own : plan.steps;
   const index = Math.max(0, steps.findIndex((s) => s.id === stepId));
   const step = steps[index]!;
   const prev = steps[index - 1];
@@ -100,7 +103,7 @@ export function CookMode({ plan, tones, progress, base, stepId, onNavigate, onTo
         </button>
         <div class="cook-progress">
           <span class="num">
-            Шаг {index + 1} из {steps.length}
+            {role && steps === own ? `${role.name} · ` : ''}Шаг {index + 1} из {steps.length}
           </span>
           <span class="cook-bar" aria-hidden="true">
             <span style={{ transform: `scaleX(${doneCount / steps.length})` }} />
@@ -140,7 +143,7 @@ export function CookMode({ plan, tones, progress, base, stepId, onNavigate, onTo
           </p>
 
           <h1 class={`display cook-title${done ? ' is-done' : ''}`}>{step.title}</h1>
-          <StepBadges plan={plan} step={step} tones={tones} />
+          <StepBadges plan={plan} step={step} tones={tones} activeRole={role?.id} />
 
           {step.details && <p class="cook-text">{step.details}</p>}
 

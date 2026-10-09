@@ -87,6 +87,7 @@ export function Overview({ plan, tones, progress, togglePrep }: Props) {
                         <span class="equipment-name">
                           {e.name}
                           {e.count && e.count > 1 && <span class="faint num"> × {e.count}</span>}
+                          {e.buy && <span class="buy-tag">купить</span>}
                         </span>
                         {e.spec && <span class="equipment-spec">{e.spec}</span>}
                         {e.note && <span class="equipment-note">{e.note}</span>}

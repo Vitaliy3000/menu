@@ -2,7 +2,7 @@ import { Check, ChevronDown, Eye, Lightbulb, Maximize2, TriangleAlert } from 'lu
 import { Fragment } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { formatClock, formatOffset } from '../../lib/format.ts';
-import { currentStepIndex, stepTime } from '../../lib/plan.ts';
+import { activeRole, currentStepIndex, mySteps, roleSteps, stepTime } from '../../lib/plan.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
 import { useNow } from '../../lib/timers.ts';
 import type { CookPlan, PlanStep } from '../../types/cook-plan.gen.ts';
@@ -20,8 +20,13 @@ interface Props {
 
 export function Timeline({ plan, tones, progress, base, focusStepId, toggleDone, openCook }: Props) {
   const [dish, setDish] = useState<string | null>(null);
+  // null — шаги своей роли (или все, если роль не выбрана); 'all' — все шаги; иначе — id роли.
+  const [roleView, setRoleView] = useState<string | null>(null);
+  const myRole = activeRole(plan, progress);
+  const viewRole = roleView === 'all' ? undefined : (plan.roles?.find((r) => r.id === roleView) ?? myRole);
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set(focusStepId ? [focusStepId] : []));
-  const current = plan.steps[currentStepIndex(plan.steps, progress.done)];
+  const own = mySteps(plan, progress);
+  const current = own[currentStepIndex(own, progress.done)];
   const now = useNow(progress.startedAt !== null, 30_000);
   const elapsed = progress.startedAt ? (now - progress.startedAt) / 60_000 : null;
 
@@ -31,7 +36,8 @@ export function Timeline({ plan, tones, progress, base, focusStepId, toggleDone,
     requestAnimationFrame(() => document.getElementById(`step-${focusStepId}`)?.scrollIntoView({ block: 'center', behavior: 'smooth' }));
   }, [focusStepId]);
 
-  const steps = dish ? plan.steps.filter((s) => s.dishes?.includes(dish)) : plan.steps;
+  const byRole = roleSteps(plan, viewRole);
+  const steps = dish ? byRole.filter((s) => s.dishes?.includes(dish)) : byRole;
   const nowIndex = elapsed === null || elapsed > plan.duration.total + 60 ? -1 : steps.findIndex((s) => s.at > elapsed);
 
   const toggleExpanded = (id: string) =>
@@ -44,6 +50,19 @@ export function Timeline({ plan, tones, progress, base, focusStepId, toggleDone,
 
   return (
     <div class="timeline-wrap">
+      {plan.roles && (
+        <div class="chip-row timeline-filter" role="group" aria-label="Чьи шаги">
+          {plan.roles.map((r) => (
+            <button key={r.id} class="chip" type="button" aria-pressed={viewRole?.id === r.id} onClick={() => setRoleView(r.id)}>
+              {r.name}
+              {r.id === myRole?.id && <span class="faint"> · я</span>}
+            </button>
+          ))}
+          <button class="chip" type="button" aria-pressed={!viewRole} onClick={() => setRoleView('all')}>
+            Все роли
+          </button>
+        </div>
+      )}
       <div class="chip-row timeline-filter" role="group" aria-label="Фильтр по блюду">
         <button class="chip" type="button" aria-pressed={dish === null} onClick={() => setDish(null)}>
           Все шаги
@@ -74,6 +93,7 @@ export function Timeline({ plan, tones, progress, base, focusStepId, toggleDone,
               done={progress.done.includes(step.id)}
               current={step.id === current?.id}
               open={expanded.has(step.id) || step.id === current?.id}
+              activeRoleId={viewRole?.id}
               onToggleDone={() => toggleDone(step.id)}
               onToggleOpen={() => toggleExpanded(step.id)}
               onFocus={() => openCook(step.id)}
@@ -103,12 +123,14 @@ interface StepProps {
   done: boolean;
   current: boolean;
   open: boolean;
+  /** Роль на экране — её бейдж на шагах не показываем. */
+  activeRoleId?: string;
   onToggleDone: () => void;
   onToggleOpen: () => void;
   onFocus: () => void;
 }
 
-function TimelineStep({ plan, step, tones, base, done, current, open, onToggleDone, onToggleOpen, onFocus }: StepProps) {
+function TimelineStep({ plan, step, tones, base, done, current, open, activeRoleId, onToggleDone, onToggleOpen, onFocus }: StepProps) {
   const cls = ['tl-step', done && 'is-done', current && 'is-current', step.passive && 'is-passive', open && 'is-open'].filter(Boolean).join(' ');
   return (
     <li id={`step-${step.id}`} class={cls}>
@@ -126,7 +148,7 @@ function TimelineStep({ plan, step, tones, base, done, current, open, onToggleDo
           <span class="tl-title">{step.title}</span>
           <ChevronDown class="tl-chevron" aria-hidden="true" />
         </button>
-        <StepBadges plan={plan} step={step} tones={tones} showEquipment={open} />
+        <StepBadges plan={plan} step={step} tones={tones} showEquipment={open} activeRole={activeRoleId} />
         {open && (
           <div class="tl-details">
             {step.details && <p class="tl-text">{step.details}</p>}

@@ -9,7 +9,8 @@ import { basename, join, relative } from 'node:path';
 import Ajv2020, { type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import type { Recipe } from '../src/types/recipe.gen.ts';
-import type { CookPlan, IngredientUse, Unit } from '../src/types/cook-plan.gen.ts';
+import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-plan.gen.ts';
+import { deviation, personDay } from '../src/lib/ration.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 
 export type Severity = 'error' | 'warning';
@@ -306,6 +307,10 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
   const ingredients = uniqueIds(p.ingredients, '/ingredients', error);
   uniqueIds(p.steps, '/steps', error);
   uniqueIds(p.beforeStart ?? [], '/beforeStart', error);
+  const roles = uniqueIds(p.roles ?? [], '/roles', error);
+  if (p.roles && p.roles.length !== p.conditions.cooks) {
+    warn('/roles', `ролей ${p.roles.length}, а поваров в conditions.cooks — ${p.conditions.cooks}`);
+  }
 
   const usedDishes = new Set<string>();
   const usedIngredients = new Map<string, { amount: number; unit: Unit }[] | 'whole'>();
@@ -342,6 +347,13 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
       error(`${path}/duration`, `шаг «${step.id}» заканчивается на ${end}-й минуте, а весь день — ${p.duration.total} мин`);
     }
 
+    if (p.roles) {
+      if (!step.role) error(`${path}/role`, `у шага «${step.id}» нет роли, а в техкарте заданы roles`);
+      else if (!roles.has(step.role)) error(`${path}/role`, `нет роли с id «${step.role}»`);
+    } else if (step.role) {
+      error(`${path}/role`, `у шага «${step.id}» есть роль, но в техкарте нет roles`);
+    }
+
     step.dishes?.forEach((id, j) => {
       usedDishes.add(id);
       if (!dishes.has(id)) error(`${path}/dishes/${j}`, `нет блюда с id «${id}»`);
@@ -369,7 +381,84 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     }
   });
 
+  if (p.ration) checkRation(p, p.ration, dishes, error, warn);
+
   return issues;
+}
+
+/** Допустимое отклонение дня от цели по калориям; белок — не меньше цели на столько же. */
+export const RATION_TOLERANCE = 0.1;
+
+function checkRation(
+  p: CookPlan,
+  ration: Ration,
+  dishes: Set<string>,
+  error: (path: string, message: string) => void,
+  warn: (path: string, message: string) => void,
+) {
+  const people = uniqueIds(ration.people, '/ration/people', error);
+  const extras = uniqueIds(ration.extras, '/ration/extras', error);
+  const usedExtras = new Set<string>();
+
+  ration.people.forEach((person, i) => {
+    const seen = new Set<string>();
+    person.portions.forEach((portion, j) => {
+      const path = `/ration/people/${i}/portions/${j}`;
+      if (!dishes.has(portion.dish)) error(`${path}/dish`, `нет блюда с id «${portion.dish}»`);
+      if (seen.has(portion.dish)) error(`${path}/dish`, `порция «${portion.dish}» у ${person.name} указана дважды`);
+      seen.add(portion.dish);
+    });
+  });
+
+  ration.extras.forEach((extra, i) => {
+    const seen = new Set<string>();
+    extra.servings.forEach((serving, j) => {
+      const path = `/ration/extras/${i}/servings/${j}/person`;
+      if (!people.has(serving.person)) error(path, `нет человека с id «${serving.person}»`);
+      if (seen.has(serving.person)) error(path, `«${serving.person}» в «${extra.id}» указан дважды`);
+      seen.add(serving.person);
+    });
+  });
+
+  const checkExtra = (id: string, meal: 'breakfast' | 'snack', path: string) => {
+    usedExtras.add(id);
+    const extra = ration.extras.find((e) => e.id === id);
+    if (!extra) error(path, `нет завтрака или перекуса с id «${id}»`);
+    else if (extra.meal !== meal) error(path, `«${id}» — ${extra.meal === 'breakfast' ? 'завтрак' : 'перекус'}, а стоит в ${meal === 'breakfast' ? 'завтраке' : 'перекусах'}`);
+  };
+
+  ration.days.forEach((day, i) => {
+    const path = `/ration/days/${i}`;
+    if (day.day !== i + 1) error(`${path}/day`, `дни должны идти подряд с 1-го: на месте ${i + 1}-го стоит ${day.day}-й`);
+    if (day.breakfast) checkExtra(day.breakfast, 'breakfast', `${path}/breakfast`);
+    day.snacks?.forEach((id, j) => checkExtra(id, 'snack', `${path}/snacks/${j}`));
+    for (const meal of ['lunch', 'dinner'] as const) {
+      const id = day[meal];
+      if (!dishes.has(id)) {
+        error(`${path}/${meal}`, `нет блюда с id «${id}»`);
+        continue;
+      }
+      ration.people.forEach((person) => {
+        if (!person.portions.some((x) => x.dish === id)) error(`${path}/${meal}`, `у ${person.name} нет порции блюда «${id}»`);
+      });
+    }
+
+    ration.people.forEach((person) => {
+      const total = personDay(p, ration, day, person.id);
+      const off = deviation(total.kcal, person.target.kcal);
+      if (Math.abs(off) > RATION_TOLERANCE) {
+        warn(path, `день ${day.day}, ${person.name}: ${round(total.kcal)} ккал при цели ${person.target.kcal} (${off > 0 ? '+' : ''}${Math.round(off * 100)} %)`);
+      }
+      const protein = person.target.protein;
+      if (protein && total.protein < protein * (1 - RATION_TOLERANCE)) {
+        warn(path, `день ${day.day}, ${person.name}: белка ${round(total.protein)} г при цели ${protein} г`);
+      }
+    });
+  });
+
+  ration.extras.forEach((extra, i) => {
+    if (!usedExtras.has(extra.id)) warn(`/ration/extras/${i}`, `«${extra.id}» не стоит ни в одном дне рациона`);
+  });
 }
 
 function uniqueIds(

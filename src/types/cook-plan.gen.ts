@@ -54,9 +54,33 @@ export type StorageKind = 'fridge' | 'freezer' | 'pantry' | 'serve';
  */
 export type ShopSection =
   'produce' | 'meat' | 'fish' | 'dairy' | 'bakery' | 'grocery' | 'frozen' | 'spices' | 'other';
+/**
+ * Идентификатор внутри этой техкарты.
+ */
+export type LocalId1 = string;
+/**
+ * Идентификатор внутри этой техкарты.
+ */
+export type LocalId2 = string;
+/**
+ * Идентификатор внутри этой техкарты.
+ */
+export type LocalId3 = string;
+/**
+ * Идентификатор внутри этой техкарты.
+ */
+export type LocalId4 = string;
+/**
+ * Идентификатор внутри этой техкарты.
+ */
+export type LocalId5 = string;
+/**
+ * Идентификатор внутри этой техкарты.
+ */
+export type LocalId6 = string;
 
 /**
- * Техкарта дня готовки: самостоятельный план с уникальным названием. Не привязана к дате и не ссылается на рецепты (Recipe): свои продукты в итоговых объёмах, своя техника, свои блюда и пошаговый таймлайн. Таймлайн рассчитывается заранее — сайт его только показывает. Порядок техкарт на сайте — порядок файлов в data/plans.
+ * Техкарта дня готовки: самостоятельный план с уникальным названием. Не привязана к дате и не ссылается на рецепты (Recipe): свои продукты в итоговых объёмах, своя техника, свои блюда и пошаговый таймлайн, а по желанию — рацион: кто что ест по дням. Таймлайн рассчитывается заранее — сайт его только показывает. Порядок техкарт на сайте — порядок файлов в data/plans.
  */
 export interface CookPlan {
   /**
@@ -87,6 +111,12 @@ export interface CookPlan {
   tags?: string[];
   conditions: Conditions;
   /**
+   * Кто готовит, если поваров несколько: у каждого свой ход работ и своя кнопка «Начать готовку», стартуют одновременно. Каждый шаг тогда помечен role.
+   *
+   * @minItems 2
+   */
+  roles?: [Role, Role, ...Role[]];
+  /**
    * Техника, посуда и расходники, под которые адаптирован план. Расходники (kind: consumable) техкарта перечисляет сама: какие и сколько нужно на этот день.
    *
    * @minItems 1
@@ -114,6 +144,7 @@ export interface CookPlan {
    * @minItems 1
    */
   steps: [PlanStep, ...PlanStep[]];
+  ration?: Ration;
   /**
    * Общие замечания к дню: что критично, что можно сдвинуть.
    */
@@ -157,6 +188,21 @@ export interface Conditions {
 }
 /**
  * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "Role".
+ */
+export interface Role {
+  id: LocalId;
+  /**
+   * Как назвать роль на кнопке: «Повар», «Помощник».
+   */
+  name: string;
+  /**
+   * Чем занимается: «плита и соусы», «овощи, духовка, фасовка».
+   */
+  note?: string;
+}
+/**
+ * This interface was referenced by `CookPlan`'s JSON-Schema
  * via the `definition` "Equipment".
  */
 export interface Equipment {
@@ -172,6 +218,10 @@ export interface Equipment {
    */
   spec?: string;
   note?: string;
+  /**
+   * Купить к дню готовки: расходники и всё, чего нет на кухне. Такие позиции попадают в список покупок на вкладке «Продукты».
+   */
+  buy?: boolean;
 }
 /**
  * Блюдо на выходе техкарты: выход (yield), порции, фасовка и хранение именно этой партии.
@@ -307,6 +357,7 @@ export interface PlanStep {
    * Короткая команда: «Тыкву — в духовку».
    */
   title: string;
+  role?: LocalId1;
   /**
    * Подробности: как именно, на что смотреть.
    */
@@ -349,4 +400,129 @@ export interface Timer {
    * Короткая подпись на таймере: «Тыква в духовке».
    */
   label: string;
+}
+/**
+ * Рацион на срок техкарты: кто что ест по дням. Обеды и ужины — блюда этой техкарты, завтраки и перекусы — из extras. Итоги дня сайт считает сам, валидатор сверяет их с целями.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "Ration".
+ */
+export interface Ration {
+  /**
+   * Для кого рацион: цели и размеры порций.
+   *
+   * @minItems 1
+   */
+  people: [RationPerson, ...RationPerson[]];
+  /**
+   * Всё, что едим помимо блюд техкарты: завтраки, перекусы, коктейли.
+   */
+  extras: RationExtra[];
+  /**
+   * Дни по порядку, начиная с 1-го — следующего после дня готовки.
+   *
+   * @minItems 1
+   */
+  days: [RationDay, ...RationDay[]];
+  /**
+   * Как пользоваться рационом: что можно менять местами, чем заменить.
+   */
+  notes?: string[];
+}
+/**
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationPerson".
+ */
+export interface RationPerson {
+  id: LocalId;
+  name: string;
+  target: RationTarget;
+  /**
+   * Порция этого человека из каждого блюда техкарты, которое есть в рационе.
+   *
+   * @minItems 1
+   */
+  portions: [RationPortion, ...RationPortion[]];
+  /**
+   * Что входит в цель: «вместе с двумя протеиновыми коктейлями».
+   */
+  note?: string;
+}
+/**
+ * Цель на день.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationTarget".
+ */
+export interface RationTarget {
+  /**
+   * Калории в день, ккал.
+   */
+  kcal: number;
+  /**
+   * Белок в день, г. Не задан — цели по белку нет.
+   */
+  protein?: number;
+}
+/**
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationPortion".
+ */
+export interface RationPortion {
+  dish: LocalId2;
+  /**
+   * Размер порции: «400 г», «стейк 180 г + 170 г риса».
+   */
+  size: string;
+  kcal: number;
+  protein: number;
+}
+/**
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationExtra".
+ */
+export interface RationExtra {
+  id: LocalId;
+  name: string;
+  /**
+   * breakfast — завтрак, snack — перекус или коктейль.
+   */
+  meal: 'breakfast' | 'snack';
+  /**
+   * Кто это ест и сколько. Кого нет в списке — тот это не ест.
+   *
+   * @minItems 1
+   */
+  servings: [RationServing, ...RationServing[]];
+}
+/**
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationServing".
+ */
+export interface RationServing {
+  person: LocalId3;
+  /**
+   * Что именно и сколько: «250 г кварка, 40 г овсянки…».
+   */
+  text: string;
+  kcal: number;
+  protein: number;
+}
+/**
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationDay".
+ */
+export interface RationDay {
+  /**
+   * Номер дня; 1 — следующий после дня готовки.
+   */
+  day: number;
+  breakfast?: LocalId4;
+  lunch: LocalId5;
+  dinner: LocalId6;
+  /**
+   * id перекусов из extras — у каждого человека свои.
+   */
+  snacks?: LocalId[];
+  note?: string;
 }

@@ -1,32 +1,49 @@
 import { ChefHat, Clock3, ChevronLeft, Clock, Flame, Play, RotateCcw, Users, UtensilsCrossed } from 'lucide-preact';
 import { countLabel, formatClock, formatDuration } from '../lib/format.ts';
-import { currentStepIndex, dishTones, doneStepCount, planBase, totalPortions } from '../lib/plan.ts';
+import {
+  activeRole,
+  currentStepIndex,
+  dishTones,
+  doneStepCount,
+  gotCount as countGot,
+  mySteps,
+  planBase,
+  roleSteps,
+  shoppingKeys,
+  totalPortions,
+} from '../lib/plan.ts';
 import { usePlanProgress } from '../lib/progress.ts';
 import { Link, navigate, setQuery, useLocation } from '../lib/router.tsx';
-import type { CookPlan } from '../types/cook-plan.gen.ts';
+import type { CookPlan, Role } from '../types/cook-plan.gen.ts';
 import { CookMode } from './plan/CookMode.tsx';
 import { Overview } from './plan/Overview.tsx';
 import { Products } from './plan/Products.tsx';
+import { Ration } from './plan/Ration.tsx';
 import { planPath } from './plan/StepParts.tsx';
 import { Timeline } from './plan/Timeline.tsx';
 
-type Tab = 'overview' | 'products' | 'steps';
+type Tab = 'overview' | 'products' | 'steps' | 'ration';
 const TABS: { id: Tab; label: string }[] = [
   { id: 'overview', label: 'Обзор' },
   { id: 'products', label: 'Продукты' },
   { id: 'steps', label: 'Ход работ' },
+  { id: 'ration', label: 'Рацион' },
 ];
 
 export function PlanPage({ plan }: { plan: CookPlan }) {
   const { query } = useLocation();
   const [progress, actions] = usePlanProgress(plan.id);
-  const tab = (TABS.find((t) => t.id === query.get('tab'))?.id ?? 'overview') as Tab;
+  const tabs = TABS.filter((t) => t.id !== 'ration' || plan.ration);
+  const tab = (tabs.find((t) => t.id === query.get('tab'))?.id ?? 'overview') as Tab;
   const cookStep = query.get('cook');
   const tones = dishTones(plan);
   const base = planBase(plan, progress.startedAt);
   const doneCount = doneStepCount(plan, progress);
-  const gotCount = plan.ingredients.filter((i) => progress.got.includes(i.id)).length;
-  const current = plan.steps[currentStepIndex(plan.steps, progress.done)] ?? plan.steps[plan.steps.length - 1]!;
+  const gotCount = countGot(plan, progress);
+  const role = activeRole(plan, progress);
+  const steps = mySteps(plan, progress);
+  const current = steps[currentStepIndex(steps, progress.done)] ?? steps[steps.length - 1]!;
+  const needsRole = Boolean(plan.roles) && !role;
   const started = progress.startedAt !== null || doneCount > 0;
   const end = base ? new Date(base.getTime() + plan.duration.total * 60_000) : null;
 
@@ -38,6 +55,14 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
   const closeCook = () => {
     if (window.history.length > 1 && window.history.state) window.history.back();
     else setQuery({ cook: null });
+  };
+
+  /** Старт за роль: сразу открывает первый невыполненный шаг этой роли. */
+  const startAs = (r: Role) => {
+    const own = roleSteps(plan, r);
+    const first = own[currentStepIndex(own, progress.done)] ?? own[0]!;
+    actions.start(r.id);
+    navigate(`${planPath(plan)}?tab=steps&cook=${first.id}`);
   };
 
   const resetAll = () => {
@@ -109,17 +134,41 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
       </dl>
 
       <div class="plan-cta">
-        <button type="button" class="btn btn-primary btn-lg plan-cta-main" onClick={() => openCook()}>
-          {started ? <Flame aria-hidden="true" /> : <Play aria-hidden="true" />}
-          {doneCount === plan.steps.length ? 'Открыть режим готовки' : started ? `Продолжить · шаг ${plan.steps.indexOf(current) + 1}` : 'Начать готовку'}
-        </button>
+        {needsRole ? (
+          <div class="plan-cta-roles">
+            {plan.roles!.map((r) => (
+              <button key={r.id} type="button" class="btn btn-primary btn-lg plan-cta-main" onClick={() => startAs(r)}>
+                <Play aria-hidden="true" />
+                Начать: {r.name}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <button type="button" class="btn btn-primary btn-lg plan-cta-main" onClick={() => openCook()}>
+            {started ? <Flame aria-hidden="true" /> : <Play aria-hidden="true" />}
+            {doneCount === steps.length ? 'Открыть режим готовки' : started ? `Продолжить · шаг ${steps.indexOf(current) + 1}` : 'Начать готовку'}
+            {role && <span class="plan-cta-role"> · {role.name}</span>}
+          </button>
+        )}
         <div class="plan-cta-side">
+          {needsRole && (
+            <span class="faint plan-cta-hint">
+              <Users aria-hidden="true" />
+              Каждый — на своём телефоне: выберите роль и нажмите одновременно, договорившись голосом.
+            </span>
+          )}
+          {role && (
+            <button type="button" class="btn btn-ghost btn-sm" onClick={() => actions.setRole(undefined)}>
+              <Users aria-hidden="true" />
+              Сменить роль
+            </button>
+          )}
           {started && (
             <span class="plan-cta-progress num">
               <span class="progress-line" aria-hidden="true">
-                <span style={{ transform: `scaleX(${doneCount / plan.steps.length})` }} />
+                <span style={{ transform: `scaleX(${doneCount / steps.length})` }} />
               </span>
-              {doneCount} из {plan.steps.length} шагов
+              {doneCount} из {steps.length} шагов
             </span>
           )}
           {(started || gotCount > 0 || progress.prep.length > 0) && (
@@ -139,7 +188,7 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
 
       <div class="plan-tabs" role="tablist" aria-label="Разделы техкарты">
         <div class="tabs">
-          {TABS.map((t) => (
+          {tabs.map((t) => (
             <button
               key={t.id}
               type="button"
@@ -150,12 +199,12 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
               {t.label}
               {t.id === 'products' && (
                 <span class="tab-count">
-                  {gotCount}/{plan.ingredients.length}
+                  {gotCount}/{shoppingKeys(plan).length}
                 </span>
               )}
               {t.id === 'steps' && (
                 <span class="tab-count">
-                  {doneCount}/{plan.steps.length}
+                  {doneCount}/{steps.length}
                 </span>
               )}
             </button>
@@ -177,6 +226,7 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
             openCook={openCook}
           />
         )}
+        {tab === 'ration' && plan.ration && <Ration plan={plan} ration={plan.ration} tones={tones} progress={progress} />}
       </div>
 
       {cookStep && (

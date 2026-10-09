@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "CookPlan",
-  "description": "Техкарта дня готовки: самостоятельный план с уникальным названием. Не привязана к дате и не ссылается на рецепты (Recipe): свои продукты в итоговых объёмах, своя техника, свои блюда и пошаговый таймлайн. Таймлайн рассчитывается заранее — сайт его только показывает. Порядок техкарт на сайте — порядок файлов в data/plans.",
+  "description": "Техкарта дня готовки: самостоятельный план с уникальным названием. Не привязана к дате и не ссылается на рецепты (Recipe): свои продукты в итоговых объёмах, своя техника, свои блюда и пошаговый таймлайн, а по желанию — рацион: кто что ест по дням. Таймлайн рассчитывается заранее — сайт его только показывает. Порядок техкарт на сайте — порядок файлов в data/plans.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -65,6 +65,14 @@
     "conditions": {
       "$ref": "#/$defs/Conditions"
     },
+    "roles": {
+      "type": "array",
+      "minItems": 2,
+      "description": "Кто готовит, если поваров несколько: у каждого свой ход работ и своя кнопка «Начать готовку», стартуют одновременно. Каждый шаг тогда помечен role.",
+      "items": {
+        "$ref": "#/$defs/Role"
+      }
+    },
     "equipment": {
       "type": "array",
       "minItems": 1,
@@ -103,6 +111,9 @@
       "items": {
         "$ref": "#/$defs/PlanStep"
       }
+    },
+    "ration": {
+      "$ref": "#/$defs/Ration"
     },
     "notes": {
       "type": "array",
@@ -224,6 +235,10 @@
         "note": {
           "type": "string",
           "maxLength": 160
+        },
+        "buy": {
+          "type": "boolean",
+          "description": "Купить к дню готовки: расходники и всё, чего нет на кухне. Такие позиции попадают в список покупок на вкладке «Продукты»."
         }
       }
     },
@@ -577,6 +592,10 @@
           "maxLength": 90,
           "description": "Короткая команда: «Тыкву — в духовку»."
         },
+        "role": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Кто делает шаг — id из roles. Обязательно, если roles заданы."
+        },
         "details": {
           "type": "string",
           "minLength": 5,
@@ -629,6 +648,274 @@
         "tip": {
           "type": "string",
           "minLength": 5
+        }
+      }
+    },
+    "Ration": {
+      "title": "Ration",
+      "description": "Рацион на срок техкарты: кто что ест по дням. Обеды и ужины — блюда этой техкарты, завтраки и перекусы — из extras. Итоги дня сайт считает сам, валидатор сверяет их с целями.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "people",
+        "extras",
+        "days"
+      ],
+      "properties": {
+        "people": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Для кого рацион: цели и размеры порций.",
+          "items": {
+            "$ref": "#/$defs/RationPerson"
+          }
+        },
+        "extras": {
+          "type": "array",
+          "description": "Всё, что едим помимо блюд техкарты: завтраки, перекусы, коктейли.",
+          "items": {
+            "$ref": "#/$defs/RationExtra"
+          }
+        },
+        "days": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Дни по порядку, начиная с 1-го — следующего после дня готовки.",
+          "items": {
+            "$ref": "#/$defs/RationDay"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Как пользоваться рационом: что можно менять местами, чем заменить.",
+          "items": {
+            "type": "string",
+            "minLength": 5
+          }
+        }
+      }
+    },
+    "RationPerson": {
+      "title": "RationPerson",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "target",
+        "portions"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "target": {
+          "$ref": "#/$defs/RationTarget"
+        },
+        "portions": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Порция этого человека из каждого блюда техкарты, которое есть в рационе.",
+          "items": {
+            "$ref": "#/$defs/RationPortion"
+          }
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Что входит в цель: «вместе с двумя протеиновыми коктейлями»."
+        }
+      }
+    },
+    "RationTarget": {
+      "title": "RationTarget",
+      "description": "Цель на день.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kcal"
+      ],
+      "properties": {
+        "kcal": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Калории в день, ккал."
+        },
+        "protein": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Белок в день, г. Не задан — цели по белку нет."
+        }
+      }
+    },
+    "RationPortion": {
+      "title": "RationPortion",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dish",
+        "size",
+        "kcal",
+        "protein"
+      ],
+      "properties": {
+        "dish": {
+          "$ref": "#/$defs/LocalId",
+          "description": "id блюда из dishes."
+        },
+        "size": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Размер порции: «400 г», «стейк 180 г + 170 г риса»."
+        },
+        "kcal": {
+          "type": "number",
+          "minimum": 0
+        },
+        "protein": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "RationExtra": {
+      "title": "RationExtra",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "meal",
+        "servings"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "meal": {
+          "type": "string",
+          "enum": [
+            "breakfast",
+            "snack"
+          ],
+          "description": "breakfast — завтрак, snack — перекус или коктейль."
+        },
+        "servings": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Кто это ест и сколько. Кого нет в списке — тот это не ест.",
+          "items": {
+            "$ref": "#/$defs/RationServing"
+          }
+        }
+      }
+    },
+    "RationServing": {
+      "title": "RationServing",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "person",
+        "text",
+        "kcal",
+        "protein"
+      ],
+      "properties": {
+        "person": {
+          "$ref": "#/$defs/LocalId",
+          "description": "id из ration.people."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 240,
+          "description": "Что именно и сколько: «250 г кварка, 40 г овсянки…»."
+        },
+        "kcal": {
+          "type": "number",
+          "minimum": 0
+        },
+        "protein": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "RationDay": {
+      "title": "RationDay",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "day",
+        "lunch",
+        "dinner"
+      ],
+      "properties": {
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Номер дня; 1 — следующий после дня готовки."
+        },
+        "breakfast": {
+          "$ref": "#/$defs/LocalId",
+          "description": "id завтрака из extras."
+        },
+        "lunch": {
+          "$ref": "#/$defs/LocalId",
+          "description": "id блюда из dishes."
+        },
+        "dinner": {
+          "$ref": "#/$defs/LocalId",
+          "description": "id блюда из dishes."
+        },
+        "snacks": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "id перекусов из extras — у каждого человека свои.",
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          }
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 160
+        }
+      }
+    },
+    "Role": {
+      "title": "Role",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/LocalId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "description": "Как назвать роль на кнопке: «Повар», «Помощник»."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "Чем занимается: «плита и соусы», «овощи, духовка, фасовка»."
         }
       }
     }

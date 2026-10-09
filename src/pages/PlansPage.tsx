@@ -2,7 +2,7 @@ import { ClipboardList } from 'lucide-preact';
 import { StatBadge } from '../components/StatBadge.tsx';
 import { plans } from '../data/index.ts';
 import { countLabel, formatDuration } from '../lib/format.ts';
-import { dishTones, doneStepCount, totalPortions } from '../lib/plan.ts';
+import { dishTones, doneStepCount, mySteps, totalPortions } from '../lib/plan.ts';
 import { peekProgress } from '../lib/progress.ts';
 import { Link } from '../lib/router.tsx';
 import type { CookPlan } from '../types/cook-plan.gen.ts';
@@ -41,7 +41,9 @@ export function PlansPage() {
 }
 
 function PlanCard({ plan: p }: { plan: CookPlan }) {
-  const doneCount = doneStepCount(p, peekProgress(p.id));
+  const progress = peekProgress(p.id);
+  const doneCount = doneStepCount(p, progress);
+  const stepCount = mySteps(p, progress).length;
   const tones = dishTones(p);
   const hours = Math.floor(p.duration.total / 60);
   const minutes = String(p.duration.total % 60).padStart(2, '0');
@@ -51,12 +53,12 @@ function PlanCard({ plan: p }: { plan: CookPlan }) {
       <StatBadge top="время" value={`${hours}:${minutes}`} bottom="ч:мин" />
       <div class="plan-card-body">
         <div class="plan-card-top">
-          {doneCount > 0 && doneCount < p.steps.length && (
+          {doneCount > 0 && doneCount < stepCount && (
             <span class="badge badge-warn num">
-              В процессе · {doneCount}/{p.steps.length}
+              В процессе · {doneCount}/{stepCount}
             </span>
           )}
-          {doneCount === p.steps.length && <span class="badge badge-done">Готово</span>}
+          {doneCount === stepCount && <span class="badge badge-done">Готово</span>}
           <span class="faint num plan-card-time">
             {p.start && `старт в ${p.start} · `}
             {formatDuration(p.duration.total)}, активно {formatDuration(p.duration.active)}

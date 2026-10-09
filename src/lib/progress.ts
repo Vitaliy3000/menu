@@ -11,6 +11,8 @@ export interface PlanProgress {
   prep: string[];
   /** Когда нажали «Начать готовку», epoch ms. */
   startedAt: number | null;
+  /** Роль на этом устройстве, если в техкарте несколько поваров: id из plan.roles. */
+  role?: string;
 }
 
 const EMPTY: PlanProgress = { done: [], got: [], prep: [], startedAt: null };
@@ -20,7 +22,8 @@ const isProgress = (v: unknown): v is PlanProgress =>
   isStringArray(v.done) &&
   isStringArray(v.got) &&
   isStringArray(v.prep) &&
-  (v.startedAt === null || typeof v.startedAt === 'number');
+  (v.startedAt === null || typeof v.startedAt === 'number') &&
+  (v.role === undefined || typeof v.role === 'string');
 
 const storageKey = (planId: string) => `menu:plan:${planId}:v1`;
 const stores = new Map<string, Store<PlanProgress>>();
@@ -57,11 +60,15 @@ export function usePlanProgress(planId: string) {
       toggle(list: ListKey, id: string, on?: boolean) {
         store.set((p) => ({ ...p, [list]: toggleIn(p[list], id, on) }));
       },
-      start() {
-        store.set((p) => (p.startedAt ? p : { ...p, startedAt: Date.now() }));
+      /** Старт готовки; с ролью — сразу запоминает, кто готовит на этом устройстве. */
+      start(role?: string) {
+        store.set((p) => ({ ...p, startedAt: p.startedAt ?? Date.now(), role: role ?? p.role }));
+      },
+      setRole(role: string | undefined) {
+        store.set(({ role: _, ...p }) => (role ? { ...p, role } : p));
       },
       resetSteps() {
-        store.set((p) => ({ ...p, done: [], startedAt: null }));
+        store.set(({ role: _, ...p }) => ({ ...p, done: [], startedAt: null }));
       },
       resetAll() {
         store.set(EMPTY);

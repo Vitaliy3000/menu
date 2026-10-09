@@ -33,8 +33,16 @@ export function UsesList({ plan, step, large = false }: { plan: CookPlan; step: 
   );
 }
 
-export function StepBadges(props: { plan: CookPlan; step: PlanStep; tones: Map<string, string>; showEquipment?: boolean }) {
-  const { plan, step, tones, showEquipment = true } = props;
+export function StepBadges(props: {
+  plan: CookPlan;
+  step: PlanStep;
+  tones: Map<string, string>;
+  showEquipment?: boolean;
+  /** Роль, чьи шаги сейчас на экране: её бейдж не нужен, чужой — показываем. */
+  activeRole?: string;
+}) {
+  const { plan, step, tones, showEquipment = true, activeRole } = props;
+  const role = step.role !== activeRole ? plan.roles?.find((r) => r.id === step.role) : undefined;
   const equipment = (step.equipment ?? [])
     .map((id) => plan.equipment.find((e) => e.id === id)?.name)
     .filter(Boolean)
@@ -42,6 +50,7 @@ export function StepBadges(props: { plan: CookPlan; step: PlanStep; tones: Map<s
   const dishes = plan.dishes.filter((d) => step.dishes?.includes(d.id));
   return (
     <div class="step-badges">
+      {role && <span class="badge badge-info">{role.name}</span>}
       <span class="step-dur num">
         {step.passive ? <Hourglass aria-hidden="true" /> : null}
         {formatDuration(step.duration)}
