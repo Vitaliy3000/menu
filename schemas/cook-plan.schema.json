@@ -338,6 +338,18 @@
         "serve"
       ]
     },
+    "Zone": {
+      "title": "Zone",
+      "description": "Зона кухни: prep — подготовка (доски, раковина, посудомойка), hot — горячая (плита и духовка), pack — фасовка, dry — сухое хранение, cold — холодное хранение. В prep, hot и pack одновременно работает только один человек.",
+      "type": "string",
+      "enum": [
+        "prep",
+        "hot",
+        "pack",
+        "dry",
+        "cold"
+      ]
+    },
     "Packaging": {
       "title": "Packaging",
       "description": "Одна позиция фасовки.",
@@ -638,6 +650,15 @@
         "role": {
           "$ref": "#/$defs/LocalId",
           "description": "Кто делает шаг — id из roles. Обязательно, если roles заданы."
+        },
+        "zones": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Где работают руки во время шага. Короткий заход в соседнюю зону — взять кастрюлю — не считается. Обязательно для активных шагов, если roles заданы; у пассивных — не нужно.",
+          "items": {
+            "$ref": "#/$defs/Zone"
+          }
         },
         "details": {
           "type": "string",

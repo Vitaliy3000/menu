@@ -11,6 +11,7 @@ import addFormats from 'ajv-formats';
 import type { Recipe } from '../src/types/recipe.gen.ts';
 import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-plan.gen.ts';
 import { deviation, personDay } from '../src/lib/ration.ts';
+import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 
 export type Severity = 'error' | 'warning';
@@ -353,6 +354,9 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     } else if (step.role) {
       error(`${path}/role`, `у шага «${step.id}» есть роль, но в техкарте нет roles`);
     }
+    if (p.roles && !step.passive && !step.zones) {
+      error(`${path}/zones`, `у шага «${step.id}» нет зон, а в техкарте заданы roles`);
+    }
 
     step.dishes?.forEach((id, j) => {
       usedDishes.add(id);
@@ -363,6 +367,15 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     });
     step.uses?.forEach((use, j) => trackUse(use, `${path}/uses/${j}`));
   });
+
+  if (p.roles) {
+    for (const c of zoneConflicts(p.steps)) {
+      error(
+        `/steps/${c.index}/zones`,
+        `«${c.first}» и «${c.second}» — разные роли одновременно в одной зоне (${ZONE_LABELS[c.zone].toLowerCase()}), ${c.from}–${c.to}-я минута`,
+      );
+    }
+  }
 
   p.dishes.forEach((dish, i) => {
     if (!usedDishes.has(dish.id)) warn(`/dishes/${i}`, `блюдо «${dish.id}» не упоминается ни в одном шаге`);

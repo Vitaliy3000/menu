@@ -146,7 +146,7 @@ describe('роли поваров', () => {
         { id: 'helper', name: 'Помощник' },
       ],
       steps: [
-        { ...p.steps[0]!, role: 'helper' },
+        { ...p.steps[0]!, role: 'helper', zones: ['prep'] },
         { ...p.steps[1]!, role: 'chef' },
       ],
     };
@@ -172,6 +172,33 @@ describe('роли поваров', () => {
     const q = withRoles();
     q.conditions.cooks = 3;
     expect(messages(checkPlan(q, file))).toContain('ролей 2, а поваров в conditions.cooks — 3');
+  });
+
+  it('с ролями у активного шага должны быть зоны, у пассивного — не нужны', () => {
+    const p = withRoles();
+    delete p.steps[0]!.zones;
+    expect(messages(checkPlan(p, file))).toBe('у шага «s1» нет зон, а в техкарте заданы roles');
+  });
+
+  it('двое в одной зоне на одного человека — ошибка', () => {
+    const p = withRoles();
+    p.steps.splice(1, 0, { id: 's3', at: 10, duration: 5, title: 'Помыть доску', role: 'chef', zones: ['prep', 'hot'] });
+    expect(messages(checkPlan(p, file))).toBe('«s1» и «s3» — разные роли одновременно в одной зоне (подготовка), 10–15-я минута');
+  });
+
+  it('разные зоны, хранение, своя роль и пассивные шаги — без замечаний', () => {
+    const p = withRoles();
+    p.steps.splice(
+      1,
+      0,
+      { id: 'heat', at: 5, duration: 10, title: 'Разогреть сковороду', role: 'chef', zones: ['hot'] },
+      { id: 'fridge-a', at: 18, duration: 2, title: 'Взять масло', role: 'chef', zones: ['cold'] },
+      { id: 'fridge-b', at: 19, duration: 2, title: 'Убрать тыкву', role: 'helper', zones: ['cold'] },
+      { id: 'rinse', at: 19, duration: 1, title: 'Сполоснуть нож', role: 'helper', zones: ['prep'] },
+    );
+    p.steps.push({ id: 'rest', at: 25, duration: 10, title: 'Остывает', role: 'helper', passive: true, zones: ['pack'] });
+    p.steps.push({ id: 'pack', at: 30, duration: 10, title: 'Разложить', role: 'chef', zones: ['pack'] });
+    expect(checkPlan(p, file)).toEqual([]);
   });
 });
 

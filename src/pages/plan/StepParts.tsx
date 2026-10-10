@@ -1,6 +1,7 @@
-import { Flame, Hourglass, Play, Timer as TimerIcon } from 'lucide-preact';
+import { Flame, Hourglass, MapPin, Play, Timer as TimerIcon } from 'lucide-preact';
 import { formatAmount, formatCountdown, formatDuration } from '../../lib/format.ts';
 import { remainingMs, startTimer, useNow, useTimers } from '../../lib/timers.ts';
+import { ZONE_LABELS } from '../../lib/zones.ts';
 import type { CookPlan, PlanStep } from '../../types/cook-plan.gen.ts';
 
 export const planPath = (plan: CookPlan) => `/plans/${plan.id}/`;
@@ -55,6 +56,12 @@ export function StepBadges(props: {
         {step.passive ? <Hourglass aria-hidden="true" /> : null}
         {formatDuration(step.duration)}
       </span>
+      {step.zones && (
+        <span class="badge">
+          <MapPin aria-hidden="true" />
+          {step.zones.map((z) => ZONE_LABELS[z]).join(' · ')}
+        </span>
+      )}
       {step.heat && (
         <span class="badge badge-accent">
           <Flame aria-hidden="true" />

@@ -59,6 +59,13 @@ export type ShopSection =
  */
 export type LocalId1 = string;
 /**
+ * Зона кухни: prep — подготовка (доски, раковина, посудомойка), hot — горячая (плита и духовка), pack — фасовка, dry — сухое хранение, cold — холодное хранение. В prep, hot и pack одновременно работает только один человек.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "Zone".
+ */
+export type Zone = 'prep' | 'hot' | 'pack' | 'dry' | 'cold';
+/**
  * Идентификатор внутри этой техкарты.
  */
 export type LocalId2 = string;
@@ -387,6 +394,12 @@ export interface PlanStep {
    */
   title: string;
   role?: LocalId1;
+  /**
+   * Где работают руки во время шага. Короткий заход в соседнюю зону — взять кастрюлю — не считается. Обязательно для активных шагов, если roles заданы; у пассивных — не нужно.
+   *
+   * @minItems 1
+   */
+  zones?: [Zone, ...Zone[]];
   /**
    * Подробности: как именно, на что смотреть.
    */
