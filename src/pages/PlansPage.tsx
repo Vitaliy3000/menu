@@ -1,7 +1,7 @@
 import { ClipboardList } from 'lucide-preact';
 import { StatBadge } from '../components/StatBadge.tsx';
 import { plans } from '../data/index.ts';
-import { countLabel, formatDuration } from '../lib/format.ts';
+import { countLabel, formatDuration, formatMoney } from '../lib/format.ts';
 import { dishTones, doneStepCount, mySteps, totalPortions } from '../lib/plan.ts';
 import { peekProgress } from '../lib/progress.ts';
 import { Link } from '../lib/router.tsx';
@@ -47,6 +47,7 @@ function PlanCard({ plan: p }: { plan: CookPlan }) {
   const tones = dishTones(p);
   const hours = Math.floor(p.duration.total / 60);
   const minutes = String(p.duration.total % 60).padStart(2, '0');
+  const days = p.ration?.days.length ?? 0;
 
   return (
     <Link to={`/plans/${p.id}/`} class="plan-card">
@@ -75,6 +76,13 @@ function PlanCard({ plan: p }: { plan: CookPlan }) {
           ))}
         </div>
         <p class="faint plan-card-foot num">
+          {days > 0 && `${countLabel(days, ['день', 'дня', 'дней'])} · `}
+          {p.cost && (
+            <span title={p.cost.note}>
+              ≈ {formatMoney(p.cost.amount, p.cost.currency)} в {p.cost.store}
+              {days > 0 && `, ${formatMoney(p.cost.amount / days, p.cost.currency)} в день`} ·{' '}
+            </span>
+          )}
           {countLabel(totalPortions(p), ['порция', 'порции', 'порций'])} · {countLabel(p.steps.length, ['шаг', 'шага', 'шагов'])} ·{' '}
           {p.conditions.cooks === 1 ? 'готовит 1 человек' : `готовят ${p.conditions.cooks}`}
         </p>

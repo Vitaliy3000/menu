@@ -108,6 +108,7 @@ export interface CookPlan {
    * Для кого и на какой срок: «2 взрослых, обеды и ужины пн–пт».
    */
   audience?: string;
+  cost?: PlanCost;
   tags?: string[];
   conditions: Conditions;
   /**
@@ -165,6 +166,34 @@ export interface PlanDuration {
    * Сколько из них заняты руки.
    */
   active: number;
+}
+/**
+ * Примерная стоимость продуктов за весь срок техкарты, включая докупки: сколько каждого продукта ушло в техкарту × цена за кг, л или штуку по обычным ценам магазина, без акций. Остатки упаковок не считаются, домашние запасы — по доле; контейнеры и расходники не входят.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "PlanCost".
+ */
+export interface PlanCost {
+  /**
+   * Сумма за весь срок техкарты, в валюте currency.
+   */
+  amount: number;
+  /**
+   * Код валюты ISO 4217: «EUR».
+   */
+  currency: string;
+  /**
+   * Где сверяли цены: «AH».
+   */
+  store: string;
+  /**
+   * Когда сверяли цены, YYYY-MM-DD.
+   */
+  date: string;
+  /**
+   * Что учтено и что нет: «без контейнеров — они ещё ≈ 50 €».
+   */
+  note?: string;
 }
 /**
  * Условия, под которые составлен план.

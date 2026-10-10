@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, formatAmount, formatCountdown, formatDayMonth, formatDuration, formatWeekdayShort, plural, roundAmount, typograph } from '../src/lib/format.ts';
+import { addDays, formatAmount, formatCountdown, formatDayMonth, formatDuration, formatMoney, formatWeekdayShort, plural, roundAmount, typograph } from '../src/lib/format.ts';
 
 const NB = ' ';
 
@@ -32,6 +32,13 @@ describe('formatAmount', () => {
   it('диапазоны', () => {
     expect(formatAmount(2, 'clove', 3)).toBe(`2–3${NB}зубчика`);
     expect(formatAmount(1, 'tbsp', 2)).toBe(`1–2${NB}ст. л.`);
+  });
+});
+
+describe('formatMoney', () => {
+  it('целыми, валюта после числа через неразрывный пробел', () => {
+    expect(formatMoney(587.6, 'EUR')).toBe(`588${NB}€`);
+    expect(formatMoney(1234, 'EUR')).toBe(`1${NB}234${NB}€`);
   });
 });
 

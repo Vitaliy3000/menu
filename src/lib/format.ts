@@ -18,6 +18,10 @@ export const countLabel = (n: number, forms: PluralForms) => `${formatNumber(n)}
 const numberFormat = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 2 });
 export const formatNumber = (n: number) => numberFormat.format(n).replace(/ /g, ' ');
 
+/** «588 €» — целыми, валюта после числа через неразрывный пробел. */
+export const formatMoney = (amount: number, currency: string) =>
+  new Intl.NumberFormat('ru-RU', { style: 'currency', currency, maximumFractionDigits: 0 }).format(amount).replace(/\s/g, '\u00a0');
+
 /**
  * Неразрывные пробелы там, где перенос строки выглядит неряшливо:
  * «200 °C», «35 мин», «1,5 кг», «суп — это», «д. 5». Применяется к текстам данных при загрузке.
