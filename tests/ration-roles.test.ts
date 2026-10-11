@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { doneStepCount, gotCount, mySteps, shoppingKeys } from '../src/lib/plan.ts';
+import { doneStepCount, gotCount, mySteps, roleTimes, shoppingKeys } from '../src/lib/plan.ts';
 import type { PlanProgress } from '../src/lib/progress.ts';
 import { personDay, rationToday } from '../src/lib/ration.ts';
 import type { CookPlan } from '../src/types/cook-plan.gen.ts';
@@ -50,6 +50,29 @@ describe('роли на устройстве', () => {
 
   it('неизвестная роль из старого прогресса не прячет шаги', () => {
     expect(mySteps(plan, progress({ role: 'sous' }))).toHaveLength(3);
+  });
+});
+
+describe('длительность по ролям', () => {
+  it('у каждого — от первого шага до последнего и сколько заняты руки', () => {
+    const times = roleTimes({
+      ...plan,
+      steps: [
+        { id: 'cut', at: 5, duration: 10, title: 'Нарезать морковь', role: 'helper' },
+        { id: 'boil', at: 0, duration: 30, title: 'Суп варится', role: 'chef', passive: true },
+        { id: 'stir', at: 10, duration: 10, title: 'Помешивать', role: 'chef' },
+        { id: 'taste', at: 15, duration: 10, title: 'Попробовать соль', role: 'chef' },
+        { id: 'wash', at: 15, duration: 10, title: 'Помыть посуду', role: 'helper' },
+      ],
+    });
+    expect(times?.map((t) => [t.role.id, t.total, t.active])).toEqual([
+      ['chef', 30, 15],
+      ['helper', 20, 20],
+    ]);
+  });
+
+  it('без ролей — только общая длительность', () => {
+    expect(roleTimes({ ...plan, roles: undefined })).toBeNull();
   });
 });
 

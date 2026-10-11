@@ -2,7 +2,7 @@ import { ClipboardList } from 'lucide-preact';
 import { StatBadge } from '../components/StatBadge.tsx';
 import { plans } from '../data/index.ts';
 import { countLabel, formatDuration, formatMoney } from '../lib/format.ts';
-import { dishTones, doneStepCount, mySteps, totalPortions } from '../lib/plan.ts';
+import { dishTones, doneStepCount, mySteps, roleTimes, totalPortions } from '../lib/plan.ts';
 import { peekProgress } from '../lib/progress.ts';
 import { Link } from '../lib/router.tsx';
 import type { CookPlan } from '../types/cook-plan.gen.ts';
@@ -48,6 +48,7 @@ function PlanCard({ plan: p }: { plan: CookPlan }) {
   const hours = Math.floor(p.duration.total / 60);
   const minutes = String(p.duration.total % 60).padStart(2, '0');
   const days = p.ration?.days.length ?? 0;
+  const times = roleTimes(p);
 
   return (
     <Link to={`/plans/${p.id}/`} class="plan-card">
@@ -62,7 +63,10 @@ function PlanCard({ plan: p }: { plan: CookPlan }) {
           {doneCount === stepCount && <span class="badge badge-done">Готово</span>}
           <span class="faint num plan-card-time">
             {p.start && `старт в ${p.start} · `}
-            {formatDuration(p.duration.total)}, активно {formatDuration(p.duration.active)}
+            {formatDuration(p.duration.total)}
+            {times
+              ? ` · активно: ${times.map((t) => `${t.role.name} ${formatDuration(t.active)}`).join(', ')}`
+              : `, активно ${formatDuration(p.duration.active)}`}
           </span>
         </div>
         <h2 class="display plan-card-title">{p.title}</h2>

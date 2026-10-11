@@ -9,6 +9,7 @@ import {
   mySteps,
   planBase,
   roleSteps,
+  roleTimes,
   shoppingKeys,
   totalPortions,
 } from '../lib/plan.ts';
@@ -46,6 +47,7 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
   const needsRole = Boolean(plan.roles) && !role;
   const started = progress.startedAt !== null || doneCount > 0;
   const end = base ? new Date(base.getTime() + plan.duration.total * 60_000) : null;
+  const times = roleTimes(plan);
 
   const openCook = (stepId = current.id) => {
     actions.start();
@@ -105,7 +107,15 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
             Длительность
           </dt>
           <dd class="display num">{formatDuration(plan.duration.total)}</dd>
-          <dd class="fact-sub">активно {formatDuration(plan.duration.active)}</dd>
+          {times ? (
+            times.map((t) => (
+              <dd key={t.role.id} class="fact-sub">
+                {t.role.name} — {formatDuration(t.total)}, активно {formatDuration(t.active)}
+              </dd>
+            ))
+          ) : (
+            <dd class="fact-sub">активно {formatDuration(plan.duration.active)}</dd>
+          )}
         </div>
         <div class="fact">
           <dt>

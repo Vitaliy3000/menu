@@ -52,6 +52,35 @@ export const roleSteps = (plan: CookPlan, role?: Role): PlanStep[] => (role ? pl
 /** Шаги, которые ведёт это устройство: своей роли или все. */
 export const mySteps = (plan: CookPlan, progress: PlanProgress) => roleSteps(plan, activeRole(plan, progress));
 
+export interface RoleTime {
+  role: Role;
+  /** От первого шага роли до конца последнего, минут. */
+  total: number;
+  /** Сколько из них заняты руки: активные шаги, наложения считаются один раз. */
+  active: number;
+}
+
+/** Длительность по каждой роли; без ролей готовит один человек — null, хватает общей. */
+export function roleTimes(plan: CookPlan): RoleTime[] | null {
+  if (!plan.roles) return null;
+  return plan.roles.map((role) => {
+    const steps = roleSteps(plan, role);
+    if (steps.length === 0) return { role, total: 0, active: 0 };
+    const start = Math.min(...steps.map((s) => s.at));
+    const end = Math.max(...steps.map((s) => s.at + s.duration));
+    const busy = steps.filter((s) => !s.passive).sort((a, b) => a.at - b.at);
+    let active = 0;
+    let reached = -Infinity;
+    for (const s of busy) {
+      const from = Math.max(s.at, reached);
+      const to = s.at + s.duration;
+      if (to > from) active += to - from;
+      reached = Math.max(reached, to);
+    }
+    return { role, total: end - start, active };
+  });
+}
+
 export const doneStepCount = (plan: CookPlan, progress: PlanProgress) =>
   mySteps(plan, progress).filter((s) => progress.done.includes(s.id)).length;
 
