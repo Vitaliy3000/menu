@@ -193,3 +193,50 @@
 .storage-note {
   font-size: 0.9rem;
 }
+
+/* Излишки */
+.surplus-lead {
+  max-width: 62ch;
+  margin-bottom: 14px;
+}
+
+.surplus-card {
+  max-width: 560px;
+}
+
+.surplus-card ul {
+  display: grid;
+}
+
+.surplus-card li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  line-height: 1.4;
+}
+
+.surplus-card li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.surplus-card li:last-child {
+  padding-bottom: 0;
+}
+
+.surplus-item {
+  font-weight: 600;
+}
+
+.surplus-amount {
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.surplus-note {
+  grid-column: 1 / -1;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}

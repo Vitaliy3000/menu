@@ -14,6 +14,7 @@ export function KitchenPage() {
     ...(k.planRules?.length ? [{ id: 'rules', label: 'Правила техкарт' }] : []),
     { id: 'equipment', label: 'Оборудование' },
     { id: 'storage', label: 'Хранение' },
+    ...(k.surplus?.length ? [{ id: 'surplus', label: 'Излишки' }] : []),
   ];
 
   return (
@@ -21,8 +22,8 @@ export function KitchenPage() {
       <header class="page-head">
         <h1 class="display h1">Кухня</h1>
         <p class="lead">
-          Справочник для составления техкарт: кто что не ест, по каким правилам составляем, чем готовим и куда
-          убираем. Техкарты на него не
+          Справочник для составления техкарт: кто что не ест, по каким правилам составляем, чем готовим, куда
+          убираем и что из запасов пора израсходовать. Техкарты на него не
           ссылаются — он нужен, чтобы не повторять всё это в каждом промпте.
         </p>
         {k.draft && (
@@ -122,6 +123,23 @@ export function KitchenPage() {
         </div>
       </section>
 
+      {k.surplus && k.surplus.length > 0 && (
+        <section id="surplus" class="kitchen-section">
+          <h2 class="display h2 section-heading">Излишки</h2>
+          <p class="muted surplus-lead">Уже есть дома — желательно включить в меню следующих техкарт и не закупать заново.</p>
+          <article class="card card-pad surplus-card">
+            <ul>
+              {k.surplus.map((s) => (
+                <li key={s.item}>
+                  <span class="surplus-item">{s.item}</span>
+                  <span class="surplus-amount num">{s.amount}</span>
+                  {s.note && <span class="surplus-note">{s.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        </section>
+      )}
     </div>
   );
 }

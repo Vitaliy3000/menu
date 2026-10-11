@@ -233,6 +233,12 @@ export function checkKitchen(k: Kitchen, file: string): Issue[] {
     });
   });
 
+  const surplus = new Set<string>();
+  k.surplus?.forEach((s, i) => {
+    if (surplus.has(norm(s.item))) error(`/surplus/${i}`, `«${s.item}» в излишках указан дважды`);
+    surplus.add(norm(s.item));
+  });
+
   return issues;
 }
 

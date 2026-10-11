@@ -19,6 +19,7 @@ const kitchen = (): Kitchen => ({
   ],
   equipment: [{ id: 'oven', name: 'Духовка', kind: 'oven', spec: '60 л' }],
   storage: [{ id: 'freezer', name: 'Морозилка', kind: 'freezer', free: '≈ 20 л' }],
+  surplus: [{ item: 'Рис для суши', amount: '6 кг' }],
 });
 
 const file = 'data/kitchen.json';
@@ -51,8 +52,10 @@ describe('справочник кухни', () => {
     const k = kitchen();
     k.equipment.push({ id: 'oven', name: 'Вторая духовка', kind: 'oven' });
     k.people[0]!.avoid.push({ item: 'кинза', level: 'never' });
+    k.surplus!.push({ item: 'рис для суши', amount: '1 кг' });
     const issues = checkKitchen(k, file);
     expect(messages(issues)).toContain('id «oven» повторяется');
     expect(messages(issues)).toContain('«кинза» у Виталий указан дважды');
+    expect(messages(issues)).toContain('«рис для суши» в излишках указан дважды');
   });
 });
