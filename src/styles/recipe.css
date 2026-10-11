@@ -96,7 +96,7 @@
 
 .section-nav {
   position: sticky;
-  top: var(--header-h);
+  top: calc(var(--header-h) + env(safe-area-inset-top));
   z-index: 20;
   display: flex;
   gap: 6px;
@@ -381,6 +381,7 @@ li:last-child > .ingredient {
 }
 
 .step-text {
+  max-width: 70ch;
   font-size: 1.06rem;
   line-height: 1.6;
   cursor: pointer;
@@ -666,10 +667,10 @@ li:last-child > .ingredient {
   box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink);
 }
 
+/* Строчными: заглавные «ИЮН», «ИЮЛ» шире ячейки и слипаются в карточке ~330 px */
 .month-label {
   font-size: 0.66rem;
   font-weight: 600;
-  text-transform: uppercase;
   color: var(--ink-3);
 }
 

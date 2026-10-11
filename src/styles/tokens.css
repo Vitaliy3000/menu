@@ -59,6 +59,19 @@
   }
 }
 
+/* Большие экраны: MacBook Pro 16″ (1728 px) и iMac 24″ (2240 px) — не держать контент узкой колонкой */
+@media (min-width: 1600px) {
+  :root {
+    --content-w: 1440px;
+  }
+}
+
+@media (min-width: 2000px) {
+  :root {
+    --content-w: 1640px;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;

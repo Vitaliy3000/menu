@@ -308,7 +308,7 @@ export function RecipeCard({ recipe: r, month }: { recipe: Recipe; month: number
   const category = CATEGORIES[r.category];
   return (
     <Link to={`/recipes/${r.id}/`} class="recipe-card">
-      <Plate recipe={r} size={60} />
+      <Plate recipe={r} />
       <div class="recipe-card-body">
         <span class="recipe-card-eyebrow">
           {category.label}

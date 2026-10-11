@@ -123,6 +123,13 @@
   }
 }
 
+/* Три колонки — только на iMac: на MacBook Pro 16″ карточка уже ~360 px, и строка «время · порции · ккал» переносится */
+@media (min-width: 2000px) {
+  .recipe-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .recipe-grid > li {
   display: grid;
 }
@@ -146,6 +153,28 @@
 
 .recipe-card:active {
   transform: translateY(0);
+}
+
+.recipe-card .plate,
+.recipe-card .plate-img {
+  --size: 60px;
+}
+
+/* Телефон: тарелка поменьше, чтобы «время · порции · ккал · ❄» помещались в одну строку на 375 px */
+@media (max-width: 479px) {
+  .recipe-card {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .recipe-card .plate,
+  .recipe-card .plate-img {
+    --size: 44px;
+  }
+
+  .recipe-card .meta {
+    column-gap: 10px;
+  }
 }
 
 .recipe-card-body {

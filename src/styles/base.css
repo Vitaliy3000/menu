@@ -16,7 +16,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  scroll-padding-top: calc(var(--header-h) + 64px);
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top) + 64px);
 }
 
 body {
@@ -474,6 +474,16 @@ ol {
   display: none;
 }
 
+/* На десктопе свайпа нет — чипы переносятся, а не прячутся за краем */
+@media (min-width: 1024px) {
+  .chip-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
 .chip-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -737,6 +747,13 @@ button.tag:hover {
   background: var(--surface-2);
   width: max-content;
   max-width: 100%;
+  /* Страховка: не шире экрана, даже если вкладки не влезли */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tabs button {
