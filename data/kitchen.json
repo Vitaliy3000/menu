@@ -147,6 +147,8 @@
     { "id": "boards", "name": "Разделочные доски", "kind": "tool", "count": 8, "spec": "2 большие деревянные, 3 средние и 3 маленькие пластиковые" },
     { "id": "rolling-pin", "name": "Скалка", "kind": "tool" },
     { "id": "silicone-mat", "name": "Силиконовый коврик", "kind": "tool" },
+    { "id": "pizza-peel", "name": "Лопата для пиццы", "kind": "tool", "note": "Pizzaspatel" },
+    { "id": "pizza-cutter", "name": "Нож для пиццы", "kind": "tool" },
     { "id": "bowls", "name": "Миски", "kind": "tool", "spec": "1 огромная, 4 по ≈ 2 л, много мелких разных размеров" },
     { "id": "colander", "name": "Дуршлаг", "kind": "tool" },
     { "id": "skimmer", "name": "Шумовка", "kind": "tool", "note": "Вынимать пасту и картофель из кипятка: горячую воду в раковину не сливаем" },
@@ -158,7 +160,9 @@
     { "id": "glass-1800", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 3, "spec": "1,8 л", "note": "В духовку можно, но без крышки" },
     { "id": "glass-1000", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 3, "spec": "1 л", "note": "В духовку можно, но без крышки" },
     { "id": "glass-600", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 8, "spec": "600 мл", "note": "В духовку можно, но без крышки" },
-    { "id": "glass-180", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 16, "spec": "180 мл", "note": "В духовку можно, но без крышки" }
+    { "id": "glass-180", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 16, "spec": "180 мл", "note": "В духовку можно, но без крышки" },
+    { "id": "plastic-boxes", "name": "Пластиковый контейнер", "kind": "container", "count": 5 },
+    { "id": "dough-boxes", "name": "Контейнер для теста", "kind": "container", "count": 3, "spec": "Deegkrat Basic Line, 30 × 40 × 7 см", "note": "Крышка одна — на верхний: контейнеры ставятся друг на друга" }
   ],
   "storage": [
     { "id": "fridge", "name": "Холодильник", "kind": "fridge", "capacity": "195 л полезного объёма", "free": "≈ 156 л (80 %)", "note": "ATAG KS12178B, в одном корпусе с морозилкой" },
