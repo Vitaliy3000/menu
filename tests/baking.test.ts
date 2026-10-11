@@ -44,7 +44,6 @@ const bake = (): Bake => ({
 
 const baking = (): Baking => ({
   guides: [{ id: 'pullman', title: 'Pullman', summary: 'Как печь формовой хлеб.', sections: [{ title: 'Мука', points: ['Type 55.'] }] }],
-  shopping: [{ title: 'Первый заказ', items: [{ name: 'Лезвие' }, { name: 'Пергамент' }] }],
   ideas: [{ title: 'Ромовая баба' }],
 });
 
@@ -170,12 +169,10 @@ describe('справочник выпечки', () => {
   it('ловит повторы и пустые разделы', () => {
     const k = baking();
     k.guides.push({ ...k.guides[0]!, sections: [{ title: 'Пусто' }] });
-    k.shopping.push({ title: 'Позже', items: [{ name: 'лезвие' }] });
     k.ideas!.push({ title: 'ромовая баба' });
     const text = messages(checkBaking(k, 'data/baking.json'));
     expect(text).toContain('id «pullman» повторяется');
     expect(text).toContain('в разделе «Пусто» нет ни текста, ни пунктов');
-    expect(text).toContain('«лезвие» уже есть в списке покупок («Первый заказ»)');
     expect(text).toContain('идея «ромовая баба» указана дважды');
   });
 });

@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Baking",
-  "description": "Справочник раздела «Выпечка»: руководства (например, по формовому хлебу), что купить для домашней пекарни и что испечь дальше. Рецептуры (Bake) на него не ссылаются.",
+  "description": "Справочник раздела «Выпечка»: руководства (например, по формовому хлебу) и что испечь дальше. Рецептуры (Bake) на него не ссылаются.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["guides", "shopping"],
+  "required": ["guides"],
   "properties": {
     "$schema": {
       "type": "string",
@@ -14,11 +14,6 @@
       "type": "array",
       "description": "Руководства: каждое — отдельный раздел страницы «Выпечка».",
       "items": { "$ref": "#/$defs/Guide" }
-    },
-    "shopping": {
-      "type": "array",
-      "description": "Что купить: инвентарь, мука и продукты, сгруппированные по смыслу.",
-      "items": { "$ref": "#/$defs/ShoppingGroup" }
     },
     "ideas": {
       "type": "array",
@@ -101,55 +96,6 @@
           }
         }
       ]
-    },
-    "ShoppingGroup": {
-      "title": "ShoppingGroup",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "items"],
-      "properties": {
-        "title": {
-          "type": "string",
-          "minLength": 2,
-          "maxLength": 60
-        },
-        "note": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 200
-        },
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "items": { "$ref": "#/$defs/ShoppingItem" }
-        }
-      }
-    },
-    "ShoppingItem": {
-      "title": "ShoppingItem",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["name"],
-      "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 2,
-          "maxLength": 60,
-          "description": "Что купить. Не повторяется внутри справочника."
-        },
-        "note": {
-          "type": "string",
-          "minLength": 3,
-          "maxLength": 300,
-          "description": "Размер, зачем нужно, на что обратить внимание."
-        },
-        "options": {
-          "type": "array",
-          "minItems": 2,
-          "description": "Взаимозаменяемые варианты: «гастроёмкость GN 1/1», «baking cloche».",
-          "items": { "type": "string", "minLength": 2, "maxLength": 100 }
-        }
-      }
     },
     "Idea": {
       "title": "Idea",

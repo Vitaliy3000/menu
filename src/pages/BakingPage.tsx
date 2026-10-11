@@ -1,4 +1,4 @@
-import { ExternalLink, ShoppingBasket, Wheat } from 'lucide-preact';
+import { ExternalLink, Wheat } from 'lucide-preact';
 import { SectionNav } from '../components/SectionNav.tsx';
 import { StatBadge } from '../components/StatBadge.tsx';
 import { bakes, baking } from '../data/index.ts';
@@ -14,7 +14,6 @@ export function BakingPage() {
   const sections = [
     { id: 'bakes', label: 'Рецептуры' },
     ...(baking?.guides.map((g) => ({ id: g.id, label: g.title })) ?? []),
-    ...(baking?.shopping.length ? [{ id: 'shopping', label: 'Что купить' }] : []),
     ...(baking?.ideas?.length ? [{ id: 'ideas', label: 'Что испечь' }] : []),
   ];
 
@@ -26,7 +25,7 @@ export function BakingPage() {
         </h1>
         <p class="lead">
           Хлеб и пицца: формулы в граммах и пекарских процентах, режимы с температурами и таймерами, заметки с пробных выпечек.
-          Ниже — справочник: формовой хлеб, что купить и что испечь дальше.
+          Ниже — справочник: формовой хлеб и что испечь дальше.
         </p>
       </header>
 
@@ -61,38 +60,6 @@ export function BakingPage() {
       </section>
 
       {baking?.guides.map((g) => <GuideSection key={g.id} guide={g} />)}
-
-      {baking && baking.shopping.length > 0 && (
-        <section id="shopping" class="baking-section">
-          <h2 class="display h2 section-heading">Что купить</h2>
-          <div class="baking-grid">
-            {baking.shopping.map((group) => (
-              <article key={group.title} class="card card-pad shopping-card">
-                <h3 class="info-title">
-                  <ShoppingBasket aria-hidden="true" />
-                  {group.title}
-                </h3>
-                {group.note && <p class="faint">{group.note}</p>}
-                <ul class="shopping-list">
-                  {group.items.map((item) => (
-                    <li key={item.name}>
-                      <span class="shopping-name">{item.name}</span>
-                      {item.note && <span class="shopping-note">{item.note}</span>}
-                      {item.options && (
-                        <ul class="bullets shopping-options">
-                          {item.options.map((o) => (
-                            <li key={o}>{o}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
 
       {baking?.ideas && baking.ideas.length > 0 && (
         <section id="ideas" class="baking-section">

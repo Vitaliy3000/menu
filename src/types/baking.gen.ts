@@ -7,7 +7,7 @@
 export type GuidePoint = string | GuidePointDetail;
 
 /**
- * Справочник раздела «Выпечка»: руководства (например, по формовому хлебу), что купить для домашней пекарни и что испечь дальше. Рецептуры (Bake) на него не ссылаются.
+ * Справочник раздела «Выпечка»: руководства (например, по формовому хлебу) и что испечь дальше. Рецептуры (Bake) на него не ссылаются.
  */
 export interface Baking {
   /**
@@ -18,10 +18,6 @@ export interface Baking {
    * Руководства: каждое — отдельный раздел страницы «Выпечка».
    */
   guides: Guide[];
-  /**
-   * Что купить: инвентарь, мука и продукты, сгруппированные по смыслу.
-   */
-  shopping: ShoppingGroup[];
   /**
    * Что испечь дальше: идеи и ссылки, по которым ещё нет рецептуры.
    */
@@ -72,38 +68,6 @@ export interface GuidePointDetail {
    * @minItems 1
    */
   points?: [string, ...string[]];
-}
-/**
- * This interface was referenced by `Baking`'s JSON-Schema
- * via the `definition` "ShoppingGroup".
- */
-export interface ShoppingGroup {
-  title: string;
-  note?: string;
-  /**
-   * @minItems 1
-   */
-  items: [ShoppingItem, ...ShoppingItem[]];
-}
-/**
- * This interface was referenced by `Baking`'s JSON-Schema
- * via the `definition` "ShoppingItem".
- */
-export interface ShoppingItem {
-  /**
-   * Что купить. Не повторяется внутри справочника.
-   */
-  name: string;
-  /**
-   * Размер, зачем нужно, на что обратить внимание.
-   */
-  note?: string;
-  /**
-   * Взаимозаменяемые варианты: «гастроёмкость GN 1/1», «baking cloche».
-   *
-   * @minItems 2
-   */
-  options?: [string, string, ...string[]];
 }
 /**
  * This interface was referenced by `Baking`'s JSON-Schema

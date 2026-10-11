@@ -440,15 +440,6 @@ export function checkBaking(k: Baking, file: string): Issue[] {
     }),
   );
 
-  const items = new Map<string, string>();
-  k.shopping.forEach((group, gi) =>
-    group.items.forEach((item, ii) => {
-      const other = items.get(norm(item.name));
-      if (other) error(`/shopping/${gi}/items/${ii}`, `«${item.name}» уже есть в списке покупок («${other}»)`);
-      else items.set(norm(item.name), group.title);
-    }),
-  );
-
   const ideas = new Set<string>();
   k.ideas?.forEach((idea, i) => {
     if (ideas.has(norm(idea.title))) error(`/ideas/${i}`, `идея «${idea.title}» указана дважды`);
