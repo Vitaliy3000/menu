@@ -161,7 +161,7 @@
     { "id": "glass-1000", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 3, "spec": "1 л", "note": "В духовку можно, но без крышки" },
     { "id": "glass-600", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 8, "spec": "600 мл", "note": "В духовку можно, но без крышки" },
     { "id": "glass-180", "name": "Стеклянный контейнер с крышкой", "kind": "container", "count": 16, "spec": "180 мл", "note": "В духовку можно, но без крышки" },
-    { "id": "plastic-boxes", "name": "Пластиковый контейнер", "kind": "container", "count": 5 },
+    { "id": "plastic-boxes", "name": "Пластиковый контейнер", "kind": "container", "count": 5, "spec": "5,2 л" },
     { "id": "dough-boxes", "name": "Контейнер для теста", "kind": "container", "count": 3, "spec": "Deegkrat Basic Line, 30 × 40 × 7 см", "note": "Крышка одна — на верхний: контейнеры ставятся друг на друга" }
   ],
   "storage": [
