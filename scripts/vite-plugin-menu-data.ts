@@ -2,7 +2,7 @@
  * Vite-плагин данных сайта:
  *  - при сборке валидирует data/ и падает с понятной ошибкой, если что-то не так;
  *  - в dev-режиме перепроверяет данные на лету и показывает ошибки в оверлее браузера;
- *  - после сборки кладёт index.html в папку каждого маршрута (recipes/<id>/, plans/<id>/),
+ *  - после сборки кладёт index.html в папку каждого маршрута (recipes/<id>/, plans/<id>/, baking/<id>/),
  *    чтобы прямые ссылки на GitHub Pages отдавались с кодом 200 и правильными <title>/description,
  *    а 404.html ловит всё остальное;
  *  - публикует справочник кухни и схемы как обычные файлы (kitchen.json, schemas/*.json),
@@ -109,8 +109,10 @@ export function menuData(): Plugin {
       const pages: PageMeta[] = [
         { path: 'plans/', title: 'Техкарты', description: 'Готовые планы дней готовки под конкретные объёмы и технику.' },
         { path: 'kitchen/', title: 'Кухня', description: 'Справочник для техкарт: кто что не ест, оборудование, хранение, излишки.' },
+        { path: 'baking/', title: 'Выпечка', description: 'Хлеб и пицца: формулы в пекарских процентах, режимы, заметки с пробных выпечек.' },
         ...data.recipes.map((r) => ({ path: `recipes/${r.id}/`, title: r.title, description: r.description })),
         ...data.plans.map((p) => ({ path: `plans/${p.id}/`, title: p.title, description: p.summary })),
+        ...data.bakes.map((b) => ({ path: `baking/${b.id}/`, title: b.title, description: b.description })),
       ];
 
       await Promise.all(

@@ -127,6 +127,20 @@ export function formatDuration(minutes: number): string {
   return rest === 0 ? `${h} ч` : `${h} ч ${String(rest).padStart(2, '0')} мин`;
 }
 
+/** Диапазон времени: «50–60 мин», «1,5–2 ч», «8–16 ч». Таймер ставят на нижнюю границу. */
+export function formatDurationRange(min: number, max?: number): string {
+  if (max === undefined || max === min) return formatDuration(min);
+  if (max <= 90) return `${Math.round(min)}–${Math.round(max)} мин`;
+  if (min >= 60 && min % 30 === 0 && max % 30 === 0) return `${formatNumber(min / 60)}–${formatNumber(max / 60)} ч`;
+  return `${formatDuration(min)} – ${formatDuration(max)}`;
+}
+
+/** Температура: «27 °C», «26–28 °C». */
+export function formatTemp(temp: number, max?: number): string {
+  const range = max === undefined ? formatNumber(temp) : `${formatNumber(temp)}–${formatNumber(max)}`;
+  return `${range} °C`;
+}
+
 /** Компактно для бейджей: 40′, 1:05 */
 export function formatDurationShort(minutes: number): string {
   const m = Math.round(minutes);

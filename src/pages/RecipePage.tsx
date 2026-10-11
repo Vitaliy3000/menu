@@ -12,7 +12,6 @@ import {
   Refrigerator,
   Snowflake,
   Sun,
-  Timer,
   Users,
 } from 'lucide-preact';
 import { useState } from 'preact/hooks';
@@ -20,12 +19,12 @@ import { MacroBar } from '../components/MacroBar.tsx';
 import { MonthStrip } from '../components/MonthStrip.tsx';
 import { Plate } from '../components/Plate.tsx';
 import { SectionNav } from '../components/SectionNav.tsx';
+import { Steps } from '../components/Steps.tsx';
+import { WakeLockToggle } from '../components/WakeLockToggle.tsx';
 import { countLabel, formatAmount, formatDuration, formatNumber, MONTHS_IN, roundAmount } from '../lib/format.ts';
 import { CATEGORIES, DIETS, DIFFICULTY, REHEAT } from '../lib/labels.ts';
 import { isSeasonal } from '../lib/recipeFilters.ts';
 import { Link } from '../lib/router.tsx';
-import { startTimer, useTimers } from '../lib/timers.ts';
-import { useWakeLock, wakeLockSupported } from '../lib/wakeLock.ts';
 import type { Ingredient, Recipe } from '../types/recipe.gen.ts';
 
 const PORTIONS = ['порция', 'порции', 'порций'] as const;
@@ -180,7 +179,7 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
               {r.equipment.join(' · ')}
             </p>
           )}
-          <Steps recipe={r} />
+          <RecipeSteps recipe={r} />
         </section>
       </div>
 
@@ -342,13 +341,9 @@ function IngredientRow({ item, factor }: { item: Ingredient; factor: number }) {
   );
 }
 
-function Steps({ recipe: r }: { recipe: Recipe }) {
+/** Отметки шагов живут, пока открыта страница. */
+function RecipeSteps({ recipe: r }: { recipe: Recipe }) {
   const [done, setDone] = useState<Set<number>>(new Set());
-  const timers = useTimers();
-  const path = `/recipes/${r.id}/`;
-  const flat = r.steps.flatMap((g) => g.steps);
-  const current = flat.findIndex((_, i) => !done.has(i));
-
   const toggle = (i: number) =>
     setDone((prev) => {
       const next = new Set(prev);
@@ -356,54 +351,7 @@ function Steps({ recipe: r }: { recipe: Recipe }) {
       else next.add(i);
       return next;
     });
-
-  let n = 0;
-  return (
-    <div class="steps">
-      {r.steps.map((group, gi) => (
-        <div key={gi} class="step-group">
-          {group.title && <h3 class="step-group-title eyebrow">{group.title}</h3>}
-          <ol>
-            {group.steps.map((step) => {
-              const i = n++;
-              const label = `Шаг ${i + 1} · ${r.title}`;
-              const running = timers.some((t) => t.source.path === path && t.source.stepId === String(i));
-              return (
-                <li key={i} class={`step${done.has(i) ? ' is-done' : ''}${i === current ? ' is-current' : ''}`}>
-                  <button type="button" class="step-num" onClick={() => toggle(i)} aria-pressed={done.has(i)} aria-label={`Шаг ${i + 1}: отметить`}>
-                    {done.has(i) ? <Check /> : <span class="num">{i + 1}</span>}
-                  </button>
-                  <div class="step-body">
-                    <p class="step-text" onClick={() => toggle(i)}>
-                      {step.text}
-                    </p>
-                    {step.tip && (
-                      <div class="callout callout-tip">
-                        <Lightbulb aria-hidden="true" />
-                        <span>{step.tip}</span>
-                      </div>
-                    )}
-                    {step.minutes !== undefined && step.minutes >= 2 && (
-                      <button
-                        type="button"
-                        class={`step-timer${running ? ' is-running' : ''}`}
-                        onClick={() => startTimer({ label, minutes: step.minutes!, source: { path, title: r.title, stepId: String(i) } })}
-                        title={running ? 'Перезапустить таймер' : 'Запустить таймер'}
-                      >
-                        <Timer aria-hidden="true" />
-                        {formatDuration(step.minutes)}
-                        {running && <span class="visually-hidden">, таймер идёт — нажмите, чтобы перезапустить</span>}
-                      </button>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      ))}
-    </div>
-  );
+  return <Steps groups={r.steps} path={`/recipes/${r.id}/`} title={r.title} done={done} onToggle={toggle} />;
 }
 
 function StorageSummary({ recipe: r }: { recipe: Recipe }) {
@@ -446,19 +394,5 @@ function StorageSummary({ recipe: r }: { recipe: Recipe }) {
       </dl>
       {note && <p class="muted info-foot">{note}</p>}
     </>
-  );
-}
-
-function WakeLockToggle() {
-  const [on, setOn] = useState(false);
-  const active = useWakeLock(on);
-  if (!wakeLockSupported) return null;
-  return (
-    <button type="button" class={`switch${on ? ' is-on' : ''}`} role="switch" aria-checked={on} onClick={() => setOn((v) => !v)}>
-      <span class="switch-track">
-        <span class="switch-thumb" />
-      </span>
-      {on && active ? 'Экран не гаснет' : 'Не гасить экран'}
-    </button>
   );
 }

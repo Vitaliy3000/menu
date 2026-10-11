@@ -3,6 +3,8 @@ import {
   Archive,
   CakeSlice,
   ChefHat,
+  CircleCheck,
+  CircleX,
   Coffee,
   Cookie,
   CookingPot,
@@ -12,9 +14,12 @@ import {
   EggFried,
   Flame,
   Microwave,
+  NotebookPen,
   Package,
+  Pizza,
   Refrigerator,
   Salad,
+  Sandwich,
   ScrollText,
   Snowflake,
   Soup,
@@ -26,6 +31,7 @@ import {
 } from 'lucide-preact';
 import type { Diet, Difficulty, RecipeCategory, ReheatMethod } from '../types/recipe.gen.ts';
 import type { EquipmentKind, ShopSection, StorageKind } from '../types/cook-plan.gen.ts';
+import type { Attempt, BakeKind } from '../types/bake.gen.ts';
 
 export interface CategoryMeta {
   label: string;
@@ -113,3 +119,19 @@ export const EQUIPMENT_ORDER: EquipmentKind[] = ['oven', 'hob', 'appliance', 'co
 
 /** Цвета блюд в техкарте: назначаются по порядку в dishes. */
 export const DISH_TONES = ['tomato', 'herb', 'saffron', 'plum', 'sky', 'olive', 'crust', 'butter'] as const;
+
+/** Группы каталога выпечки — в этом порядке. */
+export const BAKE_KINDS: Record<BakeKind, CategoryMeta> = {
+  pan: { label: 'Формовой хлеб', plural: 'Формовой хлеб', icon: Sandwich, tone: 'wheat' },
+  hearth: { label: 'Подовый хлеб', plural: 'Подовый хлеб', icon: Wheat, tone: 'crust' },
+  pizza: { label: 'Пицца', plural: 'Пицца', icon: Pizza, tone: 'tomato' },
+  sweet: { label: 'Сдоба', plural: 'Сдоба', icon: Croissant, tone: 'butter' },
+};
+
+export const BAKE_KIND_ORDER: BakeKind[] = ['pan', 'hearth', 'pizza', 'sweet'];
+
+export const ATTEMPT_OUTCOMES: Record<Attempt['outcome'], { label: string; badge: string; icon: LucideIcon }> = {
+  ok: { label: 'Получилось', badge: 'badge-done', icon: CircleCheck },
+  issues: { label: 'Есть замечания', badge: 'badge-warn', icon: NotebookPen },
+  failed: { label: 'Не получилось', badge: 'badge-accent', icon: CircleX },
+};

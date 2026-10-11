@@ -8,6 +8,7 @@ import './styles/catalog.css';
 import './styles/recipe.css';
 import './styles/plan.css';
 import './styles/kitchen.css';
+import './styles/baking.css';
 import './styles/print.css';
 import { render } from 'preact';
 import { App } from './App.tsx';

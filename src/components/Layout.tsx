@@ -8,7 +8,13 @@ export function Layout({ children }: { children: ComponentChildren }) {
   useTimerAlarm();
   const { path } = useLocation();
   const scrolled = useScrolled();
-  const section = path.startsWith('/plans') ? 'plans' : path.startsWith('/kitchen') ? 'kitchen' : 'recipes';
+  const section = path.startsWith('/plans')
+    ? 'plans'
+    : path.startsWith('/kitchen')
+      ? 'kitchen'
+      : path.startsWith('/baking')
+        ? 'baking'
+        : 'recipes';
 
   return (
     <>
@@ -22,6 +28,9 @@ export function Layout({ children }: { children: ComponentChildren }) {
             <Link to="/" aria-current={section === 'recipes' ? 'page' : undefined}>
               Рецепты
             </Link>
+            <Link to="/baking/" aria-current={section === 'baking' ? 'page' : undefined}>
+              Выпечка
+            </Link>
             <Link to="/plans/" aria-current={section === 'plans' ? 'page' : undefined}>
               Техкарты
             </Link>
@@ -34,7 +43,7 @@ export function Layout({ children }: { children: ComponentChildren }) {
       <main id="main">{children}</main>
       <footer class="site-footer">
         <div class="container">
-          <span>Меню — рецепты и техкарты дней готовки</span>
+          <span>Меню — рецепты, выпечка и техкарты дней готовки</span>
           <span>Данные: data/*.json · схемы: schemas/</span>
         </div>
       </footer>

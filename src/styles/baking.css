@@ -1,0 +1,482 @@
+/* ------------------------------------------------------------------ */
+/* Выпечка: каталог и справочник                                       */
+/* ------------------------------------------------------------------ */
+
+.baking .section-nav {
+  margin-top: 24px;
+}
+
+.baking-section {
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.baking-lead {
+  max-width: 70ch;
+  margin: -8px 0 18px;
+}
+
+.bake-group + .bake-group {
+  margin-top: 24px;
+}
+
+.bake-group-title {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 1024px) {
+  .bake-group .plan-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .bake-group .plan-list > li {
+    display: grid;
+  }
+}
+
+.bake-more {
+  margin-top: 18px;
+  font-size: 0.92rem;
+}
+
+.bake-more a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bake-card .plan-card-foot::first-letter {
+  text-transform: uppercase;
+}
+
+.baking-grid {
+  display: grid;
+  gap: 12px;
+  align-items: start;
+}
+
+/* Карточки разной высоты: колонками, без пустот под короткими */
+@media (min-width: 720px) {
+  .baking-grid {
+    display: block;
+    columns: 320px;
+    column-gap: 16px;
+  }
+
+  .baking-grid > * {
+    break-inside: avoid;
+    margin-bottom: 16px;
+  }
+}
+
+/* Руководство */
+.guide-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.guide-card > .muted {
+  line-height: 1.5;
+}
+
+.guide-points {
+  display: grid;
+  gap: 8px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.guide-bullet {
+  position: relative;
+  padding-left: 16px;
+}
+
+.guide-bullet::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.guide-detail {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+}
+
+.guide-detail-title {
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.guide-detail .bullets {
+  font-size: 0.92rem;
+}
+
+/* Что купить */
+.shopping-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.shopping-list {
+  display: grid;
+}
+
+.shopping-list > li {
+  display: grid;
+  gap: 2px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.shopping-list > li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.shopping-name {
+  font-weight: 550;
+  line-height: 1.4;
+}
+
+.shopping-note {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.shopping-options {
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+/* Что испечь дальше */
+.idea-list {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .idea-list {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+}
+
+.idea {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 16px 18px;
+}
+
+.idea-title {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.idea-note {
+  font-size: 0.9rem;
+}
+
+.idea-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 2px;
+}
+
+.idea-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--accent);
+}
+
+.idea-links a:hover {
+  color: var(--accent-hover);
+}
+
+.idea-links svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Рецептура                                                           */
+/* ------------------------------------------------------------------ */
+
+.bake-methods {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  margin-bottom: 16px;
+}
+
+/* Нечётное число фактов на телефоне: последний — во всю ширину, без пустой клетки */
+@media (max-width: 719px) {
+  .facts > .fact:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Прошлые выпечки */
+.attempt-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .attempt-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+}
+
+.attempt {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  border-left: 4px solid var(--warn);
+}
+
+.attempt-failed {
+  border-left-color: var(--accent);
+}
+
+.attempt-ok {
+  border-left-color: var(--done);
+}
+
+.attempt-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.attempt-title {
+  font-weight: 650;
+}
+
+.attempt .bullets {
+  line-height: 1.5;
+}
+
+/* Формула */
+.formula {
+  display: grid;
+  gap: 16px;
+}
+
+.formula-pan {
+  margin-top: -8px;
+  font-size: 0.88rem;
+}
+
+.formula-list {
+  display: grid;
+}
+
+.formula-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px 46px;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.formula-row.is-checkable {
+  grid-template-columns: auto minmax(0, 1fr) 64px 46px;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+
+.formula-row.is-checkable.no-percent {
+  grid-template-columns: auto minmax(0, 1fr) 64px;
+}
+
+.formula-row.is-checkable:hover {
+  background: var(--surface-2);
+}
+
+.formula-row .check {
+  --size: 22px;
+  align-self: start;
+  margin-top: 1px;
+}
+
+.formula-name {
+  display: grid;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  font-size: 0.97rem;
+  line-height: 1.45;
+}
+
+.formula-grams,
+.formula-percent {
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.formula-grams {
+  font-weight: 650;
+}
+
+.formula-percent {
+  color: var(--ink-3);
+}
+
+.formula-row.is-checked .formula-name,
+.formula-row.is-checked .formula-grams {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, var(--ink-3) 60%, transparent);
+}
+
+.formula-head {
+  padding-top: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.formula-head span:not(:first-child) {
+  text-align: right;
+}
+
+.formula-total {
+  border-bottom: 0;
+  font-weight: 650;
+}
+
+.formula-total span:not(:first-child) {
+  text-align: right;
+}
+
+.formula-total span:last-child {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+.formula-part {
+  display: grid;
+  gap: 4px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-strong);
+}
+
+.formula-part h3 {
+  color: var(--accent);
+}
+
+.formula-part .formula-row:last-child {
+  border-bottom: 0;
+}
+
+.method-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.method-actions .btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Результат, проблемы, начинки */
+.bake-result {
+  max-width: 80ch;
+  padding: 16px 18px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.trouble-list {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .trouble-list {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+}
+
+.trouble {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.trouble dt {
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.trouble dd {
+  line-height: 1.55;
+}
+
+.variation-list {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 560px) {
+  .variation-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+.variation {
+  display: grid;
+  gap: 2px;
+  align-content: start;
+  padding: 14px 16px;
+}
+
+.variation-name {
+  font-weight: 650;
+}
+
+.variation .muted {
+  font-size: 0.92rem;
+}
+
+.bake-serving {
+  max-width: 80ch;
+  display: grid;
+  gap: 10px;
+}
+
+.bake-serving .muted {
+  line-height: 1.6;
+}
+
+.bake-sources {
+  line-height: 1.7;
+}

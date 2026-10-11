@@ -13,6 +13,9 @@ import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-pl
 import { deviation, personDay } from '../src/lib/ration.ts';
 import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
+import type { Bake } from '../src/types/bake.gen.ts';
+import type { Baking } from '../src/types/baking.gen.ts';
+import { doughGrams, expectedDough, flourGrams, inFinal } from '../src/lib/baking.ts';
 
 export type Severity = 'error' | 'warning';
 
@@ -29,6 +32,8 @@ export interface DataSet {
   recipes: Recipe[];
   plans: CookPlan[];
   kitchen: Kitchen | null;
+  bakes: Bake[];
+  baking: Baking | null;
   issues: Issue[];
 }
 
@@ -41,16 +46,21 @@ export interface SourceFile {
 export const DATA_DIRS = {
   recipes: 'data/recipes',
   plans: 'data/plans',
+  bakes: 'data/bakes',
 } as const;
 
 export const SCHEMA_FILES = {
   recipes: 'schemas/recipe.schema.json',
   plans: 'schemas/cook-plan.schema.json',
   kitchen: 'schemas/kitchen.schema.json',
+  bakes: 'schemas/bake.schema.json',
+  baking: 'schemas/baking.schema.json',
 } as const;
 
 /** Справочник кухни — один файл. */
 export const KITCHEN_FILE = 'data/kitchen.json';
+/** Справочник выпечки — один файл. */
+export const BAKING_FILE = 'data/baking.json';
 
 type Kind = keyof typeof DATA_DIRS;
 
@@ -59,18 +69,37 @@ type Kind = keyof typeof DATA_DIRS;
 /* ------------------------------------------------------------------ */
 
 export async function validateProject(root: string): Promise<DataSet> {
-  const [recipeSchema, planSchema, kitchenSchema] = await Promise.all([
+  const [recipeSchema, planSchema, kitchenSchema, bakeSchema, bakingSchema] = await Promise.all([
     readJson(join(root, SCHEMA_FILES.recipes)),
     readJson(join(root, SCHEMA_FILES.plans)),
     readJson(join(root, SCHEMA_FILES.kitchen)),
+    readJson(join(root, SCHEMA_FILES.bakes)),
+    readJson(join(root, SCHEMA_FILES.baking)),
   ]);
-  const [recipeFiles, planFiles, kitchenText] = await Promise.all([
+  const [recipeFiles, planFiles, bakeFiles, kitchenFile, bakingFile] = await Promise.all([
     readSources(root, DATA_DIRS.recipes),
     readSources(root, DATA_DIRS.plans),
-    readFile(join(root, KITCHEN_FILE), 'utf8').catch(() => null),
+    readSources(root, DATA_DIRS.bakes),
+    readSource(root, KITCHEN_FILE),
+    readSource(root, BAKING_FILE),
   ]);
-  const kitchenFile = kitchenText === null ? null : { file: KITCHEN_FILE, text: kitchenText };
-  return validateSources({ recipeSchema, planSchema, kitchenSchema, recipeFiles, planFiles, kitchenFile });
+  return validateSources({
+    recipeSchema,
+    planSchema,
+    kitchenSchema,
+    bakeSchema,
+    bakingSchema,
+    recipeFiles,
+    planFiles,
+    bakeFiles,
+    kitchenFile,
+    bakingFile,
+  });
+}
+
+async function readSource(root: string, file: string): Promise<SourceFile | null> {
+  const text = await readFile(join(root, file), 'utf8').catch(() => null);
+  return text === null ? null : { file, text };
 }
 
 async function readJson(path: string): Promise<object> {
@@ -101,6 +130,13 @@ export function validateSources(input: {
   kitchenSchema?: object;
   /** null — файла нет. */
   kitchenFile?: SourceFile | null;
+  /** Без схемы рецептуры выпечки не проверяются. */
+  bakeSchema?: object;
+  bakeFiles?: SourceFile[];
+  /** Без схемы справочник выпечки не проверяется. */
+  bakingSchema?: object;
+  /** null — файла нет. */
+  bakingFile?: SourceFile | null;
 }): DataSet {
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
@@ -115,26 +151,47 @@ export function validateSources(input: {
   for (const { doc, file } of plans) issues.push(...checkPlan(doc, file));
   issues.push(...checkUniqueTitles(plans));
 
-  let kitchen: Kitchen | null = null;
-  if (input.kitchenSchema) {
-    if (!input.kitchenFile) {
-      issues.push({ severity: 'error', file: KITCHEN_FILE, path: '', message: 'Нет справочника кухни' });
-    } else {
-      const validateKitchen = ajv.compile<Kitchen>(input.kitchenSchema);
-      const [parsed] = parseFiles([input.kitchenFile], validateKitchen, issues);
-      if (parsed) {
-        kitchen = parsed.doc;
-        issues.push(...checkKitchen(parsed.doc, parsed.file));
-      }
-    }
+  const kitchen = input.kitchenSchema
+    ? parseReference(ajv.compile<Kitchen>(input.kitchenSchema), input.kitchenFile, KITCHEN_FILE, 'Нет справочника кухни', checkKitchen, issues)
+    : null;
+
+  let bakes: { doc: Bake; file: string }[] = [];
+  if (input.bakeSchema) {
+    bakes = parseAll('bakes', input.bakeFiles ?? [], ajv.compile<Bake>(input.bakeSchema), issues);
+    for (const { doc, file } of bakes) issues.push(...checkBake(doc, file));
+    issues.push(...checkUniqueTitles(bakes));
   }
+  const baking = input.bakingSchema
+    ? parseReference(ajv.compile<Baking>(input.bakingSchema), input.bakingFile, BAKING_FILE, 'Нет справочника выпечки', checkBaking, issues)
+    : null;
 
   return {
     recipes: recipes.map((r) => r.doc),
     plans: plans.map((p) => p.doc),
     kitchen,
+    bakes: bakes.map((b) => b.doc),
+    baking,
     issues,
   };
+}
+
+/** Справочник из одного файла: нет файла — ошибка, иначе схема и смысловые проверки. */
+function parseReference<T>(
+  validate: ValidateFunction<T>,
+  source: SourceFile | null | undefined,
+  file: string,
+  missing: string,
+  check: (doc: T, file: string) => Issue[],
+  issues: Issue[],
+): T | null {
+  if (!source) {
+    issues.push({ severity: 'error', file, path: '', message: missing });
+    return null;
+  }
+  const [parsed] = parseFiles([source], validate, issues);
+  if (!parsed) return null;
+  issues.push(...check(parsed.doc, parsed.file));
+  return parsed.doc;
 }
 
 function parseAll<T>(
@@ -291,6 +348,114 @@ export function checkMacros(n: { kcal: number; protein: number; fat: number; car
   return diff > 0.15
     ? `калорийность ${n.kcal} ккал не сходится с БЖУ (≈ ${Math.round(fromMacros)} ккал по 4/9/4)`
     : null;
+}
+
+/* ------------------------------------------------------------------ */
+/* Смысловые проверки: выпечка                                         */
+/* ------------------------------------------------------------------ */
+
+/** Допуск между весом теста и загрузкой формы (г/л × объём). */
+const PAN_LOAD_TOLERANCE = 0.03;
+
+export function checkBake(b: Bake, file: string): Issue[] {
+  const issues: Issue[] = [];
+  const error = (path: string, message: string) => issues.push({ severity: 'error', file, path, message });
+  const warn = (path: string, message: string) => issues.push({ severity: 'warning', file, path, message });
+  const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
+
+  const expectedId = basename(file, '.json');
+  if (b.id !== expectedId) error('/id', `id «${b.id}» должен совпадать с именем файла «${expectedId}»`);
+
+  const methodIds = uniqueIds(b.methods, '/methods', error);
+  if (b.methods.length > 1) {
+    b.methods.forEach((m, i) => {
+      if (!m.title) error(`/methods/${i}`, `у способа «${m.id}» нет названия — оно нужно, когда способов несколько`);
+    });
+  }
+
+  b.methods.forEach((m, mi) => {
+    const base = `/methods/${mi}`;
+    const f = m.formula;
+    const partIds = uniqueIds(f.parts ?? [], `${base}/formula/parts`, error);
+    const usedParts = new Set<string>();
+    const names = new Set<string>();
+
+    f.ingredients.forEach((ing, ii) => {
+      const path = `${base}/formula/ingredients/${ii}`;
+      if (names.has(norm(ing.name))) error(path, `«${ing.name}» в формуле указан дважды`);
+      names.add(norm(ing.name));
+      for (const part of Object.keys(ing.parts ?? {})) {
+        if (!partIds.has(part)) error(`${path}/parts/${part}`, `нет части «${part}» в formula.parts`);
+        usedParts.add(part);
+      }
+      if (inFinal(ing) < -1e-9) {
+        error(`${path}/parts`, `«${ing.name}»: в части уходит ${round(ing.grams - inFinal(ing))} г — больше, чем всего (${ing.grams} г)`);
+      }
+    });
+
+    f.parts?.forEach((p, pi) => {
+      if (!usedParts.has(p.id)) error(`${base}/formula/parts/${pi}`, `в часть «${p.name}» не входит ни один ингредиент`);
+    });
+    if (flourGrams(f) === 0) error(`${base}/formula`, 'нет муки (flour: true) — не от чего считать пекарские проценты');
+
+    const expected = m.pan ? expectedDough(m.pan) : null;
+    const dough = doughGrams(f);
+    if (m.pan && expected !== null && Math.abs(dough - expected) / expected > PAN_LOAD_TOLERANCE) {
+      const count = m.pan.count && m.pan.count > 1 ? ` × ${m.pan.count}` : '';
+      warn(
+        `${base}/pan`,
+        `теста ${Math.round(dough)} г, а по загрузке формы (${m.pan.load} г/л × ${m.pan.volume} л${count}) ждём ≈ ${Math.round(expected)} г`,
+      );
+    }
+
+    m.stages.forEach((stage, si) =>
+      stage.steps.forEach((step, ti) => {
+        const path = `${base}/stages/${si}/steps/${ti}`;
+        if (step.minutes !== undefined && step.minutesMax !== undefined && step.minutesMax <= step.minutes) {
+          error(path, `minutesMax (${step.minutesMax}) должен быть больше minutes (${step.minutes})`);
+        }
+        if (step.temp !== undefined && step.tempMax !== undefined && step.tempMax <= step.temp) {
+          error(path, `tempMax (${step.tempMax}) должен быть больше temp (${step.temp})`);
+        }
+      }),
+    );
+  });
+
+  b.attempts?.forEach((a, i) => {
+    if (a.method !== undefined && !methodIds.has(a.method)) error(`/attempts/${i}/method`, `нет способа «${a.method}»`);
+  });
+
+  return issues;
+}
+
+export function checkBaking(k: Baking, file: string): Issue[] {
+  const issues: Issue[] = [];
+  const error = (path: string, message: string) => issues.push({ severity: 'error', file, path, message });
+  const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
+
+  uniqueIds(k.guides, '/guides', error);
+  k.guides.forEach((g, gi) =>
+    g.sections.forEach((s, si) => {
+      if (!s.text && !s.points) error(`/guides/${gi}/sections/${si}`, `в разделе «${s.title}» нет ни текста, ни пунктов`);
+    }),
+  );
+
+  const items = new Map<string, string>();
+  k.shopping.forEach((group, gi) =>
+    group.items.forEach((item, ii) => {
+      const other = items.get(norm(item.name));
+      if (other) error(`/shopping/${gi}/items/${ii}`, `«${item.name}» уже есть в списке покупок («${other}»)`);
+      else items.set(norm(item.name), group.title);
+    }),
+  );
+
+  const ideas = new Set<string>();
+  k.ideas?.forEach((idea, i) => {
+    if (ideas.has(norm(idea.title))) error(`/ideas/${i}`, `идея «${idea.title}» указана дважды`);
+    ideas.add(norm(idea.title));
+  });
+
+  return issues;
 }
 
 /* ------------------------------------------------------------------ */

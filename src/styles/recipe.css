@@ -426,6 +426,36 @@ li:last-child > .ingredient {
   color: var(--surface);
 }
 
+.step-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Температура шага: теста, расстойки или духовки */
+.step-temp {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 32px;
+  padding: 0 12px 0 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.step-temp svg {
+  width: 16px;
+  height: 16px;
+}
+
+.step.is-done .step-meta {
+  opacity: 0.6;
+}
+
 /* Переключатель */
 .switch {
   display: inline-flex;

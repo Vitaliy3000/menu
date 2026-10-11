@@ -40,7 +40,7 @@ function TimerChip({ timer, now }: { timer: KitchenTimer; now: number }) {
       <button
         class="timer-main"
         type="button"
-        onClick={() => navigate(timer.source.path + (timer.source.stepId ? `?tab=steps&step=${timer.source.stepId}` : ''))}
+        onClick={() => navigate(stepLink(timer.source))}
         title={timer.source.title}
       >
         <span class="timer-label">{timer.label}</span>
@@ -66,4 +66,10 @@ function TimerChip({ timer, now }: { timer: KitchenTimer; now: number }) {
       </div>
     </div>
   );
+}
+
+/** Ссылка на шаг, с которого запущен таймер. В пути уже может быть query (?method=…). */
+function stepLink({ path, stepId }: KitchenTimer['source']): string {
+  if (!stepId) return path;
+  return `${path}${path.includes('?') ? '&' : '?'}tab=steps&step=${encodeURIComponent(stepId)}`;
 }

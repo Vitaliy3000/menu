@@ -1,0 +1,429 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bake",
+  "description": "Рецептура раздела «Выпечка»: формула в граммах (пекарские проценты сайт считает сам), форма, режим по этапам с температурами и журнал пробных выпечек. Самостоятельная сущность: не ссылается на рецепты, техкарты и справочники.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "kind", "description", "methods"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Путь к схеме для подсказок в редакторе. На сайт не влияет."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 80,
+      "description": "Уникальный идентификатор и часть URL. Должен совпадать с именем файла без .json."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "description": "Название по-русски: «Шокупан на юдане». Уникально среди рецептур выпечки."
+    },
+    "original": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 60,
+      "description": "Название в оригинале, если оно отличается: «生食パン · Nama Shokupan», «Pain brioché»."
+    },
+    "kind": {
+      "$ref": "#/$defs/BakeKind"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 600,
+      "description": "Что это за выпечка и чем она хороша. 1–3 предложения."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Свободные теги в нижнем регистре: «форма с крышкой», «холодная ферментация».",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 32,
+        "pattern": "^[^A-ZА-ЯЁ]+$"
+      }
+    },
+    "result": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 800,
+      "description": "Каким должен получиться результат: мякиш, корка, вкус. По нему сверяют готовую выпечку."
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Способы приготовления: прямой, с предферментом. Обычно один; если несколько — на странице переключатель, и у каждого нужно название.",
+      "items": { "$ref": "#/$defs/Method" }
+    },
+    "attempts": {
+      "type": "array",
+      "description": "Журнал пробных выпечек: что пошло не так и что поменять в следующий раз. Показывается перед формулой.",
+      "items": { "$ref": "#/$defs/Attempt" }
+    },
+    "troubleshooting": {
+      "type": "array",
+      "description": "Частые проблемы и их причины.",
+      "items": { "$ref": "#/$defs/Trouble" }
+    },
+    "variations": {
+      "$ref": "#/$defs/Variations"
+    },
+    "tips": {
+      "type": "array",
+      "description": "Советы, замены и объяснения «почему так».",
+      "items": { "type": "string", "minLength": 5 }
+    },
+    "serving": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 600,
+      "description": "Как подавать и хранить."
+    },
+    "sources": {
+      "type": "array",
+      "description": "Откуда взята рецептура.",
+      "items": { "$ref": "#/$defs/Source" }
+    }
+  },
+  "$defs": {
+    "BakeKind": {
+      "title": "BakeKind",
+      "description": "Группа в каталоге: pan — формовой хлеб, hearth — подовый хлеб (на стали или камне), pizza — пицца и фокачча, sweet — сдоба и сладкая выпечка.",
+      "type": "string",
+      "enum": ["pan", "hearth", "pizza", "sweet"]
+    },
+    "Method": {
+      "title": "BakeMethod",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "formula", "stages"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Идентификатор способа, уникальный в рецептуре. Попадает в URL: ?method=straight."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 32,
+          "description": "Название способа: «С предферментом», «Прямой». Обязательно, если способов несколько."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 300,
+          "description": "Короткое пояснение к способу."
+        },
+        "pan": {
+          "$ref": "#/$defs/Pan"
+        },
+        "time": {
+          "$ref": "#/$defs/Time"
+        },
+        "formula": {
+          "$ref": "#/$defs/Formula"
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Этапы работы по порядку.",
+          "items": { "$ref": "#/$defs/Stage" }
+        }
+      }
+    },
+    "Pan": {
+      "title": "Pan",
+      "description": "Форма или противень, на которые рассчитана формула.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60,
+          "description": "«Форма Pullman с крышкой», «Форма Agnelli»."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "Сколько форм на один замес. По умолчанию 1."
+        },
+        "size": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Размер: «30 × 23 см», «95 × 209 × 86 мм внутри»."
+        },
+        "volume": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 20,
+          "description": "Объём одной формы, л."
+        },
+        "lid": {
+          "type": "boolean",
+          "description": "true — выпекается под крышкой, false — открытая форма."
+        },
+        "load": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 600,
+          "description": "Загрузка: граммов теста на литр объёма формы. Валидатор сверяет её с весом теста (допуск 3 %)."
+        }
+      },
+      "dependentRequired": {
+        "load": ["volume"]
+      }
+    },
+    "Time": {
+      "title": "BakeTime",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total"],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Производственное время, мин: от замеса до выхода из духовки."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Что не входит в total: «+ 5 ч созревания предфермента»."
+        }
+      }
+    },
+    "Formula": {
+      "title": "Formula",
+      "description": "Состав на один замес (на pan.count форм).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ingredients"],
+      "properties": {
+        "parts": {
+          "type": "array",
+          "description": "Части, которые замешивают заранее: предфермент, юдане, автолиз. Финальное тесто = всего − части, а каждая часть входит в финальное тесто целиком.",
+          "items": { "$ref": "#/$defs/Part" }
+        },
+        "ingredients": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/Ingredient" }
+        }
+      }
+    },
+    "Part": {
+      "title": "DoughPart",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "Ключ для ingredient.parts."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 24,
+          "description": "«Предфермент», «Юдане»."
+        }
+      }
+    },
+    "Ingredient": {
+      "title": "BakeIngredient",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "grams"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60,
+          "description": "Название продукта: «Сильная хлебная мука»."
+        },
+        "grams": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Всего граммов на замес, включая то, что уходит в части."
+        },
+        "flour": {
+          "type": "boolean",
+          "description": "Мука: от суммы такой муки считаются пекарские проценты (мука = 100 %). Хотя бы одна мука в формуле обязательна."
+        },
+        "parts": {
+          "type": "object",
+          "description": "Сколько граммов уходит в каждую часть: {\"yudane\": 65}. Остаток идёт в финальное тесто.",
+          "propertyNames": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "additionalProperties": { "type": "number", "exclusiveMinimum": 0 }
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Уточнение: «12–13,5 % белка», «холодная»."
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Можно не добавлять. В вес теста всё равно входит."
+        }
+      }
+    },
+    "Stage": {
+      "title": "BakeStage",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "steps"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40,
+          "description": "«Предфермент», «Замес», «Расстойка и выпечка»."
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Step" }
+        }
+      }
+    },
+    "Step": {
+      "title": "BakeStep",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Что сделать. Одно действие или короткая связка действий."
+        },
+        "minutes": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Сколько длится шаг, мин. На это время ставится таймер."
+        },
+        "minutesMax": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Верхняя граница: minutes=50, minutesMax=60 → «50–60 мин». Таймер — на нижнюю."
+        },
+        "temp": {
+          "type": "number",
+          "minimum": -30,
+          "maximum": 500,
+          "description": "Температура, °C: теста, расстойки или духовки — что именно, сказано в тексте шага."
+        },
+        "tempMax": {
+          "type": "number",
+          "minimum": -30,
+          "maximum": 500,
+          "description": "Верхняя граница: temp=26, tempMax=28 → «26–28 °C»."
+        },
+        "tip": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Подсказка к шагу: признак готовности, частая ошибка."
+        }
+      },
+      "dependentRequired": {
+        "minutesMax": ["minutes"],
+        "tempMax": ["temp"]
+      }
+    },
+    "Attempt": {
+      "title": "Attempt",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "notes"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40,
+          "description": "«Попытка 1»."
+        },
+        "method": {
+          "type": "string",
+          "description": "id способа, если заметки про конкретный способ."
+        },
+        "outcome": {
+          "type": "string",
+          "enum": ["ok", "issues", "failed"],
+          "description": "ok — получилось, issues — получилось с замечаниями, failed — не получилось."
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Что заметили и что поменять.",
+          "items": { "type": "string", "minLength": 5 }
+        }
+      }
+    },
+    "Trouble": {
+      "title": "Trouble",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["problem", "fix"],
+      "properties": {
+        "problem": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 80,
+          "description": "Симптом: «Корка лопнула»."
+        },
+        "fix": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Причины и что делать."
+        }
+      }
+    },
+    "Variations": {
+      "title": "Variations",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "items"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40,
+          "description": "Заголовок раздела: «Начинки»."
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string", "minLength": 2, "maxLength": 60 },
+              "text": { "type": "string", "minLength": 3, "maxLength": 200 }
+            }
+          }
+        }
+      }
+    },
+    "Source": {
+      "title": "BakeSource",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

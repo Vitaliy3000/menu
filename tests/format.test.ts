@@ -1,5 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, formatAmount, formatCountdown, formatDayMonth, formatDuration, formatMoney, formatWeekdayShort, plural, roundAmount, typograph } from '../src/lib/format.ts';
+import {
+  addDays,
+  formatAmount,
+  formatCountdown,
+  formatDayMonth,
+  formatDuration,
+  formatDurationRange,
+  formatMoney,
+  formatTemp,
+  formatWeekdayShort,
+  plural,
+  roundAmount,
+  typograph,
+} from '../src/lib/format.ts';
 
 const NB = ' ';
 
@@ -59,6 +72,20 @@ describe('время и даты', () => {
     expect(formatDuration(40)).toBe(`40${NB}мин`);
     expect(formatDuration(65)).toBe(`1${NB}ч${NB}05${NB}мин`);
     expect(formatDuration(120)).toBe(`2${NB}ч`);
+  });
+
+  it('formatDurationRange', () => {
+    expect(formatDurationRange(50)).toBe(`50${NB}мин`);
+    expect(formatDurationRange(50, 60)).toBe(`50–60${NB}мин`);
+    expect(formatDurationRange(480, 960)).toBe(`8–16${NB}ч`);
+    expect(formatDurationRange(45, 70)).toBe(`45–70${NB}мин`);
+    expect(formatDurationRange(90, 120)).toBe(`1,5–2${NB}ч`);
+    expect(formatDurationRange(50, 100)).toBe(`50${NB}мин${NB}– 1${NB}ч${NB}40${NB}мин`);
+  });
+
+  it('formatTemp', () => {
+    expect(formatTemp(27)).toBe(`27${NB}°C`);
+    expect(formatTemp(26, 28)).toBe(`26–28${NB}°C`);
   });
 
   it('formatCountdown', () => {

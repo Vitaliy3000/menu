@@ -1,8 +1,10 @@
 import type { JSX } from 'preact';
 import { useEffect } from 'preact/hooks';
 import { Layout } from './components/Layout.tsx';
-import { getPlan, getRecipe } from './data/index.ts';
+import { getBake, getPlan, getRecipe } from './data/index.ts';
 import { match, useLocation } from './lib/router.tsx';
+import { BakePage } from './pages/BakePage.tsx';
+import { BakingPage } from './pages/BakingPage.tsx';
 import { KitchenPage } from './pages/KitchenPage.tsx';
 import { NotFoundPage } from './pages/NotFoundPage.tsx';
 import { PlanPage } from './pages/PlanPage.tsx';
@@ -27,6 +29,7 @@ function route(path: string): { title: string | null; view: JSX.Element } {
   if (path === '/') return { title: null, view: <RecipesPage /> };
   if (path === '/plans') return { title: 'Техкарты', view: <PlansPage /> };
   if (path === '/kitchen') return { title: 'Кухня', view: <KitchenPage /> };
+  if (path === '/baking') return { title: 'Выпечка', view: <BakingPage /> };
 
   const recipeId = match('/recipes/:id', path)?.id;
   if (recipeId) {
@@ -38,6 +41,12 @@ function route(path: string): { title: string | null; view: JSX.Element } {
   if (planId) {
     const plan = getPlan(planId);
     return plan ? { title: plan.title, view: <PlanPage key={plan.id} plan={plan} /> } : notFound;
+  }
+
+  const bakeId = match('/baking/:id', path)?.id;
+  if (bakeId) {
+    const bake = getBake(bakeId);
+    return bake ? { title: bake.title, view: <BakePage key={bake.id} bake={bake} /> } : notFound;
   }
 
   return notFound;
