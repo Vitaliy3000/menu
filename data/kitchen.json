@@ -199,6 +199,8 @@
     { "id": "plastic-boxes", "name": "Пластиковый контейнер", "kind": "container", "count": 5, "spec": "5,2 л" },
     { "id": "dough-boxes", "name": "Контейнер для теста", "kind": "container", "count": 3, "spec": "Deegkrat Basic Line, 30 × 40 × 7 см", "note": "Крышка одна — на верхний: контейнеры ставятся друг на друга" },
     { "id": "bottles-500", "name": "Стеклянная бутылка", "kind": "container", "count": 2, "spec": "500 мл" },
+    { "id": "sauce-jars-250", "name": "Баночка для соусов", "kind": "container", "spec": "250 мл" },
+    { "id": "sauce-jars-500", "name": "Баночка для соусов", "kind": "container", "spec": "500 мл" },
     { "id": "squeeze-bottles", "name": "Бутылка-дозатор", "kind": "container", "count": 10 },
     { "id": "cake-keeper", "name": "Контейнер для торта и пирога", "kind": "container", "spec": "Ø 27 см" }
   ],
