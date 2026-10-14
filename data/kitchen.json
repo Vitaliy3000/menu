@@ -141,6 +141,7 @@
     { "id": "pyrex-rect", "name": "Стеклянная форма Pyrex", "kind": "cookware", "spec": "Прямоугольная, ≈ 25 × 35 см" },
     { "id": "pyrex-oval", "name": "Стеклянная форма Pyrex", "kind": "cookware", "spec": "Овальная, ≈ 25 × 35 см" },
     { "id": "oven-tray", "name": "Стеклянный противень", "kind": "cookware", "spec": "Низкие борта, из комплекта духовки" },
+    { "id": "oven-tray-30x40", "name": "Противень духовки", "kind": "cookware", "count": 2, "spec": "30 × 40 см, штатный" },
     { "id": "tray-30", "name": "Эмалированный противень", "kind": "cookware", "spec": "30 × 20 см" },
     { "id": "tray-23", "name": "Эмалированный противень", "kind": "cookware", "spec": "23 × 15 см" },
     { "id": "springform-245", "name": "Разъёмная форма", "kind": "cookware", "spec": "Ø 24,5 см" },
@@ -169,10 +170,12 @@
     { "id": "torch", "name": "Кулинарная горелка", "kind": "tool" },
     { "id": "bowls", "name": "Миски", "kind": "tool", "spec": "1 огромная, 4 по ≈ 2 л, много мелких разных размеров" },
     { "id": "colander", "name": "Дуршлаг", "kind": "tool" },
+    { "id": "sink-colander", "name": "Дуршлаг-решётка для раковины", "kind": "tool", "spec": "IKEA, большой, с крупными отверстиями", "note": "Мыть овощи и всё, что промывают прямо в раковине" },
     { "id": "sieves", "name": "Сито", "kind": "tool", "count": 2, "spec": "Большое и маленькое" },
     { "id": "salad-spinner", "name": "Центрифуга для салата", "kind": "tool" },
     { "id": "skimmer", "name": "Шумовка", "kind": "tool", "note": "Вынимать пасту и картофель из кипятка: горячую воду в раковину не сливаем" },
     { "id": "trivets", "name": "Подставки под горячее", "kind": "tool", "count": 2 },
+    { "id": "cooling-rack", "name": "Решётка для остывания", "kind": "tool", "spec": "25 × 40 см" },
     { "id": "whisk", "name": "Венчик", "kind": "tool" },
     { "id": "ladle", "name": "Половник", "kind": "tool" },
     { "id": "spatula", "name": "Лопатка", "kind": "tool" },
@@ -195,7 +198,8 @@
     { "id": "plastic-boxes", "name": "Пластиковый контейнер", "kind": "container", "count": 5, "spec": "5,2 л" },
     { "id": "dough-boxes", "name": "Контейнер для теста", "kind": "container", "count": 3, "spec": "Deegkrat Basic Line, 30 × 40 × 7 см", "note": "Крышка одна — на верхний: контейнеры ставятся друг на друга" },
     { "id": "bottles-500", "name": "Стеклянная бутылка", "kind": "container", "count": 2, "spec": "500 мл" },
-    { "id": "squeeze-bottles", "name": "Бутылка-дозатор", "kind": "container", "count": 10 }
+    { "id": "squeeze-bottles", "name": "Бутылка-дозатор", "kind": "container", "count": 10 },
+    { "id": "cake-keeper", "name": "Контейнер для торта и пирога", "kind": "container", "spec": "Ø 27 см" }
   ],
   "storage": [
     { "id": "fridge", "name": "Холодильник", "kind": "fridge", "capacity": "195 л полезного объёма", "free": "≈ 156 л (80 %)", "note": "ATAG KS12178B, в одном корпусе с морозилкой" },
