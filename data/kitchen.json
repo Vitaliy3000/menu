@@ -134,6 +134,7 @@
     { "id": "pot-2", "name": "Кастрюля с крышкой", "kind": "cookware", "spec": "2 л" },
     { "id": "pot-4", "name": "Кастрюля с крышкой", "kind": "cookware", "spec": "4 л" },
     { "id": "pot-12", "name": "Кастрюля с крышкой", "kind": "cookware", "spec": "12 л" },
+    { "id": "steamer-insert", "name": "Вставка для готовки на пару", "kind": "cookware", "spec": "IKEA, сито-вставка в кастрюлю" },
     { "id": "saute", "name": "Сотейник с крышкой", "kind": "cookware", "spec": "Нержавейка, Ø 28 см" },
     { "id": "pan-24", "name": "Сковорода", "kind": "cookware", "spec": "Нержавейка, Ø 24 см, без крышки" },
     { "id": "pan-20", "name": "Сковорода", "kind": "cookware", "spec": "Антипригарная, Ø 20 см" },
