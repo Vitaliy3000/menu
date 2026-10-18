@@ -55,7 +55,7 @@ export function BakingPage() {
           ))
         )}
         <p class="faint bake-more">
-          Сладкая выпечка — круассаны, эклеры, маффины, шарлотка — в <Link to="/?cat=baking">рецептах</Link>.
+          Сладкая выпечка — эклеры, маффины, шарлотка — в <Link to="/?cat=baking">рецептах</Link>.
         </p>
       </section>
 
