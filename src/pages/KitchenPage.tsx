@@ -3,7 +3,7 @@ import { SectionNav } from '../components/SectionNav.tsx';
 import { kitchen } from '../data/index.ts';
 import { AVOID_LEVELS, AVOID_ORDER, STORAGE_PLACES } from '../lib/kitchen.ts';
 import { DISH_TONES, EQUIPMENT_KINDS, EQUIPMENT_ORDER } from '../lib/labels.ts';
-import type { Person } from '../types/kitchen.gen.ts';
+import type { Person, ProductGuide } from '../types/kitchen.gen.ts';
 import { NotFoundPage } from './NotFoundPage.tsx';
 
 export function KitchenPage() {
@@ -12,6 +12,7 @@ export function KitchenPage() {
   const sections = [
     { id: 'people', label: 'Кто что не ест' },
     ...(k.planRules?.length ? [{ id: 'rules', label: 'Правила техкарт' }] : []),
+    ...(k.products ? [{ id: 'products', label: 'Продукты и бренды' }] : []),
     { id: 'equipment', label: 'Оборудование' },
     { id: 'storage', label: 'Хранение' },
     ...(k.surplus?.length ? [{ id: 'surplus', label: 'Излишки' }] : []),
@@ -22,8 +23,8 @@ export function KitchenPage() {
       <header class="page-head">
         <h1 class="display h1">Кухня</h1>
         <p class="lead">
-          Справочник для составления техкарт: кто что не ест, по каким правилам составляем, чем готовим, куда
-          убираем и что из запасов пора израсходовать. Техкарты на него не
+          Справочник для составления техкарт: кто что не ест, по каким правилам составляем, какие продукты и
+          марки берём, чем готовим, куда убираем и что из запасов пора израсходовать. Техкарты на него не
           ссылаются — он нужен, чтобы не повторять всё это в каждом промпте.
         </p>
         {k.draft && (
@@ -65,6 +66,8 @@ export function KitchenPage() {
           </div>
         </section>
       )}
+
+      {k.products && <ProductsSection guide={k.products} />}
 
       <section id="equipment" class="kitchen-section">
         <h2 class="display h2 section-heading">Оборудование</h2>
@@ -128,12 +131,12 @@ export function KitchenPage() {
           <h2 class="display h2 section-heading">Излишки</h2>
           <p class="muted surplus-lead">Уже есть дома — желательно включить в меню следующих техкарт и не закупать заново.</p>
           <article class="card card-pad surplus-card">
-            <ul>
+            <ul class="line-list">
               {k.surplus.map((s) => (
                 <li key={s.item}>
-                  <span class="surplus-item">{s.item}</span>
+                  <span class="line-item">{s.item}</span>
                   <span class="surplus-amount num">{s.amount}</span>
-                  {s.note && <span class="surplus-note">{s.note}</span>}
+                  {s.note && <span class="line-note">{s.note}</span>}
                 </li>
               ))}
             </ul>
@@ -141,6 +144,51 @@ export function KitchenPage() {
         </section>
       )}
     </div>
+  );
+}
+
+function ProductsSection({ guide }: { guide: ProductGuide }) {
+  return (
+    <section id="products" class="kitchen-section">
+      <h2 class="display h2 section-heading">Продукты и бренды</h2>
+      <div class="rules-grid">
+        <article class="card card-pad rules-card">
+          <h3 class="info-title">Как выбираем</h3>
+          <ul class="bullets">
+            {guide.rules.map((rule) => (
+              <li key={rule}>{rule}</li>
+            ))}
+          </ul>
+        </article>
+        {guide.choose.length > 0 && (
+          <article class="card card-pad rules-card">
+            <h3 class="info-title">Выбираем</h3>
+            <ul class="line-list">
+              {guide.choose.map((c) => (
+                <li key={c.item}>
+                  <span class="line-item">{c.item}</span>
+                  <span>{c.pick}</span>
+                  {c.note && <span class="line-note">{c.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        )}
+        {guide.avoid.length > 0 && (
+          <article class="card card-pad rules-card">
+            <h3 class="info-title">Избегаем</h3>
+            <ul class="line-list">
+              {guide.avoid.map((a) => (
+                <li key={a.item}>
+                  <span class="line-item">{a.item}</span>
+                  {a.note && <span class="line-note">{a.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        )}
+      </div>
+    </section>
   );
 }
 

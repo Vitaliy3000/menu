@@ -148,6 +148,38 @@
   line-height: 1.45;
 }
 
+/* Строки с разделителями: продукты и бренды, излишки */
+.line-list {
+  display: grid;
+}
+
+.line-list li {
+  display: grid;
+  gap: 2px 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  line-height: 1.4;
+}
+
+.line-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.line-list li:last-child {
+  padding-bottom: 0;
+}
+
+.line-item {
+  font-weight: 600;
+}
+
+.line-note {
+  grid-column: 1 / -1;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
 /* Хранение */
 .storage-grid {
   display: grid;
@@ -204,39 +236,11 @@
   max-width: 560px;
 }
 
-.surplus-card ul {
-  display: grid;
-}
-
 .surplus-card li {
-  display: grid;
   grid-template-columns: 1fr auto;
-  gap: 2px 16px;
-  padding: 10px 0;
-  border-top: 1px solid var(--line);
-  line-height: 1.4;
-}
-
-.surplus-card li:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.surplus-card li:last-child {
-  padding-bottom: 0;
-}
-
-.surplus-item {
-  font-weight: 600;
 }
 
 .surplus-amount {
   color: var(--ink-2);
   white-space: nowrap;
-}
-
-.surplus-note {
-  grid-column: 1 / -1;
-  font-size: 0.88rem;
-  color: var(--ink-2);
 }

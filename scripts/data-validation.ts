@@ -276,25 +276,17 @@ export function checkUniqueTitles(docs: { doc: { title: string }; file: string }
 export function checkKitchen(k: Kitchen, file: string): Issue[] {
   const issues: Issue[] = [];
   const error = (path: string, message: string) => issues.push({ severity: 'error', file, path, message });
-  const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
 
   uniqueIds(k.people, '/people', error);
   uniqueIds(k.equipment, '/equipment', error);
   uniqueIds(k.storage, '/storage', error);
 
-  k.people.forEach((person, i) => {
-    const seen = new Set<string>();
-    person.avoid.forEach((a, j) => {
-      if (seen.has(norm(a.item))) error(`/people/${i}/avoid/${j}`, `«${a.item}» у ${person.name} указан дважды`);
-      seen.add(norm(a.item));
-    });
-  });
-
-  const surplus = new Set<string>();
-  k.surplus?.forEach((s, i) => {
-    if (surplus.has(norm(s.item))) error(`/surplus/${i}`, `«${s.item}» в излишках указан дважды`);
-    surplus.add(norm(s.item));
-  });
+  k.people.forEach((person, i) => uniqueItems(person.avoid, `/people/${i}/avoid`, `у ${person.name}`, error));
+  uniqueItems(k.surplus ?? [], '/surplus', 'в излишках', error);
+  if (k.products) {
+    uniqueItems(k.products.choose, '/products/choose', 'в «Выбираем»', error);
+    uniqueItems(k.products.avoid, '/products/avoid', 'в «Избегаем»', error);
+  }
 
   return issues;
 }
@@ -664,6 +656,20 @@ function uniqueIds(
     ids.add(item.id);
   });
   return ids;
+}
+
+function uniqueItems(
+  items: { item: string }[],
+  path: string,
+  where: string,
+  error: (path: string, message: string) => void,
+) {
+  const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
+  const seen = new Set<string>();
+  items.forEach(({ item }, i) => {
+    if (seen.has(norm(item))) error(`${path}/${i}`, `«${item}» ${where} указан дважды`);
+    seen.add(norm(item));
+  });
 }
 
 const BASE_UNIT: Partial<Record<Unit, [Unit, number]>> = {

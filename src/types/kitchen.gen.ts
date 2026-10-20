@@ -26,7 +26,7 @@ export type EquipmentKind = 'oven' | 'hob' | 'appliance' | 'cookware' | 'tool' |
 export type StorageKind = 'fridge' | 'freezer' | 'pantry';
 
 /**
- * Справочник кухни: кто что не ест, правила составления техкарт, оборудование, места хранения и излишки продуктов. На него опираются при составлении техкарт (CookPlan) вне сайта — чтобы не повторять всё это в каждом промпте. Техкарты на справочник не ссылаются и остаются самодостаточными.
+ * Справочник кухни: кто что не ест, правила составления техкарт, правила подбора продуктов и брендов, оборудование, места хранения и излишки продуктов. На него опираются при составлении техкарт (CookPlan) вне сайта — чтобы не повторять всё это в каждом промпте. Техкарты на справочник не ссылаются и остаются самодостаточными.
  */
 export interface Kitchen {
   /**
@@ -44,9 +44,10 @@ export interface Kitchen {
    */
   people: [Person, ...Person[]];
   /**
-   * Правила составления техкарт по темам: продукты, питание, приёмы пищи, время и техника, фасовка.
+   * Правила составления техкарт по темам: меню и закупка, питание, приёмы пищи, время и техника, фасовка.
    */
   planRules?: RuleGroup[];
+  products?: ProductGuide;
   /**
    * Техника и многоразовая посуда, которые есть на кухне.
    */
@@ -101,6 +102,64 @@ export interface RuleGroup {
    * @minItems 1
    */
   rules: [string, ...string[]];
+}
+/**
+ * Продукты и бренды: как выбираем в магазине, что берём всегда и чего избегаем.
+ *
+ * This interface was referenced by `Kitchen`'s JSON-Schema
+ * via the `definition` "ProductGuide".
+ */
+export interface ProductGuide {
+  /**
+   * Общие правила подбора: эмблемы, маркировки, производители. По одному на строку.
+   *
+   * @minItems 1
+   */
+  rules: [string, ...string[]];
+  /**
+   * Что берём всегда. Важнее общих правил.
+   */
+  choose: ProductChoice[];
+  /**
+   * Продукты и марки, которых избегаем.
+   */
+  avoid: ProductAvoid[];
+}
+/**
+ * Продукт и то, что берём под него.
+ *
+ * This interface was referenced by `Kitchen`'s JSON-Schema
+ * via the `definition` "ProductChoice".
+ */
+export interface ProductChoice {
+  /**
+   * Продукт: «Сухая паста», «Чёрные оливки без косточки».
+   */
+  item: string;
+  /**
+   * Марка или конкретный товар — с названием, как на упаковке.
+   */
+  pick: string;
+  /**
+   * Где купить, фасовка, что не годится взамен.
+   */
+  note?: string;
+}
+/**
+ * Продукт или марка, которых избегаем.
+ *
+ * This interface was referenced by `Kitchen`'s JSON-Schema
+ * via the `definition` "ProductAvoid".
+ */
+export interface ProductAvoid {
+  /**
+   * Продукт или марка: «Курица AH Scharrel».
+   */
+  item: string;
+  /**
+   * Почему, насколько строго и что берём взамен.
+   */
+  note?: string;
 }
 /**
  * This interface was referenced by `Kitchen`'s JSON-Schema

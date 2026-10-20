@@ -20,6 +20,11 @@ const kitchen = (): Kitchen => ({
   equipment: [{ id: 'oven', name: 'Духовка', kind: 'oven', spec: '60 л' }],
   storage: [{ id: 'freezer', name: 'Морозилка', kind: 'freezer', free: '≈ 20 л' }],
   surplus: [{ item: 'Рис для суши', amount: '6 кг' }],
+  products: {
+    rules: ['Фарш — только био'],
+    choose: [{ item: 'Сухая паста', pick: 'De Cecco' }],
+    avoid: [{ item: 'Курица AH Scharrel', note: 'Beter Leven 1 ster' }],
+  },
 });
 
 const file = 'data/kitchen.json';
@@ -53,9 +58,13 @@ describe('справочник кухни', () => {
     k.equipment.push({ id: 'oven', name: 'Вторая духовка', kind: 'oven' });
     k.people[0]!.avoid.push({ item: 'кинза', level: 'never' });
     k.surplus!.push({ item: 'рис для суши', amount: '1 кг' });
+    k.products!.choose.push({ item: 'сухая паста', pick: 'Rummo' });
+    k.products!.avoid.push({ item: 'Курица AH scharrel' });
     const issues = checkKitchen(k, file);
     expect(messages(issues)).toContain('id «oven» повторяется');
     expect(messages(issues)).toContain('«кинза» у Виталий указан дважды');
     expect(messages(issues)).toContain('«рис для суши» в излишках указан дважды');
+    expect(messages(issues)).toContain('«сухая паста» в «Выбираем» указан дважды');
+    expect(messages(issues)).toContain('«Курица AH scharrel» в «Избегаем» указан дважды');
   });
 });
