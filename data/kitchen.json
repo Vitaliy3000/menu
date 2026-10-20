@@ -126,7 +126,7 @@
       { "item": "Чёрные оливки без косточки", "pick": "Carbonell Zwarte olijven zonder pit", "note": "Банка 340 г, есть в AH" }
     ],
     "avoid": [
-      { "item": "Собственная марка AH", "note": "AH, AH Biologisch, AH Excellent, AH Terra — стараемся не брать: сначала ищем другую марку, которая проходит правила" },
+      { "item": "Марка AH: соевое молоко, кварк, рис, йогурт, мягкий сыр", "note": "AH, AH Biologisch, AH Excellent, AH Terra, De Zaanse Hoeve — берём другую марку, даже без био. Ветчина, яйца, гауда, мясо, рыба, хлеб, овощи и фрукты AH — можно" },
       { "item": "Курица AH Scharrel", "note": "Beter Leven 1 ster — берём AH Biologisch (3 ster)" },
       { "item": "Куриное бедро Sligro", "note": "Всё с Beter Leven 1 ster" }
     ]
