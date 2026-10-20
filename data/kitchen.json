@@ -26,7 +26,8 @@
         { "item": "Гречка", "level": "never" },
         { "item": "Киви", "level": "never" },
         { "item": "Шпинат", "level": "never" },
-        { "item": "Яйца всмятку", "level": "never" }
+        { "item": "Яйца всмятку", "level": "never" },
+        { "item": "Бренд Pur Natur Biologische", "level": "dislike" }
       ]
     }
   ],
