@@ -381,7 +381,54 @@
         },
         "note": {
           "type": "string",
-          "maxLength": 160
+          "maxLength": 160,
+          "description": "Уточнение: «по 400 г». Дни рациона — в meals, не здесь."
+        },
+        "person": {
+          "$ref": "#/$defs/LocalId",
+          "description": "Чьи порции в этих контейнерах — id из ration.people. Задаётся вместе с meals, только если есть рацион."
+        },
+        "meals": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Какие обеды и ужины рациона лежат в этих контейнерах — по одному на контейнер, поэтому их столько же, сколько count. По ним рацион показывает, откуда взять блюдо и что вечером переложить из морозилки.",
+          "items": {
+            "$ref": "#/$defs/PackMeal"
+          }
+        }
+      },
+      "dependentRequired": {
+        "person": [
+          "meals"
+        ],
+        "meals": [
+          "person"
+        ]
+      }
+    },
+    "PackMeal": {
+      "title": "PackMeal",
+      "description": "Обед или ужин из рациона, который лежит в контейнере.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "day",
+        "meal"
+      ],
+      "properties": {
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Номер дня рациона."
+        },
+        "meal": {
+          "type": "string",
+          "enum": [
+            "lunch",
+            "dinner"
+          ],
+          "description": "lunch — обед, dinner — ужин."
         }
       }
     },
@@ -717,7 +764,7 @@
     },
     "Ration": {
       "title": "Ration",
-      "description": "Рацион на срок техкарты: кто что ест по дням. Обеды и ужины — блюда этой техкарты, завтраки и перекусы — из extras. Итоги дня сайт считает сам, валидатор сверяет их с целями.",
+      "description": "Рацион на срок техкарты: меню каждого человека по дням. Обеды и ужины — блюда этой техкарты: откуда их взять, сайт берёт из фасовки (Packaging.meals), как греть — из порции. Завтраки и перекусы — из extras. Итоги дня сайт считает сам, валидатор сверяет их с целями.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -747,14 +794,6 @@
           "description": "Дни по порядку, начиная с 1-го — следующего после дня готовки.",
           "items": {
             "$ref": "#/$defs/RationDay"
-          }
-        },
-        "notes": {
-          "type": "array",
-          "description": "Как пользоваться рационом: что можно менять местами, чем заменить.",
-          "items": {
-            "type": "string",
-            "minLength": 5
           }
         }
       }
@@ -827,7 +866,8 @@
         "kcal",
         "protein",
         "fat",
-        "carbs"
+        "carbs",
+        "reheat"
       ],
       "properties": {
         "dish": {
@@ -855,6 +895,12 @@
         "carbs": {
           "type": "number",
           "minimum": 0
+        },
+        "reheat": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 300,
+          "description": "Как разогреть именно эту порцию: где, сколько минут, что сделать до и во время. Откуда взять контейнер, писать не нужно — это видно из фасовки."
         }
       },
       "description": "Порция человека из блюда. Её КБЖУ показываются и в рационе, и в карточке блюда."
@@ -893,6 +939,12 @@
           "items": {
             "$ref": "#/$defs/RationServing"
           }
+        },
+        "how": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 400,
+          "description": "Откуда что взять и как приготовить — общее для всех; количества каждого — в servings."
         }
       }
     },
@@ -915,7 +967,7 @@
           "type": "string",
           "minLength": 2,
           "maxLength": 240,
-          "description": "Что именно и сколько: «250 г кварка, 40 г овсянки…»."
+          "description": "Что именно и сколько: «3 яйца, 20 г сыра, тост с маслом». Как готовить — в how."
         },
         "kcal": {
           "type": "number",
@@ -965,7 +1017,14 @@
         },
         "note": {
           "type": "string",
-          "maxLength": 160
+          "maxLength": 160,
+          "description": "Что в этот день не как обычно: «шнитт-лук — из морозилки, режем замороженным»."
+        },
+        "evening": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 200,
+          "description": "Что ещё сделать вечером для завтрашнего дня. Обед и ужин из морозилки сюда не писать — их сайт выводит сам из фасовки."
         }
       }
     },

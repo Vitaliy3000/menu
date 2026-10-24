@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { doneStepCount, gotCount, mySteps, roleTimes, shoppingKeys } from '../src/lib/plan.ts';
 import type { PlanProgress } from '../src/lib/progress.ts';
-import { personDay, rationToday } from '../src/lib/ration.ts';
+import { personDay, rationToday, thawTonight } from '../src/lib/ration.ts';
 import type { CookPlan } from '../src/types/cook-plan.gen.ts';
 
 const plan: CookPlan = {
@@ -18,7 +18,18 @@ const plan: CookPlan = {
     { id: 'oven', name: 'Духовка', kind: 'oven' },
     { id: 'foil', name: 'Фольга', kind: 'consumable', buy: true },
   ],
-  dishes: [{ id: 'soup', name: 'Суп', yield: { amount: 2, unit: 'l' }, portions: 4, packaging: [{ container: 'Банка 1 л', count: 2, storage: 'fridge' }] }],
+  dishes: [
+    {
+      id: 'soup',
+      name: 'Суп',
+      yield: { amount: 2, unit: 'l' },
+      portions: 4,
+      packaging: [
+        { container: 'Банка 1 л', count: 2, storage: 'fridge', person: 'ann', meals: [{ day: 1, meal: 'lunch' }, { day: 1, meal: 'dinner' }] },
+        { container: 'Пакет', count: 2, storage: 'freezer', person: 'ann', meals: [{ day: 2, meal: 'lunch' }, { day: 2, meal: 'dinner' }] },
+      ],
+    },
+  ],
   ingredients: [{ id: 'carrot', name: 'Морковь', amount: 1, unit: 'kg', section: 'produce' }],
   steps: [
     { id: 'cut', at: 0, duration: 10, title: 'Нарезать морковь', role: 'helper', dishes: ['soup'] },
@@ -26,12 +37,22 @@ const plan: CookPlan = {
     { id: 'wash', at: 10, duration: 10, title: 'Помыть посуду', role: 'helper' },
   ],
   ration: {
-    people: [{ id: 'ann', name: 'Аня', target: { kcal: 900 }, portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25 }] }],
+    people: [
+      {
+        id: 'ann',
+        name: 'Аня',
+        target: { kcal: 900 },
+        portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25, reheat: 'В микроволновке 3 минуты' }],
+      },
+    ],
     extras: [
-      { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
+      { id: 'porridge', name: 'Каша', meal: 'breakfast', how: 'Сварить на воде', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
       { id: 'shake', name: 'Коктейль', meal: 'snack', servings: [{ person: 'bob', text: '30 г протеина', kcal: 120, protein: 24 }] },
     ],
-    days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: ['shake'] }],
+    days: [
+      { day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: ['shake'] },
+      { day: 2, lunch: 'soup', dinner: 'soup' },
+    ],
   },
 };
 
@@ -89,6 +110,22 @@ describe('рацион', () => {
     expect(day.lines.map((l) => l.meal)).toEqual(['breakfast', 'lunch', 'dinner']);
     expect(day.kcal).toBe(850);
     expect(day.protein).toBe(50);
+  });
+
+  it('у обеда и ужина — контейнер из фасовки и как греть, у завтрака — как готовить', () => {
+    const [breakfast, lunch] = personDay(plan, plan.ration!, plan.ration!.days[0]!, 'ann').lines;
+    expect(breakfast).toMatchObject({ how: 'Сварить на воде' });
+    expect(breakfast!.pack).toBeUndefined();
+    expect(lunch).toMatchObject({ how: 'В микроволновке 3 минуты', pack: { container: 'Банка 1 л', storage: 'fridge' } });
+  });
+
+  it('вечером — переложить из морозилки завтрашние обед и ужин', () => {
+    const [day1, day2] = plan.ration!.days;
+    expect(thawTonight(plan, plan.ration!, day1, 'ann').map((l) => [l.meal, l.pack.container])).toEqual([
+      ['lunch', 'Пакет'],
+      ['dinner', 'Пакет'],
+    ]);
+    expect(thawTonight(plan, plan.ration!, day2!, 'ann')).toEqual([]);
   });
 
   it('день рациона считается от даты старта готовки', () => {

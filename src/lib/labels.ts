@@ -32,6 +32,7 @@ import {
 import type { Diet, Difficulty, RecipeCategory, ReheatMethod } from '../types/recipe.gen.ts';
 import type { EquipmentKind, ShopSection, StorageKind } from '../types/cook-plan.gen.ts';
 import type { Attempt, BakeKind } from '../types/bake.gen.ts';
+import type { MealKind } from './ration.ts';
 
 export interface CategoryMeta {
   label: string;
@@ -87,6 +88,13 @@ export const STORAGE: Record<StorageKind, { label: string; icon: LucideIcon }> =
   freezer: { label: 'Морозилка', icon: Snowflake },
   pantry: { label: 'Шкаф', icon: Archive },
   serve: { label: 'Подать', icon: Utensils },
+};
+
+export const MEALS: Record<MealKind, string> = {
+  breakfast: 'Завтрак',
+  lunch: 'Обед',
+  dinner: 'Ужин',
+  snack: 'Перекус',
 };
 
 export const SHOP_SECTIONS: Record<ShopSection, string> = {

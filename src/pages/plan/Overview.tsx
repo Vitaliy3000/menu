@@ -1,8 +1,8 @@
 import { Check, Info, Lightbulb, Users } from 'lucide-preact';
 import { addDays, countLabel, formatAmount, formatDayMonth, formatNumber, formatWeekdayShort } from '../../lib/format.ts';
-import { EQUIPMENT_KINDS, EQUIPMENT_ORDER, STORAGE } from '../../lib/labels.ts';
+import { EQUIPMENT_KINDS, EQUIPMENT_ORDER, MEALS, STORAGE } from '../../lib/labels.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
-import type { CookPlan, Dish, Packaging, PlanNutrition } from '../../types/cook-plan.gen.ts';
+import type { CookPlan, Dish, PackMeal, Packaging, PlanNutrition } from '../../types/cook-plan.gen.ts';
 import { UsesList } from './StepParts.tsx';
 
 interface Props {
@@ -13,13 +13,21 @@ interface Props {
 }
 
 export function Overview({ plan, tones, progress, togglePrep }: Props) {
+  const owners = new Map((plan.ration?.people ?? []).map((p) => [p.id, p.name]));
   return (
     <div class="overview">
       <section>
         <h2 class="display h2 section-heading">Что получится</h2>
         <div class="dish-grid">
           {plan.dishes.map((dish) => (
-            <DishCard key={dish.id} dish={dish} nutrition={dishNutrition(plan, dish)} tone={tones.get(dish.id)!} startedAt={progress.startedAt} />
+            <DishCard
+              key={dish.id}
+              dish={dish}
+              nutrition={dishNutrition(plan, dish)}
+              owners={owners}
+              tone={tones.get(dish.id)!}
+              startedAt={progress.startedAt}
+            />
           ))}
         </div>
       </section>
@@ -134,7 +142,20 @@ function dishNutrition(plan: CookPlan, dish: Dish): PortionNutrition[] {
   return dish.nutrition ? [{ who: 'На порцию', n: dish.nutrition }] : [];
 }
 
-function DishCard({ dish, nutrition, tone, startedAt }: { dish: Dish; nutrition: PortionNutrition[]; tone: string; startedAt: number | null }) {
+function DishCard({
+  dish,
+  nutrition,
+  owners,
+  tone,
+  startedAt,
+}: {
+  dish: Dish;
+  nutrition: PortionNutrition[];
+  /** Имена людей рациона по id — чьи порции в контейнере. */
+  owners: Map<string, string>;
+  tone: string;
+  startedAt: number | null;
+}) {
   return (
     <article class={`card dish-card tone-${tone}`}>
       <header class="dish-head">
@@ -160,7 +181,7 @@ function DishCard({ dish, nutrition, tone, startedAt }: { dish: Dish; nutrition:
       </dl>
       <ul class="packaging">
         {dish.packaging.map((p, i) => (
-          <PackagingRow key={i} pack={p} startedAt={startedAt} />
+          <PackagingRow key={i} pack={p} owner={p.person && owners.get(p.person)} startedAt={startedAt} />
         ))}
       </ul>
       {(dish.reheat || nutrition.length > 0) && (
@@ -182,7 +203,7 @@ function DishCard({ dish, nutrition, tone, startedAt }: { dish: Dish; nutrition:
   );
 }
 
-function PackagingRow({ pack, startedAt }: { pack: Packaging; startedAt: number | null }) {
+function PackagingRow({ pack, owner, startedAt }: { pack: Packaging; owner?: string; startedAt: number | null }) {
   const { label, icon: Icon } = STORAGE[pack.storage];
   return (
     <li class={`pack pack-${pack.storage}`}>
@@ -192,16 +213,21 @@ function PackagingRow({ pack, startedAt }: { pack: Packaging; startedAt: number 
       <span class="pack-body">
         <span class="pack-what">
           <span class="num">{pack.count} ×</span> {pack.container}
+          {owner && ` — ${owner}`}
         </span>
         <span class="pack-where">
           {label}
           {pack.storage !== 'serve' && pack.days !== undefined && ` · ${shelfLife(pack.days, startedAt)}`}
           {pack.note && ` · ${pack.note}`}
+          {pack.meals && ` · ${mealsLabel(pack.meals)}`}
         </span>
       </span>
     </li>
   );
 }
+
+/** «обед д. 5, ужин д. 8» */
+const mealsLabel = (meals: PackMeal[]) => meals.map((m) => `${MEALS[m.meal].toLowerCase()} д.\u00a0${m.day}`).join(', ');
 
 /** Срок хранения: после старта готовки — конкретная дата, до него — длительность. */
 function shelfLife(days: number, startedAt: number | null): string {

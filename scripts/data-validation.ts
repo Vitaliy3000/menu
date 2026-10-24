@@ -535,11 +535,12 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     if (!usedDishes.has(dish.id)) warn(`/dishes/${i}`, `блюдо «${dish.id}» не упоминается ни в одном шаге`);
     const packs = new Set<string>();
     dish.packaging.forEach((pack, j) => {
-      const key = JSON.stringify([pack.container, pack.storage, pack.days]);
+      const key = JSON.stringify([pack.container, pack.person, pack.storage, pack.days]);
       if (packs.has(key)) {
         warn(`/dishes/${i}/packaging/${j}`, `«${pack.container}» (${pack.storage}) уже есть в фасовке — объедините строки через count`);
       }
       packs.add(key);
+      if (pack.person && !p.ration) error(`/dishes/${i}/packaging/${j}/person`, 'фасовка ссылается на рацион, а рациона в техкарте нет');
     });
   });
 
@@ -642,6 +643,43 @@ function checkRation(
 
   ration.extras.forEach((extra, i) => {
     if (!usedExtras.has(extra.id)) warn(`/ration/extras/${i}`, `«${extra.id}» не стоит ни в одном дне рациона`);
+  });
+
+  checkPackedMeals(p, ration, people, error);
+}
+
+/** Каждый обед и ужин рациона лежит ровно в одном контейнере своего блюда и своего человека: по фасовке рацион показывает, откуда его взять. */
+function checkPackedMeals(p: CookPlan, ration: Ration, people: Set<string>, error: (path: string, message: string) => void) {
+  const mealName = (meal: 'lunch' | 'dinner') => (meal === 'lunch' ? 'обед' : 'ужин');
+  const slot = (dish: string, person: string, day: number, meal: string) => `${dish}/${person}/${day}/${meal}`;
+  const packed = new Map<string, number>();
+
+  p.dishes.forEach((dish, i) => {
+    dish.packaging.forEach((pack, j) => {
+      const { person, meals } = pack;
+      if (!person || !meals) return;
+      const path = `/dishes/${i}/packaging/${j}`;
+      if (!people.has(person)) error(`${path}/person`, `нет человека с id «${person}»`);
+      if (meals.length !== pack.count) error(`${path}/meals`, `приёмов пищи ${meals.length}, а контейнеров ${pack.count}`);
+      meals.forEach((m, k) => {
+        if (ration.days[m.day - 1]?.[m.meal] !== dish.id) {
+          error(`${path}/meals/${k}`, `в рационе на ${mealName(m.meal)} дня ${m.day} не «${dish.id}»`);
+        }
+        const key = slot(dish.id, person, m.day, m.meal);
+        packed.set(key, (packed.get(key) ?? 0) + 1);
+      });
+    });
+  });
+
+  ration.days.forEach((day, i) => {
+    for (const meal of ['lunch', 'dinner'] as const) {
+      ration.people.forEach((person) => {
+        const count = packed.get(slot(day[meal], person.id, day.day, meal)) ?? 0;
+        const what = `${mealName(meal)} дня ${day.day} у ${person.name}`;
+        if (count === 0) error(`/ration/days/${i}/${meal}`, `${what} не лежит ни в одном контейнере — добавьте его в meals фасовки «${day[meal]}»`);
+        if (count > 1) error(`/ration/days/${i}/${meal}`, `${what} лежит в ${count} контейнерах`);
+      });
+    }
   });
 }
 
