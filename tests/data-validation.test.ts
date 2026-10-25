@@ -220,7 +220,7 @@ describe('рацион техкарты', () => {
         { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
         { id: 'yogurt', name: 'Йогурт', meal: 'snack', servings: [{ person: 'ann', text: '200 г', kcal: 150, protein: 15 }] },
       ],
-      days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: ['yogurt'] }],
+      days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: { afternoon: ['yogurt'] } }],
     },
   });
 
@@ -232,13 +232,14 @@ describe('рацион техкарты', () => {
 
   it('ловит ссылки на несуществующие блюда, перекусы и людей', () => {
     const p = withRation();
-    p.ration!.days[0] = { day: 2, breakfast: 'yogurt', lunch: 'stew', dinner: 'soup', snacks: ['cake'] };
+    p.ration!.days[0] = { day: 2, breakfast: 'yogurt', lunch: 'stew', dinner: 'soup', snacks: { morning: ['cake', 'yogurt'], evening: ['yogurt'] } };
     p.ration!.extras[1]!.servings.push({ person: 'bob', text: '100 г', kcal: 50, protein: 5 });
     const text = messages(checkPlan(p, file));
     expect(text).toContain('дни должны идти подряд с 1-го');
     expect(text).toContain('«yogurt» — перекус, а стоит в завтраке');
     expect(text).toContain('нет блюда с id «stew»');
     expect(text).toContain('нет завтрака или перекуса с id «cake»');
+    expect(text).toContain('«yogurt» уже стоит в другом перекусе дня 2');
     expect(text).toContain('нет человека с id «bob»');
     expect(text).toContain('«porridge» не стоит ни в одном дне');
   });
@@ -254,7 +255,7 @@ describe('рацион техкарты', () => {
 
   it('предупреждает, если день далеко от цели по калориям и белку', () => {
     const p = withRation();
-    p.ration!.days[0]!.snacks = [];
+    delete p.ration!.days[0]!.snacks;
     p.ration!.people[0]!.target = { kcal: 1200, protein: 80 };
     const issues = checkPlan(p, file);
     expect(issues.every((i) => i.severity === 'warning')).toBe(true);

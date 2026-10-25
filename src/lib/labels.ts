@@ -30,9 +30,8 @@ import {
   type LucideIcon,
 } from 'lucide-preact';
 import type { Diet, Difficulty, RecipeCategory, ReheatMethod } from '../types/recipe.gen.ts';
-import type { EquipmentKind, ShopSection, StorageKind } from '../types/cook-plan.gen.ts';
+import type { EquipmentKind, MealSlot, ShopSection, StorageKind } from '../types/cook-plan.gen.ts';
 import type { Attempt, BakeKind } from '../types/bake.gen.ts';
-import type { MealKind } from './ration.ts';
 
 export interface CategoryMeta {
   label: string;
@@ -90,11 +89,13 @@ export const STORAGE: Record<StorageKind, { label: string; icon: LucideIcon }> =
   serve: { label: 'Подать', icon: Utensils },
 };
 
-export const MEALS: Record<MealKind, string> = {
+export const MEALS: Record<MealSlot, string> = {
   breakfast: 'Завтрак',
+  morning: 'Перекус',
   lunch: 'Обед',
+  afternoon: 'Перекус',
   dinner: 'Ужин',
-  snack: 'Перекус',
+  evening: 'Перекус',
 };
 
 export const SHOP_SECTIONS: Record<ShopSection, string> = {

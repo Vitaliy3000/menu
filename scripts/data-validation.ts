@@ -616,7 +616,14 @@ function checkRation(
     const path = `/ration/days/${i}`;
     if (day.day !== i + 1) error(`${path}/day`, `дни должны идти подряд с 1-го: на месте ${i + 1}-го стоит ${day.day}-й`);
     if (day.breakfast) checkExtra(day.breakfast, 'breakfast', `${path}/breakfast`);
-    day.snacks?.forEach((id, j) => checkExtra(id, 'snack', `${path}/snacks/${j}`));
+    const daySnacks = new Set<string>();
+    for (const slot of ['morning', 'afternoon', 'evening'] as const) {
+      day.snacks?.[slot]?.forEach((id, j) => {
+        checkExtra(id, 'snack', `${path}/snacks/${slot}/${j}`);
+        if (daySnacks.has(id)) error(`${path}/snacks/${slot}/${j}`, `«${id}» уже стоит в другом перекусе дня ${day.day}`);
+        daySnacks.add(id);
+      });
+    }
     for (const meal of ['lunch', 'dinner'] as const) {
       const id = day[meal];
       if (!dishes.has(id)) {

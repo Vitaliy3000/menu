@@ -48,9 +48,11 @@ const plan: CookPlan = {
     extras: [
       { id: 'porridge', name: 'Каша', meal: 'breakfast', how: 'Сварить на воде', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
       { id: 'shake', name: 'Коктейль', meal: 'snack', servings: [{ person: 'bob', text: '30 г протеина', kcal: 120, protein: 24 }] },
+      { id: 'apple', name: 'Яблоко', meal: 'snack', servings: [{ person: 'ann', text: '1 яблоко', kcal: 80, protein: 0 }] },
+      { id: 'nuts', name: 'Орехи', meal: 'snack', servings: [{ person: 'ann', text: '20 г', kcal: 130, protein: 3 }] },
     ],
     days: [
-      { day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: ['shake'] },
+      { day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: { morning: ['shake'], evening: ['apple', 'nuts'] } },
       { day: 2, lunch: 'soup', dinner: 'soup' },
     ],
   },
@@ -105,15 +107,21 @@ describe('список покупок', () => {
 });
 
 describe('рацион', () => {
-  it('складывает завтрак, обед, ужин и только свои перекусы', () => {
+  it('идёт по порядку дня и складывает в перекус только свои позиции', () => {
     const day = personDay(plan, plan.ration!, plan.ration!.days[0]!, 'ann');
-    expect(day.lines.map((l) => l.meal)).toEqual(['breakfast', 'lunch', 'dinner']);
-    expect(day.kcal).toBe(850);
-    expect(day.protein).toBe(50);
+    expect(day.lines.map((l) => [l.slot, l.items.map((i) => i.name)])).toEqual([
+      ['breakfast', ['Каша']],
+      ['lunch', ['Суп']],
+      ['dinner', ['Суп']],
+      ['evening', ['Яблоко', 'Орехи']],
+    ]);
+    expect(day.lines[3]).toMatchObject({ kcal: 210, protein: 3 });
+    expect(day.kcal).toBe(1060);
+    expect(day.protein).toBe(53);
   });
 
   it('у обеда и ужина — контейнер из фасовки и как греть, у завтрака — как готовить', () => {
-    const [breakfast, lunch] = personDay(plan, plan.ration!, plan.ration!.days[0]!, 'ann').lines;
+    const [breakfast, lunch] = personDay(plan, plan.ration!, plan.ration!.days[0]!, 'ann').lines.map((l) => l.items[0]);
     expect(breakfast).toMatchObject({ how: 'Сварить на воде' });
     expect(breakfast!.pack).toBeUndefined();
     expect(lunch).toMatchObject({ how: 'В микроволновке 3 минуты', pack: { container: 'Банка 1 л', storage: 'fridge' } });
@@ -121,7 +129,7 @@ describe('рацион', () => {
 
   it('вечером — переложить из морозилки завтрашние обед и ужин', () => {
     const [day1, day2] = plan.ration!.days;
-    expect(thawTonight(plan, plan.ration!, day1, 'ann').map((l) => [l.meal, l.pack.container])).toEqual([
+    expect(thawTonight(plan, plan.ration!, day1, 'ann').map((l) => [l.slot, l.pack.container])).toEqual([
       ['lunch', 'Пакет'],
       ['dinner', 'Пакет'],
     ]);

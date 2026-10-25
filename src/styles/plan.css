@@ -1266,6 +1266,15 @@
   line-height: 1.35;
 }
 
+.ration-part {
+  display: grid;
+  gap: 2px;
+}
+
+.ration-part + .ration-part {
+  margin-top: 10px;
+}
+
 .ration-name {
   font-weight: 600;
   font-size: 0.95rem;
@@ -1425,7 +1434,7 @@
   gap: 10px;
 }
 
-.ration-evening .ration-item {
+.ration-aside .ration-item {
   grid-column: 2 / -1;
 }
 
@@ -1448,6 +1457,16 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink-3);
+}
+
+.ration-away {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent);
 }
 
 .ration-meals .ration-sum {

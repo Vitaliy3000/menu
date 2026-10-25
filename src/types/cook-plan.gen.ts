@@ -74,6 +74,13 @@ export type Zone = 'prep' | 'hot' | 'pack' | 'dry' | 'cold';
  */
 export type LocalId3 = string;
 /**
+ * Приём пищи по порядку дня: breakfast — завтрак, morning — перекус после завтрака, lunch — обед, afternoon — перекус после обеда, dinner — ужин, evening — перекус после ужина.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "MealSlot".
+ */
+export type MealSlot = 'breakfast' | 'morning' | 'lunch' | 'afternoon' | 'dinner' | 'evening';
+/**
  * Идентификатор внутри этой техкарты.
  */
 export type LocalId4 = string;
@@ -512,6 +519,12 @@ export interface RationPerson {
    */
   portions: [RationPortion, ...RationPortion[]];
   /**
+   * Что человек ест не дома, а на работе. Это берут с собой утром — рацион покажет список «С собой» и пометит эти приёмы пищи. Туда — то, что легко взять и не нужно готовить.
+   *
+   * @minItems 1
+   */
+  atWork?: [MealSlot, ...MealSlot[]];
+  /**
    * Что входит в цель: «вместе с двумя протеиновыми коктейлями».
    */
   note?: string;
@@ -600,16 +613,41 @@ export interface RationDay {
   breakfast?: LocalId5;
   lunch: LocalId6;
   dinner: LocalId7;
-  /**
-   * id перекусов из extras — у каждого человека свои.
-   */
-  snacks?: LocalId[];
+  snacks?: RationSnacks;
   /**
    * Что в этот день не как обычно: «шнитт-лук — из морозилки, режем замороженным».
    */
   note?: string;
   /**
-   * Что ещё сделать вечером для завтрашнего дня. Обед и ужин из морозилки сюда не писать — их сайт выводит сам из фасовки.
+   * Что ещё вечером этого дня переложить из морозилки в холодильник к завтрашнему дню: «копчёный лосось». Обеды и ужины сюда не писать — их сайт выводит сам из фасовки.
+   *
+   * @minItems 1
    */
-  evening?: string;
+  thaw?: [string, ...string[]];
+}
+/**
+ * Перекусы дня по времени — не больше трёх: после завтрака, после обеда и после ужина. В один перекус можно сложить несколько позиций из extras; у каждого человека — свои.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationSnacks".
+ */
+export interface RationSnacks {
+  /**
+   * После завтрака, до обеда.
+   *
+   * @minItems 1
+   */
+  morning?: [LocalId, ...LocalId[]];
+  /**
+   * После обеда, до ужина.
+   *
+   * @minItems 1
+   */
+  afternoon?: [LocalId, ...LocalId[]];
+  /**
+   * После ужина.
+   *
+   * @minItems 1
+   */
+  evening?: [LocalId, ...LocalId[]];
 }

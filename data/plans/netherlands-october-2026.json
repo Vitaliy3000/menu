@@ -539,7 +539,7 @@
       "amount": 7,
       "unit": "l",
       "section": "dairy",
-      "note": "Sojadrink ongezoet — для коктейлей Виталия"
+      "note": "Sojadrink ongezoet — коктейль Виталия, 500 мл в день"
     },
     {
       "id": "bread",
@@ -626,7 +626,7 @@
       "unit": "g",
       "section": "other",
       "staple": true,
-      "note": "Whey proteïne: 2 мерные ложки по 30 г в день — коктейли Виталия"
+      "note": "Whey proteïne: 60 г в день — коктейль Виталия"
     }
   ],
   "beforeStart": [
@@ -1722,6 +1722,7 @@
         "id": "vitaly",
         "name": "Виталий",
         "target": { "kcal": 2600, "protein": 180 },
+        "atWork": ["morning", "lunch", "afternoon"],
         "portions": [
           {
             "dish": "bolognese",
@@ -1769,7 +1770,7 @@
             "reheat": "Только в духовке — форма алюминиевая. Разогреть до 200 °C. Стейк в плёнке отложить, крышку снять, форму накрыть фольгой — 10 минут. Фольгу снять, стейк развернуть и выложить на овощи — ещё 12–15 минут, пока не станет матовым."
           }
         ],
-        "note": "Цель — вместе с двумя протеиновыми коктейлями. Обед в будни — с собой: утром взять из холодильника, на работе — сразу в холодильник."
+        "note": "Цель — вместе с протеиновым коктейлем. Первый перекус, обед и второй перекус — на работе: обед там сразу в холодильник."
       }
     ],
     "extras": [
@@ -1845,29 +1846,29 @@
       },
       {
         "id": "shakes",
-        "name": "Протеиновые коктейли",
+        "name": "Протеиновый коктейль",
         "meal": "snack",
-        "how": "Протеин и соевое молоко — из шкафа, открытый пакет молока — в холодильнике. В шейкер — 250 мл молока и мерную ложку протеина, встряхнуть.",
+        "how": "Протеин и соевое молоко — из шкафа, открытый пакет молока — в холодильнике. В шейкер — 500 мл молока и 60 г протеина, встряхнуть и выпить сразу.",
         "servings": [
-          { "person": "vitaly", "text": "2 за день: по 30 г протеина на 250 мл соевого молока", "kcal": 414, "protein": 63 }
+          { "person": "vitaly", "text": "60 г протеина на 500 мл соевого молока", "kcal": 414, "protein": 63 }
         ]
       },
       {
         "id": "v-fruit",
         "name": "Груша и киви",
         "meal": "snack",
-        "how": "Сначала — те, что дозревают на столе; им на смену положить на стол новые из холодильника. Киви разрезать пополам и есть ложкой.",
+        "how": "Утром — с собой. Брать сначала те, что дозревают на столе, а им на смену положить на стол новые из холодильника. Киви — с чайной ложкой: разрезать пополам и есть ложкой.",
         "servings": [
           { "person": "vitaly", "text": "1 груша и 1 киви", "kcal": 143, "protein": 2 }
         ]
       },
       {
         "id": "v-toast",
-        "name": "Тост с гаудой",
+        "name": "Бутерброд с гаудой",
         "meal": "snack",
-        "how": "Ломтик хлеба из морозилки — в тостер, сверху гауда из холодильника.",
+        "how": "Утром ломтик хлеба из морозилки — в тостер, сверху гауда из холодильника, завернуть в плёнку — с собой. Холодильник на работе не нужен.",
         "servings": [
-          { "person": "vitaly", "text": "1 тост и 20 г гауды 30+", "kcal": 133, "protein": 10 }
+          { "person": "vitaly", "text": "1 ломтик хлеба и 20 г гауды 30+", "kcal": 133, "protein": 10 }
         ]
       },
       {
@@ -1879,7 +1880,7 @@
           { "person": "vitaly", "text": "150 г кварка и 1 ч. л. мёда", "kcal": 107, "protein": 15 }
         ]
       },
-      { "id": "v-nuts", "name": "Грецкие орехи", "meal": "snack", "how": "Из шкафа.", "servings": [{ "person": "vitaly", "text": "30 г", "kcal": 196, "protein": 5 }] },
+      { "id": "v-nuts", "name": "Грецкие орехи", "meal": "snack", "how": "Утром отвесить из шкафа в стеклянный контейнер 180 мл — с собой.", "servings": [{ "person": "vitaly", "text": "30 г", "kcal": 196, "protein": 5 }] },
       {
         "id": "s-fruit",
         "name": "Яблоко и мандарины",
@@ -1915,21 +1916,21 @@
         "breakfast": "bf-omelet",
         "lunch": "bolognese",
         "dinner": "cacciatora",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-nuts", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] }
       },
       {
         "day": 2,
         "breakfast": "bf-yogurt",
         "lunch": "lemon-chicken",
         "dinner": "beef",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"]
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] }
       },
       {
         "day": 3,
         "breakfast": "bf-tosti",
         "lunch": "cacciatora",
         "dinner": "bolognese",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Ветчину открыть сегодня — остаток доедаем на завтрак дня 6."
       },
       {
@@ -1937,7 +1938,7 @@
         "breakfast": "bf-salmon",
         "lunch": "beef",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "С сегодня обед и ужин — из морозилки, оттаяли за ночь. Если внутри ещё лёд — греть на 1–2 минуты дольше. Повторно не замораживать."
       },
       {
@@ -1945,14 +1946,14 @@
         "breakfast": "bf-bacon",
         "lunch": "bolognese",
         "dinner": "lemon-chicken",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "s-fruit", "s-kwark", "s-nuts"]
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-nuts", "s-nuts"], "evening": ["shakes", "s-kwark"] }
       },
       {
         "day": 6,
         "breakfast": "bf-ready",
         "lunch": "cacciatora",
         "dinner": "beef",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Доедаем открытую ветчину."
       },
       {
@@ -1960,7 +1961,7 @@
         "breakfast": "bf-ricotta",
         "lunch": "lemon-chicken",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "v-kwark", "s-fruit", "s-kwark", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["s-toast"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Рикотту открыть сегодня — остаток на завтрак завтра."
       },
       {
@@ -1968,7 +1969,7 @@
         "breakfast": "bf-ricotta",
         "lunch": "beef",
         "dinner": "bolognese",
-        "snacks": ["shakes", "v-fruit", "v-kwark", "s-fruit", "s-kwark", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["s-toast"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Доедаем рикотту."
       },
       {
@@ -1976,7 +1977,7 @@
         "breakfast": "bf-omelet",
         "lunch": "cacciatora",
         "dinner": "lemon-chicken",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Шнитт-лук — из морозилки, режем прямо замороженным."
       },
       {
@@ -1984,33 +1985,33 @@
         "breakfast": "bf-yogurt",
         "lunch": "bolognese",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "s-fruit", "s-kwark"],
-        "evening": "Вторую упаковку ветчины — из морозилки в холодильник."
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "evening": ["shakes", "s-kwark"] },
+        "thaw": ["Ветчина — вторая упаковка"]
       },
       {
         "day": 11,
         "breakfast": "bf-tosti",
         "lunch": "lemon-chicken",
         "dinner": "cacciatora",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Ветчину открыть сегодня — остаток доедаем на завтрак дня 14.",
-        "evening": "Копчёный лосось — из морозилки в холодильник."
+        "thaw": ["Копчёный лосось — вторая упаковка"]
       },
       {
         "day": 12,
         "breakfast": "bf-salmon",
         "lunch": "beef",
         "dinner": "bolognese",
-        "snacks": ["shakes", "v-fruit", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Укроп — из морозилки, режем прямо замороженным.",
-        "evening": "Бекон — из морозилки в холодильник."
+        "thaw": ["Бекон — вторая половина, в плёнке"]
       },
       {
         "day": 13,
         "breakfast": "bf-bacon",
         "lunch": "cacciatora",
         "dinner": "salmon",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Черри — из морозилки, на сковороду прямо замороженными."
       },
       {
@@ -2018,7 +2019,7 @@
         "breakfast": "bf-ready",
         "lunch": "lemon-chicken",
         "dinner": "beef",
-        "snacks": ["shakes", "v-fruit", "v-nuts", "v-toast", "v-kwark", "s-fruit", "s-kwark", "s-nuts", "s-toast"],
+        "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
         "note": "Доедаем открытую ветчину."
       }
     ]

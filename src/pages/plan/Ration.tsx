@@ -1,4 +1,5 @@
 import { Info, Refrigerator, Snowflake, Target } from 'lucide-preact';
+import { Fragment } from 'preact';
 import { formatNumber } from '../../lib/format.ts';
 import { MEALS } from '../../lib/labels.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
@@ -88,6 +89,7 @@ function DayCard({
 }) {
   const total = personDay(plan, ration, day, person.id);
   const thaw = thawTonight(plan, ration, day, person.id);
+  const atWork = total.lines.filter((line) => person.atWork?.includes(line.slot));
 
   return (
     <details class={`card ration-day${isToday ? ' is-today' : ''}`} open={open}>
@@ -116,20 +118,27 @@ function DayCard({
           </p>
         )}
         <ul class="ration-meals">
-          {total.lines.map((line, i) => (
-            <MealRow key={i} line={line} />
+          {total.lines.map((line) => (
+            <Fragment key={line.slot}>
+              {line === atWork[0] && <TakeToWork lines={atWork} />}
+              <MealRow line={line} atWork={atWork.includes(line)} />
+            </Fragment>
           ))}
-          {(thaw.length > 0 || day.evening) && (
-            <li class="ration-evening">
+          {(thaw.length > 0 || day.thaw) && (
+            <li class="ration-aside">
               <span class="ration-meal">Вечером</span>
               <span class="ration-item">
-                {thaw.length > 0 && <span class="ration-name">Из морозилки — в холодильник, на завтра</span>}
-                {thaw.map((line) => (
-                  <span key={line.meal} class="ration-detail">
-                    {MEALS[line.meal]}: {line.name} · {line.pack.container}
+                <span class="ration-name">Разморозить на завтра — из морозилки в холодильник</span>
+                {thaw.map((item) => (
+                  <span key={item.slot} class="ration-detail">
+                    {MEALS[item.slot]}: {item.name} · {item.pack.container}
                   </span>
                 ))}
-                {day.evening && <span class="ration-how">{day.evening}</span>}
+                {day.thaw?.map((what) => (
+                  <span key={what} class="ration-detail">
+                    {what}
+                  </span>
+                ))}
               </span>
             </li>
           )}
@@ -146,17 +155,41 @@ function DayCard({
   );
 }
 
-function MealRow({ line }: { line: MealLine }) {
+function MealRow({ line, atWork }: { line: MealLine; atWork: boolean }) {
   return (
     <li>
-      <span class="ration-meal">{MEALS[line.meal]}</span>
+      <span class="ration-meal">
+        {MEALS[line.slot]}
+        {atWork && <span class="ration-away">на работе</span>}
+      </span>
       <span class="ration-item">
-        <span class="ration-name">{line.name}</span>
-        <span class="ration-detail">{line.detail}</span>
-        {line.pack && <PackSource pack={line.pack} />}
-        {line.how && <span class="ration-how">{line.how}</span>}
+        {line.items.map((item, i) => (
+          <span key={i} class="ration-part">
+            <span class="ration-name">{item.name}</span>
+            <span class="ration-detail">{item.detail}</span>
+            {item.pack && <PackSource pack={item.pack} />}
+            {item.how && <span class="ration-how">{item.how}</span>}
+          </span>
+        ))}
       </span>
       <Macros kcal={line.kcal} protein={line.protein} />
+    </li>
+  );
+}
+
+/** Что утром взять на работу: всё, что человек ест там, одним списком. */
+function TakeToWork({ lines }: { lines: MealLine[] }) {
+  return (
+    <li class="ration-aside">
+      <span class="ration-meal">С собой</span>
+      <span class="ration-item">
+        <span class="ration-name">Утром взять на работу</span>
+        {lines.map((line) => (
+          <span key={line.slot} class="ration-detail">
+            {MEALS[line.slot]}: {line.items.map((item) => (item.pack ? `${item.name} · ${item.pack.container}` : item.name)).join(', ')}
+          </span>
+        ))}
+      </span>
     </li>
   );
 }
@@ -168,7 +201,7 @@ function PackSource({ pack }: { pack: Packaging }) {
   return (
     <span class="ration-from">
       <Icon aria-hidden="true" />
-      {pack.container} — в холодильнике{thawed && ', переложен из морозилки вчера вечером'}
+      {pack.container} — в холодильнике{thawed && ', с вечера из морозилки'}
     </span>
   );
 }

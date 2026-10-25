@@ -828,6 +828,15 @@
             "$ref": "#/$defs/RationPortion"
           }
         },
+        "atWork": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Что человек ест не дома, а на работе. Это берут с собой утром — рацион покажет список «С собой» и пометит эти приёмы пищи. Туда — то, что легко взять и не нужно готовить.",
+          "items": {
+            "$ref": "#/$defs/MealSlot"
+          }
+        },
         "note": {
           "type": "string",
           "maxLength": 200,
@@ -1008,25 +1017,72 @@
           "description": "id блюда из dishes."
         },
         "snacks": {
-          "type": "array",
-          "uniqueItems": true,
-          "description": "id перекусов из extras — у каждого человека свои.",
-          "items": {
-            "$ref": "#/$defs/LocalId"
-          }
+          "$ref": "#/$defs/RationSnacks"
         },
         "note": {
           "type": "string",
           "maxLength": 160,
           "description": "Что в этот день не как обычно: «шнитт-лук — из морозилки, режем замороженным»."
         },
-        "evening": {
-          "type": "string",
-          "minLength": 5,
-          "maxLength": 200,
-          "description": "Что ещё сделать вечером для завтрашнего дня. Обед и ужин из морозилки сюда не писать — их сайт выводит сам из фасовки."
+        "thaw": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Что ещё вечером этого дня переложить из морозилки в холодильник к завтрашнему дню: «копчёный лосось». Обеды и ужины сюда не писать — их сайт выводит сам из фасовки.",
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80
+          }
         }
       }
+    },
+    "RationSnacks": {
+      "title": "RationSnacks",
+      "description": "Перекусы дня по времени — не больше трёх: после завтрака, после обеда и после ужина. В один перекус можно сложить несколько позиций из extras; у каждого человека — свои.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "morning": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "description": "После завтрака, до обеда."
+        },
+        "afternoon": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "description": "После обеда, до ужина."
+        },
+        "evening": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "description": "После ужина."
+        }
+      }
+    },
+    "MealSlot": {
+      "title": "MealSlot",
+      "description": "Приём пищи по порядку дня: breakfast — завтрак, morning — перекус после завтрака, lunch — обед, afternoon — перекус после обеда, dinner — ужин, evening — перекус после ужина.",
+      "type": "string",
+      "enum": [
+        "breakfast",
+        "morning",
+        "lunch",
+        "afternoon",
+        "dinner",
+        "evening"
+      ]
     },
     "Role": {
       "title": "Role",
