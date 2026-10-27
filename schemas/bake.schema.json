@@ -94,9 +94,9 @@
   "$defs": {
     "BakeKind": {
       "title": "BakeKind",
-      "description": "Группа в каталоге: pan — формовой хлеб, hearth — подовый хлеб (на стали или камне), pizza — пицца и фокачча, sweet — сдоба и сладкая выпечка.",
+      "description": "Группа в каталоге: pan — формовой хлеб, hearth — подовый хлеб (на стали или камне), pizza — пицца и фокачча, sweet — сдоба и сладкая выпечка, starter — закваска: выведение и подкормки.",
       "type": "string",
-      "enum": ["pan", "hearth", "pizza", "sweet"]
+      "enum": ["pan", "hearth", "pizza", "sweet", "starter"]
     },
     "Method": {
       "title": "BakeMethod",

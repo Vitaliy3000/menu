@@ -23,6 +23,7 @@ import {
   ScrollText,
   Snowflake,
   Soup,
+  Sprout,
   Utensils,
   Wheat,
   Wind,
@@ -135,9 +136,10 @@ export const BAKE_KINDS: Record<BakeKind, CategoryMeta> = {
   hearth: { label: 'Подовый хлеб', plural: 'Подовый хлеб', icon: Wheat, tone: 'crust' },
   pizza: { label: 'Пицца', plural: 'Пицца', icon: Pizza, tone: 'tomato' },
   sweet: { label: 'Сдоба', plural: 'Сдоба', icon: Croissant, tone: 'butter' },
+  starter: { label: 'Закваска', plural: 'Закваски', icon: Sprout, tone: 'olive' },
 };
 
-export const BAKE_KIND_ORDER: BakeKind[] = ['pan', 'hearth', 'pizza', 'sweet'];
+export const BAKE_KIND_ORDER: BakeKind[] = ['pan', 'hearth', 'pizza', 'sweet', 'starter'];
 
 export const ATTEMPT_OUTCOMES: Record<Attempt['outcome'], { label: string; badge: string; icon: LucideIcon }> = {
   ok: { label: 'Получилось', badge: 'badge-done', icon: CircleCheck },
