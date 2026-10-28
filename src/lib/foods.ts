@@ -9,7 +9,7 @@ export interface ScoreBand {
   hint: string;
 }
 
-/** От лучшей к худшей — те же границы, что в описании score в schemas/foods.schema.json. */
+/** От лучшей к худшей — те же границы, что в описании freezeScore в schemas/foods.schema.json. */
 export const SCORE_BANDS: ScoreBand[] = [
   { min: 95, max: 100, label: 'Не отличить', hint: 'даже рядом со свежим' },
   { min: 85, max: 90, label: 'Почти без потерь', hint: 'разница видна только рядом или снимается простым приёмом' },
@@ -76,7 +76,7 @@ const queryWords = (q: string) => normalize(q).split(' ').filter(Boolean);
 /** Без учёта группы — по ним считаются чипы групп. */
 export function matchAllGroups(index: FoodEntry[], f: FoodFilters): FoodEntry[] {
   const words = queryWords(f.q);
-  return index.filter((e) => e.food.score >= f.min && matchesQuery(e, words));
+  return index.filter((e) => e.food.freezeScore >= f.min && matchesQuery(e, words));
 }
 
 /** Без учёта порога — по ним считается распределение оценок. */
@@ -86,18 +86,18 @@ export function matchAllScores(index: FoodEntry[], f: FoodFilters): FoodEntry[] 
 }
 
 export function filterFoods(index: FoodEntry[], f: FoodFilters): FoodEntry[] {
-  const found = matchAllScores(index, f).filter((e) => e.food.score >= f.min);
+  const found = matchAllScores(index, f).filter((e) => e.food.freezeScore >= f.min);
   const by: Record<FoodSort, (a: FoodEntry, b: FoodEntry) => number> = {
     shelf: () => 0,
-    best: (a, b) => b.food.score - a.food.score,
-    worst: (a, b) => a.food.score - b.food.score,
+    best: (a, b) => b.food.freezeScore - a.food.freezeScore,
+    worst: (a, b) => a.food.freezeScore - b.food.freezeScore,
   };
   return [...found].sort(by[f.sort]);
 }
 
 /** Сколько позиций в каждой полосе шкалы — в порядке SCORE_BANDS. */
 export function bandCounts(entries: FoodEntry[]): { band: ScoreBand; count: number }[] {
-  return SCORE_BANDS.map((band) => ({ band, count: entries.filter((e) => bandOf(e.food.score) === band).length }));
+  return SCORE_BANDS.map((band) => ({ band, count: entries.filter((e) => bandOf(e.food.freezeScore) === band).length }));
 }
 
 /** Результаты по группам в порядке каталога. */

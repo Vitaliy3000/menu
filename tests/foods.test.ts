@@ -19,14 +19,14 @@ const catalog = (): Foods => ({
       id: 'vegetables',
       title: 'Овощи',
       items: [
-        { id: 'potato-raw', name: 'Картофель, сырой', score: 10, losses: 'Темнеет и становится водянистым.' },
-        { id: 'peas-blanched', name: 'Горошек, бланшированный', score: 90, months: 12, losses: 'Почти ничего.', sources: ['nchfp'] },
+        { id: 'potato-raw', name: 'Картофель, сырой', freezeScore: 10, losses: 'Темнеет и становится водянистым.' },
+        { id: 'peas-blanched', name: 'Горошек, бланшированный', freezeScore: 90, months: 12, losses: 'Почти ничего.', sources: ['nchfp'] },
       ],
     },
     {
       id: 'stews',
       title: 'Рагу и блюда в соусе',
-      items: [{ id: 'chili-con-carne', name: 'Чили кон карне', score: 95, months: 4, losses: 'Ничего.', sources: ['nchfp'] }],
+      items: [{ id: 'chili-con-carne', name: 'Чили кон карне', freezeScore: 95, months: 4, losses: 'Ничего.', sources: ['nchfp'] }],
     },
   ],
   sources: [{ id: 'nchfp', title: 'NCHFP — Freezing', url: 'https://nchfp.uga.edu/how/freeze/' }],
@@ -51,8 +51,8 @@ describe('каталог продуктов: проверка', () => {
 
   it('оценка — целое от 0 до 100 с шагом 5', () => {
     const f = catalog();
-    f.groups[0]!.items[0]!.score = 12;
-    f.groups[0]!.items[1]!.score = 105;
+    f.groups[0]!.items[0]!.freezeScore = 12;
+    f.groups[0]!.items[1]!.freezeScore = 105;
     const text = messages(validate(f));
     expect(text).toContain('must be multiple of 5');
     expect(text).toContain('must be <= 100');
@@ -60,7 +60,7 @@ describe('каталог продуктов: проверка', () => {
 
   it('ловит повторы и ссылки на несуществующие источники', () => {
     const f = catalog();
-    f.groups[1]!.items.push({ id: 'potato-raw', name: 'картофель, сырой', score: 10, losses: 'Дубль.', sources: ['usda'] });
+    f.groups[1]!.items.push({ id: 'potato-raw', name: 'картофель, сырой', freezeScore: 10, losses: 'Дубль.', sources: ['usda'] });
     f.sources.push({ id: 'unused', title: 'NCHFP — копия', url: 'https://nchfp.uga.edu/how/freeze/' });
     const text = messages(checkFoods(f, file));
     expect(text).toContain('id «potato-raw» повторяется');

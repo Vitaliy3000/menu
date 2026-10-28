@@ -224,17 +224,17 @@ function FoodRow({ food: f, group, sources }: { food: Food; group: string | null
   return (
     <details class="food-row">
       <summary>
-        <span class="food-score" aria-label={`Оценка ${f.score} из 100`}>
-          <span class="food-score-value num">{f.score}</span>
+        <span class="food-score" aria-label={`Оценка ${f.freezeScore} из 100`}>
+          <span class="food-score-value num">{f.freezeScore}</span>
           <span class="food-score-track" aria-hidden="true">
-            <span class="food-score-bar" style={{ width: `${f.score}%` }} />
+            <span class="food-score-bar" style={{ width: `${f.freezeScore}%` }} />
           </span>
         </span>
         <span class="food-row-body">
           <span class="food-name">{f.name}</span>
           <span class="faint food-meta">
             {group && `${group} · `}
-            {bandOf(f.score).label}
+            {bandOf(f.freezeScore).label}
             {f.months ? ` · до ${f.months} мес.` : ''}
           </span>
         </span>
