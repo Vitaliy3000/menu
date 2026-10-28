@@ -184,23 +184,66 @@ describe('роли поваров', () => {
 
   it('двое в одной зоне на одного человека — ошибка', () => {
     const p = withRoles();
-    p.steps.splice(1, 0, { id: 's3', at: 10, duration: 5, title: 'Помыть доску', role: 'chef', zones: ['prep', 'hot'] });
-    expect(messages(checkPlan(p, file))).toBe('«s1» и «s3» — разные роли одновременно в одной зоне (подготовка), 10–15-я минута');
+    p.steps.splice(1, 0, { id: 's3', at: 0, duration: 15, title: 'Помыть доску', role: 'chef', zones: ['prep', 'hot'] });
+    expect(messages(checkPlan(p, file))).toBe('«s1» и «s3» — разные роли одновременно в одной зоне (подготовка), 0–15-я минута');
   });
 
   it('разные зоны, хранение, своя роль и пассивные шаги — без замечаний', () => {
     const p = withRoles();
-    p.steps.splice(
-      1,
-      0,
-      { id: 'heat', at: 5, duration: 10, title: 'Разогреть сковороду', role: 'chef', zones: ['hot'] },
+    const [cut, bake] = p.steps;
+    p.steps = [
+      cut!,
+      { id: 'heat', at: 0, duration: 18, title: 'Разогреть сковороду', role: 'chef', zones: ['hot'] },
       { id: 'fridge-a', at: 18, duration: 2, title: 'Взять масло', role: 'chef', zones: ['cold'] },
       { id: 'fridge-b', at: 19, duration: 2, title: 'Убрать тыкву', role: 'helper', zones: ['cold'] },
       { id: 'rinse', at: 19, duration: 1, title: 'Сполоснуть нож', role: 'helper', zones: ['prep'] },
-    );
-    p.steps.push({ id: 'rest', at: 25, duration: 10, title: 'Остывает', role: 'helper', passive: true, zones: ['pack'] });
-    p.steps.push({ id: 'pack', at: 30, duration: 10, title: 'Разложить', role: 'chef', zones: ['pack'] });
+      bake!,
+      { id: 'pack', at: 20, duration: 10, title: 'Разложить', role: 'chef', zones: ['pack'] },
+      { id: 'cool', at: 25, duration: 10, title: 'Остывает', role: 'helper', passive: true, zones: ['pack'] },
+    ];
     expect(checkPlan(p, file)).toEqual([]);
+  });
+
+  it('пауза в ходе работ — только отдыхом с таймером', () => {
+    const p = withRoles();
+    const [cut, bake] = p.steps;
+    p.steps = [
+      cut!,
+      { id: 'heat', at: 0, duration: 10, title: 'Разогреть сковороду', role: 'chef', zones: ['hot'] },
+      { id: 'taste', at: 15, duration: 5, title: 'Попробовать соль', role: 'chef', zones: ['hot'] },
+      bake!,
+    ];
+    expect(messages(checkPlan(p, file))).toBe('у роли «chef» с 10-й по 15-ю минуту нет шага — паузу оформите отдыхом с таймером (rest)');
+
+    const pause = { id: 'pause', at: 10, duration: 5, title: 'Отдых', role: 'chef', passive: true, rest: true, timer: { minutes: 5, label: 'Отдых' } };
+    p.steps.splice(2, 0, pause);
+    expect(checkPlan(p, file)).toEqual([]);
+
+    p.steps[2] = { ...pause, passive: false, zones: ['hot'] };
+    expect(messages(checkPlan(p, file))).toBe('отдых «pause» — пассивный шаг: нужен passive: true');
+  });
+
+  it('кто ставит в духовку, тот ведёт таймер', () => {
+    const p = withRoles();
+    const [cut, bake] = p.steps;
+    p.steps = [
+      { ...cut!, duration: 18 },
+      { id: 'in', at: 18, duration: 2, title: 'Тыкву — в духовку', role: 'helper', zones: ['hot'], dishes: ['soup'], equipment: ['oven'] },
+      bake!,
+    ];
+    expect(messages(checkPlan(p, file))).toBe(
+      '«in» и «s2» — одна стадия у разных ролей: кто ставит на плиту или в духовку, тот включает таймер, мешает и снимает',
+    );
+
+    p.steps[2] = { ...bake!, role: 'helper' };
+    expect(checkPlan(p, file)).toEqual([]);
+  });
+
+  it('ход работ уже приготовленной техкарты не проверяем', () => {
+    const p = withRoles();
+    p.steps.splice(1, 0, { id: 'taste', at: 15, duration: 5, title: 'Попробовать соль', role: 'chef', zones: ['hot'] });
+    expect(messages(checkPlan(p, file))).toContain('нет шага — паузу оформите отдыхом');
+    expect(checkPlan({ ...p, cooked: true }, file)).toEqual([]);
   });
 });
 

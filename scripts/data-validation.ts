@@ -12,6 +12,7 @@ import type { Recipe } from '../src/types/recipe.gen.ts';
 import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-plan.gen.ts';
 import { deviation, personDay } from '../src/lib/ration.ts';
 import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
+import { idleGaps, stageConflicts } from './role-flow.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 import type { Bake } from '../src/types/bake.gen.ts';
 import type { Baking } from '../src/types/baking.gen.ts';
@@ -511,6 +512,7 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     if (p.roles && !step.passive && !step.zones) {
       error(`${path}/zones`, `у шага «${step.id}» нет зон, а в техкарте заданы roles`);
     }
+    if (step.rest && !step.passive) error(`${path}/passive`, `отдых «${step.id}» — пассивный шаг: нужен passive: true`);
 
     step.dishes?.forEach((id, j) => {
       usedDishes.add(id);
@@ -528,6 +530,17 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
         `/steps/${c.index}/zones`,
         `«${c.first}» и «${c.second}» — разные роли одновременно в одной зоне (${ZONE_LABELS[c.zone].toLowerCase()}), ${c.from}–${c.to}-я минута`,
       );
+    }
+  }
+  if (p.roles && !p.cooked) {
+    for (const c of stageConflicts(p)) {
+      error(
+        `/steps/${c.index}/role`,
+        `«${c.other.id}» и «${c.wait.id}» — одна стадия у разных ролей: кто ставит на плиту или в духовку, тот включает таймер, мешает и снимает`,
+      );
+    }
+    for (const g of idleGaps(p.steps)) {
+      error(`/steps/${g.index}/at`, `у роли «${g.role}» с ${g.from}-й по ${g.to}-ю минуту нет шага — паузу оформите отдыхом с таймером (rest)`);
     }
   }
 
