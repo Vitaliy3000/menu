@@ -46,7 +46,7 @@ export function personDay(plan: CookPlan, ration: Ration, day: RationDay, person
     const d = plan.dishes.find((x) => x.id === day[meal]);
     const portion = person?.portions.find((p) => p.dish === day[meal]);
     if (!d || !portion) return [];
-    return [{ name: d.name, detail: portion.size, kcal: portion.kcal, protein: portion.protein, how: portion.reheat, pack: packFor(d, personId, day.day, meal) }];
+    return [{ name: d.name, detail: portion.size, kcal: portion.kcal, protein: portion.protein, how: portion.reheat.text, pack: packFor(d, personId, day.day, meal) }];
   };
   const snack = (slot: keyof RationSnacks) => (day.snacks?.[slot] ?? []).flatMap(extra);
 

@@ -606,6 +606,9 @@ function checkRation(
       if (!dishes.has(portion.dish)) error(`${path}/dish`, `нет блюда с id «${portion.dish}»`);
       if (seen.has(portion.dish)) error(`${path}/dish`, `порция «${portion.dish}» у ${person.name} указана дважды`);
       seen.add(portion.dish);
+      if (portion.reheat.active > portion.reheat.total) {
+        error(`${path}/reheat/active`, `разогрев «${portion.dish}» у ${person.name}: руками ${portion.reheat.active} мин — больше, чем всего (${portion.reheat.total})`);
+      }
       const kcalIssue = checkMacros(portion);
       if (kcalIssue) warn(path, kcalIssue);
     });
@@ -676,6 +679,41 @@ function checkRation(
   });
 
   checkPackedMeals(p, ration, people, error);
+  if (!p.cooked) checkMeals(p, ration, error);
+}
+
+const MEAL_NAMES = { lunch: ['обед', 'обеде'], dinner: ['ужин', 'ужине'] } as const;
+const DINNER_HANDS_MAX = 10;
+
+/** Блюдо — либо обед, либо ужин: обед греют только в микроволновке на работе, ужин доводят дома руками не дольше 10 минут. */
+function checkMeals(p: CookPlan, ration: Ration, error: (path: string, message: string) => void) {
+  const meals = new Map(p.dishes.map((dish) => [dish.id, dish.meal]));
+  p.dishes.forEach((dish, i) => {
+    if (!dish.meal && ration.days.some((day) => day.lunch === dish.id || day.dinner === dish.id)) {
+      error(`/dishes/${i}/meal`, `у блюда «${dish.id}» нет meal: обед это или ужин`);
+    }
+  });
+  ration.days.forEach((day, i) => {
+    for (const meal of ['lunch', 'dinner'] as const) {
+      const actual = meals.get(day[meal]);
+      if (actual && actual !== meal) {
+        error(`/ration/days/${i}/${meal}`, `«${day[meal]}» — ${MEAL_NAMES[actual][0]}, а стоит в ${MEAL_NAMES[meal][1]} дня ${day.day}`);
+      }
+    }
+  });
+  ration.people.forEach((person, i) => {
+    person.portions.forEach((portion, j) => {
+      const path = `/ration/people/${i}/portions/${j}/reheat`;
+      const meal = meals.get(portion.dish);
+      const { methods, active } = portion.reheat;
+      if (meal === 'lunch' && methods.some((m) => m !== 'microwave')) {
+        error(`${path}/methods`, `обед «${portion.dish}» у ${person.name} греют только в микроволновке`);
+      }
+      if (meal === 'dinner' && active > DINNER_HANDS_MAX) {
+        error(`${path}/active`, `ужин «${portion.dish}» у ${person.name} — ${active} мин руками, а можно не больше ${DINNER_HANDS_MAX}`);
+      }
+    });
+  });
 }
 
 const SALT = /(?:^|\s)соль(?=\s|,|$)/iu;

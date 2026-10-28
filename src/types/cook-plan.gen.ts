@@ -129,7 +129,7 @@ export interface CookPlan {
   cost?: PlanCost;
   tags?: string[];
   /**
-   * Техкарту уже готовили по прежним правилам: проверки хода работ — стадии у плиты и в духовке, паузы без отдыха, посуда в двух шагах сразу — и соли граммами к ней не применяются.
+   * Техкарту уже готовили по прежним правилам: проверки хода работ — стадии у плиты и в духовке, паузы без отдыха, посуда в двух шагах сразу, — соли граммами и разделения на обеды и ужины к ней не применяются.
    */
   cooked?: boolean;
   conditions: Conditions;
@@ -283,6 +283,10 @@ export interface Equipment {
 export interface Dish {
   id: LocalId;
   name: string;
+  /**
+   * Обед или ужин — блюдо бывает только чем-то одним: обед греют в микроволновке на работе, ужин доводят дома. В рационе стоит только на своём месте.
+   */
+  meal?: 'lunch' | 'dinner';
   description?: string;
   yield: Quantity;
   portions: number;
@@ -569,10 +573,36 @@ export interface RationPortion {
   protein: number;
   fat: number;
   carbs: number;
+  reheat: PortionReheat;
+}
+/**
+ * Как разогреть порцию: чем, сколько минут руками и всего, что делать.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "PortionReheat".
+ */
+export interface PortionReheat {
+  /**
+   * Чем греть. Обед — только microwave: его греют на работе.
+   *
+   * @minItems 1
+   */
+  methods: [
+    'microwave' | 'stovetop' | 'oven' | 'sous-vide',
+    ...('microwave' | 'stovetop' | 'oven' | 'sous-vide')[]
+  ];
+  /**
+   * Минут руками: переложить, помешать, обжарить, заправить, разложить. У ужина — не больше 10.
+   */
+  active: number;
+  /**
+   * Минут от контейнера до тарелки вместе с ожиданием: духовка или су-вид «поставил и забыл» могут идти дольше.
+   */
+  total: number;
   /**
    * Как разогреть именно эту порцию: где, сколько минут, что сделать до и во время. Откуда взять контейнер, писать не нужно — это видно из фасовки.
    */
-  reheat: string;
+  text: string;
 }
 /**
  * This interface was referenced by `CookPlan`'s JSON-Schema

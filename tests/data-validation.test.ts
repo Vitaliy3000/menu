@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { checkMacros, checkPlan, checkRecipe, checkUniqueTitles, sumInUnit, validateProject, validateSources } from '../scripts/data-validation.ts';
-import type { CookPlan } from '../src/types/cook-plan.gen.ts';
+import type { CookPlan, Packaging, RationPortion } from '../src/types/cook-plan.gen.ts';
 import type { Recipe } from '../src/types/recipe.gen.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -295,24 +295,41 @@ describe('роли поваров', () => {
 });
 
 describe('рацион техкарты', () => {
-  const soupPortion = { dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25, reheat: 'В микроволновке 3 минуты' };
-  const withRation = (): CookPlan => ({
-    ...plan(),
-    dishes: [
-      {
-        ...plan().dishes[0]!,
-        packaging: [{ container: 'Банка 1 л', count: 2, storage: 'fridge', days: 3, person: 'ann', meals: [{ day: 1, meal: 'lunch' }, { day: 1, meal: 'dinner' }] }],
-      },
-    ],
-    ration: {
-      people: [{ id: 'ann', name: 'Аня', target: { kcal: 1000, protein: 60 }, portions: [{ ...soupPortion }] }],
-      extras: [
-        { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
-        { id: 'yogurt', name: 'Йогурт', meal: 'snack', servings: [{ person: 'ann', text: '200 г', kcal: 150, protein: 15 }] },
+  const soupPortion: RationPortion = {
+    dish: 'soup',
+    size: '400 мл',
+    kcal: 300,
+    protein: 20,
+    fat: 12,
+    carbs: 25,
+    reheat: { methods: ['microwave'], active: 1, total: 4, text: 'В микроволновке 3 минуты' },
+  };
+  const stewPortion: RationPortion = {
+    ...soupPortion,
+    dish: 'stew',
+    size: '350 г',
+    reheat: { methods: ['stovetop'], active: 8, total: 10, text: 'В сотейнике под крышкой 8 минут' },
+  };
+  const withRation = (): CookPlan => {
+    const p = plan();
+    const jar = (meal: 'lunch' | 'dinner'): [Packaging] => [{ container: 'Банка 1 л', count: 1, storage: 'fridge', days: 3, person: 'ann', meals: [{ day: 1, meal }] }];
+    return {
+      ...p,
+      dishes: [
+        { ...p.dishes[0]!, meal: 'lunch', packaging: jar('lunch') },
+        { ...p.dishes[0]!, id: 'stew', name: 'Рагу', meal: 'dinner', packaging: jar('dinner') },
       ],
-      days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: { afternoon: ['yogurt'] } }],
-    },
-  });
+      steps: [{ ...p.steps[0]!, dishes: ['soup', 'stew'] }, p.steps[1]!],
+      ration: {
+        people: [{ id: 'ann', name: 'Аня', target: { kcal: 1000, protein: 60 }, portions: [{ ...soupPortion }, { ...stewPortion }] }],
+        extras: [
+          { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
+          { id: 'yogurt', name: 'Йогурт', meal: 'snack', servings: [{ person: 'ann', text: '200 г', kcal: 150, protein: 15 }] },
+        ],
+        days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'stew', snacks: { afternoon: ['yogurt'] } }],
+      },
+    };
+  };
 
   it('валидный рацион — без замечаний', () => {
     expect(checkPlan(withRation(), file)).toEqual([]);
@@ -322,12 +339,12 @@ describe('рацион техкарты', () => {
 
   it('ловит ссылки на несуществующие блюда, перекусы и людей', () => {
     const p = withRation();
-    p.ration!.days[0] = { day: 2, breakfast: 'yogurt', lunch: 'stew', dinner: 'soup', snacks: { morning: ['cake', 'yogurt'], evening: ['yogurt'] } };
+    p.ration!.days[0] = { day: 2, breakfast: 'yogurt', lunch: 'pie', dinner: 'stew', snacks: { morning: ['cake', 'yogurt'], evening: ['yogurt'] } };
     p.ration!.extras[1]!.servings.push({ person: 'bob', text: '100 г', kcal: 50, protein: 5 });
     const text = messages(checkPlan(p, file));
     expect(text).toContain('дни должны идти подряд с 1-го');
     expect(text).toContain('«yogurt» — перекус, а стоит в завтраке');
-    expect(text).toContain('нет блюда с id «stew»');
+    expect(text).toContain('нет блюда с id «pie»');
     expect(text).toContain('нет завтрака или перекуса с id «cake»');
     expect(text).toContain('«yogurt» уже стоит в другом перекусе дня 2');
     expect(text).toContain('нет человека с id «bob»');
@@ -337,9 +354,6 @@ describe('рацион техкарты', () => {
   it('требует порцию каждого блюда дня у каждого человека', () => {
     const p = withRation();
     p.ration!.people[0]!.portions = [{ ...soupPortion }];
-    p.dishes.push({ ...p.dishes[0]!, id: 'stew', name: 'Рагу' });
-    p.steps[0] = { ...p.steps[0]!, dishes: ['soup', 'stew'] };
-    p.ration!.days[0] = { ...p.ration!.days[0]!, dinner: 'stew' };
     expect(messages(checkPlan(p, file))).toContain('у Аня нет порции блюда «stew»');
   });
 
@@ -360,12 +374,37 @@ describe('рацион техкарты', () => {
       { container: 'Банка 0,5 л', count: 2, storage: 'freezer', person: 'bob', meals: [{ day: 1, meal: 'lunch' }, { day: 2, meal: 'lunch' }] },
       { container: 'Пакет', count: 1, storage: 'freezer', person: 'ann', meals: [{ day: 1, meal: 'lunch' }] },
     ];
+    p.dishes[1]!.packaging = [{ container: 'Банка 1 л', count: 1, storage: 'fridge', person: 'ann', meals: [{ day: 2, meal: 'dinner' }] }];
     const text = messages(checkPlan(p, file));
     expect(text).toContain('приёмов пищи 1, а контейнеров 2');
     expect(text).toContain('нет человека с id «bob»');
     expect(text).toContain('в рационе на обед дня 2 не «soup»');
     expect(text).toContain('ужин дня 1 у Аня не лежит ни в одном контейнере');
     expect(text).toContain('обед дня 1 у Аня лежит в 2 контейнерах');
+  });
+
+  it('блюдо — либо обед, либо ужин: обед греют только в микроволновке, ужин — до 10 минут руками', () => {
+    const p = withRation();
+    p.ration!.days[0] = { ...p.ration!.days[0]!, lunch: 'stew', dinner: 'soup' };
+    delete p.dishes[1]!.meal;
+    const text = messages(checkPlan(p, file));
+    expect(text).toContain('у блюда «stew» нет meal: обед это или ужин');
+    expect(text).toContain('«soup» — обед, а стоит в ужине дня 1');
+
+    const q = withRation();
+    const [soup, stew] = q.ration!.people[0]!.portions;
+    q.ration!.people[0]!.portions = [
+      { ...soup!, reheat: { ...soup!.reheat, methods: ['stovetop'], active: 5, total: 3 } },
+      { ...stew!, reheat: { ...stew!.reheat, methods: ['oven'], active: 12, total: 35 } },
+    ];
+    expect(messages(checkPlan(q, file))).toBe(
+      [
+        'разогрев «soup» у Аня: руками 5 мин — больше, чем всего (3)',
+        'обед «soup» у Аня греют только в микроволновке',
+        'ужин «stew» у Аня — 12 мин руками, а можно не больше 10',
+      ].join('\n'),
+    );
+    expect(messages(checkPlan({ ...q, cooked: true }, file))).toBe('разогрев «soup» у Аня: руками 5 мин — больше, чем всего (3)');
   });
 
   it('без рациона фасовка не ссылается на людей', () => {
