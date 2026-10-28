@@ -26,7 +26,7 @@ const plan = (): CookPlan => ({
   ],
   steps: [
     { id: 's1', at: 0, duration: 20, title: 'Нарезать тыкву', dishes: ['soup'], uses: [{ ingredient: 'pumpkin', amount: 600, unit: 'g' }] },
-    { id: 's2', at: 20, duration: 40, title: 'Запечь', passive: true, dishes: ['soup'], equipment: ['oven'], timer: { minutes: 40, label: 'Тыква' }, uses: [{ ingredient: 'salt', toTaste: true }] },
+    { id: 's2', at: 20, duration: 40, title: 'Запечь', passive: true, dishes: ['soup'], equipment: ['oven'], timer: { minutes: 40, label: 'Тыква' }, uses: [{ ingredient: 'salt', amount: 8, unit: 'g' }] },
   ],
 });
 
@@ -125,6 +125,24 @@ describe('смысловые проверки CookPlan', () => {
     const text = messages(checkPlan(p, file));
     expect(text).toContain('«lime» не используется');
     expect(text).toContain('блюдо «bread» не упоминается');
+  });
+
+  it('соль — только граммами', () => {
+    const p = plan();
+    p.steps[0] = {
+      ...p.steps[0]!,
+      details: 'Нарезать кубиками, добавить щепотку соли.',
+      uses: [...p.steps[0]!.uses!, { ingredient: 'salt', amount: 1, unit: 'tsp' }],
+    };
+    p.steps[1] = { ...p.steps[1]!, uses: [{ ingredient: 'salt', toTaste: true }] };
+    expect(messages(checkPlan(p, file))).toBe(
+      [
+        'соль в «s1» — только граммами, без «по вкусу» и ложек',
+        'в «s1» соль на глаз — укажите граммы',
+        'соль в «s2» — только граммами, без «по вкусу» и ложек',
+      ].join('\n'),
+    );
+    expect(checkPlan({ ...p, cooked: true }, file)).toEqual([]);
   });
 
   it('посуда и инструменты — не в большем числе шагов сразу, чем их есть', () => {

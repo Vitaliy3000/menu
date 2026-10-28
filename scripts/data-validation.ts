@@ -534,6 +534,7 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     }
   }
   if (!p.cooked) {
+    checkSalt(p, error);
     for (const o of equipmentOveruse(p)) {
       error(
         `/steps/${o.index}/equipment`,
@@ -675,6 +676,24 @@ function checkRation(
   });
 
   checkPackedMeals(p, ration, people, error);
+}
+
+const SALT = /(?:^|\s)соль(?=\s|,|$)/iu;
+const SALT_BY_EYE = /щепотк\S*\s+соли|сол[ьи]\s+по\s+вкусу|посолить\s+по\s+вкусу/iu;
+
+/** Соль — только граммами: в октябре ложки и «по вкусу» дали 0,3–0,4 % от готового вместо 0,8–1 %. */
+function checkSalt(p: CookPlan, error: (path: string, message: string) => void) {
+  const salt = new Set(p.ingredients.filter((i) => SALT.test(i.name)).map((i) => i.id));
+  p.steps.forEach((step, i) => {
+    step.uses?.forEach((use, j) => {
+      if (salt.has(use.ingredient) && (use.toTaste || use.unit !== 'g')) {
+        error(`/steps/${i}/uses/${j}`, `соль в «${step.id}» — только граммами, без «по вкусу» и ложек`);
+      }
+    });
+    if (SALT_BY_EYE.test(`${step.title} ${step.details ?? ''} ${step.tip ?? ''}`)) {
+      error(`/steps/${i}/details`, `в «${step.id}» соль на глаз — укажите граммы`);
+    }
+  });
 }
 
 /** Каждый обед и ужин рациона лежит ровно в одном контейнере своего блюда и своего человека: по фасовке рацион показывает, откуда его взять. */
