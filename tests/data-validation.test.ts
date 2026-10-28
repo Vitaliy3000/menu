@@ -127,6 +127,35 @@ describe('смысловые проверки CookPlan', () => {
     expect(text).toContain('блюдо «bread» не упоминается');
   });
 
+  it('посуда и инструменты — не в большем числе шагов сразу, чем их есть', () => {
+    const p = plan();
+    p.equipment.push({ id: 'board', name: 'Доска', kind: 'tool' });
+    p.steps = [
+      { ...p.steps[0]!, equipment: ['board'] },
+      { id: 's3', at: 10, duration: 5, title: 'Нарезать лук', dishes: ['soup'], equipment: ['board'] },
+      p.steps[1]!,
+    ];
+    expect(messages(checkPlan(p, file))).toBe(
+      'шаги «s1», «s3» одновременно берут «board», а в equipment — 1 шт.: возьмите другую посуду или сдвиньте шаг',
+    );
+    p.equipment[1] = { ...p.equipment[1]!, count: 2 };
+    expect(checkPlan(p, file)).toEqual([]);
+    expect(checkPlan({ ...p, cooked: true }, file)).toEqual([]);
+  });
+
+  it('шаг блюда в посуде, где оно ждёт, — то же место', () => {
+    const p = plan();
+    p.equipment.push({ id: 'pot', name: 'Кастрюля', kind: 'cookware' });
+    p.steps = [
+      p.steps[0]!,
+      { ...p.steps[1]!, equipment: ['oven', 'pot'] },
+      { id: 'cream', at: 30, duration: 2, title: 'Влить сливки', dishes: ['soup'], equipment: ['pot'] },
+    ];
+    expect(checkPlan(p, file)).toEqual([]);
+    p.steps[2] = { id: 'rinse', at: 30, duration: 2, title: 'Сполоснуть кастрюлю', equipment: ['pot'] };
+    expect(messages(checkPlan(p, file))).toContain('шаги «s2», «rinse» одновременно берут «pot»');
+  });
+
   it('предупреждает о повторяющейся таре в фасовке', () => {
     const p = plan();
     const pack = p.dishes[0]!.packaging[0]!;

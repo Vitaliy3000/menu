@@ -12,6 +12,7 @@ import type { Recipe } from '../src/types/recipe.gen.ts';
 import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-plan.gen.ts';
 import { deviation, personDay } from '../src/lib/ration.ts';
 import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
+import { equipmentOveruse } from './equipment-use.ts';
 import { idleGaps, stageConflicts } from './role-flow.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 import type { Bake } from '../src/types/bake.gen.ts';
@@ -529,6 +530,14 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
       error(
         `/steps/${c.index}/zones`,
         `«${c.first}» и «${c.second}» — разные роли одновременно в одной зоне (${ZONE_LABELS[c.zone].toLowerCase()}), ${c.from}–${c.to}-я минута`,
+      );
+    }
+  }
+  if (!p.cooked) {
+    for (const o of equipmentOveruse(p)) {
+      error(
+        `/steps/${o.index}/equipment`,
+        `шаги ${o.busy.map((s) => `«${s.id}»`).join(', ')} одновременно берут «${o.item.id}», а в equipment — ${o.item.count ?? 1} шт.: возьмите другую посуду или сдвиньте шаг`,
       );
     }
   }
