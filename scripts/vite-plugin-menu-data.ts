@@ -110,6 +110,7 @@ export function menuData(): Plugin {
         { path: 'plans/', title: 'Техкарты', description: 'Готовые планы дней готовки под конкретные объёмы и технику.' },
         { path: 'kitchen/', title: 'Кухня', description: 'Справочник для техкарт: кто что не ест, оборудование, хранение, излишки.' },
         { path: 'baking/', title: 'Выпечка', description: 'Хлеб и пицца: формулы в пекарских процентах, режимы, заметки с пробных выпечек.' },
+        { path: 'foods/', title: 'Продукты и блюда', description: 'Как продукты, части блюд и блюда переносят домашнюю заморозку: оценка 0–100, что теряется и как вернуть.' },
         ...data.recipes.map((r) => ({ path: `recipes/${r.id}/`, title: r.title, description: r.description })),
         ...data.plans.map((p) => ({ path: `plans/${p.id}/`, title: p.title, description: p.summary })),
         ...data.bakes.map((b) => ({ path: `baking/${b.id}/`, title: b.title, description: b.description })),

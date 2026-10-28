@@ -5,6 +5,7 @@ import { getBake, getPlan, getRecipe } from './data/index.ts';
 import { match, useLocation } from './lib/router.tsx';
 import { BakePage } from './pages/BakePage.tsx';
 import { BakingPage } from './pages/BakingPage.tsx';
+import { FoodsPage } from './pages/FoodsPage.tsx';
 import { KitchenPage } from './pages/KitchenPage.tsx';
 import { NotFoundPage } from './pages/NotFoundPage.tsx';
 import { PlanPage } from './pages/PlanPage.tsx';
@@ -30,6 +31,7 @@ function route(path: string): { title: string | null; view: JSX.Element } {
   if (path === '/plans') return { title: 'Техкарты', view: <PlansPage /> };
   if (path === '/kitchen') return { title: 'Кухня', view: <KitchenPage /> };
   if (path === '/baking') return { title: 'Выпечка', view: <BakingPage /> };
+  if (path === '/foods') return { title: 'Продукты и блюда', view: <FoodsPage /> };
 
   const recipeId = match('/recipes/:id', path)?.id;
   if (recipeId) {

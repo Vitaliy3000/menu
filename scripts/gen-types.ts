@@ -15,6 +15,7 @@ const targets = [
   { schema: 'schemas/kitchen.schema.json', out: 'src/types/kitchen.gen.ts' },
   { schema: 'schemas/bake.schema.json', out: 'src/types/bake.gen.ts' },
   { schema: 'schemas/baking.schema.json', out: 'src/types/baking.gen.ts' },
+  { schema: 'schemas/foods.schema.json', out: 'src/types/foods.gen.ts' },
 ];
 
 const check = process.argv.includes('--check');

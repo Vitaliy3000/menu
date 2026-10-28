@@ -17,6 +17,7 @@ import { idleGaps, stageConflicts } from './role-flow.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 import type { Bake } from '../src/types/bake.gen.ts';
 import type { Baking } from '../src/types/baking.gen.ts';
+import type { Foods } from '../src/types/foods.gen.ts';
 import { doughGrams, expectedDough, flourGrams, inFinal } from '../src/lib/baking.ts';
 
 export type Severity = 'error' | 'warning';
@@ -36,6 +37,7 @@ export interface DataSet {
   kitchen: Kitchen | null;
   bakes: Bake[];
   baking: Baking | null;
+  foods: Foods | null;
   issues: Issue[];
 }
 
@@ -57,12 +59,15 @@ export const SCHEMA_FILES = {
   kitchen: 'schemas/kitchen.schema.json',
   bakes: 'schemas/bake.schema.json',
   baking: 'schemas/baking.schema.json',
+  foods: 'schemas/foods.schema.json',
 } as const;
 
 /** Справочник кухни — один файл. */
 export const KITCHEN_FILE = 'data/kitchen.json';
 /** Справочник выпечки — один файл. */
 export const BAKING_FILE = 'data/baking.json';
+/** Каталог продуктов и блюд — один файл. */
+export const FOODS_FILE = 'data/foods.json';
 
 type Kind = keyof typeof DATA_DIRS;
 
@@ -71,19 +76,21 @@ type Kind = keyof typeof DATA_DIRS;
 /* ------------------------------------------------------------------ */
 
 export async function validateProject(root: string): Promise<DataSet> {
-  const [recipeSchema, planSchema, kitchenSchema, bakeSchema, bakingSchema] = await Promise.all([
+  const [recipeSchema, planSchema, kitchenSchema, bakeSchema, bakingSchema, foodsSchema] = await Promise.all([
     readJson(join(root, SCHEMA_FILES.recipes)),
     readJson(join(root, SCHEMA_FILES.plans)),
     readJson(join(root, SCHEMA_FILES.kitchen)),
     readJson(join(root, SCHEMA_FILES.bakes)),
     readJson(join(root, SCHEMA_FILES.baking)),
+    readJson(join(root, SCHEMA_FILES.foods)),
   ]);
-  const [recipeFiles, planFiles, bakeFiles, kitchenFile, bakingFile] = await Promise.all([
+  const [recipeFiles, planFiles, bakeFiles, kitchenFile, bakingFile, foodsFile] = await Promise.all([
     readSources(root, DATA_DIRS.recipes),
     readSources(root, DATA_DIRS.plans),
     readSources(root, DATA_DIRS.bakes),
     readSource(root, KITCHEN_FILE),
     readSource(root, BAKING_FILE),
+    readSource(root, FOODS_FILE),
   ]);
   return validateSources({
     recipeSchema,
@@ -96,6 +103,8 @@ export async function validateProject(root: string): Promise<DataSet> {
     bakeFiles,
     kitchenFile,
     bakingFile,
+    foodsSchema,
+    foodsFile,
   });
 }
 
@@ -139,6 +148,10 @@ export function validateSources(input: {
   bakingSchema?: object;
   /** null — файла нет. */
   bakingFile?: SourceFile | null;
+  /** Без схемы каталог продуктов не проверяется. */
+  foodsSchema?: object;
+  /** null — файла нет. */
+  foodsFile?: SourceFile | null;
 }): DataSet {
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
@@ -166,6 +179,9 @@ export function validateSources(input: {
   const baking = input.bakingSchema
     ? parseReference(ajv.compile<Baking>(input.bakingSchema), input.bakingFile, BAKING_FILE, 'Нет справочника выпечки', checkBaking, issues)
     : null;
+  const foods = input.foodsSchema
+    ? parseReference(ajv.compile<Foods>(input.foodsSchema), input.foodsFile, FOODS_FILE, 'Нет каталога продуктов', checkFoods, issues)
+    : null;
 
   return {
     recipes: recipes.map((r) => r.doc),
@@ -173,6 +189,7 @@ export function validateSources(input: {
     kitchen,
     bakes: bakes.map((b) => b.doc),
     baking,
+    foods,
     issues,
   };
 }
@@ -438,6 +455,47 @@ export function checkBaking(k: Baking, file: string): Issue[] {
   k.ideas?.forEach((idea, i) => {
     if (ideas.has(norm(idea.title))) error(`/ideas/${i}`, `идея «${idea.title}» указана дважды`);
     ideas.add(norm(idea.title));
+  });
+
+  return issues;
+}
+
+/* ------------------------------------------------------------------ */
+/* Смысловые проверки: каталог продуктов                               */
+/* ------------------------------------------------------------------ */
+
+export function checkFoods(f: Foods, file: string): Issue[] {
+  const issues: Issue[] = [];
+  const error = (path: string, message: string) => issues.push({ severity: 'error', file, path, message });
+  const warn = (path: string, message: string) => issues.push({ severity: 'warning', file, path, message });
+  const norm = (s: string) => s.trim().toLowerCase().replace(/ё/g, 'е');
+
+  const sources = uniqueIds(f.sources, '/sources', error);
+  const urls = new Set<string>();
+  f.sources.forEach((s, i) => {
+    if (urls.has(s.url)) error(`/sources/${i}/url`, `ссылка ${s.url} уже есть в другом источнике`);
+    urls.add(s.url);
+  });
+
+  uniqueIds(f.groups, '/groups', error);
+  const ids = new Set<string>();
+  const names = new Set<string>();
+  const cited = new Set<string>();
+  f.groups.forEach((g, gi) =>
+    g.items.forEach((food, fi) => {
+      const path = `/groups/${gi}/items/${fi}`;
+      if (ids.has(food.id)) error(`${path}/id`, `id «${food.id}» повторяется`);
+      ids.add(food.id);
+      if (names.has(norm(food.name))) error(`${path}/name`, `«${food.name}» уже есть в каталоге`);
+      names.add(norm(food.name));
+      food.sources?.forEach((id, si) => {
+        if (!sources.has(id)) error(`${path}/sources/${si}`, `нет источника «${id}»`);
+        cited.add(id);
+      });
+    }),
+  );
+  f.sources.forEach((s, i) => {
+    if (!cited.has(s.id)) warn(`/sources/${i}`, `на источник «${s.id}» не ссылается ни одна позиция`);
   });
 
   return issues;

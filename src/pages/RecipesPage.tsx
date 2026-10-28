@@ -1,6 +1,7 @@
 import { ArrowRight, Clock, Flame, Leaf, Search, SlidersHorizontal, Snowflake, Users, X } from 'lucide-preact';
-import { useEffect, useMemo, useState } from 'preact/hooks';
+import { useMemo, useState } from 'preact/hooks';
 import { Plate } from '../components/Plate.tsx';
+import { SearchField } from '../components/SearchField.tsx';
 import { Sheet } from '../components/Sheet.tsx';
 import { StatBadge } from '../components/StatBadge.tsx';
 import { plans, recipes } from '../data/index.ts';
@@ -71,7 +72,7 @@ export function RecipesPage() {
         </aside>
 
         <div class="catalog-main">
-          <SearchField value={filters.q} onChange={(q) => update({ q })} />
+          <SearchField value={filters.q} onChange={(q) => update({ q })} placeholder="Блюдо, продукт или тег" label="Поиск рецептов" />
 
           <div class="chip-row catalog-cats" role="group" aria-label="Категории">
             <button class="chip" type="button" aria-pressed={filters.cat === null} onClick={() => update({ cat: null })}>
@@ -166,45 +167,6 @@ export function RecipesPage() {
         >
           <FilterPanel filters={filters} update={update} month={month} />
         </Sheet>
-      )}
-    </div>
-  );
-}
-
-function SearchField({ value, onChange }: { value: string; onChange: (v: string) => void }) {
-  // Локальное состояние + отложенная запись в URL: Safari ограничивает частоту history.replaceState.
-  const [text, setText] = useState(value);
-  useEffect(() => setText(value), [value]);
-  useEffect(() => {
-    if (text === value) return;
-    const id = window.setTimeout(() => onChange(text), 200);
-    return () => window.clearTimeout(id);
-  }, [text]);
-
-  return (
-    <div class="search" role="search">
-      <Search aria-hidden="true" />
-      <input
-        type="search"
-        placeholder="Блюдо, продукт или тег"
-        value={text}
-        onInput={(e) => setText(e.currentTarget.value)}
-        aria-label="Поиск рецептов"
-        enterKeyHint="search"
-        autoComplete="off"
-      />
-      {text && (
-        <button
-          class="icon-btn"
-          type="button"
-          onClick={() => {
-            setText('');
-            onChange('');
-          }}
-          aria-label="Очистить поиск"
-        >
-          <X />
-        </button>
       )}
     </div>
   );

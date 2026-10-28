@@ -14,7 +14,9 @@ export function Layout({ children }: { children: ComponentChildren }) {
       ? 'kitchen'
       : path.startsWith('/baking')
         ? 'baking'
-        : 'recipes';
+        : path.startsWith('/foods')
+          ? 'foods'
+          : 'recipes';
 
   return (
     <>
@@ -30,6 +32,9 @@ export function Layout({ children }: { children: ComponentChildren }) {
             </Link>
             <Link to="/baking/" aria-current={section === 'baking' ? 'page' : undefined}>
               Выпечка
+            </Link>
+            <Link to="/foods/" aria-current={section === 'foods' ? 'page' : undefined}>
+              Продукты
             </Link>
             <Link to="/plans/" aria-current={section === 'plans' ? 'page' : undefined}>
               Техкарты

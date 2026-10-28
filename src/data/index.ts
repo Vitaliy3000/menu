@@ -8,6 +8,7 @@ import type { Kitchen } from '../types/kitchen.gen.ts';
 import type { Recipe } from '../types/recipe.gen.ts';
 import type { Bake } from '../types/bake.gen.ts';
 import type { Baking } from '../types/baking.gen.ts';
+import type { Foods } from '../types/foods.gen.ts';
 import { typograph } from '../lib/format.ts';
 
 const collator = new Intl.Collator('ru');
@@ -52,6 +53,15 @@ const bakingModules = import.meta.glob<Baking>('/data/baking.json', { eager: tru
 
 /** Справочник выпечки (data/baking.json): руководства, что купить, идеи. */
 export const baking: Baking | null = Object.values(bakingModules).map(polish)[0] ?? null;
+
+const foodsLoaders = import.meta.glob<Foods>('/data/foods.json', { import: 'default' });
+let foodsCatalog: Promise<Foods> | undefined;
+
+/** Каталог продуктов и блюд (data/foods.json) — тяжёлый, поэтому отдельным чанком: грузится только на своей странице. */
+export function loadFoods(): Promise<Foods> {
+  foodsCatalog ??= Object.values(foodsLoaders)[0]!().then(polish);
+  return foodsCatalog;
+}
 
 const recipeById = new Map(recipes.map((r) => [r.id, r]));
 const planById = new Map(plans.map((p) => [p.id, p]));
