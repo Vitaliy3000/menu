@@ -2387,7 +2387,7 @@
             "chili": 7,
             "tomato": 6,
             "meaty": 4,
-            "roasted": 3,
+            "corn": 3,
             "onion": 3,
             "garlic": 3
           },
@@ -2414,7 +2414,7 @@
           "aroma": {
             "chili": 6,
             "meaty": 6,
-            "cereal": 6,
+            "corn": 6,
             "garlic": 3,
             "onion": 3,
             "mediterranean-herbs": 2
@@ -2474,7 +2474,7 @@
           },
           "aroma": {
             "meaty": 7,
-            "cereal": 3,
+            "corn": 3,
             "cilantro": 3,
             "earthy": 3,
             "onion": 3,
@@ -2684,8 +2684,9 @@
             "fat": 2
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 7,
             "onion": 3,
+            "earthy": 2,
             "warm-spice": 2,
             "nutty": 1
           },
@@ -2707,9 +2708,10 @@
             "fat": 5
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 6,
             "milky": 5,
             "onion": 3,
+            "earthy": 2,
             "warm-spice": 2
           },
           "freezeScore": 75,
@@ -2760,7 +2762,8 @@
             "fat": 3
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 5,
+            "earthy": 3,
             "onion": 3,
             "parsley": 3,
             "buttery": 2
@@ -4056,7 +4059,7 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 6,
+            "corn": 6,
             "milky": 6,
             "earthy": 3,
             "smoky": 3,
@@ -6020,9 +6023,10 @@
             "fat": 6
           },
           "aroma": {
-            "gamey": 7,
+            "gamey": 6,
             "cultured": 6,
             "onion": 5,
+            "metallic": 4,
             "roasted": 2
           },
           "freezeScore": 55,
@@ -6964,12 +6968,12 @@
             "fat": 7
           },
           "aroma": {
-            "gamey": 7,
+            "gamey": 6,
+            "metallic": 4,
             "nutty": 4,
-            "onion": 4,
             "cilantro": 4,
-            "garlic": 3,
-            "tart-fruit": 2
+            "onion": 3,
+            "garlic": 3
           },
           "freezeScore": 50,
           "months": 2,
@@ -10862,11 +10866,11 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 6,
+            "corn": 6,
             "meaty": 5,
             "beany": 4,
             "paprika": 4,
-            "cumin": 3,
+            "pumpkin": 3,
             "cured": 3
           },
           "freezeScore": 90,
@@ -10893,8 +10897,8 @@
           "aroma": {
             "meaty": 5,
             "stone-fruit": 5,
-            "earthy": 4,
-            "cereal": 3,
+            "pumpkin": 4,
+            "corn": 3,
             "onion": 3,
             "tomato": 3
           },
@@ -10923,8 +10927,8 @@
             "cumin": 6,
             "meaty": 5,
             "onion": 5,
+            "pumpkin": 4,
             "cereal": 4,
-            "garlic": 3,
             "gamey": 3
           },
           "freezeScore": 80,
@@ -11194,12 +11198,12 @@
             "fat": 6
           },
           "aroma": {
-            "gamey": 6,
+            "gamey": 5,
             "cereal": 5,
             "meaty": 4,
+            "metallic": 3,
             "paprika": 3,
-            "parsley": 3,
-            "onion": 3
+            "parsley": 3
           },
           "freezeScore": 80,
           "months": 3,
@@ -12825,7 +12829,7 @@
           },
           "aroma": {
             "chili": 7,
-            "cereal": 4,
+            "corn": 4,
             "cheesy": 4,
             "cumin": 3,
             "onion": 3,
@@ -12857,7 +12861,7 @@
             "cheesy": 6,
             "milky": 5,
             "chili": 4,
-            "cereal": 3,
+            "corn": 3,
             "meaty": 3,
             "cumin": 2
           },
@@ -17329,12 +17333,12 @@
             "fat": 5
           },
           "aroma": {
-            "gamey": 6,
+            "gamey": 5,
+            "metallic": 4,
             "bready": 4,
             "onion": 4,
             "parsley": 4,
-            "mediterranean-herbs": 3,
-            "meaty": 3
+            "mediterranean-herbs": 3
           },
           "freezeScore": 85,
           "months": 3,
@@ -18019,8 +18023,9 @@
           "id": "pyanse",
           "name": "Пянсе (корейские паровые пирожки с мясом и капустой)",
           "cuisines": [
-            "korean",
-            "russian"
+            "koryo-saram",
+            "russian",
+            "korean"
           ],
           "taste": {
             "sweet": 2,
@@ -18061,7 +18066,7 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "chili": 5,
             "meaty": 4,
             "garlic": 2,
@@ -18093,7 +18098,7 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "chili": 5,
             "meaty": 4,
             "garlic": 2,
@@ -18598,7 +18603,8 @@
             "fat": 6
           },
           "aroma": {
-            "gamey": 8,
+            "gamey": 7,
+            "metallic": 5,
             "roasted": 4,
             "onion": 4,
             "eggy": 2,
@@ -18628,12 +18634,12 @@
             "fat": 8
           },
           "aroma": {
-            "gamey": 7,
+            "gamey": 6,
             "onion": 5,
-            "earthy": 3,
+            "metallic": 3,
+            "pumpkin": 3,
             "eggy": 3,
-            "garlic": 3,
-            "pickled": 2
+            "garlic": 3
           },
           "freezeScore": 35,
           "months": 1,
@@ -20154,7 +20160,7 @@
           },
           "aroma": {
             "fried": 8,
-            "cereal": 5,
+            "corn": 5,
             "cured": 5,
             "smoky": 3
           },
@@ -20183,7 +20189,7 @@
           },
           "aroma": {
             "fried": 8,
-            "cereal": 7,
+            "corn": 7,
             "onion": 4
           },
           "freezeScore": 65,
@@ -21380,10 +21386,10 @@
           "aroma": {
             "dried-fruit": 7,
             "honey": 5,
+            "pumpkin": 5,
             "warm-spice": 4,
             "buttery": 4,
-            "roasted": 3,
-            "cereal": 3
+            "roasted": 3
           },
           "freezeScore": 50,
           "months": 2,
@@ -22393,7 +22399,7 @@
             "cilantro": 6,
             "chili": 5,
             "onion": 5,
-            "cereal": 5,
+            "corn": 5,
             "citrus": 3
           },
           "freezeScore": 10,
@@ -22421,7 +22427,7 @@
           "aroma": {
             "chili": 6,
             "tomato": 6,
-            "cereal": 5,
+            "corn": 5,
             "fried": 4,
             "cultured": 3,
             "onion": 3
@@ -23450,8 +23456,9 @@
           },
           "aroma": {
             "fried": 7,
+            "pumpkin": 3,
             "caramel": 3,
-            "earthy": 3
+            "earthy": 2
           },
           "freezeScore": 65,
           "months": 2,
@@ -24070,7 +24077,8 @@
             "fat": 4
           },
           "aroma": {
-            "earthy": 6,
+            "pumpkin": 5,
+            "earthy": 5,
             "onion": 5,
             "buttery": 3
           },
@@ -24308,8 +24316,9 @@
             "fat": 4
           },
           "aroma": {
-            "earthy": 5,
-            "buttery": 4
+            "pumpkin": 6,
+            "buttery": 4,
+            "earthy": 2
           },
           "freezeScore": 85,
           "months": 6,
@@ -24329,10 +24338,10 @@
             "fat": 4
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 7,
             "buttery": 4,
-            "warm-spice": 2,
-            "nutty": 2
+            "nutty": 2,
+            "warm-spice": 2
           },
           "freezeScore": 90,
           "months": 12,
@@ -24359,9 +24368,10 @@
             "fat": 4
           },
           "aroma": {
+            "pumpkin": 5,
             "caramel": 4,
-            "earthy": 4,
             "buttery": 4,
+            "earthy": 3,
             "warm-spice": 2
           },
           "freezeScore": 85,
@@ -24391,9 +24401,9 @@
           "aroma": {
             "caramel": 5,
             "warm-spice": 5,
+            "pumpkin": 4,
             "vanilla": 4,
             "buttery": 4,
-            "earthy": 3,
             "eggy": 2
           },
           "freezeScore": 85,
@@ -24473,8 +24483,8 @@
             "fat": 2
           },
           "aroma": {
+            "pumpkin": 6,
             "roasted": 5,
-            "earthy": 4,
             "caramel": 3,
             "nutty": 2
           },
@@ -24747,8 +24757,8 @@
             "fat": 4
           },
           "aroma": {
+            "pumpkin": 6,
             "buttery": 5,
-            "earthy": 4,
             "caramel": 3,
             "parsley": 2
           },
@@ -24774,8 +24784,8 @@
           },
           "aroma": {
             "dried-fruit": 6,
+            "pumpkin": 5,
             "honey": 5,
-            "earthy": 4,
             "warm-spice": 2,
             "caramel": 2
           },
@@ -24892,7 +24902,7 @@
           "aroma": {
             "fried": 6,
             "green": 5,
-            "cereal": 4,
+            "corn": 4,
             "tomato": 3
           },
           "freezeScore": 50,
@@ -24971,7 +24981,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 7
+            "corn": 8
           },
           "freezeScore": 85,
           "months": 12,
@@ -24998,7 +25008,7 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 6,
+            "corn": 7,
             "milky": 6,
             "buttery": 4
           },
@@ -25027,7 +25037,7 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 6,
+            "corn": 6,
             "fried": 5,
             "cheesy": 3,
             "mediterranean-herbs": 2
@@ -25175,6 +25185,7 @@
             "soy": 6,
             "earthy": 6,
             "sesame": 5,
+            "pumpkin": 2,
             "caramel": 2,
             "chili": 2
           },
@@ -26195,6 +26206,7 @@
           "id": "korean-carrot",
           "name": "Морковь по-корейски",
           "cuisines": [
+            "koryo-saram",
             "russian",
             "central-asian",
             "ukrainian"
@@ -26212,8 +26224,8 @@
             "garlic": 6,
             "warm-spice": 5,
             "pickled": 5,
-            "chili": 3,
-            "earthy": 2
+            "pumpkin": 4,
+            "chili": 3
           },
           "freezeScore": 40,
           "months": 2,
@@ -26236,8 +26248,8 @@
             "fat": 4
           },
           "aroma": {
+            "pumpkin": 5,
             "citrus": 5,
-            "earthy": 3,
             "parsley": 3,
             "mustard": 2
           },
@@ -26309,9 +26321,10 @@
           "id": "korean-fern",
           "name": "Папоротник по-корейски (кочхари-намуль)",
           "cuisines": [
-            "korean",
+            "koryo-saram",
             "russian",
-            "central-asian"
+            "central-asian",
+            "korean"
           ],
           "taste": {
             "sweet": 2,
@@ -26339,6 +26352,7 @@
           "id": "korean-yuba-salad",
           "name": "Спаржа по-корейски (из соевой спаржи фучжу)",
           "cuisines": [
+            "koryo-saram",
             "russian",
             "central-asian"
           ],
@@ -26368,6 +26382,7 @@
           "id": "korean-eggplant",
           "name": "Баклажаны по-корейски",
           "cuisines": [
+            "koryo-saram",
             "russian",
             "central-asian"
           ],
@@ -26397,6 +26412,7 @@
           "id": "funchoza-korean",
           "name": "Фунчоза по-корейски (салат с овощами в уксусной заправке)",
           "cuisines": [
+            "koryo-saram",
             "russian",
             "central-asian"
           ],
@@ -26426,9 +26442,10 @@
           "id": "korean-cucumbers",
           "name": "Огурцы по-корейски",
           "cuisines": [
-            "korean",
+            "koryo-saram",
             "russian",
-            "central-asian"
+            "central-asian",
+            "korean"
           ],
           "taste": {
             "sweet": 3,
@@ -27931,9 +27948,10 @@
             "fat": 8
           },
           "aroma": {
-            "gamey": 7,
+            "gamey": 6,
             "onion": 6,
             "eggy": 4,
+            "metallic": 4,
             "caramel": 2,
             "meaty": 2
           },
@@ -28093,9 +28111,10 @@
           "id": "hoe-korean",
           "name": "Хе из рыбы (по-корейски)",
           "cuisines": [
-            "korean",
+            "koryo-saram",
             "russian",
-            "central-asian"
+            "central-asian",
+            "korean"
           ],
           "taste": {
             "sweet": 3,
@@ -28174,8 +28193,8 @@
             "pickled": 5,
             "onion": 5,
             "mustard": 4,
-            "eggy": 3,
-            "parsley": 2
+            "metallic": 3,
+            "eggy": 3
           },
           "freezeScore": 15,
           "losses": "Нарубленное мясо темнеет и пускает сок, желток, шалот и каперсы портятся.",
@@ -28253,7 +28272,8 @@
             "fat": 3
           },
           "aroma": {
-            "meaty": 6
+            "meaty": 6,
+            "metallic": 4
           },
           "freezeScore": 55,
           "months": 1,
@@ -31027,7 +31047,7 @@
           "aroma": {
             "onion": 6,
             "parsley": 5,
-            "earthy": 3
+            "pumpkin": 3
           },
           "freezeScore": 75,
           "months": 6,
@@ -31056,7 +31076,7 @@
             "roasted": 4,
             "olive": 3,
             "caramel": 2,
-            "earthy": 2
+            "pumpkin": 2
           },
           "freezeScore": 95,
           "months": 6,
@@ -31084,7 +31104,7 @@
           "aroma": {
             "onion": 7,
             "roasted": 5,
-            "earthy": 3,
+            "pumpkin": 3,
             "nutty": 2,
             "caramel": 2
           },
@@ -34395,7 +34415,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 7
+            "corn": 7
           },
           "freezeScore": 70,
           "months": 3,
@@ -34419,7 +34439,7 @@
             "fat": 7
           },
           "aroma": {
-            "cereal": 6,
+            "corn": 6,
             "cultured": 5,
             "milky": 4
           },
@@ -34448,7 +34468,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 7
+            "corn": 7
           },
           "freezeScore": 85,
           "months": 3,
@@ -37913,7 +37933,7 @@
             "fat": 3
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "roasted": 4
           },
           "freezeScore": 80,
@@ -38578,7 +38598,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 8,
             "roasted": 4,
             "earthy": 2
           },
@@ -38604,7 +38624,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "roasted": 4,
             "earthy": 2
           },
@@ -38738,7 +38758,7 @@
             "fat": 6
           },
           "aroma": {
-            "cereal": 6,
+            "corn": 6,
             "buttery": 5,
             "roasted": 3,
             "milky": 2
@@ -40953,7 +40973,7 @@
           "aroma": {
             "warm-spice": 6,
             "cultured": 4,
-            "earthy": 3,
+            "pumpkin": 4,
             "vanilla": 3,
             "eggy": 2
           },
@@ -41927,7 +41947,7 @@
             "chocolate": 7,
             "bready": 4,
             "milky": 3,
-            "earthy": 2
+            "pumpkin": 3
           },
           "freezeScore": 90,
           "months": 3,
@@ -42657,7 +42677,7 @@
             "coconut": 7,
             "caramel": 5,
             "eggy": 4,
-            "green": 3
+            "pandan": 4
           },
           "freezeScore": 75,
           "months": 3,
@@ -45709,7 +45729,7 @@
           },
           "aroma": {
             "chocolate": 8,
-            "cereal": 5
+            "corn": 5
           },
           "freezeScore": 85,
           "months": 3,
@@ -46110,7 +46130,7 @@
           },
           "aroma": {
             "warm-spice": 8,
-            "earthy": 4,
+            "pumpkin": 5,
             "milky": 4,
             "buttery": 3,
             "eggy": 2,
@@ -46167,7 +46187,7 @@
           },
           "aroma": {
             "warm-spice": 6,
-            "earthy": 5,
+            "pumpkin": 5,
             "buttery": 4,
             "caramel": 4,
             "vanilla": 3
@@ -47357,7 +47377,7 @@
             "milky": 6,
             "buttery": 6,
             "warm-spice": 5,
-            "earthy": 3,
+            "pumpkin": 4,
             "nutty": 3
           },
           "freezeScore": 90,
@@ -49660,7 +49680,7 @@
             "fat": 5
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "buttery": 4,
             "roasted": 3
           },
@@ -49894,7 +49914,7 @@
             "fat": 3
           },
           "aroma": {
-            "cereal": 8,
+            "corn": 8,
             "vanilla": 2
           },
           "freezeScore": 85,
@@ -50272,7 +50292,8 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 5,
+            "earthy": 4,
             "caramel": 3,
             "nutty": 2
           },
@@ -50306,7 +50327,8 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 5,
+            "earthy": 4,
             "caramel": 3,
             "nutty": 2
           },
@@ -50342,8 +50364,9 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 4,
-            "green": 4
+            "pumpkin": 5,
+            "green": 4,
+            "earthy": 3
           },
           "freezeScore": 55,
           "months": 3,
@@ -50376,8 +50399,9 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 4,
-            "green": 4
+            "pumpkin": 5,
+            "green": 4,
+            "earthy": 3
           },
           "freezeScore": 70,
           "months": 6,
@@ -50408,7 +50432,8 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 4,
+            "pumpkin": 5,
+            "earthy": 3,
             "green": 3
           },
           "freezeScore": 75,
@@ -50445,7 +50470,8 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 5,
+            "pumpkin": 6,
+            "earthy": 3,
             "green": 2
           },
           "freezeScore": 50,
@@ -50473,9 +50499,10 @@
             "fat": 2
           },
           "aroma": {
+            "pumpkin": 5,
             "roasted": 5,
             "caramel": 4,
-            "earthy": 4
+            "earthy": 2
           },
           "freezeScore": 60,
           "months": 3,
@@ -50855,7 +50882,8 @@
           "aroma": {
             "parsley": 6,
             "onion": 5,
-            "earthy": 4,
+            "pumpkin": 3,
+            "earthy": 2,
             "green": 2
           },
           "freezeScore": 80,
@@ -50941,8 +50969,8 @@
           "aroma": {
             "green": 5,
             "beany": 3,
-            "cereal": 2,
-            "earthy": 2
+            "corn": 2,
+            "pumpkin": 2
           },
           "freezeScore": 80,
           "months": 12,
@@ -53064,8 +53092,9 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 4,
-            "nutty": 3
+            "pumpkin": 6,
+            "nutty": 3,
+            "earthy": 2
           },
           "freezeScore": 60,
           "months": 6,
@@ -53092,8 +53121,9 @@
             "fat": 0
           },
           "aroma": {
+            "pumpkin": 6,
             "nutty": 4,
-            "earthy": 3
+            "earthy": 2
           },
           "freezeScore": 60,
           "months": 6,
@@ -53120,10 +53150,10 @@
             "fat": 2
           },
           "aroma": {
+            "pumpkin": 6,
             "roasted": 5,
             "nutty": 4,
-            "caramel": 3,
-            "earthy": 2
+            "caramel": 3
           },
           "freezeScore": 65,
           "months": 6,
@@ -53150,8 +53180,9 @@
             "fat": 0
           },
           "aroma": {
-            "earthy": 4,
-            "nutty": 3
+            "pumpkin": 7,
+            "nutty": 3,
+            "earthy": 2
           },
           "freezeScore": 90,
           "months": 12,
@@ -53179,9 +53210,9 @@
             "fat": 0
           },
           "aroma": {
+            "pumpkin": 3,
             "green": 3,
-            "nutty": 3,
-            "earthy": 2
+            "nutty": 3
           },
           "freezeScore": 55,
           "months": 6,
@@ -55095,7 +55126,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 8,
+            "corn": 8,
             "green": 2
           },
           "freezeScore": 35,
@@ -55130,7 +55161,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 8,
+            "corn": 8,
             "green": 2
           },
           "freezeScore": 55,
@@ -55167,7 +55198,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 8,
+            "corn": 8,
             "green": 2
           },
           "freezeScore": 60,
@@ -55201,7 +55232,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 8,
+            "corn": 8,
             "green": 2
           },
           "freezeScore": 85,
@@ -55235,7 +55266,7 @@
             "fat": 2
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "roasted": 6,
             "smoky": 3,
             "caramel": 2
@@ -55265,7 +55296,7 @@
           },
           "aroma": {
             "green": 5,
-            "cereal": 4
+            "corn": 4
           },
           "freezeScore": 65,
           "months": 12,
@@ -58532,10 +58563,8 @@
             "fat": 0
           },
           "aroma": {
-            "green": 6,
-            "vanilla": 5,
-            "cereal": 3,
-            "nutty": 2
+            "pandan": 9,
+            "green": 3
           },
           "freezeScore": 85,
           "months": 6,
@@ -60121,6 +60150,7 @@
           "id": "laminaria-korean-salad",
           "name": "Морская капуста по-корейски, с морковью",
           "cuisines": [
+            "koryo-saram",
             "russian",
             "central-asian",
             "korean"
@@ -60139,6 +60169,7 @@
             "garlic": 5,
             "pickled": 5,
             "chili": 3,
+            "pumpkin": 2,
             "warm-spice": 2
           },
           "freezeScore": 60,
@@ -65417,6 +65448,7 @@
           },
           "aroma": {
             "meaty": 5,
+            "metallic": 4,
             "gamey": 2
           },
           "freezeScore": 75,
@@ -66557,7 +66589,8 @@
             "fat": 3
           },
           "aroma": {
-            "gamey": 8,
+            "metallic": 7,
+            "gamey": 6,
             "meaty": 4
           },
           "freezeScore": 75,
@@ -66587,7 +66620,8 @@
           },
           "aroma": {
             "meaty": 6,
-            "gamey": 4
+            "metallic": 4,
+            "gamey": 3
           },
           "freezeScore": 90,
           "months": 4,
@@ -66650,6 +66684,7 @@
           },
           "aroma": {
             "gamey": 8,
+            "metallic": 3,
             "meaty": 3
           },
           "freezeScore": 80,
@@ -66772,6 +66807,7 @@
           },
           "aroma": {
             "gamey": 6,
+            "metallic": 5,
             "meaty": 4
           },
           "freezeScore": 85,
@@ -66897,7 +66933,8 @@
             "fat": 1
           },
           "aroma": {
-            "gamey": 7,
+            "metallic": 9,
+            "gamey": 4,
             "meaty": 3
           },
           "freezeScore": 85,
@@ -67174,8 +67211,8 @@
             "roasted": 6,
             "cumin": 5,
             "garlic": 5,
-            "gamey": 4,
-            "mediterranean-herbs": 2
+            "metallic": 3,
+            "gamey": 3
           },
           "freezeScore": 85,
           "months": 3,
@@ -67436,7 +67473,8 @@
             "fat": 4
           },
           "aroma": {
-            "gamey": 6,
+            "metallic": 5,
+            "gamey": 5,
             "meaty": 4
           },
           "freezeScore": 80,
@@ -67469,7 +67507,8 @@
           },
           "aroma": {
             "meaty": 5,
-            "gamey": 4
+            "gamey": 4,
+            "metallic": 3
           },
           "freezeScore": 90,
           "months": 4,
@@ -67677,7 +67716,8 @@
           },
           "aroma": {
             "gamey": 6,
-            "meaty": 5
+            "meaty": 5,
+            "metallic": 4
           },
           "freezeScore": 85,
           "months": 4,
@@ -67825,6 +67865,7 @@
           },
           "aroma": {
             "gamey": 7,
+            "metallic": 4,
             "meaty": 4
           },
           "freezeScore": 85,
@@ -68397,8 +68438,9 @@
             "fat": 6
           },
           "aroma": {
-            "gamey": 7,
+            "gamey": 6,
             "onion": 6,
+            "metallic": 4,
             "meaty": 4,
             "black-pepper": 2
           },
@@ -69612,7 +69654,8 @@
             "fat": 4
           },
           "aroma": {
-            "gamey": 7,
+            "metallic": 6,
+            "gamey": 6,
             "roasted": 5,
             "meaty": 4
           },
@@ -71166,12 +71209,12 @@
             "fat": 7
           },
           "aroma": {
-            "gamey": 6,
+            "metallic": 6,
             "warm-spice": 4,
             "onion": 4,
-            "meaty": 4,
+            "gamey": 4,
             "cereal": 3,
-            "roasted": 2
+            "meaty": 3
           },
           "freezeScore": 70,
           "months": 2,
@@ -71254,8 +71297,8 @@
             "cereal": 5,
             "black-pepper": 5,
             "onion": 4,
-            "warm-spice": 3,
-            "meaty": 3
+            "metallic": 3,
+            "warm-spice": 3
           },
           "freezeScore": 90,
           "months": 3,
@@ -71282,8 +71325,8 @@
             "cereal": 4,
             "gamey": 4,
             "roasted": 4,
-            "meaty": 3,
-            "anise": 2
+            "metallic": 3,
+            "meaty": 3
           },
           "freezeScore": 85,
           "months": 3,
@@ -71475,8 +71518,9 @@
             "fat": 8
           },
           "aroma": {
-            "gamey": 7,
+            "gamey": 6,
             "buttery": 5,
+            "metallic": 4,
             "onion": 3,
             "alcohol": 2,
             "black-pepper": 2
@@ -71508,8 +71552,9 @@
             "fat": 8
           },
           "aroma": {
-            "gamey": 6,
+            "gamey": 5,
             "warm-spice": 4,
+            "metallic": 3,
             "onion": 3,
             "mediterranean-herbs": 3,
             "smoky": 2
@@ -71541,9 +71586,9 @@
             "meaty": 6,
             "gamey": 5,
             "warm-spice": 4,
+            "metallic": 3,
             "black-pepper": 3,
-            "alcohol": 2,
-            "mediterranean-herbs": 2
+            "alcohol": 2
           },
           "freezeScore": 75,
           "months": 2,
@@ -71686,7 +71731,8 @@
             "buttery": 6,
             "gamey": 5,
             "roasted": 5,
-            "meaty": 3
+            "meaty": 3,
+            "metallic": 2
           },
           "freezeScore": 85,
           "months": 6,
@@ -71716,6 +71762,7 @@
             "buttery": 7,
             "gamey": 5,
             "alcohol": 3,
+            "metallic": 2,
             "black-pepper": 2
           },
           "freezeScore": 65,
@@ -80583,10 +80630,11 @@
             "fat": 8
           },
           "aroma": {
-            "cheesy": 7,
+            "blue-mold": 6,
             "milky": 5,
-            "mushroom": 4,
-            "buttery": 3
+            "cheesy": 4,
+            "buttery": 3,
+            "mushroom": 2
           },
           "freezeScore": 40,
           "months": 3,
@@ -80609,8 +80657,9 @@
             "fat": 7
           },
           "aroma": {
-            "cheesy": 9,
-            "mushroom": 4,
+            "blue-mold": 9,
+            "cheesy": 6,
+            "mushroom": 2,
             "earthy": 2
           },
           "freezeScore": 50,
@@ -80637,9 +80686,9 @@
             "fat": 8
           },
           "aroma": {
-            "cheesy": 9,
-            "gamey": 4,
-            "mushroom": 3
+            "blue-mold": 9,
+            "cheesy": 5,
+            "gamey": 4
           },
           "freezeScore": 50,
           "months": 6,
@@ -80666,9 +80715,9 @@
             "fat": 8
           },
           "aroma": {
-            "cheesy": 8,
+            "blue-mold": 7,
+            "cheesy": 6,
             "nutty": 4,
-            "mushroom": 3,
             "earthy": 2
           },
           "freezeScore": 55,
@@ -80698,8 +80747,8 @@
             "fat": 7
           },
           "aroma": {
-            "cheesy": 8,
-            "mushroom": 4,
+            "blue-mold": 8,
+            "cheesy": 5,
             "milky": 2
           },
           "freezeScore": 50,
@@ -80727,9 +80776,10 @@
             "fat": 9
           },
           "aroma": {
-            "cheesy": 6,
             "buttery": 6,
+            "blue-mold": 5,
             "mushroom": 4,
+            "cheesy": 3,
             "milky": 3
           },
           "freezeScore": 40,
@@ -83735,7 +83785,7 @@
             "fat": 1
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "green": 2
           },
           "freezeScore": 85,
@@ -84941,7 +84991,7 @@
             "fat": 3
           },
           "aroma": {
-            "cereal": 7,
+            "corn": 7,
             "roasted": 4
           },
           "freezeScore": 85,
