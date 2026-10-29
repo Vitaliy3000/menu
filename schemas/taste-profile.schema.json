@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TasteProfile",
+  "description": "Вкусовой профиль человека по анкете «Вкусовой профиль» в терминах каталога продуктов: оси вкуса, ноты аромата, кухни и id позиций из data/foods.json. По нему каталог ранжируется под человека: явная оценка позиции в foods важнее выведенной из вкуса, аромата и кухонь.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "answered", "summary", "novelty", "diet", "taste", "aroma", "cuisines", "foods", "untried"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Путь к схеме для подсказок в редакторе. На сайт не влияет."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Совпадает с именем файла без .json."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 60,
+      "description": "Имя из анкеты."
+    },
+    "answered": {
+      "type": "string",
+      "format": "date",
+      "description": "Когда заполнена анкета."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 1200,
+      "description": "Профиль словами: что любит и почему, чего избегает, противоречия между ответами, с чего начинать новое. Сюда же то, что не ложится в поля: прожарка, текстуры без позиций в каталоге, оговорки свободных ответов."
+    },
+    "novelty": {
+      "enum": ["familiar", "similar", "curious", "adventurous"],
+      "description": "Отношение к новой еде: familiar — ест привычное; similar — попробует похожее на знакомое; curious — с удовольствием пробует новое; adventurous — ищет самое необычное."
+    },
+    "diet": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Ограничения. Пусто — нет. Ограничение из «Другое», которого нет в списке, — в foods и summary.",
+      "items": {
+        "enum": [
+          "vegetarian",
+          "vegan",
+          "no-pork",
+          "halal-kosher",
+          "gluten-free",
+          "lactose-free",
+          "nut-allergy",
+          "seafood-allergy",
+          "calorie-conscious"
+        ]
+      }
+    },
+    "taste": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sweet", "sweetSavory", "sour", "salty", "bitter", "umami", "heat", "fat"],
+      "description": "Отношение к осям Taste каталога. liking: «Избегаю» — −2, «Немного — нормально» — 0, «Нравится» — 1, «Чем больше, тем лучше» — 2. max: «Избегаю» — 2, «Немного — нормально» — 5, «Нравится» — 8, «Чем больше, тем лучше» — 10.",
+      "properties": {
+        "sweet": { "$ref": "#/$defs/TastePreference", "description": "Сладость десертов, фруктов, ягод и напитков." },
+        "sweetSavory": {
+          "$ref": "#/$defs/TastePreference",
+          "description": "Сладость в несладком: чернослив в мясе, мёд в заправке, ягодный соус к утке. Вместо sweet для позиций вне групп desserts, fruits, berries и drinks."
+        },
+        "sour": { "$ref": "#/$defs/TastePreference" },
+        "salty": { "$ref": "#/$defs/TastePreference" },
+        "bitter": { "$ref": "#/$defs/TastePreference" },
+        "umami": { "$ref": "#/$defs/TastePreference" },
+        "heat": {
+          "$ref": "#/$defs/TastePreference",
+          "description": "По шкале 0–10 из анкеты — она совпадает с осью heat каталога. liking: 0 — −2, 1–3 — 0, 4–6 — 1, 7–10 — 2; max — ответ плюс 1."
+        },
+        "fat": { "$ref": "#/$defs/TastePreference" }
+      }
+    },
+    "aroma": {
+      "$ref": "#/$defs/Likings",
+      "description": "Ноты аромата каталога (ключи Aroma в foods.schema.json). Травы и специи — по своим нотам; продукт, который и есть нота (грибы — mushroom, оливки — olive), — тоже сюда, остальные продукты — в foods. Нота, ведущая в любимом блюде, но отмеченная «Не знаю этот вкус», — 1."
+    },
+    "cuisines": {
+      "$ref": "#/$defs/Likings",
+      "description": "Кухни каталога (Cuisine в foods.schema.json). Строка анкеты — на все кухни, которые она называет: «Тайская и вьетнамская» — thai и vietnamese."
+    },
+    "foods": {
+      "$ref": "#/$defs/Likings",
+      "description": "Позиции каталога по id, о которых говорят ответы: таблица блюд, продукты, свободные ответы, способы приготовления (отмеченный способ — 1), примеры текстур (неприятная — −1) и десертов (выбранный — 1). Формы одного блюда (сырое и готовое) — с одной оценкой. Блюдо, где главный продукт человек не ест, — тоже −2."
+    },
+    "untried": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aroma", "cuisines", "foods"],
+      "description": "Не пробовал или не знает, что это: оценки нет, это материал для новых блюд. То, что уже оценено в aroma, cuisines или foods, сюда не входит.",
+      "properties": {
+        "aroma": { "$ref": "#/$defs/Keys" },
+        "cuisines": { "$ref": "#/$defs/Keys" },
+        "foods": { "$ref": "#/$defs/Keys" }
+      }
+    }
+  },
+  "$defs": {
+    "Liking": {
+      "type": "integer",
+      "minimum": -2,
+      "maximum": 2,
+      "description": "−2 — не ест или больше не возьмёт («Не ем», «Избегаю»); −1 — не нравится; 0 — всё равно, ест в составе блюда; 1 — нравится; 2 — любит («Люблю», «Чем больше, тем лучше»)."
+    },
+    "Likings": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/Liking" }
+    },
+    "Keys": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
+    "TastePreference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["liking", "max"],
+      "properties": {
+        "liking": { "$ref": "#/$defs/Liking", "description": "Насколько больше этого вкуса делает еду привлекательнее." },
+        "max": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Уровень оси каталога, выше которого уже слишком."
+        }
+      }
+    }
+  }
+}
