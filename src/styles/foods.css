@@ -178,10 +178,16 @@
   text-wrap: pretty;
 }
 
-.food-sources {
+.food-sources,
+.food-levels {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 14px;
+}
+
+.food-levels .num {
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .food-sources a {

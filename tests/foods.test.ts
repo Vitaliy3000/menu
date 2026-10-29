@@ -2,8 +2,9 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { checkFoods, validateSources } from '../scripts/data-validation.ts';
+import { AROMA_NOTES, ranked, TASTES } from '../src/lib/flavor.ts';
 import { bandCounts, bandOf, byGroup, filterFoods, indexFoods, parseFoodFilters, type FoodFilters } from '../src/lib/foods.ts';
-import type { Foods } from '../src/types/foods.gen.ts';
+import type { Foods, Taste } from '../src/types/foods.gen.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = async (path: string) => JSON.parse(await readFile(root + path, 'utf8')) as object;
@@ -13,20 +14,51 @@ const schemas = {
   foodsSchema: await read('schemas/foods.schema.json'),
 };
 
+const taste = (patch: Partial<Taste> = {}): Taste => ({ sweet: 0, sour: 0, salty: 0, bitter: 0, umami: 0, heat: 0, fat: 0, ...patch });
+
 const catalog = (): Foods => ({
   groups: [
     {
       id: 'vegetables',
       title: 'Овощи',
       items: [
-        { id: 'potato-raw', name: 'Картофель, сырой', freezeScore: 10, losses: 'Темнеет и становится водянистым.' },
-        { id: 'peas-blanched', name: 'Горошек, бланшированный', freezeScore: 90, months: 12, losses: 'Почти ничего.', sources: ['nchfp'] },
+        {
+          id: 'potato-raw',
+          name: 'Картофель, сырой',
+          cuisines: ['russian', 'dutch'],
+          taste: taste({ sweet: 1, salty: 3, umami: 2 }),
+          aroma: { earthy: 5 },
+          freezeScore: 10,
+          losses: 'Темнеет и становится водянистым.',
+        },
+        {
+          id: 'peas-blanched',
+          name: 'Горошек, бланшированный',
+          taste: taste({ sweet: 4, umami: 3 }),
+          aroma: { green: 6, beany: 2 },
+          freezeScore: 90,
+          months: 12,
+          losses: 'Почти ничего.',
+          sources: ['nchfp'],
+        },
       ],
     },
     {
       id: 'stews',
       title: 'Рагу и блюда в соусе',
-      items: [{ id: 'chili-con-carne', name: 'Чили кон карне', freezeScore: 95, months: 4, losses: 'Ничего.', sources: ['nchfp'] }],
+      items: [
+        {
+          id: 'chili-con-carne',
+          name: 'Чили кон карне',
+          cuisines: ['american', 'mexican'],
+          taste: taste({ sweet: 2, sour: 3, salty: 5, umami: 6, heat: 5, fat: 5 }),
+          aroma: { cumin: 6, chili: 6, meaty: 5 },
+          freezeScore: 95,
+          months: 4,
+          losses: 'Ничего.',
+          sources: ['nchfp'],
+        },
+      ],
     },
   ],
   sources: [{ id: 'nchfp', title: 'NCHFP — Freezing', url: 'https://nchfp.uga.edu/how/freeze/' }],
@@ -58,9 +90,24 @@ describe('каталог продуктов: проверка', () => {
     expect(text).toContain('must be <= 100');
   });
 
+  it('вкус 0–10 по всем семи ключам, ноты аромата и кухни — только из словаря', () => {
+    const f = catalog() as unknown as { groups: { items: Record<string, unknown>[] }[] };
+    const [potato, peas] = f.groups[0]!.items;
+    potato!.taste = { ...taste(), sweet: 11 };
+    potato!.aroma = { earthy: 0, smell: 3 };
+    potato!.cuisines = ['martian'];
+    delete (peas!.taste as Partial<Taste>).fat;
+    const text = messages(validate(f));
+    expect(text).toContain('must be <= 10');
+    expect(text).toContain('must be >= 1');
+    expect(text).toContain('лишнее поле «smell»');
+    expect(text).toContain('допустимые значения: russian');
+    expect(text).toContain('нет обязательного поля «fat»');
+  });
+
   it('ловит повторы и ссылки на несуществующие источники', () => {
     const f = catalog();
-    f.groups[1]!.items.push({ id: 'potato-raw', name: 'картофель, сырой', freezeScore: 10, losses: 'Дубль.', sources: ['usda'] });
+    f.groups[1]!.items.push({ id: 'potato-raw', name: 'картофель, сырой', taste: taste(), freezeScore: 10, losses: 'Дубль.', sources: ['usda'] });
     f.sources.push({ id: 'unused', title: 'NCHFP — копия', url: 'https://nchfp.uga.edu/how/freeze/' });
     const text = messages(checkFoods(f, file));
     expect(text).toContain('id «potato-raw» повторяется');
@@ -83,9 +130,10 @@ describe('каталог продуктов: фильтры', () => {
     expect(bandOf(0).label).toBe('Не замораживать');
   });
 
-  it('ищет по названию и группе, без учёта регистра и «ё»', () => {
+  it('ищет по названию, группе и кухне, без учёта регистра и «ё»', () => {
     expect(ids(filters({ q: 'КАРТОФЕЛЬ' }))).toEqual(['potato-raw']);
     expect(ids(filters({ q: 'рагу' }))).toEqual(['chili-con-carne']);
+    expect(ids(filters({ q: 'мексиканск' }))).toEqual(['chili-con-carne']);
   });
 
   it('порог, группа и сортировка', () => {
@@ -113,5 +161,16 @@ describe('каталог продуктов: фильтры', () => {
     expect(parseFoodFilters(new URLSearchParams('group=stews&min=70&sort=best'), foods.groups)).toEqual(
       filters({ group: 'stews', min: 70, sort: 'best' }),
     );
+  });
+});
+
+describe('каталог продуктов: вкус и аромат', () => {
+  it('ненулевые уровни по убыванию, равные — в порядке записи', () => {
+    expect(ranked(taste({ salty: 5, umami: 6, heat: 5 }), TASTES)).toEqual([
+      { label: 'умами', value: 6 },
+      { label: 'солёность', value: 5 },
+      { label: 'острота', value: 5 },
+    ]);
+    expect(ranked({ cumin: 6, chili: 6, meaty: 5 }, AROMA_NOTES).map((l) => l.label)).toEqual(['зира', 'чили', 'мясо и бульон']);
   });
 });

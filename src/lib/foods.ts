@@ -1,5 +1,6 @@
 /** Каталог продуктов: шкала заморозки, поиск и фильтры. Состояние фильтров живёт в query-параметрах URL. */
 import type { Food, FoodGroup, Foods } from '../types/foods.gen.ts';
+import { CUISINES } from './flavor.ts';
 import { normalize } from './search.ts';
 
 export interface ScoreBand {
@@ -45,7 +46,10 @@ export interface FoodEntry {
 
 export function indexFoods(foods: Foods): FoodEntry[] {
   return foods.groups.flatMap((group) =>
-    group.items.map((food) => ({ food, group, text: normalize(`${food.name} ${group.title}`) })),
+    group.items.map((food) => {
+      const cuisines = food.cuisines?.map((c) => CUISINES[c]).join(' ') ?? '';
+      return { food, group, text: normalize(`${food.name} ${group.title} ${cuisines}`) };
+    }),
   );
 }
 

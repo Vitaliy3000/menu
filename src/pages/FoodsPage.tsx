@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { SearchField } from '../components/SearchField.tsx';
 import { Sheet } from '../components/Sheet.tsx';
 import { loadFoods } from '../data/index.ts';
+import { AROMA_NOTES, CUISINES, ranked, TASTES, type Level } from '../lib/flavor.ts';
 import { countLabel } from '../lib/format.ts';
 import {
   bandCounts,
@@ -53,8 +54,9 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
           Продукты и блюда<span class="count num">{index.length}</span>
         </h1>
         <p class="lead">
-          Как продукты, части блюд, блюда и соусы переносят домашнюю заморозку. Оценка от 0 до 100 — насколько после
-          разморозки и лучшего способа восстановления это похоже на свежее. Сырое и готовое — отдельными позициями.
+          Продукты, части блюд, блюда и соусы: вкус и аромат по шкале от 0 до 10, кухни, к которым они относятся, и
+          как они переносят домашнюю заморозку. Оценка заморозки от 0 до 100 — насколько после разморозки и лучшего
+          способа восстановления это похоже на свежее. Сырое и готовое — отдельными позициями.
         </p>
       </header>
 
@@ -64,7 +66,7 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
         </aside>
 
         <div class="catalog-main">
-          <SearchField value={filters.q} onChange={(q) => update({ q })} placeholder="Продукт или блюдо" label="Поиск по каталогу" />
+          <SearchField value={filters.q} onChange={(q) => update({ q })} placeholder="Продукт, блюдо или кухня" label="Поиск по каталогу" />
 
           <div class="chip-row" role="group" aria-label="Группы">
             <button class="chip" type="button" aria-pressed={filters.group === null} onClick={() => update({ group: null })}>
@@ -248,6 +250,24 @@ function FoodRow({ food: f, group, sources }: { food: Food; group: string | null
 function FoodDetails({ food: f, sources }: { food: Food; sources: Map<string, FoodSource> }) {
   return (
     <dl class="food-details">
+      <dt>Вкус</dt>
+      <dd>
+        <Levels levels={ranked(f.taste, TASTES)} />
+      </dd>
+      {f.aroma && (
+        <>
+          <dt>Аромат</dt>
+          <dd>
+            <Levels levels={ranked(f.aroma, AROMA_NOTES)} />
+          </dd>
+        </>
+      )}
+      {f.cuisines && (
+        <>
+          <dt>Кухни</dt>
+          <dd>{f.cuisines.map((c) => CUISINES[c]).join(', ')}</dd>
+        </>
+      )}
       <dt>Что теряет</dt>
       <dd>{f.losses}</dd>
       {f.recovery && (
@@ -262,7 +282,7 @@ function FoodDetails({ food: f, sources }: { food: Food; sources: Map<string, Fo
           <dd>{f.method}</dd>
         </>
       )}
-      <dt>Источники</dt>
+      <dt>Источники заморозки</dt>
       <dd>
         {f.sources ? (
           <span class="food-sources">
@@ -281,5 +301,18 @@ function FoodDetails({ food: f, sources }: { food: Food; sources: Map<string, Fo
         )}
       </dd>
     </dl>
+  );
+}
+
+function Levels({ levels }: { levels: Level[] }) {
+  if (levels.length === 0) return <span class="faint">нейтральный</span>;
+  return (
+    <span class="food-levels">
+      {levels.map((l) => (
+        <span key={l.label}>
+          {l.label} <span class="num">{l.value}</span>
+        </span>
+      ))}
+    </span>
   );
 }
