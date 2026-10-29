@@ -18,10 +18,10 @@ export function checkTasteProfile(p: TasteProfile, file: string, foodIds: Set<st
   ] as const;
   for (const { key, known, what } of vocabularies) {
     for (const k of Object.keys(p[key])) if (!known(k)) error(`/${key}/${k}`, `неизвестная ${what} «${k}»`);
-    p.untried[key].forEach((k, i) => {
-      if (!known(k)) error(`/untried/${key}/${i}`, `неизвестная ${what} «${k}»`);
-      else if (k in p[key]) error(`/untried/${key}/${i}`, `«${k}» уже оценена в ${key}`);
-    });
+    for (const k of Object.keys(p.untried[key])) {
+      if (!known(k)) error(`/untried/${key}/${k}`, `неизвестная ${what} «${k}»`);
+      else if (k in p[key]) error(`/untried/${key}/${k}`, `«${k}» уже оценена в ${key}`);
+    }
   }
   return issues;
 }

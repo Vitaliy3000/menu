@@ -36,6 +36,7 @@ const catalog: Foods = {
 };
 
 const preference = { liking: 0, max: 5 };
+const nothing: TasteProfile['methods']['eggs'] = [];
 const profile = (): TasteProfile => ({
   id: 'anna',
   name: 'Анна',
@@ -56,7 +57,24 @@ const profile = (): TasteProfile => ({
   aroma: { dill: 1 },
   cuisines: { ukrainian: 2 },
   foods: { borscht: 2 },
-  untried: { aroma: ['lemongrass'], cuisines: ['thai'], foods: [] },
+  methods: {
+    chicken: ['grilled', 'boiled'],
+    duck: nothing,
+    beef: ['braised'],
+    pork: nothing,
+    lamb: nothing,
+    mince: ['grilled'],
+    'white-fish': ['baked'],
+    'fatty-fish': ['cured'],
+    'shrimp-squid': nothing,
+    'mussels-oysters': nothing,
+    liver: nothing,
+    'foie-gras': nothing,
+    offal: nothing,
+    eggs: ['grilled', 'boiled'],
+  },
+  textures: ['slimy'],
+  untried: { aroma: { lemongrass: 0 }, cuisines: { thai: -1 }, foods: {} },
 });
 
 const file = 'data/taste-profiles/anna.json';
@@ -86,12 +104,25 @@ describe('вкусовой профиль', () => {
     expect(text).toContain('нет обязательного поля «max»');
   });
 
+  it('способы — по каждому продукту и из словаря, интерес от −1 до 1', () => {
+    const p = profile() as unknown as { methods: Record<string, unknown>; textures: string[]; untried: { cuisines: Record<string, number> } };
+    delete p.methods.offal;
+    p.methods.beef = ['sous-vide'];
+    p.textures.push('crunchy');
+    p.untried.cuisines.thai = 2;
+    const text = messages(p);
+    expect(text).toContain('нет обязательного поля «offal»');
+    expect(text).toContain('допустимые значения: grilled');
+    expect(text).toContain('допустимые значения: jelly');
+    expect(text).toContain('must be <= 1');
+  });
+
   it('ноты, кухни и позиции — только из каталога', () => {
     const p = profile();
     p.aroma.smell = 1;
     p.cuisines.martian = 2;
     p.foods['pumpkin-soup'] = -2;
-    p.untried.foods.push('kimchi');
+    p.untried.foods.kimchi = 1;
     const text = messages(p);
     expect(text).toContain('неизвестная нота аромата «smell»');
     expect(text).toContain('неизвестная кухня «martian»');
@@ -102,7 +133,7 @@ describe('вкусовой профиль', () => {
   it('неопробованное не оценено, id совпадает с именем файла', () => {
     const p = profile();
     p.id = 'anya';
-    p.untried.cuisines.push('ukrainian');
+    p.untried.cuisines.ukrainian = 0;
     const text = messages(p);
     expect(text).toContain('«ukrainian» уже оценена в cuisines');
     expect(text).toContain('id «anya» должен совпадать с именем файла «anna»');

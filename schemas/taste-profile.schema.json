@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TasteProfile",
-  "description": "Вкусовой профиль человека по анкете «Вкусовой профиль» в терминах каталога продуктов: оси вкуса, ноты аромата, кухни и id позиций из data/foods.json. По нему каталог ранжируется под человека: явная оценка позиции в foods важнее выведенной из вкуса, аромата и кухонь.",
+  "description": "Вкусовой профиль человека по анкетам «Вкусовой профиль» и разбору подбора в терминах каталога продуктов: оси вкуса, ноты аромата, кухни и id позиций из data/foods.json. При противоречии разбор подбора важнее анкеты, новая анкета — старой. Топ подбора строится только из позиций foods с оценкой от 0 и их близких вариантов; позиции, которых нет ни в foods, ни в untried, человеку незнакомы и идут только в отдельный список «попробовать».",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "name", "answered", "summary", "novelty", "diet", "taste", "aroma", "cuisines", "foods", "untried"],
+  "required": ["id", "name", "answered", "summary", "novelty", "diet", "taste", "aroma", "cuisines", "foods", "methods", "textures", "untried"],
   "properties": {
     "$schema": {
       "type": "string",
@@ -24,13 +24,13 @@
     "answered": {
       "type": "string",
       "format": "date",
-      "description": "Когда заполнена анкета."
+      "description": "Когда заполнена последняя анкета."
     },
     "summary": {
       "type": "string",
       "minLength": 40,
-      "maxLength": 1200,
-      "description": "Профиль словами: что любит и почему, чего избегает, противоречия между ответами, с чего начинать новое. Сюда же то, что не ложится в поля: прожарка, текстуры без позиций в каталоге, оговорки свободных ответов."
+      "maxLength": 1500,
+      "description": "Профиль словами: что любит и почему, чего избегает, противоречия между ответами, с чего начинать новое. Сюда же то, что не ложится в поля: прожарка, блюда без позиций в каталоге, оговорки свободных ответов."
     },
     "novelty": {
       "enum": ["familiar", "similar", "curious", "adventurous"],
@@ -78,25 +78,68 @@
     },
     "aroma": {
       "$ref": "#/$defs/Likings",
-      "description": "Ноты аромата каталога (ключи Aroma в foods.schema.json). Травы и специи — по своим нотам; продукт, который и есть нота (грибы — mushroom, оливки — olive), — тоже сюда, остальные продукты — в foods. Нота, ведущая в любимом блюде, но отмеченная «Не знаю этот вкус», — 1."
+      "description": "Ноты аромата каталога (ключи Aroma в foods.schema.json). Травы и специи — по своим нотам; продукт, который и есть нота (грибы — mushroom, оливки — olive), — тоже сюда, остальные продукты — в foods. Нота, ведущая в любимом блюде, но отмеченная «Не знаю этот вкус», — 1. Пара «что ближе» с нотой (укроп или кинза) — как в foods; противоречие с прямым ответом — 0 и в summary."
     },
     "cuisines": {
       "$ref": "#/$defs/Likings",
-      "description": "Кухни каталога (Cuisine в foods.schema.json). Строка анкеты — на все кухни, которые она называет: «Тайская и вьетнамская» — thai и vietnamese."
+      "description": "Кухни каталога (Cuisine в foods.schema.json). Строка анкеты — на все кухни, которые она называет: «Тайская и вьетнамская» — thai и vietnamese. Кухня с ответом «Не пробовал(а)», но с оценённым блюдом, где она первая, — оценка лучшего такого блюда, не выше 1."
     },
     "foods": {
       "$ref": "#/$defs/Likings",
-      "description": "Позиции каталога по id, о которых говорят ответы: таблица блюд, продукты, свободные ответы, способы приготовления (отмеченный способ — 1), примеры текстур (неприятная — −1) и десертов (выбранный — 1). Формы одного блюда (сырое и готовое) — с одной оценкой. Блюдо, где главный продукт человек не ест, — тоже −2."
+      "description": "Позиции каталога по id: что человек ел, и то, чего есть не станет. Знакомые блюда: «Люблю» — 2, «Ем, нормально» — 0, «Не люблю» — −1. Новые блюда: «Ел(а), понравилось» — 1, «Ел(а), не понравилось» — −1. Ел за последние две недели — 1, берёт в ресторане — 2. Пары «что ближе»: выбранное и «оба нравятся» — 1, «ни то, ни другое» — −1 обоим. Строка — на все позиции, которые она называет, и на все формы одного блюда (сырое и готовое). Продукт «Не ем» в methods — −2 всем позициям, где он главный. Способ, который однозначно называет позицию (устрицы сырые, фуа-гра жареная), — 1; остальное из methods сюда не переносится: от способа не следует, что человек знает блюдо."
+    },
+    "methods": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chicken",
+        "duck",
+        "beef",
+        "pork",
+        "lamb",
+        "mince",
+        "white-fish",
+        "fatty-fish",
+        "shrimp-squid",
+        "mussels-oysters",
+        "liver",
+        "foie-gras",
+        "offal",
+        "eggs"
+      ],
+      "description": "В каком виде человек ест продукт с удовольствием: mince — фарш (котлеты, тефтели), white-fish — треска, судак, fatty-fish — лосось, скумбрия, сельдь, shrimp-squid — креветки и кальмары, mussels-oysters — мидии и устрицы, liver — печень говяжья и куриная, offal — язык, сердце, желудки. Пусто — не ест. Неотмеченный способ — слабый минус: оценка блюда в foods важнее (лосось запечённый «Люблю», хотя запечённое не отмечено).",
+      "properties": {
+        "chicken": { "$ref": "#/$defs/Ways" },
+        "duck": { "$ref": "#/$defs/Ways" },
+        "beef": { "$ref": "#/$defs/Ways" },
+        "pork": { "$ref": "#/$defs/Ways" },
+        "lamb": { "$ref": "#/$defs/Ways" },
+        "mince": { "$ref": "#/$defs/Ways" },
+        "white-fish": { "$ref": "#/$defs/Ways" },
+        "fatty-fish": { "$ref": "#/$defs/Ways" },
+        "shrimp-squid": { "$ref": "#/$defs/Ways" },
+        "mussels-oysters": { "$ref": "#/$defs/Ways" },
+        "liver": { "$ref": "#/$defs/Ways" },
+        "foie-gras": { "$ref": "#/$defs/Ways" },
+        "offal": { "$ref": "#/$defs/Ways" },
+        "eggs": { "$ref": "#/$defs/Ways" }
+      }
+    },
+    "textures": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Неприятные текстуры. Пусто — таких нет. jelly — желе и студень; slimy — слизистое (бамия, маслята, сырое яйцо); sticky — тягучее и липкое (моти, клейкий рис); rubbery — упругое (кальмар, осьминог); raw — сырая рыба и мясо; mushy — разваренные мягкие овощи; beads — крупинки и шарики (тапиока, чиа, икра); gristle — хрящи, кожа, жилки; chunks — кусочки в гладком.",
+      "items": { "enum": ["jelly", "slimy", "sticky", "rubbery", "raw", "mushy", "beads", "gristle", "chunks"] }
     },
     "untried": {
       "type": "object",
       "additionalProperties": false,
       "required": ["aroma", "cuisines", "foods"],
-      "description": "Не пробовал или не знает, что это: оценки нет, это материал для новых блюд. То, что уже оценено в aroma, cuisines или foods, сюда не входит.",
+      "description": "Не пробовал, не знает, что это, или не знает этот вкус — материал для списка «попробовать», не для топа. Оценённое в aroma, cuisines или foods сюда не входит.",
       "properties": {
-        "aroma": { "$ref": "#/$defs/Keys" },
-        "cuisines": { "$ref": "#/$defs/Keys" },
-        "foods": { "$ref": "#/$defs/Keys" }
+        "aroma": { "$ref": "#/$defs/Interests" },
+        "cuisines": { "$ref": "#/$defs/Interests" },
+        "foods": { "$ref": "#/$defs/Interests" }
       }
     }
   },
@@ -112,10 +155,24 @@
       "propertyNames": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
       "additionalProperties": { "$ref": "#/$defs/Liking" }
     },
-    "Keys": {
+    "Interest": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 1,
+      "description": "1 — «Не ел(а), попробовал(а) бы»; 0 — «Не пробовал(а)», «Не знаю, что это» без ответа об интересе; −1 — «Не ел(а), не тянет»."
+    },
+    "Interests": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "additionalProperties": { "$ref": "#/$defs/Interest" }
+    },
+    "Ways": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      "items": {
+        "enum": ["grilled", "deep-fried", "braised", "baked", "boiled", "cured", "raw"],
+        "description": "grilled — жареное, гриль; deep-fried — во фритюре, в панировке; braised — тушёное, в соусе; baked — запечённое; boiled — варёное, в супе; cured — копчёное, солёное, вяленое; raw — сырое: тартар, суши, севиче."
+      }
     },
     "TastePreference": {
       "type": "object",
