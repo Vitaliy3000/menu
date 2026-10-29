@@ -4306,8 +4306,8 @@
           ]
         },
         {
-          "id": "okroshka",
-          "name": "Окрошка",
+          "id": "okroshka-kefir",
+          "name": "Окрошка на кефире",
           "cuisines": [
             "russian",
             "ukrainian",
@@ -4332,6 +4332,38 @@
           },
           "freezeScore": 5,
           "losses": "Огурец, редис и зелень раскисают, яичный белок становится резиновым, кефир расслаивается.",
+          "recovery": "Никак. Отдельно можно заморозить только отварное мясо.",
+          "sources": [
+            "osu-not-freeze"
+          ]
+        },
+        {
+          "id": "okroshka-kvass",
+          "name": "Окрошка на квасе",
+          "cuisines": [
+            "russian",
+            "ukrainian",
+            "belarusian"
+          ],
+          "taste": {
+            "sweet": 4,
+            "sour": 5,
+            "salty": 5,
+            "bitter": 1,
+            "umami": 3,
+            "heat": 2,
+            "fat": 2
+          },
+          "aroma": {
+            "malty": 6,
+            "dill": 5,
+            "green": 5,
+            "onion": 4,
+            "mustard": 3,
+            "bready": 3
+          },
+          "freezeScore": 5,
+          "losses": "Огурец, редис и зелень раскисают, яичный белок становится резиновым, квас выдыхается.",
           "recovery": "Никак. Отдельно можно заморозить только отварное мясо.",
           "sources": [
             "osu-not-freeze"
