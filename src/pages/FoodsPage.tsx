@@ -221,8 +221,9 @@ function FoodList(props: { entries: FoodEntry[]; sources: Map<string, FoodSource
 }
 
 function FoodRow({ food: f, group, sources }: { food: Food; group: string | null; sources: Map<string, FoodSource> }) {
+  const [open, setOpen] = useState(false);
   return (
-    <details class="food-row">
+    <details class="food-row" onToggle={(e) => setOpen(e.currentTarget.open)}>
       <summary>
         <span class="food-score" aria-label={`Оценка ${f.freezeScore} из 100`}>
           <span class="food-score-value num">{f.freezeScore}</span>
@@ -239,40 +240,46 @@ function FoodRow({ food: f, group, sources }: { food: Food; group: string | null
           </span>
         </span>
       </summary>
-      <dl class="food-details">
-        <dt>Что теряет</dt>
-        <dd>{f.losses}</dd>
-        {f.recovery && (
-          <>
-            <dt>Как вернуть</dt>
-            <dd>{f.recovery}</dd>
-          </>
-        )}
-        {f.method && (
-          <>
-            <dt>Как заморозить</dt>
-            <dd>{f.method}</dd>
-          </>
-        )}
-        <dt>Источники</dt>
-        <dd>
-          {f.sources ? (
-            <span class="food-sources">
-              {f.sources.map((id) => {
-                const s = sources.get(id)!;
-                return (
-                  <a key={id} href={s.url} target="_blank" rel="noreferrer">
-                    {s.title}
-                    <ExternalLink aria-hidden="true" />
-                  </a>
-                );
-              })}
-            </span>
-          ) : (
-            <span class="faint">Оценка по аналогии с похожими продуктами</span>
-          )}
-        </dd>
-      </dl>
+      {open && <FoodDetails food={f} sources={sources} />}
     </details>
+  );
+}
+
+function FoodDetails({ food: f, sources }: { food: Food; sources: Map<string, FoodSource> }) {
+  return (
+    <dl class="food-details">
+      <dt>Что теряет</dt>
+      <dd>{f.losses}</dd>
+      {f.recovery && (
+        <>
+          <dt>Как вернуть</dt>
+          <dd>{f.recovery}</dd>
+        </>
+      )}
+      {f.method && (
+        <>
+          <dt>Как заморозить</dt>
+          <dd>{f.method}</dd>
+        </>
+      )}
+      <dt>Источники</dt>
+      <dd>
+        {f.sources ? (
+          <span class="food-sources">
+            {f.sources.map((id) => {
+              const s = sources.get(id)!;
+              return (
+                <a key={id} href={s.url} target="_blank" rel="noreferrer">
+                  {s.title}
+                  <ExternalLink aria-hidden="true" />
+                </a>
+              );
+            })}
+          </span>
+        ) : (
+          <span class="faint">Оценка по аналогии с похожими продуктами</span>
+        )}
+      </dd>
+    </dl>
   );
 }
