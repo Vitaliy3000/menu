@@ -3,7 +3,7 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from enum import StrEnum
 
-from deck import Card
+from deck import Card, Presentation, Shot
 
 PRONOUNCED: Mapping[str, int] = {
     "sweet": 5,
@@ -49,9 +49,13 @@ class Novelty(StrEnum):
 
 @dataclass(frozen=True, slots=True)
 class Swipe:
-    card: Card
+    shot: Shot
     answer: Answer
     ms: int
+
+    @property
+    def card(self) -> Card:
+        return self.shot.card
 
 
 @dataclass(frozen=True, slots=True)
@@ -83,6 +87,7 @@ class Trait:
 @dataclass(frozen=True, slots=True)
 class Profile:
     swipes: tuple[Swipe, ...]
+    home: tuple[Swipe, ...]
     traits: tuple[Trait, ...]
     overall: Tally
     familiar: Tally
@@ -96,6 +101,10 @@ class Profile:
             if s.answer is not Answer.UNKNOWN and s.card.taste[axis] >= PRONOUNCED[axis]
         ]
         return sorted(pronounced, key=lambda s: s.card.taste[axis])
+
+    def pairs(self) -> list[tuple[Swipe, Swipe]]:
+        restaurant = {s.card.id: s for s in self.swipes}
+        return [(restaurant[h.card.id], h) for h in self.home]
 
     def lift(self, trait: Trait) -> float:
         base = self.overall.rate
@@ -147,7 +156,8 @@ def novelty(familiar: Tally, new: Tally, rare: Tally) -> Novelty:
     return Novelty.FAMILIAR
 
 
-def build_profile(swipes: Sequence[Swipe]) -> Profile:
+def build_profile(answers: Sequence[Swipe]) -> Profile:
+    swipes = [s for s in answers if s.shot.presentation is Presentation.RESTAURANT]
     grouped: dict[tuple[Facet, str], list[Swipe]] = defaultdict(list)
     for swipe in swipes:
         for trait in card_traits(swipe.card):
@@ -160,6 +170,7 @@ def build_profile(swipes: Sequence[Swipe]) -> Profile:
     rare = tally(s for s in swipes if s.card.circle == RARE_CIRCLE)
     return Profile(
         swipes=tuple(swipes),
+        home=tuple(s for s in answers if s.shot.presentation is Presentation.HOME),
         traits=traits,
         overall=tally(swipes),
         familiar=familiar,

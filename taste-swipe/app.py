@@ -26,7 +26,7 @@ class ResultError(Exception):
 
 
 class RawSwipe(TypedDict):
-    card: str
+    shot: str
     answer: str
     ms: int
 
@@ -39,14 +39,14 @@ class RawResult(TypedDict):
 def deck_json(deck: Deck) -> list[dict[str, str]]:
     return [
         {
-            "id": card.id,
-            "name": card.name,
-            "caption": card.caption,
-            "photo": f"/photos/{card.id}.jpg",
-            "credit": f"{card.photo.author}, {card.photo.license}",
-            "source": card.photo.source,
+            "id": shot.id,
+            "name": shot.card.name,
+            "caption": shot.card.caption,
+            "photo": f"/photos/{shot.id}.jpg",
+            "credit": f"{shot.photo.author}, {shot.photo.license}",
+            "source": shot.photo.source,
         }
-        for card in deck.cards
+        for shot in deck.shots
     ]
 
 
@@ -55,9 +55,9 @@ def parse_result(raw: RawResult, deck: Deck) -> tuple[str, list[Swipe]]:
     if not name:
         raise ResultError("нет имени")
     swipes = [
-        Swipe(deck.card(s["card"]), Answer(s["answer"]), s["ms"]) for s in raw["swipes"]
+        Swipe(deck.shot(s["shot"]), Answer(s["answer"]), s["ms"]) for s in raw["swipes"]
     ]
-    if sorted(s.card.id for s in swipes) != sorted(card.id for card in deck.cards):
+    if sorted(s.shot.id for s in swipes) != sorted(shot.id for shot in deck.shots):
         raise ResultError("нужен ровно один ответ на каждую карточку")
     return name, swipes
 
@@ -71,12 +71,13 @@ def result_json(
         "answers": [
             {
                 "card": s.card.id,
+                "presentation": s.shot.presentation,
                 "name": s.card.name,
                 "foods": [food.id for food in s.card.foods],
                 "answer": s.answer,
                 "ms": s.ms,
             }
-            for s in profile.swipes
+            for s in (*profile.swipes, *profile.home)
         ],
         "novelty": profile.novelty,
         "traits": [
@@ -102,7 +103,7 @@ def save_result(name: str, document: dict[str, object], finished: datetime) -> P
 
 
 def handler_for(deck: Deck, labels: Labels) -> type[BaseHTTPRequestHandler]:
-    photos = {f"/photos/{card.id}.jpg": card.photo.path for card in deck.cards}
+    photos = {f"/photos/{shot.id}.jpg": shot.photo.path for shot in deck.shots}
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:

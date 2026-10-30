@@ -94,6 +94,14 @@ describe('колода анкеты', () => {
     expect(text).toContain('в серии «salads» нет карточек');
   });
 
+  it('домашнее фото не совпадает по id с другой карточкой', () => {
+    const d = deck();
+    d.cards.push({ ...d.cards[0]!, id: 'borscht-home' });
+    expect(messages(d)).toBe('');
+    d.cards[0]!.homePhoto = d.cards[0]!.photo;
+    expect(messages(d)).toContain('карточка «borscht-home» уже есть');
+  });
+
   it('без файла — ошибка', () => {
     const { issues } = validateSources({ ...schemas, recipeFiles: [], planFiles: [], foodsFile: { file: 'data/foods.json', text: JSON.stringify(catalog) }, tasteDeckFile: null });
     expect(issues.map((i) => i.message)).toContain('Нет колоды анкеты');

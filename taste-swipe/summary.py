@@ -2,7 +2,7 @@ from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 
 from deck import Deck, Labels, Method, Protein, Style, Texture, Weight
-from scoring import Answer, Facet, Novelty, Profile, Swipe, Trait
+from scoring import Answer, Facet, Novelty, Profile, Swipe, Trait, tally
 
 NOTABLE_LIFT = 0.15
 PORTRAIT_SIZE = 8
@@ -14,9 +14,9 @@ CIRCLES: Mapping[str, str] = {
     "4": "редкие кухни",
 }
 STYLES: Mapping[str, str] = {
-    Style.HOME: "домашнее",
-    Style.RESTAURANT: "ресторанное",
-    Style.STREET: "уличное",
+    Style.HOME: "домашняя еда",
+    Style.RESTAURANT: "ресторанные блюда",
+    Style.STREET: "уличная еда",
 }
 COMPLEXITIES: Mapping[str, str] = {
     "1": "простой вкус",
@@ -77,7 +77,7 @@ NOVELTIES: Mapping[Novelty, str] = {
 }
 FACET_TITLES: Mapping[Facet, str] = {
     Facet.CIRCLE: "Привычность",
-    Facet.STYLE: "Подача",
+    Facet.STYLE: "Тип блюда",
     Facet.COMPLEXITY: "Сложность",
     Facet.WEIGHT: "Сытость",
     Facet.CUISINE: "Кухни",
@@ -184,18 +184,33 @@ def novelty_line(profile: Profile) -> str:
     )
 
 
-def portrait(profile: Profile, labels: Labels) -> Section:
-    return Section(
-        "Портрет",
-        (
-            totals_line(profile),
-            f"Больше обычного нравится: {notable(profile, labels, liked=True)}.",
-            f"Меньше обычного: {notable(profile, labels, liked=False)}.",
-            ladder_line("Острота", "heat", profile),
-            ladder_line("Кислое", "sour", profile),
-            novelty_line(profile),
-        ),
+def presentation_line(profile: Profile) -> str:
+    pairs = profile.pairs()
+    restaurant, home = tally(r for r, _ in pairs), tally(h for _, h in pairs)
+    changed = [
+        f"{r.card.name.lower()} {MARKS[r.answer]}→{MARKS[h.answer]}"
+        for r, h in pairs
+        if r.answer is not h.answer
+    ]
+    return (
+        f"Подача, {len(pairs)} блюд в двух видах: ресторанная — {restaurant.likes} "
+        f"из {restaurant.answered}, домашняя — {home.likes} из {home.answered}; "
+        f"ответ сменился: {', '.join(changed) or 'ни разу'}."
     )
+
+
+def portrait(profile: Profile, labels: Labels) -> Section:
+    lines = [
+        totals_line(profile),
+        f"Больше обычного нравится: {notable(profile, labels, liked=True)}.",
+        f"Меньше обычного: {notable(profile, labels, liked=False)}.",
+        ladder_line("Острота", "heat", profile),
+        ladder_line("Кислое", "sour", profile),
+        novelty_line(profile),
+    ]
+    if profile.home:
+        lines.append(presentation_line(profile))
+    return Section("Портрет", tuple(lines))
 
 
 def facet_line(facet: Facet, profile: Profile, labels: Labels) -> str | None:

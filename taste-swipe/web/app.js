@@ -92,7 +92,7 @@ function attachDrag(view) {
 function answer(kind) {
   if (state.busy || state.index >= state.cards.length) return;
   const card = state.cards[state.index];
-  state.answers.push({ card: card.id, answer: kind, ms: Math.round(performance.now() - state.shownAt) });
+  state.answers.push({ shot: card.id, answer: kind, ms: Math.round(performance.now() - state.shownAt) });
   state.busy = true;
   const view = $('stack').lastElementChild;
   mark(view, kind === 'like' ? 1 : 0, kind === 'dislike' ? 1 : 0);
@@ -160,6 +160,9 @@ $('undo').addEventListener('click', undo);
 $('retry').addEventListener('click', finish);
 
 const deck = fetch('/api/deck').then((response) => response.json());
+deck.then((cards) => {
+  $('total').textContent = cards.length;
+});
 
 $('start-form').addEventListener('submit', async (e) => {
   e.preventDefault();

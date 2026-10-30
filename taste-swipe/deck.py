@@ -65,11 +65,17 @@ class RawCard(TypedDict):
     method: str
     textures: NotRequired[list[str]]
     photo: RawPhoto
+    homePhoto: NotRequired[RawPhoto]
 
 
 class RawDeck(TypedDict):
     series: list[RawSeries]
     cards: list[RawCard]
+
+
+class Presentation(StrEnum):
+    RESTAURANT = "restaurant"
+    HOME = "home"
 
 
 class Style(StrEnum):
@@ -166,6 +172,7 @@ class Card:
     method: Method
     textures: tuple[Texture, ...]
     photo: Photo
+    home_photo: Photo | None
 
     @property
     def taste(self) -> dict[str, int]:
@@ -182,15 +189,23 @@ class Card:
 
 
 @dataclass(frozen=True, slots=True)
+class Shot:
+    id: str
+    card: Card
+    presentation: Presentation
+    photo: Photo
+
+
+@dataclass(frozen=True, slots=True)
 class Deck:
     series: tuple[Series, ...]
-    cards: tuple[Card, ...]
+    shots: tuple[Shot, ...]
 
-    def card(self, card_id: str) -> Card:
-        for card in self.cards:
-            if card.id == card_id:
-                return card
-        raise DeckError(f"нет карточки «{card_id}»")
+    def shot(self, shot_id: str) -> Shot:
+        for shot in self.shots:
+            if shot.id == shot_id:
+                return shot
+        raise DeckError(f"нет карточки «{shot_id}»")
 
 
 @dataclass(frozen=True, slots=True)
@@ -221,13 +236,17 @@ def load_foods(path: Path) -> dict[str, Food]:
     }
 
 
+def parse_photo(raw: RawPhoto, name: str) -> Photo:
+    path = PHOTOS_DIR / f"{name}.jpg"
+    if not path.is_file():
+        raise DeckError(f"нет фото {path.relative_to(ROOT)}")
+    return Photo(path, raw["source"], raw["author"], raw["license"])
+
+
 def parse_card(
     raw: RawCard, series: Mapping[str, Series], foods: Mapping[str, Food]
 ) -> Card:
-    photo_path = PHOTOS_DIR / f"{raw['id']}.jpg"
-    if not photo_path.is_file():
-        raise DeckError(f"нет фото {photo_path.relative_to(ROOT)}")
-    photo = raw["photo"]
+    home = raw.get("homePhoto")
     return Card(
         id=raw["id"],
         name=raw["name"],
@@ -241,14 +260,29 @@ def parse_card(
         protein=Protein(raw["protein"]),
         method=Method(raw["method"]),
         textures=tuple(Texture(t) for t in raw.get("textures", [])),
-        photo=Photo(photo_path, photo["source"], photo["author"], photo["license"]),
+        photo=parse_photo(raw["photo"], raw["id"]),
+        home_photo=parse_photo(home, f"{raw['id']}-home") if home else None,
     )
 
 
-def show_order(cards: Sequence[Card], series: Sequence[Series]) -> tuple[Card, ...]:
-    by_series = [[card for card in cards if card.series == s] for s in series]
+def card_shots(card: Card, home_first: bool) -> list[Shot]:
+    shots = [Shot(card.id, card, Presentation.RESTAURANT, card.photo)]
+    if card.home_photo:
+        home = Shot(f"{card.id}-home", card, Presentation.HOME, card.home_photo)
+        shots.insert(0 if home_first else 1, home)
+    return shots
+
+
+def show_order(cards: Sequence[Card], series: Sequence[Series]) -> tuple[Shot, ...]:
+    paired = [card.id for card in cards if card.home_photo]
+    home_first = set(paired[1::2])
+    by_series = []
+    for s in series:
+        stacks = [card_shots(c, c.id in home_first) for c in cards if c.series == s]
+        firsts = [stack[0] for stack in stacks]
+        by_series.append(firsts + [shot for stack in stacks for shot in stack[1:]])
     rounds = zip_longest(*by_series)
-    return tuple(card for card in chain.from_iterable(rounds) if card is not None)
+    return tuple(shot for shot in chain.from_iterable(rounds) if shot is not None)
 
 
 def load_deck() -> Deck:
