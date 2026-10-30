@@ -11,6 +11,7 @@
         { "item": "Брюссельская капуста", "level": "never" },
         { "item": "Тыква", "level": "never" },
         { "item": "Гречка", "level": "never" },
+        { "item": "Перловка", "level": "dislike" },
         { "item": "Шпинат", "level": "never" },
         { "item": "Целые яблоки", "level": "never", "note": "Нарезанные — в йогурте, кварке — можно" },
         { "item": "Бобы эдамаме", "level": "never" }
@@ -24,6 +25,7 @@
         { "item": "Речная и костлявая рыба", "level": "never" },
         { "item": "Острое", "level": "never" },
         { "item": "Гречка", "level": "never" },
+        { "item": "Перловка", "level": "dislike" },
         { "item": "Киви", "level": "never" },
         { "item": "Шпинат", "level": "never" },
         { "item": "Яйца всмятку", "level": "never" },
