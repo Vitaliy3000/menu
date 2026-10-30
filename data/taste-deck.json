@@ -1,0 +1,927 @@
+{
+  "$schema": "../schemas/taste-deck.schema.json",
+  "series": [
+    { "id": "familiar", "title": "Привычное", "varies": "база: просто и знакомо" },
+    { "id": "dough", "title": "Тесто с начинкой", "varies": "кухня при одном формате" },
+    { "id": "chicken-sauce", "title": "Курица в соусе", "varies": "только специи" },
+    { "id": "beef", "title": "Говядина", "varies": "способ и подача" },
+    { "id": "soups", "title": "Супы", "varies": "кислое, копчёное, сливочное, острое" },
+    { "id": "fish", "title": "Рыба", "varies": "способ готовки" },
+    { "id": "rice", "title": "Рис", "varies": "кухня и белок" },
+    { "id": "handheld", "title": "В руках", "varies": "кухня и соус" },
+    { "id": "salads", "title": "Салаты", "varies": "майонез, свежие овощи, зелень" },
+    { "id": "sweet-savory", "title": "Сладкое в солёном", "varies": "кухня и мясо при сладком соусе" },
+    { "id": "legumes", "title": "Бобовые", "varies": "без мяса, острота вне Азии, пюре" },
+    { "id": "seafood", "title": "Морепродукты", "varies": "креветки или мидии" },
+    { "id": "layered", "title": "Запеканки", "varies": "тёплые пряности в мясе" },
+    { "id": "bold", "title": "Смелое", "varies": "субпродукты и желе" },
+    { "id": "breakfast", "title": "Завтрак", "varies": "творог или яйца с остротой" }
+  ],
+  "cards": [
+    {
+      "id": "kotlety",
+      "name": "Котлеты с пюре",
+      "caption": "Жареные котлеты из говяжьего и свиного фарша, картофельное пюре",
+      "series": "familiar",
+      "foods": ["kotlety-fried", "mashed-potatoes"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "mince",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Kotlety_mielone_z_ziemniakami_-_(2023.04.21.).jpg",
+        "author": "Aw58",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "roast-chicken",
+      "name": "Курица с картофелем",
+      "caption": "Куриные ножки, запечённые с картофелем до корочки",
+      "series": "familiar",
+      "foods": ["roast-chicken-legs", "roasted-potatoes-cooked"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "chicken",
+      "method": "baked",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Chicken_leg_quarter_20260412_145303.jpg",
+        "author": "Vauia Rex",
+        "license": "CC0"
+      }
+    },
+    {
+      "id": "shashlik",
+      "name": "Шашлык",
+      "caption": "Свинина, маринованная с луком и зажаренная на углях",
+      "series": "familiar",
+      "foods": ["shashlik-cooked"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "pork",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Shashlik.jpg",
+        "author": "Игоревич",
+        "license": "Public domain"
+      }
+    },
+    {
+      "id": "pelmeni",
+      "name": "Пельмени со сметаной",
+      "caption": "Тесто, фарш из говядины и свинины, сметана",
+      "series": "dough",
+      "foods": ["pelmeni-boiled"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "mince",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Pelmeni_Russian.jpg",
+        "author": "Eugene Kim @ Flickr",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "gyoza",
+      "name": "Гёдза",
+      "caption": "Пельмени со свининой и капустой, обжаренные до хрустящего донышка, соевый соус",
+      "series": "dough",
+      "foods": ["gyoza-cooked"],
+      "circle": 3,
+      "style": "street",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "mince",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Baked_gyoza_of_Gyoza-no-Manshu.jpg",
+        "author": "毒島みるく",
+        "license": "CC0"
+      }
+    },
+    {
+      "id": "khachapuri",
+      "name": "Хачапури по-аджарски",
+      "caption": "Лодочка из теста с расплавленным сыром, сливочным маслом и желтком",
+      "series": "dough",
+      "foods": ["khachapuri-adjaruli"],
+      "circle": 1,
+      "style": "restaurant",
+      "complexity": 1,
+      "weight": "heavy",
+      "protein": "cheese",
+      "method": "baked",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Khachapuri_Adjaruli_with_egg_and_butter_2016.jpg",
+        "author": "Eugene Krasnaok",
+        "license": "CC BY 4.0"
+      }
+    },
+    {
+      "id": "creamy-chicken",
+      "name": "Курица в сливочно-грибном соусе",
+      "caption": "Кусочки курицы с шампиньонами в сливочном соусе",
+      "series": "chicken-sauce",
+      "foods": ["chicken-creamy-mushroom"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "chicken",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Creamy_Chicken_Mussroom.jpg",
+        "author": "Justmen",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "chakhokhbili",
+      "name": "Чахохбили",
+      "caption": "Курица, тушённая с томатами и луком, с кинзой и хмели-сунели",
+      "series": "chicken-sauce",
+      "foods": ["chakhokhbili"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "chicken",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Chakhokhbili_Closeup.jpg",
+        "author": "Georgian Recipes at Georgia About",
+        "license": "CC BY 3.0"
+      }
+    },
+    {
+      "id": "tikka-masala",
+      "name": "Курица тикка масала",
+      "caption": "Курица в томатно-сливочном соусе с индийскими специями, слегка остро",
+      "series": "chicken-sauce",
+      "foods": ["chicken-tikka-masala"],
+      "circle": 3,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "hearty",
+      "protein": "chicken",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Chicken_tikka_masala_red.jpg",
+        "author": "CNEcija12345",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "green-curry",
+      "name": "Тайское зелёное карри",
+      "caption": "Курица в кокосовом молоке с зелёной пастой карри, лемонграссом и тайским базиликом, остро",
+      "series": "chicken-sauce",
+      "foods": ["thai-green-curry"],
+      "circle": 3,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "medium",
+      "protein": "chicken",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Green_curry_(45895542355).jpg",
+        "author": "pelican from Tokyo, Japan",
+        "license": "CC BY-SA 2.0"
+      }
+    },
+    {
+      "id": "stroganoff",
+      "name": "Бефстроганов с пюре",
+      "caption": "Полоски говядины в сметанном соусе, картофельное пюре",
+      "series": "beef",
+      "foods": ["boeuf-stroganoff-sour-cream", "mashed-potatoes"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "heavy",
+      "protein": "beef",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Olivka_(Novosibirsk_cafe)_07.jpg",
+        "author": "К.Артём.1",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "steak",
+      "name": "Стейк",
+      "caption": "Говядина с корочкой, розовая внутри",
+      "series": "beef",
+      "foods": ["steak-cooked"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "beef",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Medium-rare_Steak_mit_Kr%C3%A4utern.jpg",
+        "author": "Tim Reckmann",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "bourguignon",
+      "name": "Говядина по-бургундски",
+      "caption": "Говядина, томлённая в красном вине с грибами, морковью и беконом",
+      "series": "beef",
+      "foods": ["beef-bourguignon"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "heavy",
+      "protein": "beef",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Beef_bourguignon_NYT.jpg",
+        "author": "Slayschips",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "tartare",
+      "name": "Тартар из говядины",
+      "caption": "Сырая рубленая говядина с каперсами, луком, горчицей и желтком",
+      "series": "beef",
+      "foods": ["beef-tartare"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "beef",
+      "method": "raw",
+      "textures": ["raw"],
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:00_Steak_Tartare.jpg",
+        "author": "Mark Mitchell",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "borscht",
+      "name": "Борщ",
+      "caption": "Свекольный суп с капустой и говядиной, сметана, укроп",
+      "series": "soups",
+      "foods": ["borscht-with-potatoes"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "beef",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Borscht_served.jpg",
+        "author": "liz west from Boxborough, MA",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "solyanka",
+      "name": "Солянка",
+      "caption": "Густой суп на копчёностях с солёными огурцами, оливками и лимоном",
+      "series": "soups",
+      "foods": ["solyanka-meat"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 2,
+      "weight": "hearty",
+      "protein": "deli",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Soljanka_food_02.jpg",
+        "author": "Pannet",
+        "license": "CC BY 4.0"
+      }
+    },
+    {
+      "id": "mushroom-soup",
+      "name": "Грибной крем-суп",
+      "caption": "Гладкий суп-пюре из шампиньонов со сливками",
+      "series": "soups",
+      "foods": ["mushroom-cream-soup"],
+      "circle": 2,
+      "style": "home",
+      "complexity": 1,
+      "weight": "medium",
+      "protein": "vegetables",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:2020.10.19_Mushrooms_cream_soup.jpg",
+        "author": "Tess Mattew",
+        "license": "CC0"
+      }
+    },
+    {
+      "id": "kharcho",
+      "name": "Харчо",
+      "caption": "Грузинский суп с говядиной, рисом, ткемали, чесноком и кинзой, острый",
+      "series": "soups",
+      "foods": ["kharcho"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "beef",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A5%D0%B0%D1%80%D1%87%D0%BE.jpg",
+        "author": "EugSan",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "ramen",
+      "name": "Рамен",
+      "caption": "Пшеничная лапша в насыщенном свином бульоне, свинина, яйцо, нори",
+      "series": "soups",
+      "foods": ["ramen-assembled"],
+      "circle": 3,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "heavy",
+      "protein": "pork",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Chashu_Ramen_with_Egg.jpg",
+        "author": "Ceeseven",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "tom-yum",
+      "name": "Том ям с креветками",
+      "caption": "Кисло-острый тайский суп с креветками, лемонграссом, лаймом и грибами",
+      "series": "soups",
+      "foods": ["tom-yum-shrimp"],
+      "circle": 3,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "light",
+      "protein": "shrimp-squid",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Tom_yum_goong_at_Thai_Orchid_Villa_Kamppi.jpg",
+        "author": "JIP",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "baked-salmon",
+      "name": "Лосось с овощами",
+      "caption": "Филе лосося, запечённое с овощами",
+      "series": "fish",
+      "foods": ["salmon-baked"],
+      "circle": 2,
+      "style": "home",
+      "complexity": 1,
+      "weight": "light",
+      "protein": "fatty-fish",
+      "method": "baked",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Steckenroth,_salmon_on_baked_vegetables.jpg",
+        "author": "Gerda Arendt",
+        "license": "CC0"
+      }
+    },
+    {
+      "id": "steamed-cod",
+      "name": "Треска на пару",
+      "caption": "Белая рыба на пару с овощами, без соуса",
+      "series": "fish",
+      "foods": ["fish-poached"],
+      "circle": 2,
+      "style": "home",
+      "complexity": 1,
+      "weight": "light",
+      "protein": "white-fish",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Ling_Cod_with_Baked_Potato_(15988408872).jpg",
+        "author": "Prayitno",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "fish-and-chips",
+      "name": "Рыба в кляре с картошкой фри",
+      "caption": "Треска в хрустящем кляре, картофель фри, соус тартар",
+      "series": "fish",
+      "foods": ["fish-breaded-fried", "kibbeling"],
+      "circle": 2,
+      "style": "street",
+      "complexity": 1,
+      "weight": "heavy",
+      "protein": "white-fish",
+      "method": "deep-fried",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Fish_and_chips_blackpool.jpg",
+        "author": "Matthias Meckel",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "sushi",
+      "name": "Суши и роллы",
+      "caption": "Роллы и суши с сырой рыбой, соевый соус, васаби, имбирь",
+      "series": "fish",
+      "foods": ["sushi-maki"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "fatty-fish",
+      "method": "raw",
+      "textures": ["raw"],
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Assortment_of_sushi,_May_2010.jpg",
+        "author": "Steve Snodgrass",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "herring-coat",
+      "name": "Сельдь под шубой",
+      "caption": "Солёная сельдь под слоями картофеля, моркови, свёклы и майонеза",
+      "series": "fish",
+      "foods": ["herring-under-fur-coat"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 2,
+      "weight": "hearty",
+      "protein": "fatty-fish",
+      "method": "cured",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%B5%D0%BB%D1%91%D0%B4%D0%BA%D0%B0_%D0%BF%D0%BE%D0%B4_%D1%88%D1%83%D0%B1%D0%BE%D0%B9.jpg",
+        "author": "Lexx Xell",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "ceviche",
+      "name": "Севиче",
+      "caption": "Сырая рыба, маринованная в соке лайма, с луком, кинзой и перцем чили",
+      "series": "fish",
+      "foods": ["ceviche"],
+      "circle": 4,
+      "style": "restaurant",
+      "complexity": 2,
+      "weight": "light",
+      "protein": "white-fish",
+      "method": "raw",
+      "textures": ["raw"],
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Ceviche_del_Per%C3%BA.jpg",
+        "author": "Manuel González Olaechea",
+        "license": "CC BY 3.0"
+      }
+    },
+    {
+      "id": "plov",
+      "name": "Плов",
+      "caption": "Рис с бараниной, морковью, луком, зирой и чесноком",
+      "series": "rice",
+      "foods": ["plov"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 2,
+      "weight": "heavy",
+      "protein": "lamb",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Uzbek_palov_in_Yerevan_Food_Court.jpg",
+        "author": "Beko",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "risotto",
+      "name": "Ризотто с грибами",
+      "caption": "Сливочный рис с грибами, пармезаном и сливочным маслом",
+      "series": "rice",
+      "foods": ["risotto"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 2,
+      "weight": "hearty",
+      "protein": "vegetables",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom,_Trimingham.JPG",
+        "author": "Kolforn",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "paella",
+      "name": "Паэлья с морепродуктами",
+      "caption": "Рис с шафраном, креветками, сладким перцем и горошком",
+      "series": "rice",
+      "foods": ["paella-seafood"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "hearty",
+      "protein": "shrimp-squid",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Seafood_paella,_Brisbane,_12.2023.jpg",
+        "author": "Kgbo",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "burger",
+      "name": "Бургер",
+      "caption": "Говяжья котлета, сыр, соус и овощи в булочке",
+      "series": "handheld",
+      "foods": ["burger-assembled"],
+      "circle": 2,
+      "style": "street",
+      "complexity": 1,
+      "weight": "heavy",
+      "protein": "mince",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Cheeseburger.jpg",
+        "author": "Renee Comet",
+        "license": "Public domain"
+      }
+    },
+    {
+      "id": "shawarma",
+      "name": "Шаурма",
+      "caption": "Курица с гриля, овощи и чесночный соус в лаваше",
+      "series": "handheld",
+      "foods": ["shawarma"],
+      "circle": 2,
+      "style": "street",
+      "complexity": 2,
+      "weight": "heavy",
+      "protein": "chicken",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Handmade_Chicken_Shawarma_Wrap_-_Lavash.jpg",
+        "author": "Andy Li",
+        "license": "CC0"
+      }
+    },
+    {
+      "id": "tacos",
+      "name": "Тако",
+      "caption": "Кукурузные лепёшки с жареным мясом, луком, кинзой и лаймом, острый соус",
+      "series": "handheld",
+      "foods": ["tacos-assembled"],
+      "circle": 3,
+      "style": "street",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "beef",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:001_Tacos_de_carnitas,_carne_asada_y_al_pastor.jpg",
+        "author": "Larry Miller",
+        "license": "CC BY-SA 2.0"
+      }
+    },
+    {
+      "id": "olivier",
+      "name": "Оливье",
+      "caption": "Картофель, морковь, колбаса, яйцо, солёные огурцы, горошек, майонез",
+      "series": "salads",
+      "foods": ["olivier-dressed"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "hearty",
+      "protein": "deli",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%B0%D0%BB%D0%B0%D1%82_%D0%9E%D0%BB%D0%B8%D0%B2%D1%8C%D0%B5_01.jpg",
+        "author": "Pannet",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "greek-salad",
+      "name": "Греческий салат",
+      "caption": "Томаты, огурцы, перец, красный лук, маслины, фета, оливковое масло",
+      "series": "salads",
+      "foods": ["greek-salad"],
+      "circle": 2,
+      "style": "home",
+      "complexity": 1,
+      "weight": "light",
+      "protein": "cheese",
+      "method": "fresh",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Horiatiki_salad.jpg",
+        "author": "Scudsvlad",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "tabbouleh",
+      "name": "Табуле",
+      "caption": "Много петрушки, мята, томаты, немного булгура, лимонный сок",
+      "series": "salads",
+      "foods": ["tabbouleh"],
+      "circle": 3,
+      "style": "home",
+      "complexity": 1,
+      "weight": "light",
+      "protein": "vegetables",
+      "method": "fresh",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Tabuleh,_Petra_Restaurant,_2026_(01).jpg",
+        "author": "Bahnfrend",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "bbq-ribs",
+      "name": "Рёбрышки барбекю",
+      "caption": "Свиные рёбра, запечённые в копчёном сладком соусе барбекю",
+      "series": "sweet-savory",
+      "foods": ["ribs-cooked", "bbq-sauce"],
+      "circle": 2,
+      "style": "street",
+      "complexity": 1,
+      "weight": "heavy",
+      "protein": "pork",
+      "method": "baked",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Glazed_barbecue_ribs_arranged_on_a_wooden_board.jpg",
+        "author": "Oleg Yunakov",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "sweet-sour-pork",
+      "name": "Свинина в кисло-сладком соусе",
+      "caption": "Свинина в кляре в кисло-сладком соусе с ананасом и перцем",
+      "series": "sweet-savory",
+      "foods": ["sweet-sour-pork-battered"],
+      "circle": 3,
+      "style": "restaurant",
+      "complexity": 2,
+      "weight": "heavy",
+      "protein": "pork",
+      "method": "deep-fried",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:%E8%8F%A0%E8%90%9D%E5%92%95%E5%99%9C%E8%82%89.jpg",
+        "author": "Walter Grassroot",
+        "license": "CC BY-SA 3.0"
+      }
+    },
+    {
+      "id": "duck-breast",
+      "name": "Утиная грудка с ягодным соусом",
+      "caption": "Утиная грудка с корочкой, розовая внутри, ягодный соус",
+      "series": "sweet-savory",
+      "foods": ["duck-breast-cooked", "fruit-coulis"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 2,
+      "weight": "hearty",
+      "protein": "duck",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Magret_de_canard_dans_un_restaurant_de_Castera-Verduzan.jpg",
+        "author": "Pierre LANNES",
+        "license": "CC BY-SA 2.0"
+      }
+    },
+    {
+      "id": "lamb-tagine",
+      "name": "Таджин из баранины с черносливом",
+      "caption": "Баранина, томлённая с черносливом, корицей, имбирём и мёдом",
+      "series": "sweet-savory",
+      "foods": ["lamb-tagine-prunes"],
+      "circle": 4,
+      "style": "restaurant",
+      "complexity": 3,
+      "weight": "hearty",
+      "protein": "lamb",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Dar_Mansour_-_Morocco%27s_Kitchen_berber%27s_tajine,_Koh_Phangan,_Thailand.jpg",
+        "author": "Darmansour",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "falafel",
+      "name": "Фалафель с хумусом",
+      "caption": "Жареные шарики из нута с зирой и зеленью, хумус с кунжутной пастой",
+      "series": "legumes",
+      "foods": ["falafel-fried", "hummus"],
+      "circle": 3,
+      "style": "street",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "legumes",
+      "method": "deep-fried",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Hummus,_falafel,_pita_bread,_and_mafrouka_at_Agasi,_Lajpat_Nagar_(July_2025).jpg",
+        "author": "Contrapunctus-1",
+        "license": "CC0"
+      }
+    },
+    {
+      "id": "chili",
+      "name": "Чили кон карне",
+      "caption": "Говяжий фарш с фасолью, томатами, зирой и перцем чили, острый",
+      "series": "legumes",
+      "foods": ["chili-con-carne"],
+      "circle": 3,
+      "style": "home",
+      "complexity": 2,
+      "weight": "hearty",
+      "protein": "mince",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Chili_con_carne_(5034005470).jpg",
+        "author": "cyclonebill from Copenhagen, Denmark",
+        "license": "CC BY-SA 2.0"
+      }
+    },
+    {
+      "id": "dal",
+      "name": "Дал",
+      "caption": "Чечевица, разваренная до пюре, с куркумой, зирой и чесноком",
+      "series": "legumes",
+      "foods": ["dal"],
+      "circle": 3,
+      "style": "home",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "legumes",
+      "method": "braised",
+      "textures": ["mushy"],
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Dal_Tadka-Delhi.jpg",
+        "author": "AugustineKajur",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "garlic-prawns",
+      "name": "Креветки в чесночном масле",
+      "caption": "Креветки, обжаренные в оливковом масле с чесноком и перцем чили",
+      "series": "seafood",
+      "foods": ["gambas-al-ajillo"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 1,
+      "weight": "medium",
+      "protein": "shrimp-squid",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Gambas_al_ajillo_en_madrid.jpg",
+        "author": "Krista",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "mussels",
+      "name": "Мидии в белом вине",
+      "caption": "Мидии, сваренные в белом вине с чесноком, луком и петрушкой",
+      "series": "seafood",
+      "foods": ["mussels-cooked-in-shell"],
+      "circle": 2,
+      "style": "restaurant",
+      "complexity": 1,
+      "weight": "light",
+      "protein": "mussels-oysters",
+      "method": "boiled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Moules_marini%C3%A8res_02.jpg",
+        "author": "Arnaud 25",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "lasagna",
+      "name": "Лазанья",
+      "caption": "Слои пасты, мясного соуса, бешамеля и сыра",
+      "series": "layered",
+      "foods": ["lasagna-baked"],
+      "circle": 2,
+      "style": "home",
+      "complexity": 2,
+      "weight": "heavy",
+      "protein": "mince",
+      "method": "baked",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Lasagne_-_stonesoup.jpg",
+        "author": "jules / stonesoup",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "moussaka",
+      "name": "Мусака",
+      "caption": "Слои баклажанов и фарша с корицей и душистым перцем под бешамелем",
+      "series": "layered",
+      "foods": ["moussaka"],
+      "circle": 3,
+      "style": "home",
+      "complexity": 3,
+      "weight": "heavy",
+      "protein": "mince",
+      "method": "baked",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Moussaka_12.jpg",
+        "author": "Key West Wedding Photography",
+        "license": "CC BY 2.0"
+      }
+    },
+    {
+      "id": "kholodets",
+      "name": "Холодец",
+      "caption": "Застывший мясной бульон с кусочками мяса и морковью, к нему хрен или горчица",
+      "series": "bold",
+      "foods": ["kholodets"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "medium",
+      "protein": "beef",
+      "method": "boiled",
+      "textures": ["jelly"],
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Racitura_Meat_Jelly_Moldavian_Cuisine.JPG",
+        "author": "Ion.bostan",
+        "license": "CC BY-SA 3.0"
+      }
+    },
+    {
+      "id": "liver",
+      "name": "Печень с луком и пюре",
+      "caption": "Жареная говяжья печень с луком, картофельное пюре",
+      "series": "bold",
+      "foods": ["liver-fried", "mashed-potatoes"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "medium",
+      "protein": "liver",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Fried_liver,_Erfurt_(P1032731).jpg",
+        "author": "Matti Blume",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "syrniki",
+      "name": "Сырники со сметаной",
+      "caption": "Жареные лепёшки из творога, сметана",
+      "series": "breakfast",
+      "foods": ["syrniki-fried"],
+      "circle": 1,
+      "style": "home",
+      "complexity": 1,
+      "weight": "medium",
+      "protein": "cheese",
+      "method": "grilled",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%B8%D1%80%D0%BD%D0%B8%D0%BA%D0%B8,_%D0%A0%D0%BE%D0%BC%D0%BD%D0%B8._%D0%A1%D1%83%D0%BC%D1%89%D0%B8%D0%BD%D0%B0,_2023_%D1%80%D1%96%D0%BA.jpg",
+        "author": "Мандрівниця",
+        "license": "CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "shakshuka",
+      "name": "Шакшука",
+      "caption": "Яйца, запечённые в остром соусе из томатов и перца с зирой",
+      "series": "breakfast",
+      "foods": ["shakshuka-with-eggs"],
+      "circle": 3,
+      "style": "home",
+      "complexity": 2,
+      "weight": "medium",
+      "protein": "eggs",
+      "method": "braised",
+      "photo": {
+        "source": "https://commons.wikimedia.org/wiki/File:Shakshuka_by_Calliopejen1.jpg",
+        "author": "Calliopejen1",
+        "license": "CC BY-SA 3.0"
+      }
+    }
+  ]
+}
