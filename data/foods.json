@@ -15315,10 +15315,10 @@
         },
         {
           "id": "kalitki",
-          "name": "Калитки (карельские ржаные с картошкой или пшеном)",
+          "name": "Калитки карельские с картошкой или пшеном, испечённые",
           "cuisines": [
-            "russian",
-            "nordic"
+            "nordic",
+            "russian"
           ],
           "taste": {
             "sweet": 1,
@@ -15376,7 +15376,7 @@
         },
         {
           "id": "karjalanpiirakka",
-          "name": "Карельские калитки (karjalanpiirakka) с рисом, испечённые",
+          "name": "Калитки карельские с рисом (karjalanpiirakka), испечённые",
           "cuisines": [
             "nordic",
             "russian"
@@ -36239,8 +36239,7 @@
           "id": "tvp-rehydrated",
           "name": "Соевое мясо (текстурат), размоченное или отваренное",
           "cuisines": [
-            "indian",
-            "russian"
+            "indian"
           ],
           "taste": {
             "sweet": 1,
@@ -66756,37 +66755,6 @@
           ]
         },
         {
-          "id": "udder",
-          "name": "Вымя говяжье",
-          "cuisines": [
-            "russian",
-            "ukrainian",
-            "argentinian"
-          ],
-          "taste": {
-            "sweet": 1,
-            "sour": 0,
-            "salty": 1,
-            "bitter": 0,
-            "umami": 4,
-            "heat": 0,
-            "fat": 7
-          },
-          "aroma": {
-            "milky": 4,
-            "meaty": 4,
-            "gamey": 3
-          },
-          "freezeScore": 85,
-          "months": 4,
-          "losses": "Плотная жирная ткань почти не страдает от льда, но при долгом хранении жир начинает горчить.",
-          "recovery": "Вымочить, отварить 2–3 часа и обжарить или запечь — как свежее.",
-          "sources": [
-            "foodkeeper",
-            "clemson-storing-meats-seafood"
-          ]
-        },
-        {
           "id": "lungs-pluck",
           "name": "Лёгкое и ливер (сбой) говяжий, свиной, бараний",
           "cuisines": [
@@ -68391,7 +68359,7 @@
         },
         {
           "id": "tushonka-opened",
-          "name": "Тушёнка (говядина, свинина, курица), открытая банка",
+          "name": "Тушёнка и мясо в собственном соку (говядина, свинина, курица), открытая банка",
           "cuisines": [
             "russian",
             "ukrainian",
@@ -83856,34 +83824,6 @@
           "sources": [
             "usda-fsis-freezing"
           ]
-        },
-        {
-          "id": "tushyonka-opened",
-          "name": "Тушёнка и мясо в собственном соку, открытая банка",
-          "cuisines": [
-            "russian",
-            "ukrainian",
-            "belarusian"
-          ],
-          "taste": {
-            "sweet": 1,
-            "sour": 0,
-            "salty": 6,
-            "bitter": 0,
-            "umami": 6,
-            "heat": 0,
-            "fat": 7
-          },
-          "aroma": {
-            "meaty": 8,
-            "mediterranean-herbs": 3,
-            "black-pepper": 2
-          },
-          "freezeScore": 85,
-          "months": 3,
-          "losses": "Мясо почти не меняется, волокна чуть суше; желе после разморозки разжижается.",
-          "recovery": "Разогреть в макаронах по-флотски, гречке, супе — разницы почти нет. В основном.",
-          "method": "Переложить в контейнер вместе с жиром и желе: жир защищает мясо от подсыхания."
         },
         {
           "id": "canned-ready-meals-opened",
