@@ -16,8 +16,10 @@ import {
   matchAllGroups,
   matchAllScores,
   parseFoodFilters,
+  SCALES,
   type FoodEntry,
   type FoodFilters,
+  type FoodScale,
   type FoodSort,
 } from '../lib/foods.ts';
 import { setQuery, useLocation } from '../lib/router.tsx';
@@ -39,12 +41,14 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
   const filters = parseFoodFilters(query, foods.groups);
 
   const update = (patch: Partial<FoodFilters>) => setQuery(foodFiltersToQuery({ ...filters, ...patch }));
-  const reset = () => setQuery(foodFiltersToQuery({ q: '', group: null, min: 0, sort: filters.sort }));
+  const reset = () => setQuery(foodFiltersToQuery({ q: '', group: null, min: 0, sort: filters.sort, scale: 'freeze' }));
 
   const results = filterFoods(index, filters);
   const groupCounts = new Map<string, number>();
   for (const e of matchAllGroups(index, filters)) groupCounts.set(e.group.id, (groupCounts.get(e.group.id) ?? 0) + 1);
-  const anyFilter = filters.q.trim() !== '' || filters.group !== null || filters.min > 0;
+  const otherScale = filters.scale !== 'freeze';
+  const scoreFilters = Number(otherScale) + Number(filters.min > 0);
+  const anyFilter = filters.q.trim() !== '' || filters.group !== null || scoreFilters > 0;
   const panel = <FoodsPanel entries={matchAllScores(index, filters)} filters={filters} update={update} />;
 
   return (
@@ -55,8 +59,9 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
         </h1>
         <p class="lead">
           Продукты, части блюд, блюда и соусы: вкус и аромат по шкале от 0 до 10, кухни, к которым они относятся, и
-          как они переносят домашнюю заморозку. Оценка заморозки от 0 до 100 — насколько после разморозки и лучшего
-          способа восстановления это похоже на свежее. Сырое и готовое — отдельными позициями.
+          как они переносят домашнюю заморозку и микроволновку. Оценки от 0 до 100: заморозка — насколько после
+          разморозки и лучшего способа восстановления это похоже на свежее, микроволновка — насколько после нагрева это
+          похоже на только что приготовленное. Сырое и готовое — отдельными позициями.
         </p>
       </header>
 
@@ -99,17 +104,25 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
             <button class="btn btn-outline btn-sm catalog-filter-btn" type="button" onClick={() => setSheetOpen(true)}>
               <SlidersHorizontal />
               Оценка
-              {filters.min > 0 && <span class="filter-count num">1</span>}
+              {scoreFilters > 0 && <span class="filter-count num">{scoreFilters}</span>}
             </button>
           </div>
 
-          {filters.min > 0 && (
+          {scoreFilters > 0 && (
             <div class="chip-wrap active-filters">
-              <button class="chip active-pill" type="button" onClick={() => update({ min: 0 })} aria-label="Убрать фильтр">
-                {filters.min}+ · {bandOf(filters.min).label.toLowerCase()}
-                {filters.min < 95 && ' и лучше'}
-                <X />
-              </button>
+              {otherScale && (
+                <button class="chip active-pill" type="button" onClick={() => update({ scale: 'freeze' })} aria-label="Вернуть шкалу заморозки">
+                  {SCALES[filters.scale].label}
+                  <X />
+                </button>
+              )}
+              {filters.min > 0 && (
+                <button class="chip active-pill" type="button" onClick={() => update({ min: 0 })} aria-label="Убрать фильтр">
+                  {filters.min}+ · {bandOf(filters.min, filters.scale).label.toLowerCase()}
+                  {filters.min < 95 && ' и лучше'}
+                  <X />
+                </button>
+              )}
             </div>
           )}
 
@@ -134,11 +147,11 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
                   {group.title}
                   <span class="count num">{entries.length}</span>
                 </h2>
-                <FoodList entries={entries} sources={sources} />
+                <FoodList entries={entries} scale={filters.scale} sources={sources} />
               </section>
             ))
           ) : (
-            <FoodList entries={results} sources={sources} showGroup />
+            <FoodList entries={results} scale={filters.scale} sources={sources} showGroup />
           )}
         </div>
       </div>
@@ -160,14 +173,25 @@ function FoodsCatalog({ foods }: { foods: Foods }) {
   );
 }
 
-/** Распределение оценок по шкале; полоса — порог «не ниже». */
+/** Выбор шкалы и распределение оценок по ней; полоса — порог «не ниже». */
 function FoodsPanel(props: { entries: FoodEntry[]; filters: FoodFilters; update: (p: Partial<FoodFilters>) => void }) {
   const { entries, filters, update } = props;
-  const counts = bandCounts(entries);
+  const counts = bandCounts(entries, filters.scale);
   const max = Math.max(1, ...counts.map((c) => c.count));
 
   return (
     <div class="filter-panel">
+      <fieldset class="filter-group">
+        <legend class="eyebrow">Шкала</legend>
+        <div class="chip-wrap">
+          {(Object.keys(SCALES) as FoodScale[]).map((s) => (
+            <button key={s} class="chip" type="button" aria-pressed={filters.scale === s} onClick={() => update({ scale: s })}>
+              {SCALES[s].label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
       <fieldset class="filter-group">
         <legend class="eyebrow">Не ниже</legend>
         <ul class="score-scale">
@@ -210,35 +234,42 @@ function FoodsPanel(props: { entries: FoodEntry[]; filters: FoodFilters; update:
   );
 }
 
-function FoodList(props: { entries: FoodEntry[]; sources: Map<string, FoodSource>; showGroup?: boolean }) {
+function FoodList(props: { entries: FoodEntry[]; scale: FoodScale; sources: Map<string, FoodSource>; showGroup?: boolean }) {
   return (
     <ul class="food-list">
       {props.entries.map((e) => (
         <li key={e.food.id}>
-          <FoodRow food={e.food} group={props.showGroup ? e.group.title : null} sources={props.sources} />
+          <FoodRow food={e.food} group={props.showGroup ? e.group.title : null} scale={props.scale} sources={props.sources} />
         </li>
       ))}
     </ul>
   );
 }
 
-function FoodRow({ food: f, group, sources }: { food: Food; group: string | null; sources: Map<string, FoodSource> }) {
+/** Полоса шкалы, у заморозки — и срок. */
+function scoreSummary(f: Food, scale: FoodScale): string {
+  const months = scale === 'freeze' && f.months ? ` · до ${f.months} мес.` : '';
+  return bandOf(SCALES[scale].score(f), scale).label + months;
+}
+
+function FoodRow(props: { food: Food; group: string | null; scale: FoodScale; sources: Map<string, FoodSource> }) {
+  const { food: f, group, scale, sources } = props;
   const [open, setOpen] = useState(false);
+  const score = SCALES[scale].score(f);
   return (
     <details class="food-row" onToggle={(e) => setOpen(e.currentTarget.open)}>
       <summary>
-        <span class="food-score" aria-label={`Оценка ${f.freezeScore} из 100`}>
-          <span class="food-score-value num">{f.freezeScore}</span>
+        <span class="food-score" aria-label={`${SCALES[scale].label}: ${score} из 100`}>
+          <span class="food-score-value num">{score}</span>
           <span class="food-score-track" aria-hidden="true">
-            <span class="food-score-bar" style={{ width: `${f.freezeScore}%` }} />
+            <span class="food-score-bar" style={{ width: `${score}%` }} />
           </span>
         </span>
         <span class="food-row-body">
           <span class="food-name">{f.name}</span>
           <span class="faint food-meta">
             {group && `${group} · `}
-            {bandOf(f.freezeScore).label}
-            {f.months ? ` · до ${f.months} мес.` : ''}
+            {scoreSummary(f, scale)}
           </span>
         </span>
       </summary>
@@ -268,6 +299,14 @@ function FoodDetails({ food: f, sources }: { food: Food; sources: Map<string, Fo
           <dd>{f.cuisines.map((c) => CUISINES[c]).join(', ')}</dd>
         </>
       )}
+      <dt>Микроволновка</dt>
+      <dd>
+        <span class="num">{f.microwaveScore}</span> · {scoreSummary(f, 'microwave')}
+      </dd>
+      <dt>Заморозка</dt>
+      <dd>
+        <span class="num">{f.freezeScore}</span> · {scoreSummary(f, 'freeze')}
+      </dd>
       <dt>Что теряет</dt>
       <dd>{f.losses}</dd>
       {f.recovery && (

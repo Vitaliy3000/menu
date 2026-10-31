@@ -28,6 +28,7 @@ const catalog = (): Foods => ({
           cuisines: ['russian', 'dutch'],
           taste: taste({ sweet: 1, salty: 3, umami: 2 }),
           aroma: { earthy: 5 },
+          microwaveScore: 65,
           freezeScore: 10,
           losses: 'Темнеет и становится водянистым.',
         },
@@ -36,6 +37,7 @@ const catalog = (): Foods => ({
           name: 'Горошек, бланшированный',
           taste: taste({ sweet: 4, umami: 3 }),
           aroma: { green: 6, beany: 2 },
+          microwaveScore: 85,
           freezeScore: 90,
           months: 12,
           losses: 'Почти ничего.',
@@ -53,6 +55,7 @@ const catalog = (): Foods => ({
           cuisines: ['american', 'mexican'],
           taste: taste({ sweet: 2, sour: 3, salty: 5, umami: 6, heat: 5, fat: 5 }),
           aroma: { cumin: 6, chili: 6, meaty: 5 },
+          microwaveScore: 95,
           freezeScore: 95,
           months: 4,
           losses: 'Ничего.',
@@ -81,13 +84,15 @@ describe('каталог продуктов: проверка', () => {
     expect(messages(issues)).toContain('Нет каталога продуктов');
   });
 
-  it('оценка — целое от 0 до 100 с шагом 5', () => {
+  it('оценки — целые от 0 до 100 с шагом 5', () => {
     const f = catalog();
     f.groups[0]!.items[0]!.freezeScore = 12;
     f.groups[0]!.items[1]!.freezeScore = 105;
+    f.groups[1]!.items[0]!.microwaveScore = -5;
     const text = messages(validate(f));
     expect(text).toContain('must be multiple of 5');
     expect(text).toContain('must be <= 100');
+    expect(text).toContain('must be >= 0');
   });
 
   it('вкус 0–10 по всем семи ключам, ноты аромата и кухни — только из словаря', () => {
@@ -107,7 +112,7 @@ describe('каталог продуктов: проверка', () => {
 
   it('ловит повторы и ссылки на несуществующие источники', () => {
     const f = catalog();
-    f.groups[1]!.items.push({ id: 'potato-raw', name: 'картофель, сырой', taste: taste(), freezeScore: 10, losses: 'Дубль.', sources: ['usda'] });
+    f.groups[1]!.items.push({ id: 'potato-raw', name: 'картофель, сырой', taste: taste(), microwaveScore: 65, freezeScore: 10, losses: 'Дубль.', sources: ['usda'] });
     f.sources.push({ id: 'unused', title: 'NCHFP — копия', url: 'https://nchfp.uga.edu/how/freeze/' });
     const text = messages(checkFoods(f, file));
     expect(text).toContain('id «potato-raw» повторяется');
@@ -121,13 +126,15 @@ describe('каталог продуктов: проверка', () => {
 describe('каталог продуктов: фильтры', () => {
   const foods = catalog();
   const index = indexFoods(foods);
-  const filters = (patch: Partial<FoodFilters> = {}): FoodFilters => ({ q: '', group: null, min: 0, sort: 'shelf', ...patch });
+  const filters = (patch: Partial<FoodFilters> = {}): FoodFilters => ({ q: '', group: null, min: 0, sort: 'shelf', scale: 'freeze', ...patch });
   const ids = (f: FoodFilters) => filterFoods(index, f).map((e) => e.food.id);
 
   it('полоса шкалы по оценке', () => {
-    expect(bandOf(100).label).toBe('Не отличить');
-    expect(bandOf(90).label).toBe('Почти без потерь');
-    expect(bandOf(0).label).toBe('Не замораживать');
+    expect(bandOf(100, 'freeze').label).toBe('Не отличить');
+    expect(bandOf(90, 'freeze').label).toBe('Почти без потерь');
+    expect(bandOf(0, 'freeze').label).toBe('Не замораживать');
+    expect(bandOf(30, 'microwave').label).toBe('Только поесть');
+    expect(bandOf(0, 'microwave').label).toBe('Не греть');
   });
 
   it('ищет по названию, группе и кухне, без учёта регистра и «ё»', () => {
@@ -142,8 +149,19 @@ describe('каталог продуктов: фильтры', () => {
     expect(ids(filters({ sort: 'worst' }))).toEqual(['potato-raw', 'peas-blanched', 'chili-con-carne']);
   });
 
+  it('порог и распределение — по выбранной шкале', () => {
+    expect(ids(filters({ min: 50 }))).toEqual(['peas-blanched', 'chili-con-carne']);
+    expect(ids(filters({ min: 50, scale: 'microwave' }))).toEqual(['potato-raw', 'peas-blanched', 'chili-con-carne']);
+    const counts = bandCounts(index, 'microwave').filter((c) => c.count > 0).map((c) => [c.band.min, c.count]);
+    expect(counts).toEqual([
+      [95, 1],
+      [85, 1],
+      [50, 1],
+    ]);
+  });
+
   it('распределение и группировка', () => {
-    const counts = bandCounts(index).filter((c) => c.count > 0).map((c) => [c.band.min, c.count]);
+    const counts = bandCounts(index, 'freeze').filter((c) => c.count > 0).map((c) => [c.band.min, c.count]);
     expect(counts).toEqual([
       [95, 1],
       [85, 1],
@@ -158,9 +176,10 @@ describe('каталог продуктов: фильтры', () => {
   it('из URL берёт только известные группы, пороги и сортировки', () => {
     const parsed = parseFoodFilters(new URLSearchParams('group=nope&min=42&sort=random&q=лук'), foods.groups);
     expect(parsed).toEqual(filters({ q: 'лук' }));
-    expect(parseFoodFilters(new URLSearchParams('group=stews&min=70&sort=best'), foods.groups)).toEqual(
-      filters({ group: 'stews', min: 70, sort: 'best' }),
+    expect(parseFoodFilters(new URLSearchParams('group=stews&min=70&sort=best&scale=microwave'), foods.groups)).toEqual(
+      filters({ group: 'stews', min: 70, sort: 'best', scale: 'microwave' }),
     );
+    expect(parseFoodFilters(new URLSearchParams('scale=oven'), foods.groups)).toEqual(filters());
   });
 });
 

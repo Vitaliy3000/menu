@@ -26,6 +26,7 @@ const catalog: Foods = {
           cuisines: ['ukrainian'],
           taste: { sweet: 3, sour: 4, salty: 5, bitter: 0, umami: 4, heat: 0, fat: 3 },
           aroma: { earthy: 6, dill: 3 },
+          microwaveScore: 100,
           freezeScore: 95,
           losses: 'Почти ничего.',
         },
