@@ -1,0 +1,321 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f0e8;
+  --surface: #fffdf9;
+  --ink: #2b2520;
+  --muted: #74695e;
+  --faint: #a89d92;
+  --line: #e6ddd1;
+  --yes: #2f8f5b;
+  --no: #c8463d;
+  --accent: #b5652b;
+  --shadow: 0 18px 40px -18px rgb(60 40 20 / 0.35), 0 2px 6px rgb(60 40 20 / 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+main {
+  max-width: clamp(460px, (100dvh - 360px) * 4 / 3, 720px);
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 30px;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.keys {
+  padding: 0;
+  list-style: none;
+  line-height: 2;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 28px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface);
+  text-align: center;
+  font-family: inherit;
+}
+
+.hint {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  font: inherit;
+  font-size: 17px;
+}
+
+button {
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+form button,
+#retry {
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+#bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s;
+}
+
+#count {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+#stack {
+  display: grid;
+}
+
+.card {
+  --like: 0;
+  --nope: 0;
+  grid-area: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  transition: transform 0.2s ease-out;
+}
+
+.card.dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.card.leaving {
+  transition: transform 0.22s ease-in;
+}
+
+.card.behind {
+  transform: translateY(10px) scale(0.96);
+  filter: brightness(0.97);
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--line);
+}
+
+.card .body {
+  padding: 14px 18px 14px;
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.tag {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.caption {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.credit {
+  display: block;
+  overflow: hidden;
+  color: var(--faint);
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.stamp {
+  position: absolute;
+  top: 20px;
+  padding: 4px 12px;
+  border: 3px solid currentColor;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.85);
+  font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.stamp.yes {
+  left: 18px;
+  color: var(--yes);
+  opacity: var(--like);
+  transform: rotate(-12deg);
+}
+
+.stamp.no {
+  right: 18px;
+  color: var(--no);
+  opacity: var(--nope);
+  transform: rotate(12deg);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.actions button {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform 0.1s;
+}
+
+.actions button:active {
+  transform: scale(0.92);
+}
+
+.actions .no,
+.actions .yes {
+  width: 66px;
+  height: 66px;
+  font-size: 28px;
+}
+
+.actions .no {
+  color: var(--no);
+}
+
+.actions .yes {
+  color: var(--yes);
+}
+
+.actions .unsure {
+  width: 52px;
+  height: 52px;
+  color: var(--muted);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.actions .undo {
+  width: 42px;
+  height: 42px;
+  color: var(--faint);
+  font-size: 20px;
+}
+
+.actions .undo:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+#saved {
+  color: var(--muted);
+}
+
+.block {
+  margin: 18px 0;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.block h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.block h3 {
+  margin: 14px 0 6px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.block ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.5;
+}
+
+.block li + li {
+  margin-top: 6px;
+}
+
+.link {
+  margin-top: 18px;
+  padding: 0;
+  background: none;
+  color: var(--accent);
+  font-size: 16px;
+  text-decoration: underline;
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Блюда на двоих</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main>
+      <section id="start" class="screen">
+        <h1>Блюда на двоих</h1>
+        <p class="lead"><span id="total">…</span> блюд для техкарт — все переносят заморозку без потерь. Про каждое реши: <b>хочешь его в меню?</b></p>
+        <ul class="keys">
+          <li><kbd>→</kbd> или свайп вправо — нравится</li>
+          <li><kbd>←</kbd> или свайп влево — не нравится</li>
+          <li><kbd>↓</kbd> или свайп вниз — не знаю или средне</li>
+          <li><kbd>⌫</kbd> — вернуть предыдущее</li>
+        </ul>
+        <p class="hint">Потом анкету проходит второй человек, и приложение покажет, что нравится обоим.</p>
+        <form id="start-form">
+          <input id="name" placeholder="Как тебя зовут?" autocomplete="off" required />
+          <button type="submit">Начать</button>
+        </form>
+        <button id="show-pairs" class="link" hidden>Посмотреть совпадения</button>
+      </section>
+
+      <section id="swipe" class="screen" hidden>
+        <div class="progress"><div id="bar"></div></div>
+        <p id="count"></p>
+        <div id="stack"></div>
+        <div class="actions">
+          <button id="undo" class="undo" title="Вернуть предыдущее (⌫)">↺</button>
+          <button id="no" class="no" title="Не нравится (←)">✕</button>
+          <button id="unsure" class="unsure" title="Не знаю или средне (↓)">?</button>
+          <button id="yes" class="yes" title="Нравится (→)">♥</button>
+        </div>
+      </section>
+
+      <section id="done" class="screen" hidden>
+        <h1>Совпадения</h1>
+        <p id="saved"></p>
+        <button id="retry" hidden>Отправить ещё раз</button>
+        <div id="pairs"></div>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

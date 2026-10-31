@@ -7,3 +7,4 @@ dist/
 __pycache__/
 # Ответы анкеты — личные данные, репозиторий публичный
 taste-results/
+dish-swipe/results/

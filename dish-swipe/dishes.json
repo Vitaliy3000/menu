@@ -1,0 +1,825 @@
+[
+  {
+    "id": "borscht",
+    "name": "Борщ",
+    "caption": "Свекольный суп с говядиной, капустой и томатом, без картофеля; со сметаной и укропом",
+    "cuisine": "русская",
+    "meal": "lunch",
+    "serve": "Обед: накануне в холодильник, микроволновка 50–70 %, перемешать на середине. С собой — баночка сметаны с укропом и долька лимона: кислота после разогрева возвращает цвет. Без картофеля: он не переносит заморозку.",
+    "foods": [
+      "borscht-no-potatoes"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/a-bowl-of-borscht-garnished-with-sour-cream-and-herbs-18955541/",
+      "author": "Nadin Sh",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "shchi",
+    "name": "Кислые щи",
+    "caption": "Суп из квашеной капусты с говядиной, без картофеля; со сметаной",
+    "cuisine": "русская",
+    "meal": "lunch",
+    "serve": "Обед: накануне в холодильник, микроволновка 50–70 %, перемешать на середине; сметана с собой. Без картофеля.",
+    "foods": [
+      "shchi-sauerkraut"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%A9%D0%B8_%D0%B7%D0%B8%D0%BC%D0%BD%D0%B8%D0%B5.jpg",
+      "author": "Ostolob",
+      "license": "CC0"
+    }
+  },
+  {
+    "id": "solyanka",
+    "name": "Солянка сборная мясная",
+    "caption": "Густой кисло-солёный суп на копчёностях с солёными огурцами, маслинами, лимоном и сметаной",
+    "cuisine": "русская",
+    "meal": "lunch",
+    "serve": "Обед: микроволновка 50–70 %. Маслины, долька лимона и сметана — в баночке с собой, после разогрева. Мясо — отварная говядина, копчёные рёбрышки, копчёная колбаса для варки, бекон; без субпродуктов, варёной колбасы и сосисок.",
+    "foods": [
+      "solyanka-meat"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Soljanka_food_05.jpg",
+      "author": "Pannet",
+      "license": "CC BY 4.0"
+    }
+  },
+  {
+    "id": "blinchiki",
+    "name": "Блинчики с мясом",
+    "caption": "Тонкие блины с начинкой из говядины с жареным луком, обжаренные до корочки, со сметаной",
+    "cuisine": "русская",
+    "meal": "dinner",
+    "serve": "Ужин: накануне в холодильник; обжарить на топлёном масле по 3–4 минуты с каждой стороны сразу в трёх сковородах — большой стальной, серой антипригарной и блинной; сметана, укроп и солёные огурцы при подаче.",
+    "foods": [
+      "blinchiki-meat"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/a-plate-with-homemade-pancakes-with-cream-15661098/",
+      "author": "Nadin Sh",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "kiev",
+    "name": "Котлета по-киевски",
+    "caption": "Куриное филе с холодным сливочным маслом и зеленью внутри, в хрустящей панировке, с пюре из зелёного горошка",
+    "cuisine": "русская",
+    "meal": "dinner",
+    "serve": "Ужин: накануне в холодильник; без масла, на противне в духовке 180 °C 35–45 минут до 74 °C в центре (выносной щуп), сухари для панировки подсушены заранее — фритюрницы нет; пюре из горошка разогреть в кастрюле 750 мл, помешивая; лимон и укроп при подаче. Новое блюдо — сначала пробная порция.",
+    "foods": [
+      "kiev-raw",
+      "pea-puree"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Chicken_Kiev_in_Kiev_(cropped).jpg",
+      "author": "Giles Thomas (Flickr); обработка Off-shell",
+      "license": "CC BY-SA 2.0"
+    }
+  },
+  {
+    "id": "keema",
+    "name": "Индийский фарш с горошком (кима матар)",
+    "caption": "Говяжий фарш, тушённый с зелёным горошком, имбирём и гарам масалой, неострый; с лепёшкой паратха",
+    "cuisine": "индийская",
+    "meal": "dinner",
+    "serve": "Ужин: киму в сотейнике 28 см с 2 ст. л. воды 6 минут, помешивая; паратху из заморозки на сухих серой и блинной сковородах по минуте с каждой стороны; кинза и йогурт свежие. Горошек — покупной замороженный, вмешать в последние 1–2 минуты томления. Без зелёного чили и чили-порошка, гарам масала без красного перца.",
+    "foods": [
+      "keema-matar",
+      "roti-canai-raw"
+    ],
+    "photo": {
+      "source": "https://www.flickr.com/photos/127963413@N05/15727446470/",
+      "author": "Yummy O Yummy",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "lobio",
+    "name": "Лобио",
+    "caption": "Красная фасоль, тушённая с луком, грецкими орехами и хмели-сунели, неострая; с кинзой",
+    "cuisine": "грузинская",
+    "meal": "lunch",
+    "serve": "Обед: перед разогревом 1–2 ложки воды, микроволновка 50–70 %, перемешать на середине; без острого перца и аджики; кинза и капля винного уксуса — с собой.",
+    "foods": [
+      "lobio"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Lobio_with_nuts.jpg",
+      "author": "Georgian Recipes at Georgia About",
+      "license": "CC BY 3.0"
+    }
+  },
+  {
+    "id": "penovani",
+    "name": "Хачапури-пеновани",
+    "caption": "Слоёные конверты с тянущимся рассольным сыром, запечённые до золотистой корочки",
+    "cuisine": "грузинская",
+    "meal": "dinner",
+    "serve": "Ужин: прямо из морозилки смазать яйцом, 200 °C 25–30 минут; к ним свежий салат из томатов и огурцов. Сулугуни в Нидерландах нет — моцарелла для пиццы пополам с фетой или beyaz peynir.",
+    "foods": [
+      "penovani-raw"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/khachapuri-18663961/",
+      "author": "Jacob Yavin",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "goulash",
+    "name": "Гуляш с кнедликами",
+    "caption": "Говядина, томлённая с луком и сладкой паприкой в густом соусе, с чешскими хлебными кнедликами",
+    "cuisine": "чешская",
+    "meal": "dinner",
+    "serve": "Ужин: гуляш разогреть в сотейнике под крышкой 8 минут; ломтики кнедликов из морозилки — на пару 8–10 минут (вставка над кастрюлей 4 л); свежий лук и маринованные огурцы. Кнедлики в Нидерландах не продаются — делать самим.",
+    "foods": [
+      "beef-goulash-no-potatoes",
+      "knedliky-houskove"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Rindergulasch_mit_b%C3%B6hmischen_Kn%C3%B6deln,_frischen_Zwiebeln_und_Peperoni.jpg",
+      "author": "Burkhard Mücke",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "id": "lasagna",
+    "name": "Лазанья болоньезе",
+    "caption": "Листы пасты с мясным рагу болоньезе, бешамелем и пармезаном, запечённые до корочки",
+    "cuisine": "итальянская",
+    "meal": "dinner",
+    "serve": "Ужин: собранная сырой порционная лазанья в алюминиевом лотке, накануне в холодильник; под фольгой 180 °C ≈ 1 час, последние 10 минут без фольги. Руками ≈ 3 минуты. Листы яичные, рагу без куриной печени.",
+    "foods": [
+      "lasagna-assembled-unbaked"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/delicious-cheese-and-meat-lasagna-on-plate-31119092/",
+      "author": "Augusto Carneiro Junior",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "osso-buco",
+    "name": "Оссобуко",
+    "caption": "Говяжья голяшка с костью, томлённая в белом вине с овощами, с гремолатой и запечёнными ньокки из манки",
+    "cuisine": "итальянская",
+    "meal": "dinner",
+    "serve": "Ужин: голяшку в соусе разогреть в сотейнике под крышкой 10 минут; гремолата (цедра лимона, чеснок, петрушка) свежая; ньокки по-римски в своём лотке из морозилки — 200 °C 20–25 минут. Голяшка говяжья (runderschenkel): био-телятины в магазинах нет.",
+    "foods": [
+      "osso-buco",
+      "gnocchi-alla-romana"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/meat-and-vegetable-meal-on-plate-15186040/",
+      "author": "Eduardo Krajan",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "polpette",
+    "name": "Фрикадельки в томатном соусе",
+    "caption": "Итальянские фрикадельки из говядины и свинины, томлённые в томатном соусе, с пармезаном и базиликом",
+    "cuisine": "итальянская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %; тёртый пармезан и базилик — с собой, посыпать после разогрева.",
+    "foods": [
+      "meatballs-tomato-sauce"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/delicious-meatballs-in-tomato-sauce-with-rustic-bread-38303762/",
+      "author": "ankit Singh",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "cacciatore",
+    "name": "Курица каччиаторе",
+    "caption": "Куриные бёдра без кости, тушённые с томатами, сладким перцем, оливками, розмарином и вином",
+    "cuisine": "итальянская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %, перемешать на середине; без чили; петрушка с собой.",
+    "foods": [
+      "chicken-cacciatore"
+    ],
+    "photo": {
+      "source": "https://www.flickr.com/photos/twohungrydudes/6192874442/",
+      "author": "Hungry Dudes",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "sausage-lentils",
+    "name": "Колбаски с чечевицей",
+    "caption": "Свиные колбаски, томлённые с зелёной чечевицей, морковью и сельдереем",
+    "cuisine": "итальянская",
+    "meal": "lunch",
+    "serve": "Обед: колбаски неострые (salsiccia dolce или тулузские) кружками по 2 см утоплены в чечевице с запасом бульона; перед разогревом 1–2 ложки воды, микроволновка 50–70 %, перемешать на середине.",
+    "foods": [
+      "sausage-lentils"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Lyon_2e_-_Restaurant_Le_Merci%C3%A8re,_saucisse_aux_lentilles.jpg",
+      "author": "Romainbehar",
+      "license": "CC0"
+    }
+  },
+  {
+    "id": "harira",
+    "name": "Харира",
+    "caption": "Марокканский суп из баранины с нутом, чечевицей, томатами и кинзой, с лимоном",
+    "cuisine": "марокканская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, без вермишели, микроволновка 50–70 %, перемешать на середине; долька лимона и рубленые кинза с петрушкой — с собой, посыпать после разогрева.",
+    "foods": [
+      "harira"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/chickpea-soup-with-vegetables-in-white-bowl-33597401/",
+      "author": "Brad Hines",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "chili",
+    "name": "Чили кон карне",
+    "caption": "Густое рагу из говяжьего фарша с фасолью, томатами, зирой и сладкой паприкой, неострое; с чеддером и сметаной",
+    "cuisine": "американская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %, перемешать на середине; чеддер и сметана — с собой, сыр на горячее и минуту под крышкой. Специи — сладкая и копчёная сладкая паприка, зира, орегано, без чили.",
+    "foods": [
+      "chili-con-carne"
+    ],
+    "photo": {
+      "source": "https://unsplash.com/photos/chili-bowl-with-cheese-and-cream-HNVi6m5KCr8",
+      "author": "Chad Montano",
+      "license": "Unsplash License"
+    }
+  },
+  {
+    "id": "pulled-pork",
+    "name": "Пулд-порк",
+    "caption": "Свиная лопатка, томлённая до волокон, в сладком соусе барбекю, в булочке бриошь с капустным салатом",
+    "cuisine": "американская",
+    "meal": "dinner",
+    "serve": "Ужин: мясо разогреть в сотейнике под крышкой 8 минут; булочки бриошь оттаять на столе в пакете и подсушить разрезом на сухой сковороде; коулслоу — 150 г капусты на тёрке-шинковке, заправка из баночки. Руб и соус без кайенского и чипотле.",
+    "foods": [
+      "pulled-pork-bbq",
+      "bread-brioche"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/knife-sticking-on-burger-on-tray-2020314/",
+      "author": "Tim Mossholder",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "burger",
+    "name": "Бургер",
+    "caption": "Говяжья котлета с корочкой, расплавленный чеддер, маринованный огурец, лук и соус из майонеза с кетчупом в булочке бриошь",
+    "cuisine": "американская",
+    "meal": "dinner",
+    "serve": "Ужин: котлеты су-вид в вакууме, накануне в холодильник; ванна на температуру готовки 30–40 минут, обсушить, на раскалённую большую стальную по минуте с каждой стороны, чеддер расплавить горелкой; булочки подсушить на сухой сковороде; томат, лук и огурцы свежие. Новое блюдо — сначала пробная порция.",
+    "foods": [
+      "sous-vide-cooked",
+      "bread-brioche"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/delicious-cheeseburger-with-vegetables-on-plate-31450808/",
+      "author": "pedro furtado",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "meatloaf",
+    "name": "Мясной хлебец (митлоф)",
+    "caption": "Американский мясной хлебец из говяжьего фарша с томатной глазурью, с зелёным горошком на сливочном масле",
+    "cuisine": "американская",
+    "meal": "dinner",
+    "serve": "Ужин: сформованный сырым хлебец накануне в холодильник; глазурь сверху, 180 °C 50–60 минут до 70 °C в центре; горошек из морозилки 3 минуты в сотейнике со сливочным маслом.",
+    "foods": [
+      "meatloaf-raw",
+      "peas-blanched"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Meatloaf_on_white_plate.jpg",
+      "author": "Roundhere44",
+      "license": "CC0"
+    }
+  },
+  {
+    "id": "short-ribs",
+    "name": "Томлёные говяжьи рёбра",
+    "caption": "Говяжьи рёбра (short ribs), томлённые в красном вине до мягкости, в глянцевом соусе, с пюре из горошка",
+    "cuisine": "американская",
+    "meal": "dinner",
+    "serve": "Ужин: рёбра в соусе разогреть в сотейнике под крышкой 10 минут, глазурь подрумянить горелкой; пюре из горошка разогреть в кастрюле 750 мл.",
+    "foods": [
+      "braised-short-ribs",
+      "pea-puree"
+    ],
+    "photo": {
+      "source": "https://www.flickr.com/photos/stuart_spivack/4495868583/",
+      "author": "stu_spivack",
+      "license": "CC BY-SA 2.0"
+    }
+  },
+  {
+    "id": "sloppy-joe",
+    "name": "Слоппи-джо",
+    "caption": "Горячий сэндвич: мягкая булочка с говяжьим фаршем в сладковатом томатном соусе",
+    "cuisine": "американская",
+    "meal": "dinner",
+    "serve": "Ужин: начинку разогреть в сотейнике 5–6 минут, булочки подсушить на сухой сковороде; маринованные огурцы.",
+    "foods": [
+      "sloppy-joes",
+      "bread-rolls-soft"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/close-up-of-burger-with-meat-6358875/",
+      "author": "Yash Maramangallam",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "tomato-soup",
+    "name": "Томатный суп с гриль-чиз",
+    "caption": "Суп-пюре из томатов, а к нему горячий сэндвич с расплавленным чеддером",
+    "cuisine": "американская",
+    "meal": "dinner",
+    "serve": "Ужин: суп разогреть в кастрюле 5 минут; сэндвич из тостового хлеба с чеддером обжарить на сливочном масле по 2–3 минуты с каждой стороны.",
+    "foods": [
+      "tomato-soup",
+      "bread-white-sandwich"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Grilled_cheese_sandwich_with_roasted_tomato_soup.jpg",
+      "author": "jeffreyw",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "choucroute",
+    "name": "Шукрут",
+    "caption": "Эльзасская квашеная капуста, томлённая в белом вине с копчёной грудинкой и сосисками, без картофеля",
+    "cuisine": "французская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, сосиски надрезаны и утоплены в капусте, ложка вина сверху; микроволновка 50–70 % под крышкой. Горчица — только Виталию, банка на работе.",
+    "foods": [
+      "choucroute-garnie"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Brasserie_Georges_(Lyon)_-_Choucroute_imp%C3%A9riale_(nov_2022).jpg",
+      "author": "Sebleouf",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "id": "gumbo",
+    "name": "Гамбо",
+    "caption": "Густой луизианский суп-рагу с курицей, копчёной колбасой, сладким перцем, сельдереем и бамией, неострый, без риса",
+    "cuisine": "американская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %, перемешать на середине; колбаса — копчёная rookworst вместо андуй, без кайенского; зелёный лук с собой. Бамия — из турецкого магазина или без неё.",
+    "foods": [
+      "gumbo"
+    ],
+    "photo": {
+      "source": "https://www.flickr.com/photos/stuart_spivack/326665748/",
+      "author": "stu_spivack",
+      "license": "CC BY-SA 2.0"
+    }
+  },
+  {
+    "id": "bourguignon",
+    "name": "Бёф бургиньон",
+    "caption": "Говядина, томлённая в красном бургундском вине с беконом, шампиньонами и луковками, с чесночным багетом",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "Ужин: рагу (заморожено без грибов) разогреть в сотейнике под крышкой 8–10 минут, вмешать кусочек холодного масла; тем временем обжарить 150–200 г свежих шампиньонов на большой стальной 5–6 минут и вмешать; чесночный багет из морозилки — в фольге 200 °C 15 минут, потом 5 минут без неё; петрушка.",
+    "foods": [
+      "beef-bourguignon",
+      "bread-garlic"
+    ],
+    "photo": {
+      "source": "https://unsplash.com/photos/a-bowl-of-food-71gD9JoiPQY",
+      "author": "Dai López",
+      "license": "Unsplash License"
+    }
+  },
+  {
+    "id": "coq-au-vin",
+    "name": "Кок-о-вен",
+    "caption": "Куриные бёдра без кости, томлённые в красном вине с беконом, грибами и луковками",
+    "cuisine": "французская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %, перемешать на середине; соус загущён бёр манье, без крови и печени.",
+    "foods": [
+      "coq-au-vin"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Gourmet_coq_au_vin.jpg",
+      "author": "Beck from East Midlands, United Kingdom",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "duck-confit",
+    "name": "Утиная ножка конфи",
+    "caption": "Утиная ножка, томлённая в собственном жиру, с хрустящей кожей и тушёной краснокочанной капустой",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "Ужин: накануне в холодильник; кожей вверх 200 °C 20–25 минут до хруста; капусту разогреть в кастрюле 1,5 л.",
+    "foods": [
+      "duck-confit",
+      "red-cabbage-braised"
+    ],
+    "photo": {
+      "source": "https://www.flickr.com/photos/rocrain/24735167400/",
+      "author": "Peng Tu (rocrain)",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "cassoulet",
+    "name": "Кассуле",
+    "caption": "Белая фасоль, томлённая с утиным конфи, тулузскими колбасками и свининой, под хрустящей корочкой",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "Ужин: порция в форме накануне в холодильник; посыпать сухарями, 180 °C 40–45 минут. Без свиной шкурки и ножек, конфи только утиное.",
+    "foods": [
+      "cassoulet"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Cassoulet_at_Les_Cinq_Sens,_Avignon,_France_-_20140714-01.jpg",
+      "author": "Jacklee",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "id": "onion-soup",
+    "name": "Луковый суп",
+    "caption": "Французский суп из карамелизованного лука на говяжьем бульоне, под гренкой с расплавленным грюйером",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "Ужин: суп разогреть в кастрюле 1,5 л 6 минут, разлить по керамическим горшочкам, сверху гренка и тёртый грюйер — в духовку 230 °C на 8–10 минут, корочку дорумянить горелкой. Гренки подсушить в день готовки и заморозить или ставить на первую неделю.",
+    "foods": [
+      "french-onion-soup"
+    ],
+    "photo": {
+      "source": "https://unsplash.com/photos/french-onion-soup-in-a-white-bowl-with-cheese-topping-Qxlez2RBOtY",
+      "author": "Álvaro Bernal",
+      "license": "Unsplash License"
+    }
+  },
+  {
+    "id": "duck-orange",
+    "name": "Утка с апельсиновым соусом",
+    "caption": "Утиная грудка с розовым мясом и хрустящей кожей под апельсиновым соусом, с пюре из зелёного горошка",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "В день готовки кожу надрезать и вытопить 6–8 минут с холодной сковороды, остудить, вакуум, су-вид 57 °C, лёд, заморозка; основа соуса — гастрик, уваренный апельсиновый сок и демиглас, без масла. Ужин: пакеты грудок, соуса и пюре — в одну ванну 57 °C на 50 минут; грудки кожей вниз на раскалённую большую стальную 2 минуты, мясом 30 секунд; соус довести в кастрюле 750 мл, влить свежий апельсиновый сок с цедрой, вмешать холодное масло. Новое блюдо — сначала пробная порция.",
+    "foods": [
+      "sous-vide-cooked",
+      "demi-glace",
+      "pea-puree"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Duck_a_l%27orange.jpg",
+      "author": "Bev Sykes",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "entrecote",
+    "name": "Стейк с соусом бордолез",
+    "caption": "Говяжий стейк средней прожарки под соусом из красного вина и шалота, со свежим салатом",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "Ужин: ванна 54 °C — 75 минут для стейка 2,5 см (90 для 3 см), пакет бордолеза в ту же ванну; стейк на раскалённую сковороду по минуте с каждой стороны; соус довести в кастрюле 750 мл и вмешать холодное масло; салат — мытые листья из пакета с винегретом, жареный шалот из банки. Соус без костного мозга.",
+    "foods": [
+      "sous-vide-cooked",
+      "bordelaise"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/a-plate-with-meat-and-vegetables-on-it-27305335/",
+      "author": "Valeria Boltneva",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "souffle",
+    "name": "Сырное суфле",
+    "caption": "Суфле из грюйера, запечённое дважды — второй раз в сливках, с золотой корочкой; со свежим салатом",
+    "cuisine": "французская",
+    "meal": "dinner",
+    "serve": "Ужин: с вечера в холодильник; суфле в овальную Pyrex, по ложке сливок и тёртого грюйера, 200 °C 15–18 минут; салат из мытых листьев с винегретом и жареными грецкими орехами. Держит качество около двух недель — ставить на первую неделю. Формочек нет — купить рамекины.",
+    "foods": [
+      "souffle-twice-baked"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Souffl%C3%A9.JPG",
+      "author": "Pierre-alain dorange",
+      "license": "CC BY-SA 3.0"
+    }
+  },
+  {
+    "id": "gyoza",
+    "name": "Гёдза",
+    "caption": "Японские пельмени со свининой и капустой, обжаренные с хрустящим донышком, с соевым соусом и рисовым уксусом",
+    "cuisine": "японская",
+    "meal": "dinner",
+    "serve": "Ужин: гёдза из заморозки в антипригарной сковороде 28 см с крышкой (докупить: в серую входит только 10 штук) на масле 3 минуты, 100 мл воды, под крышкой 5 минут, снять крышку и дожарить донышко 2 минуты; соус — соевый с рисовым уксусом, зелёный лук.",
+    "foods": [
+      "gyoza-raw"
+    ],
+    "photo": {
+      "source": "https://unsplash.com/photos/a-black-plate-topped-with-dumplings-on-top-of-a-wooden-table-klTf2RN37Ts",
+      "author": "Mikey Frost",
+      "license": "Unsplash License"
+    }
+  },
+  {
+    "id": "teriyaki",
+    "name": "Курица терияки",
+    "caption": "Куриное бедро с хрустящей кожей под глянцевым соусом терияки, со свежим салатом из капусты",
+    "cuisine": "японская",
+    "meal": "dinner",
+    "serve": "Ужин: бедро су-вид в пакете — ванна 65 °C 40 минут, обсушить, кожей вниз на горячую сковороду с маслом под тяжёлой кастрюлей 4–6 минут, перевернуть на 30 секунд; терияки (уварка без крахмала) отдельно довести до глянца и полить мякоть, кожу оставить сухой; салат из нашинкованной капусты с заправкой на рисовом уксусе, кунжут и зелёный лук.",
+    "foods": [
+      "sous-vide-cooked",
+      "teriyaki"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/grilled-meat-on-white-ceramic-plate-13065183/",
+      "author": "Marvin Sacdalan",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "kakuni-bao",
+    "name": "Свиная грудинка какуни в булочках бао",
+    "caption": "Свиная грудинка, томлённая в соевом соусе с мирином и саке, в мягких паровых булочках с огурцом и зелёным луком",
+    "cuisine": "японская",
+    "meal": "dinner",
+    "serve": "Ужин: грудинку кубиками в бульоне разогреть в сотейнике 8 минут и подрумянить; булочки бао из морозилки на пару 8–10 минут; огурец и зелёный лук свежие. Какуни по японскому рецепту; в каталоге ближайшая позиция — хуншао жоу, та же техника.",
+    "foods": [
+      "red-braised-pork-belly",
+      "bread-bao-plain"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Pork_Belly_Steamed_Buns_-_Duroc_pork_belly,_cilantro,_scallions,_radish,_boiled_egg,_Chinese_black_vinaigrette,_hoisin_BBQ_sauce_-_10065043266.jpg",
+      "author": "City Foodsters",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "steak-pie",
+    "name": "Пирог с говядиной и элем",
+    "caption": "Британский пирог: говядина, томлённая в тёмном пиве, под слоёным тестом, с пюре из горошка",
+    "cuisine": "британская",
+    "meal": "dinner",
+    "serve": "Ужин: сырой собранный пирог из заморозки 200 °C 45–55 минут; пюре из горошка разогреть на плите (микроволновка в той же камере, что и духовка). Начинка — только говядина, без почек.",
+    "foods": [
+      "steak-pie-raw",
+      "pea-puree"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:British_steak_%26_ale_pie_-_Brewhouse_%26_Kitchen,_Worthing_2026-06-08.jpg",
+      "author": "Andy Li",
+      "license": "CC0"
+    }
+  },
+  {
+    "id": "carbonnade",
+    "name": "Говядина по-фламандски в пиве",
+    "caption": "Говядина, томлённая в тёмном бельгийском пиве с луком, горчицей и пряником, с хлебом",
+    "cuisine": "бельгийская",
+    "meal": "dinner",
+    "serve": "Ужин: разогреть в сотейнике 8–10 минут; хлеб — свежий в первую неделю, на вторую — сорт с оценкой заморозки 90+.",
+    "foods": [
+      "stoofvlees"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Flemish_Stew_with_Salad_(48207557757).jpg",
+      "author": "Iain Cameron",
+      "license": "CC BY 2.0"
+    }
+  },
+  {
+    "id": "hachee",
+    "name": "Хаше",
+    "caption": "Голландская говядина, томлённая с большим количеством лука, лавровым листом и гвоздикой, с краснокочанной капустой",
+    "cuisine": "нидерландская",
+    "meal": "dinner",
+    "serve": "Ужин: разогреть в сотейнике 8–10 минут; капусту — в кастрюле 1,5 л.",
+    "foods": [
+      "hachee",
+      "red-cabbage-braised"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Hachee_met_rode_kool_en_aardappelpuree.jpg",
+      "author": "Flanamsterdam",
+      "license": "CC0"
+    }
+  },
+  {
+    "id": "erwtensoep",
+    "name": "Гороховый суп по-голландски (снерт)",
+    "caption": "Очень густой суп из колотого гороха с копчёной колбасой и свининой; с ржаным хлебом",
+    "cuisine": "нидерландская",
+    "meal": "lunch",
+    "serve": "Обед: перед разогревом 2–3 ложки воды, микроволновка 50–70 %, перемешать на середине; ржаной хлеб с собой. Свинина — грудинка и рёбрышки, копчёная rookworst, без ножки.",
+    "foods": [
+      "erwtensoep"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Erwtensoep_roggebrood_katenspek.jpg",
+      "author": "Takeaway",
+      "license": "CC BY-SA 3.0"
+    }
+  },
+  {
+    "id": "lamb-tagine",
+    "name": "Таджин из баранины с черносливом",
+    "caption": "Баранина, томлённая с черносливом, корицей, имбирём и мёдом, с жареным миндалём",
+    "cuisine": "марокканская",
+    "meal": "dinner",
+    "serve": "Ужин: разогреть в сотейнике 8–10 минут; миндаль и кунжут из банки; хлеб — свежий в первую неделю, на вторую — сорт с оценкой заморозки 90+.",
+    "foods": [
+      "lamb-tagine-prunes"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Tajin_aux_pruneaux.JPG",
+      "author": "Basili",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "id": "chicken-tagine",
+    "name": "Таджин из курицы с лимоном и оливками",
+    "caption": "Куриные бёдра, томлённые с солёными лимонами, зелёными оливками, имбирём и шафраном",
+    "cuisine": "марокканская",
+    "meal": "lunch",
+    "serve": "Обед: бёдра без кости кусками в соусе в одном контейнере, микроволновка 50–70 % ≈ 6 минут, перемешать на середине; соус без куриной печени; петрушка с собой.",
+    "foods": [
+      "chicken-tagine-olives"
+    ],
+    "photo": {
+      "source": "https://www.flickr.com/photos/flem007_uk/14003440609/",
+      "author": "Mike_fleming",
+      "license": "CC BY-SA 2.0"
+    }
+  },
+  {
+    "id": "rogan-josh",
+    "name": "Роган джош",
+    "caption": "Баранина в ароматном красном соусе со сладкой паприкой, кардамоном и йогуртом, неострая; с лепёшкой паратха",
+    "cuisine": "индийская",
+    "meal": "dinner",
+    "serve": "Ужин: разогреть в сотейнике 8 минут; паратху из заморозки на сухих серой и блинной сковородах по минуте с каждой стороны. Вместо кашмирского чили — сладкая паприка.",
+    "foods": [
+      "rogan-josh",
+      "roti-canai-raw"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Rogan_Josh_Kashmiri.jpg",
+      "author": "Spice Eats",
+      "license": "CC BY 3.0"
+    }
+  },
+  {
+    "id": "dal-makhani",
+    "name": "Дал макхани",
+    "caption": "Чёрная чечевица и фасоль, томлённые с томатами, сливочным маслом и сливками, с лепёшкой паратха",
+    "cuisine": "индийская",
+    "meal": "dinner",
+    "serve": "Ужин: дал заморожен без сливок и масла; разогреть в кастрюле 6–8 минут с 2–3 ложками воды, вмешать 2 ст. л. сливок и кусочек масла; паратха на сухих сковородах. Без зелёного чили и чили-порошка. Целый чёрный урад — онлайн (Jamoona).",
+    "foods": [
+      "dal-makhani",
+      "roti-canai-raw"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/dal-makhani-on-a-white-bowl-12737916/",
+      "author": "dhiraj jain",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "cochinita",
+    "name": "Тако с кочинитой пибиль",
+    "caption": "Рваная свинина, томлённая в апельсиновом соке с пряностями, в тёплых пшеничных тортильях с маринованным красным луком",
+    "cuisine": "мексиканская",
+    "meal": "dinner",
+    "serve": "Ужин: мясо в соке разогреть в сотейнике 8 минут; тортильи прогреть на сухой сковороде; лук маринован дома в апельсиновом и лаймовом соке, без хабанеро. Ачиоте — онлайн или зёрна аннато из азиатского магазина; горький апельсин — апельсин с лаймом.",
+    "foods": [
+      "cochinita-pibil",
+      "bread-tortilla-wheat"
+    ],
+    "photo": {
+      "source": "https://www.pexels.com/photo/person-holding-cooked-food-on-black-plate-13191277/",
+      "author": "Kuiyibo Campos",
+      "license": "Pexels License"
+    }
+  },
+  {
+    "id": "stifado",
+    "name": "Стифадо",
+    "caption": "Греческая говядина, томлённая с луком-шалотом в томатах, красном вине и корице, с хлебом",
+    "cuisine": "греческая",
+    "meal": "dinner",
+    "serve": "Ужин: разогреть в сотейнике под крышкой 8–10 минут; фета, оливки каламата и петрушка — без готовки; хлеб — свежий в первую неделю, на вторую — сорт с оценкой заморозки 90+.",
+    "foods": [
+      "stifado"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:20240503_Stifado_Restaurant_MeGusto_anagoria.jpg",
+      "author": "Anagoria",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "id": "bigos",
+    "name": "Бигос",
+    "caption": "Польское рагу: квашеная и свежая капуста, томлённая со свининой, говядиной, копчёной колбасой, грибами и черносливом",
+    "cuisine": "польская",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %, перемешать на середине. Без дичи и кролика.",
+    "foods": [
+      "bigos"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Bigos_(1).jpg",
+      "author": "Dr. Bernd Gross",
+      "license": "CC BY-SA 4.0"
+    }
+  },
+  {
+    "id": "rouladen",
+    "name": "Говяжьи рулады",
+    "caption": "Тонкие ломти говядины, свёрнутые с горчицей, беконом и огурцом, томлённые в тёмном соусе, с краснокочанной капустой",
+    "cuisine": "немецкая",
+    "meal": "dinner",
+    "serve": "Ужин: рулады в соусе разогреть в сотейнике под крышкой 10 минут, соус при необходимости взбить венчиком; капусту — в кастрюле 1,5 л; жареный лук из банки. Соус загущать уваркой или желатином, не крахмалом. Для сборки купить кулинарную нить (keukentouw).",
+    "foods": [
+      "meat-rolls-braised",
+      "red-cabbage-braised"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:WikiCon_2021_Erfurt_022.jpg",
+      "author": "Sebastian Wallroth",
+      "license": "CC BY 4.0"
+    }
+  },
+  {
+    "id": "bao",
+    "name": "Баоцзы со свининой",
+    "caption": "Китайские пышные пирожки с сочной свининой, обжаренные до хрустящего донышка",
+    "cuisine": "китайская",
+    "meal": "dinner",
+    "serve": "Ужин: в сотейнике 28 см на ложке масла баоцзы из заморозки 2 минуты, 100 мл воды, под крышкой 10–12 минут, затем без крышки зарумянить донышко 1–2 минуты; соус из чёрного уксуса с соевым, огурцы с рисовым уксусом и кунжутом. В день готовки баоцзы варят на пару до заморозки — купить бамбуковую пароварку в 2–3 яруса.",
+    "foods": [
+      "bao-steamed"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Food_%E4%B8%8A%E6%B5%B7%E7%94%9F%E7%85%8E%E5%8C%85,_Pan-fried_Shanghai_Pork_Bun,_%E6%A8%82%E5%A4%A9%E7%9A%87%E6%9C%9D,_PARADISE_DYNASTY,_%E5%8F%B0%E5%8C%97_(23590608472).jpg",
+      "author": "bryan... from Taipei, Taiwan",
+      "license": "CC BY-SA 2.0"
+    }
+  },
+  {
+    "id": "mercimek",
+    "name": "Турецкий чечевичный суп",
+    "caption": "Мерджимек: суп-пюре из красной чечевицы с морковью, луком и зирой, с лимоном",
+    "cuisine": "турецкая",
+    "meal": "lunch",
+    "serve": "Обед: в одном контейнере, микроволновка 50–70 %; долька лимона с собой. Перечная паста только сладкая, масло сверху — со сладкой паприкой.",
+    "foods": [
+      "lentil-soup"
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Mercimek_soup_Istanbul.jpg",
+      "author": "Stolbovsky",
+      "license": "CC BY-SA 3.0"
+    }
+  },
+  {
+    "id": "mushroom-soup",
+    "name": "Грибной крем-суп",
+    "caption": "Суп-пюре из шампиньонов с луком, со сливками",
+    "cuisine": "европейская",
+    "meal": "lunch",
+    "serve": "Обед: заморожен без сливок; утром влить 30–40 мл сливок поверх замороженного супа в тот же контейнер; микроволновка 50–70 %, перемешать на середине.",
+    "foods": [
+      "mushroom-cream-soup-base"
+    ],
+    "photo": {
+      "source": "https://unsplash.com/photos/4kFexr8iJuU",
+      "author": "Choi sungwoo",
+      "license": "Unsplash License"
+    }
+  }
+]
