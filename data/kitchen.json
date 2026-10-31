@@ -228,6 +228,7 @@
     { "id": "pizza-oven", "name": "Печь для пиццы", "kind": "appliance", "spec": "Ooni Volt 12, электрическая" },
     { "id": "sous-vide", "name": "Су-вид", "kind": "appliance", "spec": "Палочка, крепится к кастрюле", "note": "Ванна — в кастрюле 12 л на столе, не на плите" },
     { "id": "toaster", "name": "Тостер", "kind": "appliance", "spec": "Gorenje, на 2 ломтика" },
+    { "id": "waffle-maker", "name": "Вафельница", "kind": "appliance", "spec": "Hurakan HKN-GES2M, 4 бельгийские вафли 10 × 10 × 1,5 см за раз" },
     { "id": "hand-blender", "name": "Погружной блендер", "kind": "appliance", "spec": "С венчиком и мерным стаканом" },
     { "id": "chopper", "name": "Чоппер", "kind": "appliance", "spec": "Насадка погружного блендера", "note": "В техкартах так и называть — чоппер, не «чаша блендера». ≈ 200 г овощей за заход: соффритто из ≈ 600 г — в 3 захода" },
     { "id": "blender", "name": "Стационарный блендер", "kind": "appliance", "spec": "Мощный, колет лёд" },
