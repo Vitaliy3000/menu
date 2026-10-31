@@ -302,13 +302,13 @@ describe('рацион техкарты', () => {
     protein: 20,
     fat: 12,
     carbs: 25,
-    reheat: { methods: ['microwave'], total: 4, actions: 2, text: 'В микроволновке 3 минуты' },
+    reheat: { methods: ['microwave'], active: 1, total: 4, text: 'В микроволновке 3 минуты' },
   };
   const stewPortion: RationPortion = {
     ...soupPortion,
     dish: 'stew',
     size: '350 г',
-    reheat: { methods: ['stovetop'], total: 10, actions: 3, text: 'В сотейнике под крышкой 8 минут' },
+    reheat: { methods: ['stovetop'], active: 8, total: 10, text: 'В сотейнике под крышкой 8 минут' },
   };
   const withRation = (): CookPlan => {
     const p = plan();
@@ -383,7 +383,7 @@ describe('рацион техкарты', () => {
     expect(text).toContain('обед дня 1 у Аня лежит в 2 контейнерах');
   });
 
-  it('блюдо — либо обед, либо ужин: обед греют только в микроволновке', () => {
+  it('блюдо — либо обед, либо ужин: обед греют только в микроволновке, ужин — до 15 минут у плиты и руками', () => {
     const p = withRation();
     p.ration!.days[0] = { ...p.ration!.days[0]!, lunch: 'stew', dinner: 'soup' };
     delete p.dishes[1]!.meal;
@@ -392,21 +392,19 @@ describe('рацион техкарты', () => {
     expect(text).toContain('«soup» — обед, а стоит в ужине дня 1');
 
     const q = withRation();
-    q.ration!.people[0]!.portions[0]!.reheat = { ...soupPortion.reheat, methods: ['stovetop'] };
-    expect(messages(checkPlan(q, file))).toBe('обед «soup» у Аня греют только в микроволновке');
-    expect(checkPlan({ ...q, cooked: true }, file)).toEqual([]);
-  });
-
-  it('ужин — до 10 минут или «поставил и забыл»: до 60 минут и не больше 5 действий', () => {
-    const dinner = (total: number, actions: number) => {
-      const p = withRation();
-      p.ration!.people[0]!.portions[1]!.reheat = { ...stewPortion.reheat, methods: ['oven'], total, actions };
-      return messages(checkPlan(p, file));
-    };
-    expect(dinner(10, 8)).toBe('');
-    expect(dinner(60, 5)).toBe('');
-    expect(dinner(35, 6)).toBe('ужин «stew» у Аня — 35 мин и 6 действий: дольше 10 мин — только «поставил и забыл», не больше 5 действий');
-    expect(dinner(70, 3)).toBe('ужин «stew» у Аня — 70 мин, а можно не больше 60');
+    const [soup, stew] = q.ration!.people[0]!.portions;
+    q.ration!.people[0]!.portions = [
+      { ...soup!, reheat: { ...soup!.reheat, methods: ['stovetop'], active: 5, total: 3 } },
+      { ...stew!, reheat: { ...stew!.reheat, methods: ['oven'], active: 16, total: 35 } },
+    ];
+    expect(messages(checkPlan(q, file))).toBe(
+      [
+        'разогрев «soup» у Аня: руками 5 мин — больше, чем всего (3)',
+        'обед «soup» у Аня греют только в микроволновке',
+        'ужин «stew» у Аня — 16 мин у плиты и руками, а можно не больше 15',
+      ].join('\n'),
+    );
+    expect(messages(checkPlan({ ...q, cooked: true }, file))).toBe('разогрев «soup» у Аня: руками 5 мин — больше, чем всего (3)');
   });
 
   it('без рациона фасовка не ссылается на людей', () => {

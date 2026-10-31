@@ -9,7 +9,7 @@ import { basename, join, relative } from 'node:path';
 import Ajv2020, { type ErrorObject, type ValidateFunction } from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import type { Recipe } from '../src/types/recipe.gen.ts';
-import type { CookPlan, IngredientUse, PortionReheat, Ration, Unit } from '../src/types/cook-plan.gen.ts';
+import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-plan.gen.ts';
 import { deviation, personDay } from '../src/lib/ration.ts';
 import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
 import { equipmentOveruse } from './equipment-use.ts';
@@ -706,6 +706,9 @@ function checkRation(
       if (!dishes.has(portion.dish)) error(`${path}/dish`, `нет блюда с id «${portion.dish}»`);
       if (seen.has(portion.dish)) error(`${path}/dish`, `порция «${portion.dish}» у ${person.name} указана дважды`);
       seen.add(portion.dish);
+      if (portion.reheat.active > portion.reheat.total) {
+        error(`${path}/reheat/active`, `разогрев «${portion.dish}» у ${person.name}: руками ${portion.reheat.active} мин — больше, чем всего (${portion.reheat.total})`);
+      }
       const kcalIssue = checkMacros(portion);
       if (kcalIssue) warn(path, kcalIssue);
     });
@@ -780,21 +783,9 @@ function checkRation(
 }
 
 const MEAL_NAMES = { lunch: ['обед', 'обеде'], dinner: ['ужин', 'ужине'] } as const;
-const QUICK_DINNER_MAX = 10;
-const HANDS_FREE_DINNER_MAX = 60;
-const HANDS_FREE_ACTIONS_MAX = 5;
+const DINNER_HANDS_MAX = 15;
 
-/** Ужин — до 10 минут или «поставил и забыл»: до 60 минут и не больше 5 действий. */
-function dinnerIssue({ total, actions }: PortionReheat): string | undefined {
-  if (total <= QUICK_DINNER_MAX) return undefined;
-  if (total > HANDS_FREE_DINNER_MAX) return `${total} мин, а можно не больше ${HANDS_FREE_DINNER_MAX}`;
-  if (actions > HANDS_FREE_ACTIONS_MAX) {
-    return `${total} мин и ${actions} действий: дольше ${QUICK_DINNER_MAX} мин — только «поставил и забыл», не больше ${HANDS_FREE_ACTIONS_MAX} действий`;
-  }
-  return undefined;
-}
-
-/** Блюдо — либо обед, либо ужин: обед греют только в микроволновке на работе, ужин доводят дома быстро или «поставил и забыл». */
+/** Блюдо — либо обед, либо ужин: обед греют только в микроволновке на работе, ужин — не сложнее завтрака: у плиты и руками не дольше 15 минут. */
 function checkMeals(p: CookPlan, ration: Ration, error: (path: string, message: string) => void) {
   const meals = new Map(p.dishes.map((dish) => [dish.id, dish.meal]));
   p.dishes.forEach((dish, i) => {
@@ -814,11 +805,13 @@ function checkMeals(p: CookPlan, ration: Ration, error: (path: string, message: 
     person.portions.forEach((portion, j) => {
       const path = `/ration/people/${i}/portions/${j}/reheat`;
       const meal = meals.get(portion.dish);
-      if (meal === 'lunch' && portion.reheat.methods.some((m) => m !== 'microwave')) {
+      const { methods, active } = portion.reheat;
+      if (meal === 'lunch' && methods.some((m) => m !== 'microwave')) {
         error(`${path}/methods`, `обед «${portion.dish}» у ${person.name} греют только в микроволновке`);
       }
-      const issue = meal === 'dinner' ? dinnerIssue(portion.reheat) : undefined;
-      if (issue) error(path, `ужин «${portion.dish}» у ${person.name} — ${issue}`);
+      if (meal === 'dinner' && active > DINNER_HANDS_MAX) {
+        error(`${path}/active`, `ужин «${portion.dish}» у ${person.name} — ${active} мин у плиты и руками, а можно не больше ${DINNER_HANDS_MAX}`);
+      }
     });
   });
 }
