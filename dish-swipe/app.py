@@ -7,6 +7,7 @@ from datetime import UTC, datetime
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import parse_qs, urlsplit
 
 from dishes import (
     APP_DIR,
@@ -16,9 +17,10 @@ from dishes import (
     DeckError,
     Dish,
     RawResult,
+    answered,
     load_dishes,
+    merge,
     pairs,
-    parse_answers,
     parse_name,
     result_json,
 )
@@ -66,12 +68,15 @@ def handler_for(dishes: Sequence[Dish]) -> type[BaseHTTPRequestHandler]:
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:
-            if self.path == "/api/deck":
+            url = urlsplit(self.path)
+            if url.path == "/api/deck":
                 self.send_json(deck)
-            elif self.path == "/api/pairs":
+            elif url.path == "/api/answered":
+                self.send_answered(parse_qs(url.query).get("name", [""])[0])
+            elif url.path == "/api/pairs":
                 self.send_pairs()
-            elif self.path in files:
-                path = files[self.path]
+            elif url.path in files:
+                path = files[url.path]
                 self.send_body(path.read_bytes(), KINDS[path.suffix], HTTPStatus.OK)
             else:
                 self.send_json({"error": "не найдено"}, HTTPStatus.NOT_FOUND)
@@ -83,15 +88,22 @@ def handler_for(dishes: Sequence[Dish]) -> type[BaseHTTPRequestHandler]:
             body = self.rfile.read(int(self.headers["Content-Length"]))
             try:
                 raw: RawResult = json.loads(body)
-                name = parse_name(raw["name"])
-                parse_answers(raw["answers"], dishes)
+                result = merge(parse_name(raw["name"]), raw["answers"], dishes)
             except (DeckError, ValueError, KeyError) as err:
                 self.send_json({"error": str(err)}, HTTPStatus.BAD_REQUEST)
                 return
             finished = datetime.now(UTC).astimezone()
-            document = result_json(name, finished, raw["answers"], dishes)
-            path = save_result(name, document, finished)
+            document = result_json(result, finished, dishes)
+            path = save_result(result.name, document, finished)
             self.send_json({"file": str(path.relative_to(ROOT))})
+
+        def send_answered(self, raw_name: str) -> None:
+            try:
+                name = parse_name(raw_name)
+            except DeckError as err:
+                self.send_json({"error": str(err)}, HTTPStatus.BAD_REQUEST)
+                return
+            self.send_json(answered(name, dishes))
 
         def send_pairs(self) -> None:
             try:

@@ -219,7 +219,10 @@ $('start-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   state.name = $('name').value.trim();
   if (!state.name) return;
-  state.cards = shuffled(await deck);
+  const [cards, answered] = await Promise.all([deck, getJson(`/api/answered?name=${encodeURIComponent(state.name)}`)]);
+  const fresh = cards.filter((card) => !answered.includes(card.id));
+  state.cards = shuffled(fresh.length ? fresh : cards);
+  $('fresh').hidden = fresh.length === 0 || fresh.length === cards.length;
   show('swipe');
   render();
 });
