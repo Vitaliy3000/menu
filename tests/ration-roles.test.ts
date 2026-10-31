@@ -42,7 +42,7 @@ const plan: CookPlan = {
         id: 'ann',
         name: 'Аня',
         target: { kcal: 900 },
-        portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25, reheat: { methods: ['microwave'], active: 1, total: 4, text: 'В микроволновке 3 минуты' } }],
+        portions: [{ dish: 'soup', size: '400 мл', kcal: 300, protein: 20, fat: 12, carbs: 25, reheat: { methods: ['microwave'], total: 4, actions: 2, text: 'В микроволновке 3 минуты' } }],
       },
     ],
     extras: [
