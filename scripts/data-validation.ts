@@ -742,8 +742,9 @@ function checkRation(
 
 const MEAL_NAMES = { lunch: ['обед', 'обеде'], dinner: ['ужин', 'ужине'] } as const;
 const DINNER_HANDS_MAX = 15;
+const DINNER_TOTAL_MAX = 20;
 
-/** Блюдо — либо обед, либо ужин: обед греют только в микроволновке на работе, ужин — не сложнее завтрака: у плиты и руками не дольше 15 минут. */
+/** Блюдо — либо обед, либо ужин: обед греют только в микроволновке на работе, ужин — как основное блюдо в ресторане: до тарелки не дольше 20 минут, у плиты и руками — не дольше 15. */
 function checkMeals(p: CookPlan, ration: Ration, error: (path: string, message: string) => void) {
   const meals = new Map(p.dishes.map((dish) => [dish.id, dish.meal]));
   p.dishes.forEach((dish, i) => {
@@ -763,12 +764,15 @@ function checkMeals(p: CookPlan, ration: Ration, error: (path: string, message: 
     person.portions.forEach((portion, j) => {
       const path = `/ration/people/${i}/portions/${j}/reheat`;
       const meal = meals.get(portion.dish);
-      const { methods, active } = portion.reheat;
+      const { methods, active, total } = portion.reheat;
       if (meal === 'lunch' && methods.some((m) => m !== 'microwave')) {
         error(`${path}/methods`, `обед «${portion.dish}» у ${person.name} греют только в микроволновке`);
       }
       if (meal === 'dinner' && active > DINNER_HANDS_MAX) {
         error(`${path}/active`, `ужин «${portion.dish}» у ${person.name} — ${active} мин у плиты и руками, а можно не больше ${DINNER_HANDS_MAX}`);
+      }
+      if (meal === 'dinner' && total > DINNER_TOTAL_MAX) {
+        error(`${path}/total`, `ужин «${portion.dish}» у ${person.name} — ${total} мин до тарелки, а можно не больше ${DINNER_TOTAL_MAX}`);
       }
     });
   });
