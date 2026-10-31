@@ -16,8 +16,6 @@ const targets = [
   { schema: 'schemas/bake.schema.json', out: 'src/types/bake.gen.ts' },
   { schema: 'schemas/baking.schema.json', out: 'src/types/baking.gen.ts' },
   { schema: 'schemas/foods.schema.json', out: 'src/types/foods.gen.ts' },
-  { schema: 'schemas/taste-profile.schema.json', out: 'src/types/taste-profile.gen.ts' },
-  { schema: 'schemas/taste-deck.schema.json', out: 'src/types/taste-deck.gen.ts' },
 ];
 
 const check = process.argv.includes('--check');

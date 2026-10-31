@@ -14,14 +14,10 @@ import { deviation, personDay } from '../src/lib/ration.ts';
 import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
 import { equipmentOveruse } from './equipment-use.ts';
 import { idleGaps, stageConflicts } from './role-flow.ts';
-import { checkTasteDeck } from './taste-deck-check.ts';
-import { checkTasteProfile } from './taste-profile-check.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 import type { Bake } from '../src/types/bake.gen.ts';
 import type { Baking } from '../src/types/baking.gen.ts';
 import type { Foods } from '../src/types/foods.gen.ts';
-import type { TasteDeck } from '../src/types/taste-deck.gen.ts';
-import type { TasteProfile } from '../src/types/taste-profile.gen.ts';
 import { doughGrams, expectedDough, flourGrams, inFinal } from '../src/lib/baking.ts';
 
 export type Severity = 'error' | 'warning';
@@ -42,8 +38,6 @@ export interface DataSet {
   bakes: Bake[];
   baking: Baking | null;
   foods: Foods | null;
-  tasteProfiles: TasteProfile[];
-  tasteDeck: TasteDeck | null;
   issues: Issue[];
 }
 
@@ -57,7 +51,6 @@ export const DATA_DIRS = {
   recipes: 'data/recipes',
   plans: 'data/plans',
   bakes: 'data/bakes',
-  tasteProfiles: 'data/taste-profiles',
 } as const;
 
 export const SCHEMA_FILES = {
@@ -67,8 +60,6 @@ export const SCHEMA_FILES = {
   bakes: 'schemas/bake.schema.json',
   baking: 'schemas/baking.schema.json',
   foods: 'schemas/foods.schema.json',
-  tasteProfiles: 'schemas/taste-profile.schema.json',
-  tasteDeck: 'schemas/taste-deck.schema.json',
 } as const;
 
 /** Справочник кухни — один файл. */
@@ -77,8 +68,6 @@ export const KITCHEN_FILE = 'data/kitchen.json';
 export const BAKING_FILE = 'data/baking.json';
 /** Каталог продуктов и блюд — один файл. */
 export const FOODS_FILE = 'data/foods.json';
-/** Колода анкеты «Вкусовой профиль» — один файл. */
-export const TASTE_DECK_FILE = 'data/taste-deck.json';
 
 type Kind = keyof typeof DATA_DIRS;
 
@@ -87,25 +76,21 @@ type Kind = keyof typeof DATA_DIRS;
 /* ------------------------------------------------------------------ */
 
 export async function validateProject(root: string): Promise<DataSet> {
-  const [recipeSchema, planSchema, kitchenSchema, bakeSchema, bakingSchema, foodsSchema, tasteProfileSchema, tasteDeckSchema] = await Promise.all([
+  const [recipeSchema, planSchema, kitchenSchema, bakeSchema, bakingSchema, foodsSchema] = await Promise.all([
     readJson(join(root, SCHEMA_FILES.recipes)),
     readJson(join(root, SCHEMA_FILES.plans)),
     readJson(join(root, SCHEMA_FILES.kitchen)),
     readJson(join(root, SCHEMA_FILES.bakes)),
     readJson(join(root, SCHEMA_FILES.baking)),
     readJson(join(root, SCHEMA_FILES.foods)),
-    readJson(join(root, SCHEMA_FILES.tasteProfiles)),
-    readJson(join(root, SCHEMA_FILES.tasteDeck)),
   ]);
-  const [recipeFiles, planFiles, bakeFiles, tasteProfileFiles, kitchenFile, bakingFile, foodsFile, tasteDeckFile] = await Promise.all([
+  const [recipeFiles, planFiles, bakeFiles, kitchenFile, bakingFile, foodsFile] = await Promise.all([
     readSources(root, DATA_DIRS.recipes),
     readSources(root, DATA_DIRS.plans),
     readSources(root, DATA_DIRS.bakes),
-    readSources(root, DATA_DIRS.tasteProfiles),
     readSource(root, KITCHEN_FILE),
     readSource(root, BAKING_FILE),
     readSource(root, FOODS_FILE),
-    readSource(root, TASTE_DECK_FILE),
   ]);
   return validateSources({
     recipeSchema,
@@ -120,10 +105,6 @@ export async function validateProject(root: string): Promise<DataSet> {
     bakingFile,
     foodsSchema,
     foodsFile,
-    tasteProfileSchema,
-    tasteProfileFiles,
-    tasteDeckSchema,
-    tasteDeckFile,
   });
 }
 
@@ -171,13 +152,6 @@ export function validateSources(input: {
   foodsSchema?: object;
   /** null — файла нет. */
   foodsFile?: SourceFile | null;
-  /** Без схемы или без каталога продуктов вкусовые профили не проверяются. */
-  tasteProfileSchema?: object;
-  tasteProfileFiles?: SourceFile[];
-  /** Без схемы или без каталога продуктов колода анкеты не проверяется. */
-  tasteDeckSchema?: object;
-  /** null — файла нет. */
-  tasteDeckFile?: SourceFile | null;
 }): DataSet {
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
@@ -209,20 +183,6 @@ export function validateSources(input: {
     ? parseReference(ajv.compile<Foods>(input.foodsSchema), input.foodsFile, FOODS_FILE, 'Нет каталога продуктов', checkFoods, issues)
     : null;
 
-  let tasteProfiles: { doc: TasteProfile; file: string }[] = [];
-  let tasteDeck: TasteDeck | null = null;
-  if (foods) {
-    const foodIds = new Set(foods.groups.flatMap((g) => g.items.map((f) => f.id)));
-    if (input.tasteProfileSchema) {
-      tasteProfiles = parseAll('tasteProfiles', input.tasteProfileFiles ?? [], ajv.compile<TasteProfile>(input.tasteProfileSchema), issues);
-      for (const { doc, file } of tasteProfiles) issues.push(...checkTasteProfile(doc, file, foodIds));
-    }
-    if (input.tasteDeckSchema) {
-      const check = (doc: TasteDeck, file: string) => checkTasteDeck(doc, file, foodIds);
-      tasteDeck = parseReference(ajv.compile<TasteDeck>(input.tasteDeckSchema), input.tasteDeckFile, TASTE_DECK_FILE, 'Нет колоды анкеты', check, issues);
-    }
-  }
-
   return {
     recipes: recipes.map((r) => r.doc),
     plans: plans.map((p) => p.doc),
@@ -230,8 +190,6 @@ export function validateSources(input: {
     bakes: bakes.map((b) => b.doc),
     baking,
     foods,
-    tasteProfiles: tasteProfiles.map((p) => p.doc),
-    tasteDeck,
     issues,
   };
 }

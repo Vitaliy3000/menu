@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { formatIssue, validateProject } from './data-validation.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const { recipes, plans, kitchen, bakes, baking, foods, tasteProfiles, tasteDeck, issues } = await validateProject(root);
+const { recipes, plans, kitchen, bakes, baking, foods, issues } = await validateProject(root);
 
 const errors = issues.filter((i) => i.severity === 'error');
 const warnings = issues.filter((i) => i.severity === 'warning');
@@ -16,5 +16,5 @@ if (errors.length > 0) {
   process.exit(1);
 }
 console.log(
-  `✓ Рецептов: ${recipes.length}, техкарт: ${plans.length}, выпечки: ${bakes.length}, справочник кухни: ${kitchen ? 'есть' : 'нет'}, справочник выпечки: ${baking ? 'есть' : 'нет'}, в каталоге продуктов: ${foods?.groups.reduce((n, g) => n + g.items.length, 0) ?? 0}, вкусовых профилей: ${tasteProfiles.length}, карточек анкеты: ${tasteDeck?.cards.length ?? 0}. Предупреждений: ${warnings.length}`,
+  `✓ Рецептов: ${recipes.length}, техкарт: ${plans.length}, выпечки: ${bakes.length}, справочник кухни: ${kitchen ? 'есть' : 'нет'}, справочник выпечки: ${baking ? 'есть' : 'нет'}, в каталоге продуктов: ${foods?.groups.reduce((n, g) => n + g.items.length, 0) ?? 0}. Предупреждений: ${warnings.length}`,
 );

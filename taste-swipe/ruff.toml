@@ -1,6 +1,0 @@
-target-version = "py313"
-
-[lint]
-extend-select = ["A", "ASYNC", "B", "I", "RUF", "S", "UP"]
-# Строки интерфейса на русском: кириллица в них не опечатка.
-ignore = ["RUF001"]
