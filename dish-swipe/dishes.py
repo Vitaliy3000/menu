@@ -13,7 +13,7 @@ DISHES_FILE = APP_DIR / "dishes.json"
 FOODS_FILE = ROOT / "data" / "foods.json"
 PHOTOS_DIR = APP_DIR / "photos"
 RESULTS_DIR = APP_DIR / "results"
-MIN_FREEZE_SCORE = 80
+MIN_FREEZE_SCORE = 85
 MIN_LUNCH_MICROWAVE_SCORE = 80
 
 
