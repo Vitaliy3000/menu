@@ -1112,14 +1112,6 @@
       "note": "1-я. Tromp&Rueb Appelazijn 0,75 л"
     },
     {
-      "id": "dijon",
-      "name": "Дижонская горчица",
-      "amount": 50,
-      "unit": "g",
-      "section": "grocery",
-      "note": "1-я. Maille Dijonmosterd 215 г"
-    },
-    {
       "id": "bay",
       "name": "Лавровый лист",
       "amount": 5,
@@ -1282,6 +1274,15 @@
       "amount": 6,
       "unit": "g",
       "section": "spices",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "dijon",
+      "name": "Дижонская горчица",
+      "amount": 50,
+      "unit": "g",
+      "section": "grocery",
       "staple": true,
       "note": "Из излишков"
     },
