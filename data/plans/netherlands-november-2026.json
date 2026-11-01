@@ -1,0 +1,5300 @@
+{
+  "$schema": "../../schemas/cook-plan.schema.json",
+  "id": "netherlands-november-2026",
+  "title": "Нидерланды-Ноябрь-2026",
+  "summary": "Меню на 14 дней для двоих — русское, американское и европейское. Обеды из микроволновки: борщ, чили с рисом или кукурузой, паста аль форно. Ужины за 20 минут: котлеты с тушёной капустой, пулд-порк в своей бриоши, лосось в фисташковой корочке с картофелем дюшес. Уходят остатки: лосось, демиглас, фузилли, фасоль, рис для суши.",
+  "start": "09:00",
+  "duration": {
+    "total": 480,
+    "active": 425
+  },
+  "audience": "2 взрослых: завтраки, обеды, ужины и перекусы на 14 дней",
+  "cost": {
+    "amount": 410,
+    "currency": "EUR",
+    "store": "AH",
+    "date": "2026-11-01",
+    "note": "По доле упаковок, с запасами из излишков по их доле. Без контейнеров, пакетов и расходников."
+  },
+  "tags": [
+    "на две недели",
+    "русская",
+    "американская",
+    "заморозка",
+    "обеды с собой",
+    "сезонное"
+  ],
+  "conditions": {
+    "cooks": 2,
+    "kitchen": "Индукция на 4 конфорки, одна камера духовки с СВЧ, морозилка 80 л и ларь 198 л, посудомойка",
+    "notes": [
+      "Зоны: в подготовке, горячей зоне и фасовке — по одному человеку. Повар режет, ведёт плиту и духовку; помощник чистит овощи, отвешивает соль, моет посуду, замешивает котлеты, делает дюшес и фасует. Миски и кастрюли передают на границе зон и говорят об этом голосом.",
+      "Духовка весь день: 140 °C — пулд-порк и картофель, после пулд-порка — 200 °C для пасты. Плита: борщ в кастрюле 12 л с утра; в кастрюле 4 л — сначала капуста, потом чили; рагу — в сотейнике; рис, соус и паста — после обеда.",
+      "Время шагов — по скорости того, кто их делает: помощник режет втрое дольше, поэтому режет повар, а помощник чистит. Руки заняты: у повара 353 минуты из 480, у помощника 323 — меньше 75 %.",
+      "Обеды — со сдвигом: помощник ест, пока повар доводит борщ и ставит чили, повар — пока всё томится. Обед и завтрак до старта — из закупки: бутерброды с ветчиной и гаудой. Ужин — 1,1 кг борща, оставленного в кастрюле 1,5 л.",
+      "Заморозить нужно ≈ 21 кг, а ларь и морозилка берут 12,5 кг в сутки: сегодня — только сырые котлеты, остальное — утром дня 1 и дня 2 (см. последний шаг).",
+      "Полки холодильника на остывание: верхняя — котлеты до ларя, потом борщ в два слоя через аккумуляторы; средняя — чили; нижняя — паста и противень с пакетами пулд-порка; стекло над ящиком — лотки дюшес и рис. Закупка — в двери и ящике."
+    ]
+  },
+  "roles": [
+    {
+      "id": "chef",
+      "name": "Повар",
+      "note": "Нарезка, плита и духовка: борщ, капуста, чили, рагу, пулд-порк, рис и паста"
+    },
+    {
+      "id": "helper",
+      "name": "Помощник",
+      "note": "Соль, чистка овощей, подписи, котлеты, дюшес, мойка и фасовка"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "oven",
+      "name": "Духовка с микроволновкой",
+      "kind": "oven",
+      "spec": "Конвекция, 2 уровня",
+      "note": "140 °C — пулд-порк и картофель, потом 200 °C — паста"
+    },
+    {
+      "id": "hob",
+      "name": "Индукционная варочная панель",
+      "kind": "hob",
+      "spec": "4 конфорки"
+    },
+    {
+      "id": "pot-12",
+      "name": "Кастрюля 12 л с крышкой",
+      "kind": "cookware",
+      "note": "Борщ, потом вода для пасты"
+    },
+    {
+      "id": "pot-4",
+      "name": "Кастрюля 4 л с крышкой",
+      "kind": "cookware",
+      "note": "Капуста к котлетам, потом чили"
+    },
+    {
+      "id": "pot-2",
+      "name": "Кастрюля 2 л с крышкой",
+      "kind": "cookware",
+      "note": "Рис"
+    },
+    {
+      "id": "pot-1500",
+      "name": "Кастрюля 1,5 л с крышкой",
+      "kind": "cookware",
+      "count": 2,
+      "note": "Соус барбекю; борщ на ужин в день готовки"
+    },
+    {
+      "id": "saute",
+      "name": "Сотейник с крышкой",
+      "kind": "cookware",
+      "note": "Рагу для пасты"
+    },
+    {
+      "id": "pan-24",
+      "name": "Большая стальная сковорода",
+      "kind": "cookware",
+      "note": "Зажарка для борща, фарш для чили"
+    },
+    {
+      "id": "pyrex",
+      "name": "Стеклянная форма Pyrex",
+      "kind": "cookware",
+      "count": 2,
+      "spec": "Прямоугольная и овальная",
+      "note": "Пулд-порк в духовке"
+    },
+    {
+      "id": "enamel-trays",
+      "name": "Эмалированный противень",
+      "kind": "cookware",
+      "count": 2,
+      "note": "Паста аль форно"
+    },
+    {
+      "id": "oven-tray",
+      "name": "Противень духовки",
+      "kind": "cookware",
+      "note": "Картофель для дюшес"
+    },
+    {
+      "id": "steel-bowl",
+      "name": "Большая стальная миска",
+      "kind": "tool",
+      "note": "Фарш для котлет"
+    },
+    {
+      "id": "glass-bowls",
+      "name": "Большая стеклянная миска",
+      "kind": "tool",
+      "count": 2,
+      "note": "Хлеб в молоке и обжаренный фарш для чили; мясо пулд-порка"
+    },
+    {
+      "id": "plastic-boxes",
+      "name": "Пластиковый контейнер 5,2 л",
+      "kind": "tool",
+      "count": 5,
+      "note": "Нашинкованная капуста, почищенные овощи, ледяная вода"
+    },
+    {
+      "id": "small-bowls",
+      "name": "Мелкие миски",
+      "kind": "tool",
+      "count": 12,
+      "note": "Соль по местам и подставки под ложки"
+    },
+    {
+      "id": "chopper",
+      "name": "Чоппер",
+      "kind": "appliance",
+      "note": "Один заход: пармезан, потом лук для котлет"
+    },
+    {
+      "id": "dishwasher",
+      "name": "Посудомоечная машина",
+      "kind": "appliance",
+      "note": "Пустая к старту; запуск перед обедом и в конце дня"
+    },
+    {
+      "id": "scale",
+      "name": "Кухонные весы",
+      "kind": "tool",
+      "count": 2
+    },
+    {
+      "id": "jewelry-scale",
+      "name": "Ювелирные весы",
+      "kind": "tool",
+      "note": "Соль"
+    },
+    {
+      "id": "probe",
+      "name": "Термощуп",
+      "kind": "tool",
+      "count": 2,
+      "note": "Выносной — в пулд-порке всё время в духовке"
+    },
+    {
+      "id": "knives",
+      "name": "Ножи",
+      "kind": "tool",
+      "count": 2,
+      "note": "У каждого свой"
+    },
+    {
+      "id": "boards",
+      "name": "Разделочные доски",
+      "kind": "tool",
+      "count": 8,
+      "note": "Овощи, свёкла, сырое мясо, готовое мясо, кукуруза"
+    },
+    {
+      "id": "graters",
+      "name": "Тёрка",
+      "kind": "tool",
+      "note": "Крупная сторона — морковь"
+    },
+    {
+      "id": "peeler",
+      "name": "Овощечистка",
+      "kind": "tool"
+    },
+    {
+      "id": "sieves",
+      "name": "Сито",
+      "kind": "tool",
+      "note": "Промыть рис"
+    },
+    {
+      "id": "colander",
+      "name": "Дуршлаг",
+      "kind": "tool",
+      "note": "Фасоль"
+    },
+    {
+      "id": "sink-colander",
+      "name": "Дуршлаг-решётка для раковины",
+      "kind": "tool",
+      "note": "Помыть картофель"
+    },
+    {
+      "id": "skimmer",
+      "name": "Шумовка",
+      "kind": "tool",
+      "note": "Пена борща, фузилли из кипятка"
+    },
+    {
+      "id": "ladle",
+      "name": "Стальной половник",
+      "kind": "tool",
+      "note": "Фасовка борща и чили"
+    },
+    {
+      "id": "steel-spoon",
+      "name": "Большая стальная ложка",
+      "kind": "tool",
+      "note": "Капуста к котлетам"
+    },
+    {
+      "id": "grey-spoon",
+      "name": "Серая силиконовая ложка",
+      "kind": "tool",
+      "note": "Борщ"
+    },
+    {
+      "id": "black-spatula",
+      "name": "Чёрная пластиковая лопатка на стальной ручке",
+      "kind": "tool",
+      "note": "Капуста, потом чили"
+    },
+    {
+      "id": "grey-spatula",
+      "name": "Большая серая силиконовая лопатка",
+      "kind": "tool",
+      "note": "Рагу"
+    },
+    {
+      "id": "blue-spatula",
+      "name": "Голубая силиконовая лопатка",
+      "kind": "tool",
+      "note": "Рис"
+    },
+    {
+      "id": "steel-turner",
+      "name": "Широкая стальная лопатка",
+      "kind": "tool",
+      "note": "Фарш и зажарка на сковороде, фасовка пасты"
+    },
+    {
+      "id": "tongs",
+      "name": "Кухонные щипцы",
+      "kind": "tool",
+      "note": "Мясо из борща, пулд-порк"
+    },
+    {
+      "id": "masher",
+      "name": "Толкушка для пюре",
+      "kind": "tool",
+      "note": "Дюшес"
+    },
+    {
+      "id": "whisk",
+      "name": "Венчик",
+      "kind": "tool",
+      "note": "Соус барбекю"
+    },
+    {
+      "id": "measures",
+      "name": "Мерные стаканы и ложки",
+      "kind": "tool"
+    },
+    {
+      "id": "trivets",
+      "name": "Подставки под горячее",
+      "kind": "tool",
+      "count": 2
+    },
+    {
+      "id": "cooling-rack",
+      "name": "Решётка для остывания",
+      "kind": "tool"
+    },
+    {
+      "id": "ice-packs",
+      "name": "Аккумуляторы холода",
+      "kind": "tool",
+      "count": 20,
+      "note": "Из ларя — под борщ, чили и пулд-порк"
+    },
+    {
+      "id": "tape",
+      "name": "Малярный скотч и маркер",
+      "kind": "consumable",
+      "note": "Подписи на крышках. В AH онлайн нет",
+      "buy": true
+    },
+    {
+      "id": "foil",
+      "name": "Алюминиевая фольга",
+      "kind": "consumable",
+      "note": "AH Aluminiumfolie — накрыть пулд-порк",
+      "buy": true
+    },
+    {
+      "id": "film",
+      "name": "Пищевая плёнка",
+      "kind": "consumable",
+      "note": "AH Vershoudfolie — рис",
+      "buy": true
+    },
+    {
+      "id": "zip-bags",
+      "name": "Пакеты с застёжкой 1 л",
+      "kind": "consumable",
+      "count": 30,
+      "note": "Toppits Safeloc diepvrieszakken, 2 × 20: капуста, подлива, пулд-порк",
+      "buy": true
+    },
+    {
+      "id": "piping",
+      "name": "Кондитерский мешок с насадкой-звездой",
+      "kind": "consumable",
+      "note": "AH Spuitzak met 5 kunststofmondjes",
+      "buy": true
+    },
+    {
+      "id": "paper-box",
+      "name": "Бумажный контейнер с крышкой",
+      "kind": "consumable",
+      "count": 23,
+      "note": "Из излишков, 500 мл, можно в микроволновку: борщ Свете, чили, паста"
+    },
+    {
+      "id": "plastic-750",
+      "name": "Пластиковый контейнер — меньший",
+      "kind": "consumable",
+      "count": 15,
+      "note": "Из излишков, 750 мл: борщ Виталию, котлеты"
+    },
+    {
+      "id": "alu-tray",
+      "name": "Алюминиевый лоток с крышкой",
+      "kind": "consumable",
+      "count": 8,
+      "note": "Из излишков: лосось с дюшес — дюшес печётся прямо в нём"
+    }
+  ],
+  "dishes": [
+    {
+      "id": "borscht",
+      "name": "Борщ",
+      "meal": "lunch",
+      "description": "Борщ на рёберном крае со свёклой, капустой и зажаркой, без картофеля — он не переносит заморозку. Со своей сметаной.",
+      "yield": {
+        "amount": 7.1,
+        "unit": "kg"
+      },
+      "portions": 12,
+      "portionSize": "Виталий 700 г · Света 400 г",
+      "packaging": [
+        {
+          "container": "Пластиковый контейнер — меньший",
+          "count": 1,
+          "storage": "fridge",
+          "days": 1,
+          "note": "700 г",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 1,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Пластиковый контейнер — меньший",
+          "count": 4,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по 700 г",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 4,
+              "meal": "lunch"
+            },
+            {
+              "day": 7,
+              "meal": "lunch"
+            },
+            {
+              "day": 10,
+              "meal": "lunch"
+            },
+            {
+              "day": 13,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Бумажный контейнер",
+          "count": 1,
+          "storage": "fridge",
+          "days": 1,
+          "note": "400 г",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 1,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Бумажный контейнер",
+          "count": 4,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по 400 г",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 4,
+              "meal": "lunch"
+            },
+            {
+              "day": 7,
+              "meal": "lunch"
+            },
+            {
+              "day": 10,
+              "meal": "lunch"
+            },
+            {
+              "day": 13,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Кастрюля 1,5 л — ужин в день готовки",
+          "count": 1,
+          "storage": "serve",
+          "days": 0,
+          "note": "≈ 1,1 кг на двоих, со сметаной и хлебом"
+        }
+      ]
+    },
+    {
+      "id": "chili",
+      "name": "Чили",
+      "meal": "lunch",
+      "description": "Чили кон карне без острого: био-говядина, фасоль, томаты, сладкая и копчёная паприка, зира. Виталию — с рисом и чеддером, Свете — с кукурузой и сметаной.",
+      "yield": {
+        "amount": 3,
+        "unit": "kg"
+      },
+      "portions": 10,
+      "portionSize": "Виталий 300 г + рис · Света 230 г",
+      "packaging": [
+        {
+          "container": "Бумажный контейнер",
+          "count": 1,
+          "storage": "fridge",
+          "days": 2,
+          "note": "300 г чили, сверху 130 г риса в плёнке",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 2,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Бумажный контейнер",
+          "count": 4,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по 300 г чили и 130 г риса в плёнке",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 5,
+              "meal": "lunch"
+            },
+            {
+              "day": 8,
+              "meal": "lunch"
+            },
+            {
+              "day": 11,
+              "meal": "lunch"
+            },
+            {
+              "day": 14,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Бумажный контейнер",
+          "count": 1,
+          "storage": "fridge",
+          "days": 2,
+          "note": "230 г чили и ≈ 130 г кукурузы",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 2,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Бумажный контейнер",
+          "count": 4,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по 230 г чили и ≈ 130 г кукурузы",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 5,
+              "meal": "lunch"
+            },
+            {
+              "day": 8,
+              "meal": "lunch"
+            },
+            {
+              "day": 11,
+              "meal": "lunch"
+            },
+            {
+              "day": 14,
+              "meal": "lunch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pasta",
+      "name": "Паста",
+      "meal": "lunch",
+      "description": "Паста аль форно: фузилли с рагу из свиных колбасок, пассаты и вяленых томатов, под моцареллой и пармезаном.",
+      "yield": {
+        "amount": 2.85,
+        "unit": "kg"
+      },
+      "portions": 8,
+      "portionSize": "Виталий 380 г · Света 265 г",
+      "packaging": [
+        {
+          "container": "Бумажный контейнер",
+          "count": 4,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по ≈ 380 г",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 3,
+              "meal": "lunch"
+            },
+            {
+              "day": 6,
+              "meal": "lunch"
+            },
+            {
+              "day": 9,
+              "meal": "lunch"
+            },
+            {
+              "day": 12,
+              "meal": "lunch"
+            }
+          ]
+        },
+        {
+          "container": "Бумажный контейнер",
+          "count": 4,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по ≈ 265 г",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 3,
+              "meal": "lunch"
+            },
+            {
+              "day": 6,
+              "meal": "lunch"
+            },
+            {
+              "day": 9,
+              "meal": "lunch"
+            },
+            {
+              "day": 12,
+              "meal": "lunch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kotlety",
+      "name": "Котлеты",
+      "meal": "dinner",
+      "description": "Котлеты из говядины со свининой, морозятся сырыми и жарятся при подаче. Тушёная капуста на утином жире, подлива на демигласе, кислые огурцы, жареный лук.",
+      "yield": {
+        "amount": 25,
+        "unit": "pcs"
+      },
+      "portions": 10,
+      "portionSize": "Виталий 3 · Света 2 котлеты",
+      "packaging": [
+        {
+          "container": "Пластиковый контейнер — меньший",
+          "count": 5,
+          "storage": "freezer",
+          "days": 90,
+          "note": "3 сырые котлеты, пакет капусты ≈ 210 г, пакет подливы",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 2,
+              "meal": "dinner"
+            },
+            {
+              "day": 5,
+              "meal": "dinner"
+            },
+            {
+              "day": 7,
+              "meal": "dinner"
+            },
+            {
+              "day": 10,
+              "meal": "dinner"
+            },
+            {
+              "day": 13,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Пластиковый контейнер — меньший",
+          "count": 5,
+          "storage": "freezer",
+          "days": 90,
+          "note": "2 сырые котлеты, пакет капусты ≈ 270 г, пакет подливы",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 2,
+              "meal": "dinner"
+            },
+            {
+              "day": 5,
+              "meal": "dinner"
+            },
+            {
+              "day": 7,
+              "meal": "dinner"
+            },
+            {
+              "day": 10,
+              "meal": "dinner"
+            },
+            {
+              "day": 13,
+              "meal": "dinner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulled-pork",
+      "name": "Пулд-порк",
+      "meal": "dinner",
+      "description": "Свиная лопатка, томлённая до волокон, в сладком соусе барбекю без острого — в своей булочке бриошь с коулслоу.",
+      "yield": {
+        "amount": 1.85,
+        "unit": "kg"
+      },
+      "portions": 10,
+      "portionSize": "Виталий 180 г · Света 120 г",
+      "packaging": [
+        {
+          "container": "Пакет с застёжкой",
+          "count": 5,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по ≈ 180 г; булочки — отдельным пакетом в морозилке",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 3,
+              "meal": "dinner"
+            },
+            {
+              "day": 6,
+              "meal": "dinner"
+            },
+            {
+              "day": 9,
+              "meal": "dinner"
+            },
+            {
+              "day": 12,
+              "meal": "dinner"
+            },
+            {
+              "day": 14,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Пакет с застёжкой",
+          "count": 5,
+          "storage": "freezer",
+          "days": 90,
+          "note": "по ≈ 120 г",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 3,
+              "meal": "dinner"
+            },
+            {
+              "day": 6,
+              "meal": "dinner"
+            },
+            {
+              "day": 9,
+              "meal": "dinner"
+            },
+            {
+              "day": 12,
+              "meal": "dinner"
+            },
+            {
+              "day": 14,
+              "meal": "dinner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salmon",
+      "name": "Лосось",
+      "meal": "dinner",
+      "description": "Лосось в корочке из фисташковой пасты и панко, картофель дюшес — розочки из пюре, запечённые до корочки, — и масляный соус бёр блан.",
+      "yield": {
+        "amount": 8,
+        "unit": "pcs"
+      },
+      "portions": 8,
+      "portionSize": "Виталий 180 г · Света 130 г лосося",
+      "packaging": [
+        {
+          "container": "Алюминиевый лоток",
+          "count": 1,
+          "storage": "fridge",
+          "days": 1,
+          "note": "4 розочки дюшес и кусок лосося ≈ 180 г",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 1,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Алюминиевый лоток",
+          "count": 3,
+          "storage": "freezer",
+          "days": 90,
+          "note": "4 розочки дюшес и кусок лосося ≈ 180 г",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 4,
+              "meal": "dinner"
+            },
+            {
+              "day": 8,
+              "meal": "dinner"
+            },
+            {
+              "day": 11,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Алюминиевый лоток",
+          "count": 1,
+          "storage": "fridge",
+          "days": 1,
+          "note": "3 розочки дюшес и кусок лосося ≈ 130 г",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 1,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Алюминиевый лоток",
+          "count": 3,
+          "storage": "freezer",
+          "days": 90,
+          "note": "3 розочки дюшес и кусок лосося ≈ 130 г",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 4,
+              "meal": "dinner"
+            },
+            {
+              "day": 8,
+              "meal": "dinner"
+            },
+            {
+              "day": 11,
+              "meal": "dinner"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "riblap",
+      "name": "Говяжий рёберный край",
+      "amount": 1.5,
+      "unit": "kg",
+      "section": "meat",
+      "note": "1-я закупка. AH Greenfields Runder riblap, 2 уп. ≈ 755 г: травяной откорм"
+    },
+    {
+      "id": "beef-mince",
+      "name": "Био говяжий фарш",
+      "amount": 1.25,
+      "unit": "kg",
+      "section": "meat",
+      "note": "1-я. AH Biologisch Rundergehakt: 500 г + 3 × 250 г"
+    },
+    {
+      "id": "mixed-mince",
+      "name": "Био фарш говядина со свининой",
+      "amount": 1.75,
+      "unit": "kg",
+      "section": "meat",
+      "note": "1-я. AH Biologisch Gemengd gehakt, 7 × 250 г"
+    },
+    {
+      "id": "sausages",
+      "name": "Био свиные колбаски",
+      "amount": 600,
+      "unit": "g",
+      "section": "meat",
+      "note": "1-я. AH Biologisch Varkensbraadworst, 3 × 200 г"
+    },
+    {
+      "id": "pork",
+      "name": "Био свиная лопатка на кости",
+      "amount": 2.55,
+      "unit": "kg",
+      "section": "meat",
+      "note": "1-я. AH Biologisch Schouderkarbonade, 6 × ≈ 425 г — куском био нет"
+    },
+    {
+      "id": "beets",
+      "name": "Варёная свёкла",
+      "amount": 1,
+      "unit": "kg",
+      "section": "produce",
+      "note": "1-я. AH Biologisch Rode bieten gekookt, 2 × 500 г — сырой в AH нет"
+    },
+    {
+      "id": "cabbage",
+      "name": "Белокочанная капуста",
+      "amount": 3.7,
+      "unit": "kg",
+      "section": "produce",
+      "note": "1-я. AH Biologisch Witte kool, ≈ 4 кочана"
+    },
+    {
+      "id": "onions",
+      "name": "Репчатый лук",
+      "amount": 1.5,
+      "unit": "kg",
+      "section": "produce",
+      "note": "1-я. AH Gele uien, 2 × 1 кг"
+    },
+    {
+      "id": "carrots",
+      "name": "Морковь",
+      "amount": 1,
+      "unit": "kg",
+      "section": "produce",
+      "note": "1-я. AH Winterpeen 1 кг: 600 г — в день готовки, остальное — коулслоу"
+    },
+    {
+      "id": "garlic",
+      "name": "Чеснок",
+      "amount": 12,
+      "unit": "clove",
+      "section": "produce",
+      "note": "1-я. AH Knoflook, 2 головки"
+    },
+    {
+      "id": "red-pepper",
+      "name": "Красный сладкий перец",
+      "amount": 2,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "1-я. AH Paprika rood"
+    },
+    {
+      "id": "corn",
+      "name": "Варёные початки кукурузы",
+      "amount": 6,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "1-я. AH Biologisch Gekookte maïskolven, 3 × 2 шт"
+    },
+    {
+      "id": "potatoes",
+      "name": "Рассыпчатый картофель",
+      "amount": 1.7,
+      "unit": "kg",
+      "section": "produce",
+      "note": "1-я. AH Kruimige aardappelen, 2 × 1 кг, ≈ 8 крупных"
+    },
+    {
+      "id": "dill",
+      "name": "Укроп",
+      "amount": 2,
+      "unit": "bunch",
+      "section": "produce",
+      "note": "1-я. AH Dille 20 г × 2"
+    },
+    {
+      "id": "fond",
+      "name": "Мясной фонд",
+      "amount": 1.2,
+      "unit": "l",
+      "section": "grocery",
+      "note": "1-я. AH Vlees fond, 3 × 400 мл"
+    },
+    {
+      "id": "tomato-paste",
+      "name": "Томатная паста",
+      "amount": 280,
+      "unit": "g",
+      "section": "grocery",
+      "note": "1-я. Mutti Tomaten concentraat dubbel, 2 × 140 г"
+    },
+    {
+      "id": "pelati",
+      "name": "Томаты в собственном соку",
+      "amount": 800,
+      "unit": "g",
+      "section": "grocery",
+      "note": "1-я. Mutti Pomodori pelati, 2 × 400 г"
+    },
+    {
+      "id": "kidney",
+      "name": "Фасоль кидни",
+      "amount": 2,
+      "unit": "can",
+      "section": "grocery",
+      "note": "1-я. AH Terra Kidneybonen, 2 × 400 г"
+    },
+    {
+      "id": "passata",
+      "name": "Пассата",
+      "amount": 1145,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "1-я. Mutti Passata: 720 мл + 425 мл"
+    },
+    {
+      "id": "fusilli",
+      "name": "Фузилли",
+      "amount": 1,
+      "unit": "kg",
+      "section": "grocery",
+      "note": "500 г из излишков + 1-я: De Cecco Fusilli 500 г"
+    },
+    {
+      "id": "mozzarella",
+      "name": "Моцарелла",
+      "amount": 2,
+      "unit": "pcs",
+      "section": "dairy",
+      "note": "1-я. Galbani Mozzarella, 2 × 225 г — ≈ 125 г сыра без рассола"
+    },
+    {
+      "id": "parmesan",
+      "name": "Пармезан",
+      "amount": 150,
+      "unit": "g",
+      "section": "dairy",
+      "note": "1-я. Zanetti Parmigiano Reggiano 150 г"
+    },
+    {
+      "id": "white-bread",
+      "name": "Белый хлеб",
+      "amount": 1,
+      "unit": "pcs",
+      "section": "bakery",
+      "note": "1-я. AH Casino wit half — нужно 175 г без корки"
+    },
+    {
+      "id": "sourdough",
+      "name": "Хлеб на закваске",
+      "amount": 2,
+      "unit": "pcs",
+      "section": "bakery",
+      "note": "1-я. AH OerDesem San Francisco gesneden — нарезанный, в морозилку"
+    },
+    {
+      "id": "ham",
+      "name": "Био ветчина",
+      "amount": 200,
+      "unit": "g",
+      "section": "meat",
+      "note": "1-я. AH Biologisch Achterham, 2 × ≈ 100 г"
+    },
+    {
+      "id": "gouda",
+      "name": "Гауда",
+      "amount": 380,
+      "unit": "g",
+      "section": "dairy",
+      "note": "1-я. AH Goudse jong 48+ plakken, 2 × 190 г"
+    },
+    {
+      "id": "milk",
+      "name": "Молоко",
+      "amount": 2,
+      "unit": "l",
+      "section": "dairy",
+      "note": "1-я. AH Biologisch Volle melk, 2 × 1 л"
+    },
+    {
+      "id": "eggs",
+      "name": "Био яйца",
+      "amount": 30,
+      "unit": "pcs",
+      "section": "dairy",
+      "note": "1-я. AH Biologisch Eieren, 2 × 15"
+    },
+    {
+      "id": "butter",
+      "name": "Сливочное масло",
+      "amount": 500,
+      "unit": "g",
+      "section": "dairy",
+      "note": "1-я. AH Roomboter ongezouten, 2 × 250 г"
+    },
+    {
+      "id": "cream",
+      "name": "Сливки 35 %",
+      "amount": 750,
+      "unit": "ml",
+      "section": "dairy",
+      "note": "Для сметаны. AH Slagroom, 3 × 250 мл"
+    },
+    {
+      "id": "bio-yogurt",
+      "name": "Био-йогурт",
+      "amount": 45,
+      "unit": "g",
+      "section": "dairy",
+      "note": "Закваска для сметаны. Arla Biologisch volle yoghurt 1 л"
+    },
+    {
+      "id": "yeast",
+      "name": "Сухие дрожжи",
+      "amount": 7,
+      "unit": "g",
+      "section": "grocery",
+      "note": "Для булочек. Dr. Oetker Gist, пакетик 7 г"
+    },
+    {
+      "id": "brown-sugar",
+      "name": "Тёмный тростниковый сахар",
+      "amount": 70,
+      "unit": "g",
+      "section": "grocery",
+      "note": "1-я. Van Gilse Donkere basterdsuiker"
+    },
+    {
+      "id": "ketchup",
+      "name": "Кетчуп",
+      "amount": 300,
+      "unit": "g",
+      "section": "grocery",
+      "note": "1-я. Heinz Tomato ketchup 400 мл"
+    },
+    {
+      "id": "cider-vinegar",
+      "name": "Яблочный уксус",
+      "amount": 160,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "1-я. Tromp&Rueb Appelazijn 0,75 л"
+    },
+    {
+      "id": "worcester",
+      "name": "Вустерширский соус",
+      "amount": 15,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "1-я. Lea & Perrins"
+    },
+    {
+      "id": "dijon",
+      "name": "Дижонская горчица",
+      "amount": 50,
+      "unit": "g",
+      "section": "grocery",
+      "note": "1-я. Maille Dijonmosterd 215 г"
+    },
+    {
+      "id": "red-wine-vinegar",
+      "name": "Красный винный уксус",
+      "amount": 45,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "1-я. AH Biologisch Rode wijnazijn 250 мл"
+    },
+    {
+      "id": "panko",
+      "name": "Панко",
+      "amount": 60,
+      "unit": "g",
+      "section": "grocery",
+      "note": "1-я. AH Panko broodkruim 200 г"
+    },
+    {
+      "id": "bay",
+      "name": "Лавровый лист",
+      "amount": 5,
+      "unit": "leaf",
+      "section": "spices",
+      "note": "1-я. Verstegen Laurier heel"
+    },
+    {
+      "id": "paprika",
+      "name": "Сладкая паприка",
+      "amount": 24,
+      "unit": "g",
+      "section": "spices",
+      "note": "1-я. AH Paprika mild gemalen 48 г"
+    },
+    {
+      "id": "smoked-paprika",
+      "name": "Копчёная сладкая паприка",
+      "amount": 19,
+      "unit": "g",
+      "section": "spices",
+      "note": "1-я. La Chinata Smoked paprika sweet 70 г"
+    },
+    {
+      "id": "cumin",
+      "name": "Молотая зира",
+      "amount": 7,
+      "unit": "g",
+      "section": "spices",
+      "note": "1-я. Verstegen Komijnzaad gemalen"
+    },
+    {
+      "id": "oregano",
+      "name": "Орегано",
+      "amount": 3,
+      "unit": "g",
+      "section": "spices",
+      "note": "1-я. AH Oregano"
+    },
+    {
+      "id": "garlic-powder",
+      "name": "Чесночный порошок",
+      "amount": 6,
+      "unit": "g",
+      "section": "spices",
+      "note": "1-я. Verstegen Knoflookpoeder"
+    },
+    {
+      "id": "onion-powder",
+      "name": "Луковый порошок",
+      "amount": 6,
+      "unit": "g",
+      "section": "spices",
+      "note": "1-я. Verstegen Uienpoeder"
+    },
+    {
+      "id": "nutmeg",
+      "name": "Мускатный орех",
+      "amount": 1,
+      "unit": "g",
+      "section": "spices",
+      "staple": true,
+      "note": "AH Nootmuskaat"
+    },
+    {
+      "id": "salmon",
+      "name": "Лосось без кожи, порционный",
+      "amount": 1.24,
+      "unit": "kg",
+      "section": "fish",
+      "staple": true,
+      "note": "Из излишков, замороженный: 8 кусков из ≈ 1,5 кг"
+    },
+    {
+      "id": "demi-glace",
+      "name": "Демиглас",
+      "amount": 350,
+      "unit": "g",
+      "section": "frozen",
+      "staple": true,
+      "note": "Из излишков: половина из 700 г"
+    },
+    {
+      "id": "duck-fat",
+      "name": "Утиный жир",
+      "amount": 60,
+      "unit": "g",
+      "section": "frozen",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "gelatin",
+      "name": "Желатин",
+      "amount": 7,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "red-beans",
+      "name": "Красная фасоль из излишков",
+      "amount": 2,
+      "unit": "can",
+      "section": "grocery",
+      "staple": true,
+      "note": "2 банки по 250 г"
+    },
+    {
+      "id": "sundried",
+      "name": "Вяленые томаты в масле",
+      "amount": 80,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "sushi-rice",
+      "name": "Рис для суши",
+      "amount": 280,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "croissant-flour",
+      "name": "Мука для круассанов",
+      "amount": 500,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков — на булочки"
+    },
+    {
+      "id": "oats",
+      "name": "Овсянка",
+      "amount": 210,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "peanut-paste",
+      "name": "Арахисовая паста",
+      "amount": 60,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "pistachio-paste",
+      "name": "Фисташковая паста несладкая",
+      "amount": 92,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "good-olive-oil",
+      "name": "Дорогое оливковое масло",
+      "amount": 40,
+      "unit": "ml",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков: Свете к пасте"
+    },
+    {
+      "id": "oil",
+      "name": "Подсолнечное масло",
+      "amount": 200,
+      "unit": "ml",
+      "section": "grocery",
+      "staple": true,
+      "note": "AH Zonnebloemolie"
+    },
+    {
+      "id": "salt",
+      "name": "Соль",
+      "amount": 250,
+      "unit": "g",
+      "section": "spices",
+      "staple": true
+    },
+    {
+      "id": "pepper-black",
+      "name": "Чёрный молотый перец",
+      "amount": 10,
+      "unit": "g",
+      "section": "spices",
+      "staple": true
+    },
+    {
+      "id": "sugar",
+      "name": "Сахар",
+      "amount": 65,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true
+    },
+    {
+      "id": "protein",
+      "name": "Протеин",
+      "amount": 840,
+      "unit": "g",
+      "section": "other",
+      "staple": true,
+      "note": "Для коктейля, 60 г в день"
+    },
+    {
+      "id": "cheddar",
+      "name": "Тёртый чеддер",
+      "amount": 100,
+      "unit": "g",
+      "section": "dairy",
+      "note": "2-я. AH Cheddar geraspte kaas 150 г"
+    },
+    {
+      "id": "pointed-cabbage",
+      "name": "Остроконечная капуста",
+      "amount": 1.25,
+      "unit": "kg",
+      "section": "produce",
+      "note": "2-я. AH Spitskool, 2 шт — коулслоу"
+    },
+    {
+      "id": "mayo",
+      "name": "Майонез",
+      "amount": 120,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. Hellmann's Real 430 мл"
+    },
+    {
+      "id": "pickles",
+      "name": "Кислые огурцы",
+      "amount": 400,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. AH Augurken zuur 670 г — не сладкие"
+    },
+    {
+      "id": "fried-onion",
+      "name": "Жареный лук",
+      "amount": 100,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. Go-Tan Gebakken uitjes 100 г"
+    },
+    {
+      "id": "spring-onion",
+      "name": "Зелёный лук",
+      "amount": 2,
+      "unit": "bunch",
+      "section": "produce",
+      "note": "2-я. AH Bosui"
+    },
+    {
+      "id": "shallots",
+      "name": "Шалот",
+      "amount": 120,
+      "unit": "g",
+      "section": "produce",
+      "note": "2-я. AH Sjalotten 500 г"
+    },
+    {
+      "id": "white-wine",
+      "name": "Сухое белое вино",
+      "amount": 200,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "2-я. AH Fris & droge Franse huiswijn wit 250 мл"
+    },
+    {
+      "id": "white-wine-vinegar",
+      "name": "Белый винный уксус",
+      "amount": 60,
+      "unit": "ml",
+      "section": "grocery",
+      "note": "2-я. AH Biologisch Witte wijnazijn 250 мл"
+    },
+    {
+      "id": "lemons",
+      "name": "Лимоны",
+      "amount": 4,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "2-я. AH Citroen 500 г"
+    },
+    {
+      "id": "chives",
+      "name": "Шнитт-лук",
+      "amount": 2,
+      "unit": "bunch",
+      "section": "produce",
+      "note": "2-я. AH Bieslook 25 г × 2"
+    },
+    {
+      "id": "parsley",
+      "name": "Плоская петрушка",
+      "amount": 1,
+      "unit": "bunch",
+      "section": "produce",
+      "note": "2-я. AH Platte peterselie 15 г"
+    },
+    {
+      "id": "basil",
+      "name": "Базилик",
+      "amount": 2,
+      "unit": "bunch",
+      "section": "produce",
+      "note": "2-я. AH Basilicum 22 г × 2"
+    },
+    {
+      "id": "pears",
+      "name": "Груши",
+      "amount": 18,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "2-я. AH Conference bak 1 кг × 4 — твёрдые"
+    },
+    {
+      "id": "mandarins",
+      "name": "Мандарины",
+      "amount": 50,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "2-я. AH Mandarijnen 1 кг × 4"
+    },
+    {
+      "id": "apples",
+      "name": "Яблоки",
+      "amount": 14,
+      "unit": "pcs",
+      "section": "produce",
+      "note": "2-я. AH Elstar zak 1,5 кг × 2 — Свете"
+    },
+    {
+      "id": "cherry",
+      "name": "Черри",
+      "amount": 200,
+      "unit": "g",
+      "section": "produce",
+      "note": "2-я. AH Cherrytomaten 250 г"
+    },
+    {
+      "id": "bagels",
+      "name": "Бейглы с кунжутом",
+      "amount": 4,
+      "unit": "pcs",
+      "section": "bakery",
+      "note": "2-я. AH Sesam bagels, 4 шт — в морозилку"
+    },
+    {
+      "id": "cream-cheese",
+      "name": "Творожный сыр",
+      "amount": 110,
+      "unit": "g",
+      "section": "dairy",
+      "note": "2-я. Philadelphia original 200 г"
+    },
+    {
+      "id": "smoked-salmon",
+      "name": "Копчёный лосось",
+      "amount": 200,
+      "unit": "g",
+      "section": "fish",
+      "note": "2-я. AH Gerookte zalm, 2 × 100 г"
+    },
+    {
+      "id": "greek-yogurt",
+      "name": "Греческий йогурт 5 %",
+      "amount": 900,
+      "unit": "g",
+      "section": "dairy",
+      "note": "2-я. Dodoni Griekse yoghurt 5% 1 кг"
+    },
+    {
+      "id": "granola",
+      "name": "Гранола",
+      "amount": 250,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. AH Granola noten 500 г"
+    },
+    {
+      "id": "bacon",
+      "name": "Бекон",
+      "amount": 80,
+      "unit": "g",
+      "section": "meat",
+      "note": "2-я. AH Ontbijtspek ≈ 100 г — Beter Leven 3 ster"
+    },
+    {
+      "id": "kwark",
+      "name": "Обезжиренный кварк",
+      "amount": 900,
+      "unit": "g",
+      "section": "dairy",
+      "note": "2-я. Campina Magere milde kwark naturel 1 кг"
+    },
+    {
+      "id": "honey",
+      "name": "Мёд",
+      "amount": 60,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. AH Honing 350 г"
+    },
+    {
+      "id": "walnuts",
+      "name": "Грецкие орехи",
+      "amount": 1,
+      "unit": "kg",
+      "section": "grocery",
+      "note": "2-я. AH Terra Ongebrande walnoten, 2 × 500 г"
+    },
+    {
+      "id": "soy-milk",
+      "name": "Соевое молоко",
+      "amount": 7,
+      "unit": "l",
+      "section": "dairy",
+      "note": "2-я. Alpro Sojadrink original, 7 × 1 л"
+    },
+    {
+      "id": "dark-choc",
+      "name": "Тёмный шоколад",
+      "amount": 300,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. AH Reep extra puur, 3 × 100 г"
+    },
+    {
+      "id": "capers",
+      "name": "Каперсы",
+      "amount": 20,
+      "unit": "g",
+      "section": "grocery",
+      "note": "2-я. AH Biologisch Kappertjes 100 г"
+    }
+  ],
+  "beforeStart": [
+    {
+      "id": "space",
+      "when": "до закупки",
+      "text": "Освободить в холодильнике ≈ 80 л: сначала туда ляжет закупка, в день готовки — 51 контейнер и пакет на остывание и 20 аккумуляторов. В ларе — дно и стенки под котлеты (≈ 30 л), в морозилке холодильника — ≈ 15 л под хлеб, бейглы и зелень второй недели."
+    },
+    {
+      "id": "ice",
+      "when": "за 2–3 дня",
+      "text": "Все 20 аккумуляторов — в ларь."
+    },
+    {
+      "id": "buns",
+      "when": "за 1–7 дней",
+      "text": "Испечь 12 булочек по рецепту «Булочки бриошь для бургеров» в разделе «Выпечка»: на муке для круассанов из излишков. Остудить на решётке и в тот же день — в морозилку в пакете. 10 — на пулд-порк, 2 — запас.",
+      "uses": [
+        {
+          "ingredient": "croissant-flour",
+          "amount": 500,
+          "unit": "g"
+        },
+        {
+          "ingredient": "milk",
+          "amount": 200,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "eggs",
+          "amount": 3,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "butter",
+          "amount": 60,
+          "unit": "g"
+        },
+        {
+          "ingredient": "sugar",
+          "amount": 40,
+          "unit": "g"
+        },
+        {
+          "ingredient": "yeast",
+          "amount": 7,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "smetana",
+      "when": "за 2 дня",
+      "text": "Сделать сметану по рецепту «Сметана на су-виде»: сливки с био-йогуртом — в баночки, 8 часов в ванне на 40 °C, потом ночь в холодильнике. Выйдет ≈ 780 г: борщ, чили Свете и ужин в день готовки. Две банки: вторую не открывать до второй недели.",
+      "uses": [
+        {
+          "ingredient": "cream",
+          "amount": 750,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "bio-yogurt",
+          "amount": 45,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "buy",
+      "when": "за 1–2 дня",
+      "text": "Первая закупка — всё с пометкой «1-я», плюс расходники. Мясо, птица, яйца и гастрономия — не с 1 звездой Beter Leven: в AH обычные бекон, ветчина и свиная лопатка — 1 звезда, берём био. Фарш — только био. Срок на мясе — не раньше дня готовки."
+    },
+    {
+      "id": "cold",
+      "when": "накануне утром",
+      "text": "Быструю заморозку ларя включить сейчас: сутки до закладки котлет. Холодильник — на 2–3 °C. Термощупом в стакане воды проверить: в холодильнике не теплее 4 °C, в ларе — −18 °C или холоднее."
+    },
+    {
+      "id": "demi",
+      "when": "накануне вечером",
+      "text": "Демиглас из ларя — в холодильник: утром его разложат по пакетам."
+    },
+    {
+      "id": "stock",
+      "when": "вечером в день готовки",
+      "text": "Вторая закупка — всё с пометкой «2-я»: завтраки, перекусы и свежее к подаче. Сразу в морозилку: хлеб, бейглы, вторую упаковку копчёного лосося, половину укропа и шнитт-лука — рубленными, в контейнере. Груши, мандарины и яблоки — в холодильник, по 2–3 груши — на стол дозревать.",
+      "uses": [
+        {
+          "ingredient": "cheddar",
+          "amount": 100,
+          "unit": "g"
+        },
+        {
+          "ingredient": "pointed-cabbage",
+          "amount": 1.25,
+          "unit": "kg"
+        },
+        {
+          "ingredient": "carrots",
+          "amount": 250,
+          "unit": "g",
+          "note": "коулслоу"
+        },
+        {
+          "ingredient": "mayo",
+          "amount": 120,
+          "unit": "g"
+        },
+        {
+          "ingredient": "pickles",
+          "amount": 400,
+          "unit": "g"
+        },
+        {
+          "ingredient": "fried-onion",
+          "amount": 100,
+          "unit": "g"
+        },
+        {
+          "ingredient": "spring-onion",
+          "amount": 2,
+          "unit": "bunch"
+        },
+        {
+          "ingredient": "shallots",
+          "amount": 120,
+          "unit": "g"
+        },
+        {
+          "ingredient": "white-wine",
+          "amount": 200,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "white-wine-vinegar",
+          "amount": 60,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "lemons",
+          "amount": 4,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "chives",
+          "amount": 2,
+          "unit": "bunch"
+        },
+        {
+          "ingredient": "parsley",
+          "amount": 1,
+          "unit": "bunch"
+        },
+        {
+          "ingredient": "basil",
+          "amount": 2,
+          "unit": "bunch"
+        },
+        {
+          "ingredient": "dill",
+          "amount": 2,
+          "unit": "bunch"
+        },
+        {
+          "ingredient": "pears",
+          "amount": 18,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "mandarins",
+          "amount": 50,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "apples",
+          "amount": 14,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "cherry",
+          "amount": 200,
+          "unit": "g"
+        },
+        {
+          "ingredient": "bagels",
+          "amount": 4,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "cream-cheese",
+          "amount": 110,
+          "unit": "g"
+        },
+        {
+          "ingredient": "smoked-salmon",
+          "amount": 200,
+          "unit": "g"
+        },
+        {
+          "ingredient": "greek-yogurt",
+          "amount": 900,
+          "unit": "g"
+        },
+        {
+          "ingredient": "granola",
+          "amount": 250,
+          "unit": "g"
+        },
+        {
+          "ingredient": "bacon",
+          "amount": 80,
+          "unit": "g"
+        },
+        {
+          "ingredient": "kwark",
+          "amount": 900,
+          "unit": "g"
+        },
+        {
+          "ingredient": "honey",
+          "amount": 60,
+          "unit": "g"
+        },
+        {
+          "ingredient": "walnuts",
+          "amount": 650,
+          "unit": "g"
+        },
+        {
+          "ingredient": "soy-milk",
+          "amount": 7,
+          "unit": "l"
+        },
+        {
+          "ingredient": "dark-choc",
+          "amount": 280,
+          "unit": "g"
+        },
+        {
+          "ingredient": "capers",
+          "amount": 20,
+          "unit": "g"
+        },
+        {
+          "ingredient": "oats",
+          "amount": 210,
+          "unit": "g"
+        },
+        {
+          "ingredient": "peanut-paste",
+          "amount": 60,
+          "unit": "g"
+        },
+        {
+          "ingredient": "pistachio-paste",
+          "amount": 92,
+          "unit": "g"
+        },
+        {
+          "ingredient": "good-olive-oil",
+          "amount": 40,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "protein",
+          "amount": 840,
+          "unit": "g"
+        },
+        {
+          "ingredient": "salmon",
+          "amount": 930,
+          "unit": "g",
+          "note": "куски к ужинам 4, 8, 11"
+        },
+        {
+          "ingredient": "panko",
+          "amount": 44,
+          "unit": "g"
+        },
+        {
+          "ingredient": "dijon",
+          "amount": 30,
+          "unit": "g"
+        },
+        {
+          "ingredient": "butter",
+          "amount": 240,
+          "unit": "g",
+          "note": "соус, котлеты и завтраки"
+        },
+        {
+          "ingredient": "milk",
+          "amount": 760,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "eggs",
+          "amount": 20,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "gouda",
+          "amount": 380,
+          "unit": "g",
+          "note": "60 г — обед в день готовки"
+        },
+        {
+          "ingredient": "ham",
+          "amount": 200,
+          "unit": "g",
+          "note": "80 г — обед в день готовки"
+        },
+        {
+          "ingredient": "sourdough",
+          "amount": 2,
+          "unit": "pcs"
+        }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "c-layout",
+      "at": 0,
+      "duration": 8,
+      "title": "Разложить по зонам, духовку — на 140 °C",
+      "role": "chef",
+      "zones": [
+        "prep",
+        "hot"
+      ],
+      "details": "В подготовку — доски для овощей, свёклы, сырого и готового мяса, нож. На плиту — кастрюли 12 л и 4 л, сотейник и большую стальную сковороду, у каждой — своя ложка на мелкой миске. Духовку — на 140 °C, конвекция: в ней весь день пулд-порк и картофель.",
+      "equipment": [
+        "oven",
+        "boards",
+        "knives",
+        "small-bowls"
+      ],
+      "heat": "140 °C, конвекция"
+    },
+    {
+      "id": "h-layout",
+      "at": 0,
+      "duration": 5,
+      "title": "Фасовка: разложить места и миски",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "На столы фасовки — две подставки, решётку для остывания и две большие деревянные доски: 5 мест под горячее. На полку под ними — стопки контейнеров и пакетов. Мелкие миски — для соли.",
+      "equipment": [
+        "trivets",
+        "cooling-rack",
+        "small-bowls"
+      ]
+    },
+    {
+      "id": "h-salt",
+      "at": 5,
+      "duration": 12,
+      "title": "Соль: отвесить по мискам",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Ювелирные весы, мелкие миски, подписать: «Борщ: бульон» 20 г, «Борщ: овощи» 15 г, «Капуста» 22 г, «Чили: фарш» 9 г, «Чили: соус» 7 г, «Рис» 5 г, «Котлеты» 22 г, «Пулд-порк» 12 г, «Дюшес» 12 г, «Паста: вода» 60 г, «Запас» 20 г.",
+      "equipment": [
+        "jewelry-scale",
+        "small-bowls"
+      ]
+    },
+    {
+      "id": "c-potato-wash",
+      "at": 8,
+      "duration": 6,
+      "title": "Лосось: картофель помыть и наколоть",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "1,7 кг рассыпчатого картофеля (≈ 8 крупных) потереть щёткой под водой в дуршлаге-решётке, обсушить, наколоть вилкой по 4 раза. Целиком — на противень духовки и на стол горячей зоны: печь его будем позже.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "sink-colander",
+        "oven-tray"
+      ],
+      "uses": [
+        {
+          "ingredient": "potatoes",
+          "amount": 1.7,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "id": "c-borscht-beef",
+      "at": 14,
+      "duration": 7,
+      "title": "Борщ: говядину — в кастрюлю 12 л",
+      "role": "chef",
+      "zones": [
+        "prep",
+        "hot"
+      ],
+      "details": "Доска для сырого мяса. 1,5 кг рёберного края сполоснуть, целыми кусками — в кастрюлю 12 л, залить 3 л холодной воды, накрыть — на сильный огонь. Нож и доску — в мойку, руки — с мылом: дальше овощи.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "boards",
+        "pot-12",
+        "hob"
+      ],
+      "uses": [
+        {
+          "ingredient": "riblap",
+          "amount": 1.5,
+          "unit": "kg"
+        }
+      ],
+      "heat": "сильный огонь, 9/9"
+    },
+    {
+      "id": "h-rub",
+      "at": 17,
+      "duration": 4,
+      "title": "Пулд-порк: смешать специи",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "В миску «Пулд-порк» к соли: 30 г тёмного сахара, по 10 г сладкой и копчёной паприки, по 6 г чесночного и лукового порошка, 3 г чёрного перца. Перемешать — повару.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "small-bowls",
+        "scale"
+      ],
+      "uses": [
+        {
+          "ingredient": "salt",
+          "amount": 12,
+          "unit": "g"
+        },
+        {
+          "ingredient": "brown-sugar",
+          "amount": 30,
+          "unit": "g"
+        },
+        {
+          "ingredient": "paprika",
+          "amount": 10,
+          "unit": "g"
+        },
+        {
+          "ingredient": "smoked-paprika",
+          "amount": 10,
+          "unit": "g"
+        },
+        {
+          "ingredient": "garlic-powder",
+          "amount": 6,
+          "unit": "g"
+        },
+        {
+          "ingredient": "onion-powder",
+          "amount": 6,
+          "unit": "g"
+        },
+        {
+          "ingredient": "pepper-black",
+          "amount": 3,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "c-cabbage-1",
+      "at": 21,
+      "duration": 18,
+      "title": "Капуста: нашинковать — первая половина",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "4 кочана: снять верхние листья, разрезать на четвертинки, вырезать кочерыжку. Шинковать тонко, 3–4 мм. Первые 800 г — в зелёную миску «Борщ: капуста», остальное — в пластиковые контейнеры 5,2 л «Котлеты: капуста».",
+      "dishes": [
+        "borscht",
+        "kotlety"
+      ],
+      "equipment": [
+        "boards",
+        "knives",
+        "plastic-boxes"
+      ],
+      "uses": [
+        {
+          "ingredient": "cabbage",
+          "amount": 1.8,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "id": "w-borscht-boil",
+      "at": 21,
+      "duration": 18,
+      "title": "Борщ: ждём кипения",
+      "role": "chef",
+      "passive": true,
+      "details": "Как закипит — сразу снимать пену.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob"
+      ],
+      "timer": {
+        "minutes": 18,
+        "label": "Борщ закипает"
+      }
+    },
+    {
+      "id": "h-peel",
+      "at": 21,
+      "duration": 24,
+      "title": "Лук, чеснок и морковь — почистить",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "За столом фасовки. 1,3 кг лука (≈ 9 луковиц): срезать донце и верх, снять шелуху. 12 зубчиков чеснока, 600 г моркови — овощечисткой. Всё — в пластиковый контейнер 5,2 л и повару в подготовку: «овощи почищены».",
+      "dishes": [
+        "borscht",
+        "chili",
+        "pasta",
+        "kotlety"
+      ],
+      "equipment": [
+        "knives",
+        "peeler",
+        "plastic-boxes"
+      ]
+    },
+    {
+      "id": "c-borscht-skim",
+      "at": 39,
+      "duration": 5,
+      "title": "Борщ: снять пену, фонд, лавр, соль",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Шумовкой снять всю серую пену. Влить 800 мл мясного фонда, 3 лавровых листа, высыпать миску «Борщ: бульон». Огонь — слабый, крышку сдвинуть: бульон едва булькает. Серая силиконовая ложка — на мелкую миску рядом.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "skimmer",
+        "grey-spoon"
+      ],
+      "uses": [
+        {
+          "ingredient": "fond",
+          "amount": 800,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "bay",
+          "amount": 3,
+          "unit": "leaf"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 20,
+          "unit": "g"
+        }
+      ],
+      "heat": "слабый огонь, 3/9"
+    },
+    {
+      "id": "c-cabbage-2",
+      "at": 44,
+      "duration": 13,
+      "title": "Капуста: нашинковать — вторая половина",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "Так же тонко — в контейнеры «Котлеты: капуста»: всего у котлет ≈ 2,9 кг. Кочерыжки и верхние листья — в мусор, контейнеры — на полку под столом фасовки.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "boards",
+        "knives",
+        "plastic-boxes"
+      ],
+      "uses": [
+        {
+          "ingredient": "cabbage",
+          "amount": 1.9,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "id": "w-borscht-simmer",
+      "at": 44,
+      "duration": 153,
+      "title": "Борщ: говядина варится",
+      "role": "chef",
+      "passive": true,
+      "details": "Раз в полчаса заглянуть: бульон едва булькает? Сильнее не надо — помутнеет.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "grey-spoon"
+      ],
+      "doneWhen": "Мясо мягкое: вилка входит без усилия. Если упругое — ещё 20 минут.",
+      "timer": {
+        "minutes": 153,
+        "label": "Борщ: бульон"
+      }
+    },
+    {
+      "id": "h-labels",
+      "at": 45,
+      "duration": 28,
+      "title": "Контейнеры и пакеты: подписать",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Малярный скотч на крышку: блюдо, кто, день — как в фасовке. Бумажные: борщ Свете (5), чили (10), паста (8). Меньшие пластиковые: борщ Виталию (5), котлеты (10). Лотки: лосось (8). Пакеты: капуста, подлива, пулд-порк — по 10. Стопками по блюдам.",
+      "equipment": [
+        "tape",
+        "paper-box",
+        "plastic-750",
+        "alu-tray",
+        "zip-bags"
+      ]
+    },
+    {
+      "id": "c-onion",
+      "at": 57,
+      "duration": 13,
+      "title": "Лук: нарезать на четыре блюда",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "Лук почистил помощник. Кубиком 5 мм, взвешивая, — в миски: «Борщ» 300 г, «Котлеты: капуста» 250 г, «Чили» 300 г, «Паста» 250 г. Для котлет 200 г — крупно, в миску «Котлеты: в чоппер».",
+      "dishes": [
+        "borscht",
+        "kotlety",
+        "chili",
+        "pasta"
+      ],
+      "equipment": [
+        "boards",
+        "knives",
+        "scale"
+      ],
+      "uses": [
+        {
+          "ingredient": "onions",
+          "amount": 1.3,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "id": "c-carrot",
+      "at": 70,
+      "duration": 7,
+      "title": "Морковь: натереть",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "600 г моркови — на крупной тёрке: 300 г — к луку в миску «Борщ», 300 г — в «Котлеты: капуста».",
+      "dishes": [
+        "borscht",
+        "kotlety"
+      ],
+      "equipment": [
+        "graters",
+        "scale"
+      ],
+      "uses": [
+        {
+          "ingredient": "carrots",
+          "amount": 600,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "h-corn",
+      "at": 73,
+      "duration": 20,
+      "title": "Чили: кукурузу срезать с початков",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "6 варёных початков: поставить стоймя на доску и срезать зёрна ножом сверху вниз. ≈ 650 г — в миску «Чили: кукуруза», накрыть, в холодильник: это Свете вместо риса.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "knives",
+        "boards"
+      ],
+      "uses": [
+        {
+          "ingredient": "corn",
+          "amount": 6,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "c-zazharka",
+      "at": 77,
+      "duration": 12,
+      "title": "Борщ: зажарка",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Большая стальная сковорода, 2 ст. л. масла, средний огонь. Лук с морковью из миски «Борщ» — 10 минут, до мягкости. 100 г томатной пасты — 2 минуты, помешивая, и 15 мл красного винного уксуса. Обратно в миску «Борщ», остудить — в холодильник.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pan-24",
+        "hob",
+        "steel-turner"
+      ],
+      "uses": [
+        {
+          "ingredient": "oil",
+          "amount": 30,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "tomato-paste",
+          "amount": 100,
+          "unit": "g"
+        },
+        {
+          "ingredient": "red-wine-vinegar",
+          "amount": 15,
+          "unit": "ml"
+        }
+      ],
+      "heat": "средний огонь, 6/9"
+    },
+    {
+      "id": "c-cabbage-start",
+      "at": 89,
+      "duration": 16,
+      "title": "Котлеты: капусту тушить",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Кастрюля 4 л, 60 г утиного жира и 20 мл масла, средний огонь. Лук и морковь «Котлеты: капуста» — 8 минут. Капусту — по трети, накрывая на 2 минуты, пока осядет. 60 г томатной пасты, 2 лавровых листа, 150 мл воды, миска «Капуста».",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula"
+      ],
+      "uses": [
+        {
+          "ingredient": "duck-fat",
+          "amount": 60,
+          "unit": "g"
+        },
+        {
+          "ingredient": "oil",
+          "amount": 20,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "tomato-paste",
+          "amount": 60,
+          "unit": "g"
+        },
+        {
+          "ingredient": "bay",
+          "amount": 2,
+          "unit": "leaf"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 22,
+          "unit": "g"
+        }
+      ],
+      "heat": "средний огонь, 5/9",
+      "tip": "Капуста сразу не влезет: кастрюля полна не больше чем на ¾, остальное — по мере оседания."
+    },
+    {
+      "id": "h-break-1",
+      "at": 93,
+      "duration": 10,
+      "title": "Перерыв",
+      "role": "helper",
+      "details": "Сесть на 10 минут, попить воды.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 10,
+        "label": "Перерыв"
+      }
+    },
+    {
+      "id": "h-wash-1",
+      "at": 103,
+      "duration": 10,
+      "title": "Мойка: сковорода и доски",
+      "role": "helper",
+      "zones": [
+        "prep"
+      ],
+      "details": "Большую стальную сковороду после зажарки — вымыть руками и вернуть на плиту: в ней повар жарит фарш. Доски и миски из контейнера у раковины — в посудомойку.",
+      "equipment": [
+        "pan-24",
+        "dishwasher"
+      ]
+    },
+    {
+      "id": "chef-pause-1",
+      "at": 105,
+      "duration": 8,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Борщ: свёклу нарезать соломкой»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 8,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "w-cabbage",
+      "at": 105,
+      "duration": 84,
+      "title": "Котлеты: капуста тушится",
+      "role": "chef",
+      "passive": true,
+      "details": "Крышка, слабый огонь. Раз в 15 минут перемешать чёрной лопаткой.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula"
+      ],
+      "doneWhen": "Капуста мягкая, но соломка держит форму.",
+      "timer": {
+        "minutes": 84,
+        "label": "Капуста"
+      }
+    },
+    {
+      "id": "c-beets",
+      "at": 113,
+      "duration": 10,
+      "title": "Борщ: свёклу нарезать соломкой",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "Отдельная доска — свёкла красит. 1 кг варёной свёклы нарезать соломкой 5 мм — в красную миску «Борщ: свёкла», в холодильник. Доску — сразу в мойку.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "boards",
+        "knives"
+      ],
+      "uses": [
+        {
+          "ingredient": "beets",
+          "amount": 1,
+          "unit": "kg"
+        }
+      ]
+    },
+    {
+      "id": "h-demi",
+      "at": 113,
+      "duration": 12,
+      "title": "Котлеты: демиглас — по пакетам",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Демиглас из холодильника — 10 порций по 35 г в пакеты «Подлива», выдавить воздух, закрыть. В холодильник: потом лягут в контейнеры котлет.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "scale",
+        "zip-bags"
+      ],
+      "uses": [
+        {
+          "ingredient": "demi-glace",
+          "amount": 350,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "c-break-1",
+      "at": 123,
+      "duration": 10,
+      "title": "Перерыв",
+      "role": "chef",
+      "details": "Сесть на 10 минут, попить воды. Капуста и борщ — под крышками.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 10,
+        "label": "Перерыв"
+      }
+    },
+    {
+      "id": "h-beans",
+      "at": 125,
+      "duration": 4,
+      "title": "Чили: фасоль откинуть",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "4 банки фасоли — 2 кидни и 2 из запасов — открыть и откинуть на дуршлаг над миской, жидкость — в мусор. Дуршлаг с фасолью — на стол горячей зоны.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "colander"
+      ]
+    },
+    {
+      "id": "helper-pause-1",
+      "at": 129,
+      "duration": 22,
+      "title": "Отдых",
+      "role": "helper",
+      "details": "Следующий шаг — «Котлеты: замесить фарш»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 22,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-garlic",
+      "at": 133,
+      "duration": 4,
+      "title": "Чеснок: порубить на четыре блюда",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "12 зубчиков, которые почистил помощник, раздавить ножом и мелко порубить. В мелкие миски: «Борщ» — 3 зубчика, «Чили» — 4, «Паста» — 3, «Котлеты» — 2.",
+      "dishes": [
+        "borscht",
+        "chili",
+        "pasta",
+        "kotlety"
+      ],
+      "equipment": [
+        "boards",
+        "knives"
+      ],
+      "uses": [
+        {
+          "ingredient": "garlic",
+          "amount": 12,
+          "unit": "clove"
+        }
+      ]
+    },
+    {
+      "id": "c-pepper",
+      "at": 137,
+      "duration": 3,
+      "title": "Чили: перец нарезать",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "2 красных перца — без семян и перегородок, кубиком 1 см — в миску «Чили», к луку.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "boards",
+        "knives"
+      ],
+      "uses": [
+        {
+          "ingredient": "red-pepper",
+          "amount": 2,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "c-sundried",
+      "at": 140,
+      "duration": 2,
+      "title": "Паста: вяленые томаты нарезать",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "80 г вяленых томатов из банки — мелко, в миску «Паста», и туда же 2 ст. л. масла из банки.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "boards",
+        "knives"
+      ],
+      "uses": [
+        {
+          "ingredient": "sundried",
+          "amount": 80,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "c-chopper",
+      "at": 142,
+      "duration": 6,
+      "title": "Чоппер: пармезан, потом лук для котлет",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "Один заход, от сухого к мокрому, чашу между загрузками не мыть. 100 г пармезана кусками — в крошку, в миску «Паста: сыр». Лук из миски «Котлеты: в чоппер» — в кашицу, обратно в ту же миску. Чашу — в мойку.",
+      "dishes": [
+        "pasta",
+        "kotlety"
+      ],
+      "equipment": [
+        "chopper"
+      ],
+      "uses": [
+        {
+          "ingredient": "parmesan",
+          "amount": 100,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "c-bread",
+      "at": 148,
+      "duration": 3,
+      "title": "Котлеты: хлеб замочить в молоке",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "175 г белого хлеба без корки — кубиками в большую стеклянную миску, залить 175 мл молока. Миску и миски «Котлеты» с луком и чесноком — помощнику на стол фасовки: он замешивает фарш.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "boards",
+        "knives",
+        "glass-bowls"
+      ],
+      "uses": [
+        {
+          "ingredient": "white-bread"
+        },
+        {
+          "ingredient": "milk",
+          "amount": 175,
+          "unit": "ml"
+        }
+      ]
+    },
+    {
+      "id": "c-sausage",
+      "at": 151,
+      "duration": 5,
+      "title": "Паста: колбаски — из оболочки",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "Дальше мясо: перед ним вымыть руки и нож. Доска для сырого мяса. 600 г свиных колбасок надрезать вдоль, снять оболочку, фарш — в миску «Паста: колбаски», в холодильник.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "boards",
+        "knives"
+      ],
+      "uses": [
+        {
+          "ingredient": "sausages",
+          "amount": 600,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "h-kotlety-mix",
+      "at": 151,
+      "duration": 12,
+      "title": "Котлеты: замесить фарш",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "В большую стальную миску: 1,75 кг фарша, хлеб с молоком, лук и чеснок «Котлеты», 2 яйца, 2 г перца, миска «Котлеты». Месить рукой 5 минут, до липкости, потом отбить: 10 раз бросить комом в миску.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "steel-bowl"
+      ],
+      "uses": [
+        {
+          "ingredient": "mixed-mince",
+          "amount": 1.75,
+          "unit": "kg"
+        },
+        {
+          "ingredient": "eggs",
+          "amount": 2,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "pepper-black",
+          "amount": 2,
+          "unit": "g"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 22,
+          "unit": "g"
+        }
+      ],
+      "tip": "Отбитый фарш держит сок и форму: котлеты не трескаются."
+    },
+    {
+      "id": "c-pork-rub",
+      "at": 156,
+      "duration": 12,
+      "title": "Пулд-порк: натереть специями — в формы",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "6 упаковок свиной лопатки обсушить бумагой и со всех сторон натереть смесью из миски «Пулд-порк». В две формы Pyrex — в один слой. В каждую — 30 мл яблочного уксуса и 100 мл воды, плотно закрыть фольгой. Руки и доску — с мылом.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "boards",
+        "pyrex",
+        "foil"
+      ],
+      "uses": [
+        {
+          "ingredient": "pork",
+          "amount": 2.55,
+          "unit": "kg"
+        },
+        {
+          "ingredient": "cider-vinegar",
+          "amount": 60,
+          "unit": "ml"
+        }
+      ]
+    },
+    {
+      "id": "h-kotlety-form",
+      "at": 163,
+      "duration": 35,
+      "title": "Котлеты: сформовать 25 котлет",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Фарш взвесить и разделить на 25 равных, ≈ 98 г. Мокрыми руками — овальные котлеты толщиной 2 см: толще за 6 минут под крышкой не прогреются. В контейнеры «Котлеты»: Виталию по 3, Свете по 2, не вплотную.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "steel-bowl",
+        "scale",
+        "plastic-750"
+      ]
+    },
+    {
+      "id": "c-pork-in",
+      "at": 168,
+      "duration": 3,
+      "title": "Пулд-порк — в духовку",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Обе формы — на средний уровень, рядом. Выносной щуп — через фольгу в самый толстый кусок. Духовка — 140 °C.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "oven",
+        "pyrex",
+        "probe"
+      ],
+      "heat": "140 °C, конвекция"
+    },
+    {
+      "id": "c-chili-brown",
+      "at": 171,
+      "duration": 18,
+      "title": "Чили: фарш обжарить в 3 захода",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Большая стальная сковорода, 1 ст. л. масла, сильный огонь. 1,25 кг фарша — тремя порциями: лепёшкой, 3 минуты не трогать, разбить лопаткой и жарить до тёмной корочки ещё 3. Каждую — в большую стеклянную миску. Посолить из миски «Чили: фарш».",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pan-24",
+        "hob",
+        "steel-turner",
+        "glass-bowls"
+      ],
+      "uses": [
+        {
+          "ingredient": "beef-mince",
+          "amount": 1.25,
+          "unit": "kg"
+        },
+        {
+          "ingredient": "oil",
+          "amount": 15,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 9,
+          "unit": "g"
+        }
+      ],
+      "heat": "сильный огонь, 8/9",
+      "tip": "Весь фарш сразу потушится в своём соку и станет серым — поэтому три захода."
+    },
+    {
+      "id": "w-pork",
+      "at": 171,
+      "duration": 171,
+      "title": "Пулд-порк томится",
+      "role": "chef",
+      "passive": true,
+      "details": "Фольгу не открывать.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "oven",
+        "pyrex",
+        "probe"
+      ],
+      "doneWhen": "Мясо разваливается вилкой, щуп — 93–95 °C. Если упругое — ещё 30 минут.",
+      "timer": {
+        "minutes": 171,
+        "label": "Пулд-порк"
+      }
+    },
+    {
+      "id": "c-cabbage-finish",
+      "at": 189,
+      "duration": 8,
+      "title": "Котлеты: капусту выпарить и попробовать",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Крышку снять, средний огонь, 5 минут — выпарить сок. 10 г сахара и 15 мл винного уксуса, перемешать. Попробовать: пресно — +5 г соли из миски «Запас». Снять с огня, кастрюлю — в фасовку на подставку: дальше помощник.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula"
+      ],
+      "uses": [
+        {
+          "ingredient": "sugar",
+          "amount": 10,
+          "unit": "g"
+        },
+        {
+          "ingredient": "red-wine-vinegar",
+          "amount": 15,
+          "unit": "ml"
+        }
+      ],
+      "heat": "средний огонь, 5/9"
+    },
+    {
+      "id": "c-borscht-meat",
+      "at": 197,
+      "duration": 12,
+      "title": "Борщ: говядину нарезать, капусту — в бульон",
+      "role": "chef",
+      "zones": [
+        "hot",
+        "prep"
+      ],
+      "details": "Щипцами — на доску для готового мяса. Срезать кости и плёнки, нарезать кубиками 2 см — обратно в кастрюлю, бульон не сливать. Огонь — средний, капусту из зелёной миски «Борщ: капуста» — в кастрюлю.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "tongs",
+        "boards",
+        "knives"
+      ],
+      "heat": "средний огонь, 6/9"
+    },
+    {
+      "id": "h-kotlety-fridge",
+      "at": 198,
+      "duration": 3,
+      "title": "Котлеты — в холодильник",
+      "role": "helper",
+      "zones": [
+        "cold"
+      ],
+      "details": "10 контейнеров под крышками — на нижнюю полку, пока не готова капуста. Столы фасовки — протереть с моющим средством: было сырое мясо.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "plastic-750"
+      ]
+    },
+    {
+      "id": "h-cabbage-out",
+      "at": 201,
+      "duration": 4,
+      "title": "Котлеты: капусту — в контейнер 5,2 л",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Капусту из кастрюли 4 л большой стальной ложкой — в пластиковый контейнер 5,2 л, разровнять, без крышки. Кастрюлю — в мойку.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "steel-spoon",
+        "plastic-boxes"
+      ]
+    },
+    {
+      "id": "helper-pause-2",
+      "at": 205,
+      "duration": 4,
+      "title": "Отдых",
+      "role": "helper",
+      "details": "Следующий шаг — «Кастрюля 4 л: вымыть для чили»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 4,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-ragu-brown",
+      "at": 209,
+      "duration": 15,
+      "title": "Паста: колбаски и лук обжарить",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Сотейник, 1 ст. л. масла, сильный огонь. Фарш колбасок — 9 минут, разбивая серой лопаткой, до корочки. Огонь — средний, лук из миски «Паста» — 6 минут, до мягкости.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "saute",
+        "hob",
+        "grey-spatula"
+      ],
+      "uses": [
+        {
+          "ingredient": "oil",
+          "amount": 15,
+          "unit": "ml"
+        }
+      ],
+      "heat": "сильный огонь, потом средний"
+    },
+    {
+      "id": "w-borscht-cabbage",
+      "at": 209,
+      "duration": 15,
+      "title": "Борщ: капуста варится",
+      "role": "chef",
+      "passive": true,
+      "details": "Крышку сдвинуть.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "grey-spoon"
+      ],
+      "timer": {
+        "minutes": 15,
+        "label": "Борщ: капуста"
+      }
+    },
+    {
+      "id": "h-pot4-wash",
+      "at": 209,
+      "duration": 5,
+      "title": "Кастрюля 4 л: вымыть для чили",
+      "role": "helper",
+      "zones": [
+        "prep"
+      ],
+      "details": "Вымыть руками, вытереть и вернуть повару на плиту: в ней будет чили.",
+      "equipment": [
+        "pot-4"
+      ]
+    },
+    {
+      "id": "h-wash-2",
+      "at": 214,
+      "duration": 10,
+      "title": "Посудомойку — загрузить и включить",
+      "role": "helper",
+      "zones": [
+        "prep"
+      ],
+      "details": "Всё грязное из контейнера у раковины — в посудомойку и запустить: она работает, пока обед. Ножи — руками.",
+      "equipment": [
+        "dishwasher"
+      ]
+    },
+    {
+      "id": "c-borscht-finish",
+      "at": 224,
+      "duration": 5,
+      "title": "Борщ: зажарка, свёкла, чеснок",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Зажарку и свёклу из холодильника, чеснок «Борщ», 15 г сахара, 15 мл красного винного уксуса, миска «Борщ: овощи». Довести до кипения и сразу убавить до слабого: от сильного кипения свёкла бледнеет.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "grey-spoon"
+      ],
+      "uses": [
+        {
+          "ingredient": "sugar",
+          "amount": 15,
+          "unit": "g"
+        },
+        {
+          "ingredient": "red-wine-vinegar",
+          "amount": 15,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 15,
+          "unit": "g"
+        }
+      ],
+      "heat": "слабый огонь, 3/9"
+    },
+    {
+      "id": "h-lunch",
+      "at": 224,
+      "duration": 60,
+      "title": "Обед",
+      "role": "helper",
+      "details": "Час на обед: бутерброды с ветчиной и гаудой на хлебе на закваске.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 60,
+        "label": "Обед"
+      }
+    },
+    {
+      "id": "c-ragu-sauce",
+      "at": 229,
+      "duration": 5,
+      "title": "Паста: чеснок, вяленые томаты, пассата",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Чеснок «Паста» — минута. Вяленые томаты с маслом и всю пассату, довести до кипения. Огонь — самый слабый, крышку сдвинуть. Соль не нужна: она есть в колбасках, пробуем в конце.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "saute",
+        "hob",
+        "grey-spatula"
+      ],
+      "uses": [
+        {
+          "ingredient": "passata",
+          "amount": 1145,
+          "unit": "ml"
+        }
+      ],
+      "heat": "минимальный огонь, 2/9"
+    },
+    {
+      "id": "w-borscht-final",
+      "at": 229,
+      "duration": 8,
+      "title": "Борщ: последние минуты",
+      "role": "chef",
+      "passive": true,
+      "details": "Слабый огонь: едва булькает.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "grey-spoon"
+      ],
+      "timer": {
+        "minutes": 8,
+        "label": "Борщ"
+      }
+    },
+    {
+      "id": "chef-pause-2",
+      "at": 234,
+      "duration": 3,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Борщ: попробовать и снять с огня»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 3,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "w-ragu",
+      "at": 234,
+      "duration": 81,
+      "title": "Паста: рагу томится",
+      "role": "chef",
+      "passive": true,
+      "details": "Раз в полчаса перемешать: не пригорает?",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "saute",
+        "hob",
+        "grey-spatula"
+      ],
+      "doneWhen": "Рагу густое: лопатка оставляет на дне дорожку.",
+      "timer": {
+        "minutes": 81,
+        "label": "Паста: рагу"
+      }
+    },
+    {
+      "id": "c-borscht-taste",
+      "at": 237,
+      "duration": 3,
+      "title": "Борщ: попробовать и снять с огня",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Попробовать: пресно — +5 г соли из миски «Запас», размешать, попробовать снова. Огонь выключить, крышку закрыть. Дальше фасует помощник.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "grey-spoon"
+      ]
+    },
+    {
+      "id": "c-chili-base-1",
+      "at": 240,
+      "duration": 9,
+      "title": "Чили: лук, перец и специи",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Вымытая кастрюля 4 л, 1 ст. л. масла, средний огонь. Лук и перец «Чили» — 7 минут. Чеснок, 2 ст. л. сладкой паприки, 1 ст. л. копчёной, 1 ст. л. зиры, 1 ч. л. орегано, 50 г томатной пасты — минута, помешивая.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula"
+      ],
+      "uses": [
+        {
+          "ingredient": "oil",
+          "amount": 15,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "paprika",
+          "amount": 14,
+          "unit": "g"
+        },
+        {
+          "ingredient": "smoked-paprika",
+          "amount": 7,
+          "unit": "g"
+        },
+        {
+          "ingredient": "cumin",
+          "amount": 7,
+          "unit": "g"
+        },
+        {
+          "ingredient": "oregano",
+          "amount": 3,
+          "unit": "g"
+        },
+        {
+          "ingredient": "tomato-paste",
+          "amount": 50,
+          "unit": "g"
+        }
+      ],
+      "heat": "средний огонь, 5/9"
+    },
+    {
+      "id": "c-chili-base-2",
+      "at": 249,
+      "duration": 4,
+      "title": "Чили: фарш, томаты, фонд, фасоль",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Фарш с соком из миски, 2 банки томатов — раздавить лопаткой, 300 мл фонда, фасоль из дуршлага, миска «Чили: соус». Довести до кипения. Кастрюля полна на ¾ — больше не доливать.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula",
+        "glass-bowls",
+        "colander"
+      ],
+      "uses": [
+        {
+          "ingredient": "pelati",
+          "amount": 800,
+          "unit": "g"
+        },
+        {
+          "ingredient": "fond",
+          "amount": 300,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "kidney",
+          "amount": 2,
+          "unit": "can"
+        },
+        {
+          "ingredient": "red-beans",
+          "amount": 2,
+          "unit": "can"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 7,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "c-potato-in",
+      "at": 253,
+      "duration": 2,
+      "title": "Лосось: картофель — в духовку",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Противень с картофелем — на нижний уровень, под формы пулд-порка. 140 °C. Перед обедом перемешать чили и рагу: оба едва булькают.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "oven",
+        "oven-tray"
+      ]
+    },
+    {
+      "id": "w-chili",
+      "at": 253,
+      "duration": 75,
+      "title": "Чили томится",
+      "role": "chef",
+      "passive": true,
+      "details": "Слабый огонь, крышку сдвинуть. Раз в 20 минут перемешать со дна.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula"
+      ],
+      "doneWhen": "Густое, фасоль мягкая, по краю блестит жир.",
+      "timer": {
+        "minutes": 75,
+        "label": "Чили"
+      }
+    },
+    {
+      "id": "c-lunch",
+      "at": 255,
+      "duration": 60,
+      "title": "Обед",
+      "role": "chef",
+      "details": "Час на обед: бутерброды с ветчиной и гаудой на хлебе на закваске. Чили, рагу и пулд-порк томятся сами.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 60,
+        "label": "Обед"
+      }
+    },
+    {
+      "id": "w-potato",
+      "at": 255,
+      "duration": 127,
+      "title": "Лосось: картофель печётся",
+      "role": "chef",
+      "passive": true,
+      "details": "Не открывать.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "oven",
+        "oven-tray"
+      ],
+      "doneWhen": "Нож входит в самую крупную картофелину без усилия.",
+      "timer": {
+        "minutes": 127,
+        "label": "Картофель"
+      }
+    },
+    {
+      "id": "h-cabbage-bags",
+      "at": 284,
+      "duration": 15,
+      "title": "Котлеты: капусту — по пакетам",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Капусту взвесить и разложить в 10 пакетов «Капуста»: Виталию 4 части, Свете 5 — ≈ 210 и 270 г. Выдавить воздух, закрыть, разгладить плоско — в контейнер 5,2 л с холодной водой и 4 аккумуляторами.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "scale",
+        "zip-bags",
+        "steel-spoon",
+        "plastic-boxes",
+        "ice-packs"
+      ]
+    },
+    {
+      "id": "h-borscht-pack",
+      "at": 299,
+      "duration": 18,
+      "title": "Борщ: разлить по контейнерам",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Кастрюлю — в фасовку на подставку. Сначала ужин: 1,1 кг — в кастрюлю 1,5 л. Остальное взвесить и разлить половником: Виталию 5 по ≈ 700 г, Свете 5 по ≈ 400 г, мясо поровну. Без крышек — на аккумуляторы.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "pot-12",
+        "pot-1500",
+        "ladle",
+        "scale",
+        "paper-box",
+        "plastic-750",
+        "ice-packs",
+        "trivets"
+      ]
+    },
+    {
+      "id": "w-cabbage-chill",
+      "at": 299,
+      "duration": 24,
+      "title": "Котлеты: капуста остывает в воде",
+      "role": "helper",
+      "passive": true,
+      "details": "Пакеты — под водой, сверху аккумуляторы.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "plastic-boxes"
+      ],
+      "timer": {
+        "minutes": 24,
+        "label": "Капуста в воде"
+      }
+    },
+    {
+      "id": "c-ragu-off",
+      "at": 315,
+      "duration": 3,
+      "title": "Паста: рагу попробовать и снять",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Рагу густое. Попробовать: пресно — +3 г соли из миски «Запас». Выключить огонь, накрыть: ждёт фузилли.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "saute",
+        "hob",
+        "grey-spatula"
+      ]
+    },
+    {
+      "id": "h-pot12-wash",
+      "at": 317,
+      "duration": 6,
+      "title": "Кастрюля 12 л: вымыть для пасты",
+      "role": "helper",
+      "zones": [
+        "prep"
+      ],
+      "details": "Вымыть руками и отдать повару: в ней варить пасту.",
+      "equipment": [
+        "pot-12"
+      ]
+    },
+    {
+      "id": "w-borscht-cool",
+      "at": 317,
+      "duration": 25,
+      "title": "Борщ остывает",
+      "role": "helper",
+      "passive": true,
+      "details": "Без крышек, на аккумуляторах.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "ice-packs"
+      ],
+      "timer": {
+        "minutes": 25,
+        "label": "Борщ остывает"
+      }
+    },
+    {
+      "id": "chef-pause-3",
+      "at": 318,
+      "duration": 10,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Чили: попробовать и снять с огня»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 10,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "h-cabbage-boxes",
+      "at": 323,
+      "duration": 6,
+      "title": "Котлеты: капусту и подливу — к котлетам, в ларь",
+      "role": "helper",
+      "zones": [
+        "pack",
+        "cold"
+      ],
+      "details": "Котлеты из холодильника. В каждый контейнер — пакет капусты и пакет подливы с тем же днём. Закрыть — в ларь, на дно и к стенкам, в один слой: сырое — в заморозку первым.",
+      "dishes": [
+        "kotlety"
+      ],
+      "equipment": [
+        "plastic-750",
+        "zip-bags"
+      ]
+    },
+    {
+      "id": "c-chili-off",
+      "at": 328,
+      "duration": 4,
+      "title": "Чили: попробовать и снять с огня",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Попробовать: пресно — +5 г соли из миски «Запас», размешать, попробовать снова. Выключить, кастрюлю — в фасовку на подставку: фасует помощник.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-4",
+        "hob",
+        "black-spatula"
+      ]
+    },
+    {
+      "id": "helper-pause-3",
+      "at": 329,
+      "duration": 13,
+      "title": "Отдых",
+      "role": "helper",
+      "details": "Следующий шаг — «Борщ — в холодильник»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 13,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-bbq",
+      "at": 332,
+      "duration": 5,
+      "title": "Пулд-порк: соус барбекю",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Кастрюля 1,5 л: 300 г кетчупа, 50 мл яблочного уксуса, 40 г тёмного сахара, 1 ст. л. вустерширского соуса, 1 ст. л. дижонской горчицы, ½ ч. л. копчёной паприки. Венчиком размешать, довести до кипения, огонь — слабый.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "pot-1500",
+        "hob",
+        "whisk"
+      ],
+      "uses": [
+        {
+          "ingredient": "ketchup",
+          "amount": 300,
+          "unit": "g"
+        },
+        {
+          "ingredient": "cider-vinegar",
+          "amount": 50,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "brown-sugar",
+          "amount": 40,
+          "unit": "g"
+        },
+        {
+          "ingredient": "worcester",
+          "amount": 15,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "dijon",
+          "amount": 15,
+          "unit": "g"
+        },
+        {
+          "ingredient": "smoked-paprika",
+          "amount": 2,
+          "unit": "g"
+        }
+      ],
+      "heat": "слабый огонь, 3/9"
+    },
+    {
+      "id": "c-rice-on",
+      "at": 337,
+      "duration": 5,
+      "title": "Чили: рис промыть и поставить",
+      "role": "chef",
+      "zones": [
+        "prep",
+        "hot"
+      ],
+      "details": "280 г риса для суши промыть в сите до прозрачной воды — 4–5 раз. В кастрюлю 2 л, 340 мл холодной воды, миска «Рис». Под крышкой довести до кипения, огонь — минимальный.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "sieves",
+        "pot-2",
+        "hob",
+        "blue-spatula"
+      ],
+      "uses": [
+        {
+          "ingredient": "sushi-rice",
+          "amount": 280,
+          "unit": "g"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 5,
+          "unit": "g"
+        }
+      ],
+      "heat": "сильный огонь, потом 1/9"
+    },
+    {
+      "id": "w-bbq",
+      "at": 337,
+      "duration": 10,
+      "title": "Пулд-порк: соус уваривается",
+      "role": "chef",
+      "passive": true,
+      "details": "Раз в 5 минут помешать венчиком.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "pot-1500",
+        "hob",
+        "whisk"
+      ],
+      "timer": {
+        "minutes": 10,
+        "label": "Соус барбекю"
+      }
+    },
+    {
+      "id": "c-pork-out",
+      "at": 342,
+      "duration": 4,
+      "title": "Пулд-порк — из духовки",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Формы — на стол горячей зоны, фольгу снять. Духовку — на 200 °C: в ней ещё картофель, потом паста.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "oven",
+        "pyrex",
+        "probe"
+      ],
+      "heat": "200 °C, конвекция"
+    },
+    {
+      "id": "w-rice",
+      "at": 342,
+      "duration": 12,
+      "title": "Чили: рис варится",
+      "role": "chef",
+      "passive": true,
+      "details": "Крышку не открывать.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-2",
+        "hob",
+        "blue-spatula"
+      ],
+      "timer": {
+        "minutes": 12,
+        "label": "Рис"
+      }
+    },
+    {
+      "id": "h-borscht-fridge",
+      "at": 342,
+      "duration": 4,
+      "title": "Борщ — в холодильник",
+      "role": "helper",
+      "zones": [
+        "cold"
+      ],
+      "details": "10 контейнеров и кастрюлю с ужином — на полку холодильника. Крышки прикрыть, не защёлкивать. В два слоя — только через аккумулятор.",
+      "dishes": [
+        "borscht"
+      ],
+      "equipment": [
+        "paper-box",
+        "plastic-750",
+        "pot-1500",
+        "ice-packs"
+      ]
+    },
+    {
+      "id": "chef-pause-4",
+      "at": 346,
+      "duration": 1,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Пулд-порк: соус — с огня»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 1,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "h-break-2",
+      "at": 346,
+      "duration": 10,
+      "title": "Перерыв",
+      "role": "helper",
+      "details": "Сесть на 10 минут.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 10,
+        "label": "Перерыв"
+      }
+    },
+    {
+      "id": "c-bbq-off",
+      "at": 347,
+      "duration": 2,
+      "title": "Пулд-порк: соус — с огня",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Соус загустел, как кетчуп. Выключить, накрыть — ждёт мясо.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "pot-1500",
+        "hob",
+        "whisk"
+      ]
+    },
+    {
+      "id": "chef-pause-5",
+      "at": 349,
+      "duration": 5,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Чили: рис — с огня»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 5,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-rice-off",
+      "at": 354,
+      "duration": 1,
+      "title": "Чили: рис — с огня",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Выключить, крышку не открывать: рис 10 минут доходит на пару.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-2",
+        "hob",
+        "blue-spatula"
+      ]
+    },
+    {
+      "id": "c-pasta-water",
+      "at": 355,
+      "duration": 4,
+      "title": "Паста: воду — на огонь",
+      "role": "chef",
+      "zones": [
+        "prep",
+        "hot"
+      ],
+      "details": "В вымытую кастрюлю 12 л — 6 л воды и миску «Паста: вода». Накрыть, сильный огонь.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob"
+      ],
+      "uses": [
+        {
+          "ingredient": "salt",
+          "amount": 60,
+          "unit": "g"
+        }
+      ],
+      "heat": "сильный огонь, 9/9"
+    },
+    {
+      "id": "helper-pause-4",
+      "at": 356,
+      "duration": 9,
+      "title": "Отдых",
+      "role": "helper",
+      "details": "Следующий шаг — «Чили: рис — в плёнку»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 9,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-pork-shred",
+      "at": 359,
+      "duration": 18,
+      "title": "Пулд-порк: разобрать мясо на волокна",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Мясо — в большую стеклянную миску, кости, хрящи и плотный жир — в мусор. Разобрать двумя вилками на волокна. Сок из форм — в мерный стакан: через 5 минут снять жир ложкой.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "pyrex",
+        "tongs",
+        "glass-bowls",
+        "measures"
+      ]
+    },
+    {
+      "id": "w-pasta-boil",
+      "at": 359,
+      "duration": 25,
+      "title": "Паста: вода закипает",
+      "role": "chef",
+      "passive": true,
+      "details": "Как закипит — убавить до среднего, крышку не снимать.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob"
+      ],
+      "timer": {
+        "minutes": 25,
+        "label": "Вода для пасты"
+      }
+    },
+    {
+      "id": "h-rice-wrap",
+      "at": 365,
+      "duration": 8,
+      "title": "Чили: рис — в плёнку",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Рис разрыхлить голубой лопаткой и взвесить. 5 порций по ≈ 130 г: горячим — на плёнку, плоской лепёшкой 1,5 см, завернуть — пар останется внутри. Подписать «Рис» — и сразу в холодильник: рису до холодильника не больше часа.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-2",
+        "blue-spatula",
+        "scale",
+        "film"
+      ]
+    },
+    {
+      "id": "h-chili-pack",
+      "at": 373,
+      "duration": 16,
+      "title": "Чили: разложить по контейнерам",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Чили взвесить и разложить половником без остатка: Виталию 5 по ≈ 300 г, Свете 5 по ≈ 230 г. Свете сверху — кукурузу из холодильника поровну, ≈ 130 г. Без крышек — на аккумуляторы.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "pot-4",
+        "ladle",
+        "scale",
+        "paper-box",
+        "ice-packs"
+      ]
+    },
+    {
+      "id": "c-pork-mix",
+      "at": 377,
+      "duration": 5,
+      "title": "Пулд-порк: соус, сок и желатин",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "7 г желатина — в 40 мл холодной воды на 5 минут, растворить в тёплом соусе. В мясо — соус и 150 мл сока без жира, перемешать. Попробовать: пресно — +3 г соли из миски «Запас». Миску — в фасовку, на аккумуляторы.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "glass-bowls",
+        "pot-1500"
+      ],
+      "uses": [
+        {
+          "ingredient": "gelatin",
+          "amount": 7,
+          "unit": "g"
+        }
+      ],
+      "tip": "Желатин держит сок в мясе: после заморозки оно не сохнет."
+    },
+    {
+      "id": "c-potato-out",
+      "at": 382,
+      "duration": 2,
+      "title": "Лосось: картофель — из духовки",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Противень — в фасовку, на решётку для остывания: помощнику на дюшес. Картофель нужен горячим.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "oven",
+        "oven-tray"
+      ]
+    },
+    {
+      "id": "w-pork-cool",
+      "at": 382,
+      "duration": 47,
+      "title": "Пулд-порк остывает",
+      "role": "chef",
+      "passive": true,
+      "details": "Миска — на аккумуляторах, без крышки.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "glass-bowls"
+      ],
+      "timer": {
+        "minutes": 47,
+        "label": "Пулд-порк остывает"
+      }
+    },
+    {
+      "id": "c-pasta-in",
+      "at": 384,
+      "duration": 2,
+      "title": "Паста: фузилли — в кипяток",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "600 г фузилли — в кипящую воду, перемешать шумовкой. Варить на 3 минуты меньше, чем написано на пачке: дойдут в духовке.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "skimmer"
+      ],
+      "uses": [
+        {
+          "ingredient": "fusilli",
+          "amount": 600,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "chef-pause-6",
+      "at": 386,
+      "duration": 7,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Паста: собрать в противни»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 7,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "w-pasta-cook",
+      "at": 386,
+      "duration": 7,
+      "title": "Паста: фузилли варятся",
+      "role": "chef",
+      "passive": true,
+      "details": "Дважды перемешать шумовкой.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "pot-12",
+        "hob",
+        "skimmer"
+      ],
+      "timer": {
+        "minutes": 7,
+        "label": "Фузилли"
+      }
+    },
+    {
+      "id": "h-duchess-mash",
+      "at": 389,
+      "duration": 15,
+      "title": "Лосось: дюшес — пюре",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Картофель разрезать пополам, мякоть ложкой — в большую стеклянную миску, кожуру — в мусор. Толкушкой — в гладкое пюре со 100 г мягкого масла, 4 желтками, 1 г мускатного ореха и миской «Дюшес». Белки — в мусор.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "oven-tray",
+        "glass-bowls",
+        "masher"
+      ],
+      "uses": [
+        {
+          "ingredient": "butter",
+          "amount": 100,
+          "unit": "g"
+        },
+        {
+          "ingredient": "eggs",
+          "amount": 4,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "nutmeg",
+          "amount": 1,
+          "unit": "g"
+        },
+        {
+          "ingredient": "salt",
+          "amount": 12,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "w-chili-cool",
+      "at": 389,
+      "duration": 40,
+      "title": "Чили остывает",
+      "role": "helper",
+      "passive": true,
+      "details": "Без крышек, на аккумуляторах.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "paper-box"
+      ],
+      "timer": {
+        "minutes": 40,
+        "label": "Чили остывает"
+      }
+    },
+    {
+      "id": "c-pasta-out",
+      "at": 393,
+      "duration": 12,
+      "title": "Паста: собрать в противни",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Шумовкой — фузилли в два эмалированных противня, поровну. Рагу из сотейника — сверху, перемешать. 70 г пармезана — внутрь, моцареллу порвать — сверху, остаток пармезана — на неё. Воду не сливать: пусть остывает в кастрюле.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "pot-12",
+        "skimmer",
+        "saute",
+        "enamel-trays",
+        "steel-turner"
+      ],
+      "uses": [
+        {
+          "ingredient": "mozzarella",
+          "amount": 2,
+          "unit": "pcs"
+        }
+      ],
+      "warning": "Горячую воду в раковину не сливать — она испортится."
+    },
+    {
+      "id": "h-duchess-pipe",
+      "at": 404,
+      "duration": 25,
+      "title": "Лосось: дюшес — отсадить розочки",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Пюре — в кондитерский мешок со звездой. В 8 алюминиевых лотков «Лосось»: Виталию по 4 розочки Ø 5 см, Свете по 3, с зазором 2 см. Всё пюре — без остатка, ≈ 52 г на розочку. Без крышек — остывать.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "glass-bowls",
+        "piping",
+        "alu-tray"
+      ]
+    },
+    {
+      "id": "c-pasta-bake-in",
+      "at": 405,
+      "duration": 2,
+      "title": "Паста — в духовку",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Оба противня — на средний уровень, 200 °C.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "oven",
+        "enamel-trays"
+      ],
+      "heat": "200 °C, конвекция"
+    },
+    {
+      "id": "c-break-2",
+      "at": 407,
+      "duration": 10,
+      "title": "Перерыв",
+      "role": "chef",
+      "details": "Сесть на 10 минут.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 10,
+        "label": "Перерыв"
+      }
+    },
+    {
+      "id": "w-pasta-bake",
+      "at": 407,
+      "duration": 20,
+      "title": "Паста запекается",
+      "role": "chef",
+      "passive": true,
+      "details": "Не открывать.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "oven",
+        "enamel-trays"
+      ],
+      "timer": {
+        "minutes": 20,
+        "label": "Паста"
+      }
+    },
+    {
+      "id": "c-hot-clean",
+      "at": 417,
+      "duration": 10,
+      "title": "Горячая зона: прибрать",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Сковороду, сотейник и кастрюлю 4 л — в контейнер у раковины. Плиту протереть. Шумовку, лопатки и ложки — в посудомойку.",
+      "equipment": [
+        "hob"
+      ]
+    },
+    {
+      "id": "c-pasta-out-oven",
+      "at": 427,
+      "duration": 2,
+      "title": "Паста — из духовки",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Противни — в фасовку, на большие деревянные доски. Духовку выключить.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "oven",
+        "enamel-trays"
+      ],
+      "doneWhen": "Сыр подрумянился пятнами, по краю пузырится соус."
+    },
+    {
+      "id": "c-pork-bags",
+      "at": 429,
+      "duration": 12,
+      "title": "Пулд-порк: по пакетам",
+      "role": "chef",
+      "zones": [
+        "pack"
+      ],
+      "details": "Мясо с соусом взвесить и разложить в 10 пакетов «Пулд-порк»: Виталию 5 по ≈ 180 г, Свете 5 по ≈ 120 г. Выдавить воздух, разгладить слоем 2 см, — на противень духовки, в холодильник.",
+      "dishes": [
+        "pulled-pork"
+      ],
+      "equipment": [
+        "glass-bowls",
+        "scale",
+        "zip-bags",
+        "tongs"
+      ]
+    },
+    {
+      "id": "w-pasta-cool",
+      "at": 429,
+      "duration": 25,
+      "title": "Паста остывает в противнях",
+      "role": "chef",
+      "passive": true,
+      "details": "Без накрытия.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "enamel-trays"
+      ],
+      "timer": {
+        "minutes": 25,
+        "label": "Паста остывает"
+      }
+    },
+    {
+      "id": "h-chili-fridge",
+      "at": 429,
+      "duration": 3,
+      "title": "Чили — в холодильник",
+      "role": "helper",
+      "zones": [
+        "cold"
+      ],
+      "details": "Виталию в каждый контейнер сверху — рис в плёнке из холодильника. 10 контейнеров — на полку, крышки прикрыть, не защёлкивать.",
+      "dishes": [
+        "chili"
+      ],
+      "equipment": [
+        "paper-box",
+        "film"
+      ]
+    },
+    {
+      "id": "w-duchess-cool",
+      "at": 429,
+      "duration": 25,
+      "title": "Лосось: дюшес остывает",
+      "role": "helper",
+      "passive": true,
+      "details": "Лотки без крышек.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "alu-tray"
+      ],
+      "timer": {
+        "minutes": 25,
+        "label": "Дюшес остывает"
+      }
+    },
+    {
+      "id": "helper-pause-5",
+      "at": 432,
+      "duration": 22,
+      "title": "Отдых",
+      "role": "helper",
+      "details": "Следующий шаг — «Лосось: лотки дюшес — в холодильник»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 22,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "chef-pause-7",
+      "at": 441,
+      "duration": 13,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Паста: разложить по контейнерам»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 13,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-pasta-pack",
+      "at": 454,
+      "duration": 14,
+      "title": "Паста: разложить по контейнерам",
+      "role": "chef",
+      "zones": [
+        "pack"
+      ],
+      "details": "Широкой стальной лопаткой — в бумажные контейнеры «Паста»: всё взвесить и разделить без остатка, Виталию 4 по ≈ 380 г, Свете 4 по ≈ 265 г. Паста уже остыла в противнях: крышки прикрыть — и в холодильник.",
+      "dishes": [
+        "pasta"
+      ],
+      "equipment": [
+        "enamel-trays",
+        "steel-turner",
+        "scale",
+        "paper-box"
+      ]
+    },
+    {
+      "id": "h-duchess-fridge",
+      "at": 454,
+      "duration": 3,
+      "title": "Лосось: лотки дюшес — в холодильник",
+      "role": "helper",
+      "zones": [
+        "cold"
+      ],
+      "details": "Крышки — сверху, не защёлкивать.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "alu-tray"
+      ]
+    },
+    {
+      "id": "h-salmon-day1",
+      "at": 457,
+      "duration": 4,
+      "title": "Лосось: куски на день 1 — в лотки",
+      "role": "helper",
+      "zones": [
+        "cold"
+      ],
+      "details": "Из ларя 2 куска лосося: ≈ 180 г — в лоток «Лосось, Виталий, день 1», ≈ 130 г — в лоток Свете. Оба — в холодильник: к ужину завтра лосось оттает.",
+      "dishes": [
+        "salmon"
+      ],
+      "equipment": [
+        "alu-tray"
+      ],
+      "uses": [
+        {
+          "ingredient": "salmon",
+          "amount": 310,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "helper-pause-6",
+      "at": 461,
+      "duration": 7,
+      "title": "Отдых",
+      "role": "helper",
+      "details": "Следующий шаг — «Фасовку прибрать, посудомойку — запустить»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 7,
+        "label": "Отдых"
+      }
+    },
+    {
+      "id": "c-prep-clean",
+      "at": 468,
+      "duration": 12,
+      "title": "Подготовка: прибрать",
+      "role": "chef",
+      "zones": [
+        "prep"
+      ],
+      "details": "Кастрюли и сковороду — вымыть руками. Доски — с моющим средством, ножи — вытереть и убрать. Кастрюлю 12 л с остывшей водой — вылить в раковину, когда вода не горячее 50 °C.",
+      "equipment": [
+        "knives",
+        "boards"
+      ]
+    },
+    {
+      "id": "h-clean",
+      "at": 468,
+      "duration": 12,
+      "title": "Фасовку прибрать, посудомойку — запустить",
+      "role": "helper",
+      "zones": [
+        "pack"
+      ],
+      "details": "Столы фасовки протереть, пустые аккумуляторы — сложить в холодильник. Посудомойку загрузить и запустить второй раз.",
+      "equipment": [
+        "dishwasher"
+      ]
+    },
+    {
+      "id": "freeze",
+      "at": 477,
+      "duration": 3,
+      "title": "Через 4 часа — заморозка",
+      "role": "helper",
+      "details": "Остыло — термощуп в центре контейнера не выше 5 °C. Сегодня в ларе только котлеты. Утром дня 1 в ларь — борщ, пасту и пулд-порк (≈ 8,6 кг), в морозилку холодильника — чили (≈ 3,2 кг). Утром дня 2 — лотки дюшес дней 4, 8, 11, положив в каждый кусок лосося из ларя.",
+      "passive": true,
+      "dishes": [
+        "borscht",
+        "chili",
+        "pasta",
+        "kotlety",
+        "pulled-pork",
+        "salmon"
+      ],
+      "timer": {
+        "minutes": 240,
+        "label": "Заморозка"
+      },
+      "warning": "Тёплое в морозилку не ставить. Борщ и лотки лосося дня 1, чили дня 2 — не замораживать: их едят первыми. Быструю заморозку выключить через сутки после последней закладки."
+    }
+  ],
+  "ration": {
+    "people": [
+      {
+        "id": "vitaly",
+        "name": "Виталий",
+        "target": {
+          "kcal": 2500,
+          "protein": 180
+        },
+        "portions": [
+          {
+            "dish": "borscht",
+            "size": "700 г + 2 ст. л. сметаны",
+            "kcal": 522,
+            "protein": 33,
+            "fat": 34,
+            "carbs": 21,
+            "reheat": {
+              "methods": [
+                "microwave"
+              ],
+              "active": 2,
+              "total": 9,
+              "text": "Утром — 2 ст. л. своей сметаны сверху. В обед микроволновка 60 %, крышка неплотно: 4 минуты, перемешать, ещё 3, минуту под крышкой."
+            }
+          },
+          {
+            "dish": "chili",
+            "size": "300 г чили, 130 г риса, 20 г чеддера",
+            "kcal": 679,
+            "protein": 40,
+            "fat": 31,
+            "carbs": 60,
+            "reheat": {
+              "methods": [
+                "microwave"
+              ],
+              "active": 3,
+              "total": 11,
+              "text": "Утром сверху — 20 г тёртого чеддера. В обед рис в плёнке вынуть. Чили — 60 %, крышка неплотно: 3 минуты, перемешать, ещё 3. Рис надрезать, ложку воды — 2 минуты на 60 %, выложить рядом, минуту под крышкой."
+            }
+          },
+          {
+            "dish": "pasta",
+            "size": "≈ 380 г",
+            "kcal": 720,
+            "protein": 35,
+            "fat": 32,
+            "carbs": 72,
+            "reheat": {
+              "methods": [
+                "microwave"
+              ],
+              "active": 2,
+              "total": 9,
+              "text": "Утром на края — 2 ст. л. воды. Микроволновка 50 %, крышка неплотно: 4 минуты, минуту постоять, ещё 3, минуту под крышкой — середина прогреется, а сыр не станет резиновым."
+            }
+          },
+          {
+            "dish": "kotlety",
+            "size": "3 котлеты, 210 г капусты, подлива",
+            "kcal": 849,
+            "protein": 46,
+            "fat": 58,
+            "carbs": 35,
+            "reheat": {
+              "methods": [
+                "stovetop"
+              ],
+              "active": 13,
+              "total": 19,
+              "text": "Сотейник с ложкой масла — 2 мин на сильном огне. Капусту — в кастрюлю 1,5 л, средний огонь, без крышки. Котлеты — по 3 мин с двух сторон, крышку, слабый огонь, 6 мин, до 72 °C. Подливу с 2 ложками воды — в сотейник, кусочек масла. Подать с огурцами, жареным луком и укропом."
+            }
+          },
+          {
+            "dish": "pulled-pork",
+            "size": "180 г мяса, булочка, 120 г коулслоу",
+            "kcal": 749,
+            "protein": 45,
+            "fat": 37,
+            "carbs": 59,
+            "reheat": {
+              "methods": [
+                "stovetop"
+              ],
+              "active": 10,
+              "total": 13,
+              "text": "Мясо с 2 ст. л. воды — в сотейник под крышку, средний огонь, 9 мин, дважды перемешать, до 70 °C. Тем временем коулслоу: капуста на шинковке тёрки, тёртая морковь, ложка майонеза, ложка яблочного уксуса, щепоть сахара. Булочку — разрезом в тостер. Собрать с огурцами и жареным луком."
+            }
+          },
+          {
+            "dish": "salmon",
+            "size": "лосось 180 г, 4 розочки дюшес, соус",
+            "kcal": 900,
+            "protein": 45,
+            "fat": 59,
+            "carbs": 48,
+            "reheat": {
+              "methods": [
+                "oven",
+                "stovetop"
+              ],
+              "active": 12,
+              "total": 18,
+              "text": "Духовка — 220 °C заранее. Лотки дюшес без крышек — 14 мин. Лосось обсушить, посолить (1 г), смазать горчицей, прижать фисташковую пасту с панко, цедрой и петрушкой; через 4 мин — к дюшес, до 48 °C. Бёр блан: шалот, вино и уксус уварить, вбить холодное масло, лимон. Тарелки — подогреть."
+            }
+          }
+        ],
+        "atWork": [
+          "morning",
+          "lunch",
+          "afternoon"
+        ],
+        "note": "Вместе с протеиновым коктейлем вечером"
+      },
+      {
+        "id": "sveta",
+        "name": "Света",
+        "target": {
+          "kcal": 1800
+        },
+        "portions": [
+          {
+            "dish": "borscht",
+            "size": "400 г + 2 ст. л. сметаны",
+            "kcal": 339,
+            "protein": 19,
+            "fat": 24,
+            "carbs": 12,
+            "reheat": {
+              "methods": [
+                "microwave"
+              ],
+              "active": 2,
+              "total": 7,
+              "text": "Микроволновка 60 %, крышка неплотно: 3 минуты, перемешать, ещё 2, минуту под крышкой. Сверху — 2 ст. л. сметаны и укроп."
+            }
+          },
+          {
+            "dish": "chili",
+            "size": "230 г чили, ≈ 130 г кукурузы, ложка сметаны",
+            "kcal": 519,
+            "protein": 29,
+            "fat": 27,
+            "carbs": 40,
+            "reheat": {
+              "methods": [
+                "microwave"
+              ],
+              "active": 2,
+              "total": 7,
+              "text": "Кукуруза уже сверху. Микроволновка 60 %, крышка неплотно: 3 минуты, перемешать, ещё 2, минуту под крышкой. Сверху — ложка сметаны."
+            }
+          },
+          {
+            "dish": "pasta",
+            "size": "≈ 265 г",
+            "kcal": 502,
+            "protein": 25,
+            "fat": 23,
+            "carbs": 50,
+            "reheat": {
+              "methods": [
+                "microwave"
+              ],
+              "active": 2,
+              "total": 8,
+              "text": "На края — 2 ст. л. воды. Микроволновка 50 %, крышка неплотно: 3 минуты, минуту постоять, ещё 3. Сверху — базилик и 2 ч. л. хорошего оливкового масла."
+            }
+          },
+          {
+            "dish": "kotlety",
+            "size": "2 котлеты, 270 г капусты, подлива",
+            "kcal": 684,
+            "protein": 34,
+            "fat": 45,
+            "carbs": 35,
+            "reheat": {
+              "methods": [
+                "stovetop"
+              ],
+              "active": 13,
+              "total": 19,
+              "text": "Сотейник с ложкой масла — 2 мин на сильном огне. Капусту — в кастрюлю 1,5 л, средний огонь, без крышки. Котлеты — по 3 мин с двух сторон, крышку, слабый огонь, 6 мин, до 72 °C. Подливу с 2 ложками воды — в сотейник, кусочек масла. Подать с огурцами, жареным луком и укропом."
+            }
+          },
+          {
+            "dish": "pulled-pork",
+            "size": "120 г мяса, булочка, 150 г коулслоу",
+            "kcal": 639,
+            "protein": 34,
+            "fat": 31,
+            "carbs": 56,
+            "reheat": {
+              "methods": [
+                "stovetop"
+              ],
+              "active": 10,
+              "total": 13,
+              "text": "Мясо с 2 ст. л. воды — в сотейник под крышку, средний огонь, 9 мин, дважды перемешать, до 70 °C. Тем временем коулслоу: капуста на шинковке тёрки, тёртая морковь, ложка майонеза, ложка яблочного уксуса, щепоть сахара. Булочку — разрезом в тостер. Собрать с огурцами и жареным луком."
+            }
+          },
+          {
+            "dish": "salmon",
+            "size": "лосось 130 г, 3 розочки дюшес, соус",
+            "kcal": 666,
+            "protein": 33,
+            "fat": 43,
+            "carbs": 36,
+            "reheat": {
+              "methods": [
+                "oven",
+                "stovetop"
+              ],
+              "active": 12,
+              "total": 18,
+              "text": "Духовка — 220 °C заранее. Лотки дюшес без крышек — 14 мин. Лосось обсушить, посолить (1 г), смазать горчицей, прижать фисташковую пасту с панко, цедрой и петрушкой; через 4 мин — к дюшес, до 48 °C. Бёр блан: шалот, вино и уксус уварить, вбить холодное масло, лимон. Тарелки — подогреть."
+            }
+          }
+        ],
+        "note": "Белка — не больше 95 г в день"
+      }
+    ],
+    "extras": [
+      {
+        "id": "bf-oats",
+        "name": "Овсянка с арахисовой пастой и грушей",
+        "meal": "breakfast",
+        "how": "Овсянку с молоком — в кастрюлю 1,5 л, средний огонь, помешивая, 5 минут. В тарелке — арахисовая паста, мёд и груша ломтиками.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "60 г овсянки, 200 мл молока, 20 г арахисовой пасты, 1 ч. л. мёда, ½ груши",
+            "kcal": 547,
+            "protein": 20
+          },
+          {
+            "person": "sveta",
+            "text": "45 г овсянки, 180 мл молока, 10 г арахисовой пасты, 1 ч. л. мёда, ½ груши",
+            "kcal": 411,
+            "protein": 15
+          }
+        ]
+      },
+      {
+        "id": "bf-omelet",
+        "name": "Омлет с гаудой и шнитт-луком, тост",
+        "meal": "breakfast",
+        "how": "Из морозилки — хлеб на закваске: ломтик сразу в тостер. Яйца взбить вилкой. На серой антипригарной сковороде на слабом огне растопить немного масла, вылить яйца и помешивать 2–3 минуты. На половину — гауду и шнитт-лук, сложить. Тост — с маслом.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "3 яйца, 25 г гауды, шнитт-лук; тост с маслом",
+            "kcal": 474,
+            "protein": 31
+          },
+          {
+            "person": "sveta",
+            "text": "2 яйца, 15 г гауды, шнитт-лук; тост с маслом",
+            "kcal": 360,
+            "protein": 21
+          }
+        ]
+      },
+      {
+        "id": "bf-bagel",
+        "name": "Бейгл с творожным сыром и копчёным лососем",
+        "meal": "breakfast",
+        "how": "Из морозилки — бейглы: разрезать и в тостер. Из холодильника — творожный сыр, копчёный лосось, каперсы и укроп. Намазать сыр, сверху лосось, каперсы и рубленый укроп.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "1 бейгл, 30 г творожного сыра, 60 г лосося, 1 ч. л. каперсов",
+            "kcal": 413,
+            "protein": 24
+          },
+          {
+            "person": "sveta",
+            "text": "1 бейгл, 25 г творожного сыра, 40 г лосося, каперсы",
+            "kcal": 365,
+            "protein": 19
+          }
+        ]
+      },
+      {
+        "id": "bf-yogurt",
+        "name": "Греческий йогурт с гранолой, грушей и фисташковой пастой",
+        "meal": "breakfast",
+        "how": "Йогурт — в миску, сверху гранола, груша ломтиками и фисташковая паста.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "250 г йогурта, 40 г гранолы, ½ груши, 10 г фисташковой пасты",
+            "kcal": 525,
+            "protein": 29
+          },
+          {
+            "person": "sveta",
+            "text": "200 г йогурта, 30 г гранолы, ½ груши, 8 г фисташковой пасты",
+            "kcal": 421,
+            "protein": 23
+          }
+        ]
+      },
+      {
+        "id": "bf-eggs",
+        "name": "Яичница с беконом и черри, тост",
+        "meal": "breakfast",
+        "how": "Хлеб из морозилки — в тостер. Бекон — на холодную серую антипригарную сковороду, средний огонь, 4 минуты до хруста. На его жире минуту — черри половинками, рядом разбить яйца — 3 минуты. Свете яйца перевернуть на 30 секунд: желток всмятку она не ест.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "3 яйца, 25 г бекона, 100 г черри; тост",
+            "kcal": 442,
+            "protein": 29
+          },
+          {
+            "person": "sveta",
+            "text": "2 яйца, 15 г бекона, 100 г черри; тост",
+            "kcal": 334,
+            "protein": 21
+          }
+        ]
+      },
+      {
+        "id": "bf-toast",
+        "name": "Тосты с ветчиной и гаудой, мандарин",
+        "meal": "breakfast",
+        "how": "Хлеб из морозилки — в тостер, намазать маслом, сверху ветчина и гауда.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "2 ломтика хлеба с маслом, 40 г ветчины, 30 г гауды; мандарин",
+            "kcal": 452,
+            "protein": 24
+          },
+          {
+            "person": "sveta",
+            "text": "2 ломтика хлеба с маслом, 25 г ветчины, 20 г гауды; мандарин",
+            "kcal": 400,
+            "protein": 18
+          }
+        ]
+      },
+      {
+        "id": "bf-kwark",
+        "name": "Кварк с мёдом, орехами, гранолой и мандарином",
+        "meal": "breakfast",
+        "how": "Кварк — в миску, сверху мёд, грецкие орехи, гранола и дольки мандарина.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "250 г кварка, 2 ч. л. мёда, 15 г грецких орехов, 30 г гранолы, мандарин",
+            "kcal": 443,
+            "protein": 28
+          },
+          {
+            "person": "sveta",
+            "text": "200 г кварка, 1 ч. л. мёда, 10 г орехов, 25 г гранолы, мандарин",
+            "kcal": 350,
+            "protein": 22
+          }
+        ]
+      },
+      {
+        "id": "v-fruit",
+        "name": "Груша и мандарин",
+        "meal": "snack",
+        "how": "Утром — с собой.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "1 груша и 1 мандарин",
+            "kcal": 135,
+            "protein": 1
+          }
+        ]
+      },
+      {
+        "id": "v-nuts",
+        "name": "Грецкие орехи",
+        "meal": "snack",
+        "how": "Утром отвесить в стеклянный контейнер 180 мл — с собой.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "20 г",
+            "kcal": 131,
+            "protein": 3
+          }
+        ]
+      },
+      {
+        "id": "v-shake",
+        "name": "Протеиновый коктейль",
+        "meal": "snack",
+        "how": "В шейкер — 500 мл соевого молока и 60 г протеина, встряхнуть и выпить сразу.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "60 г протеина на 500 мл соевого молока",
+            "kcal": 414,
+            "protein": 63
+          }
+        ]
+      },
+      {
+        "id": "s-fruit",
+        "name": "Яблоко и мандарины",
+        "meal": "snack",
+        "how": "Из холодильника.",
+        "servings": [
+          {
+            "person": "sveta",
+            "text": "1 яблоко и 2 мандарина",
+            "kcal": 158,
+            "protein": 2
+          }
+        ]
+      },
+      {
+        "id": "s-nuts",
+        "name": "Грецкие орехи",
+        "meal": "snack",
+        "how": "Из шкафа.",
+        "servings": [
+          {
+            "person": "sveta",
+            "text": "20 г",
+            "kcal": 131,
+            "protein": 3
+          }
+        ]
+      },
+      {
+        "id": "s-choc",
+        "name": "Тёмный шоколад",
+        "meal": "snack",
+        "how": "Из шкафа.",
+        "servings": [
+          {
+            "person": "sveta",
+            "text": "20 г",
+            "kcal": 112,
+            "protein": 2
+          }
+        ]
+      }
+    ],
+    "days": [
+      {
+        "day": 1,
+        "breakfast": "bf-oats",
+        "lunch": "borscht",
+        "dinner": "salmon",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "note": "Борщ и лоток лосося — из холодильника: их не замораживали. Чили на завтра — тоже в холодильнике."
+      },
+      {
+        "day": 2,
+        "breakfast": "bf-omelet",
+        "lunch": "chili",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "thaw": [
+          "2 булочки бриошь к пулд-порку"
+        ]
+      },
+      {
+        "day": 3,
+        "breakfast": "bf-bagel",
+        "lunch": "pasta",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      },
+      {
+        "day": 4,
+        "breakfast": "bf-yogurt",
+        "lunch": "borscht",
+        "dinner": "salmon",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      },
+      {
+        "day": 5,
+        "breakfast": "bf-eggs",
+        "lunch": "chili",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "thaw": [
+          "2 булочки бриошь к пулд-порку"
+        ]
+      },
+      {
+        "day": 6,
+        "breakfast": "bf-toast",
+        "lunch": "pasta",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      },
+      {
+        "day": 7,
+        "breakfast": "bf-kwark",
+        "lunch": "borscht",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "thaw": [
+          "вторая упаковка копчёного лосося"
+        ]
+      },
+      {
+        "day": 8,
+        "breakfast": "bf-bagel",
+        "lunch": "chili",
+        "dinner": "salmon",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "note": "Укроп и шнитт-лук второй недели — из морозилки: режем замороженными.",
+        "thaw": [
+          "2 булочки бриошь к пулд-порку"
+        ]
+      },
+      {
+        "day": 9,
+        "breakfast": "bf-eggs",
+        "lunch": "pasta",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      },
+      {
+        "day": 10,
+        "breakfast": "bf-oats",
+        "lunch": "borscht",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      },
+      {
+        "day": 11,
+        "breakfast": "bf-omelet",
+        "lunch": "chili",
+        "dinner": "salmon",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "thaw": [
+          "2 булочки бриошь к пулд-порку"
+        ]
+      },
+      {
+        "day": 12,
+        "breakfast": "bf-toast",
+        "lunch": "pasta",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      },
+      {
+        "day": 13,
+        "breakfast": "bf-yogurt",
+        "lunch": "borscht",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        },
+        "thaw": [
+          "2 булочки бриошь к пулд-порку"
+        ]
+      },
+      {
+        "day": 14,
+        "breakfast": "bf-kwark",
+        "lunch": "chili",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-fruit"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-nuts"
+          ],
+          "evening": [
+            "v-shake",
+            "s-choc"
+          ]
+        }
+      }
+    ]
+  },
+  "notes": [
+    "Сметана и булочки бриошь — свои, по отдельным рецептам: их делают заранее, в день готовки на них нет ни места, ни духовки.",
+    "Сырой свёклы в AH нет, борщ — на варёной: её кладут в конце и не кипятят сильно, а уксус держит цвет.",
+    "Рис для суши после заморозки чуть твердеет (каталог: 80 из 100); Виталий греет его отдельно, в плёнке, с ложкой воды.",
+    "Пулд-порк и лосось с дюшес — новые ужины: по правилам одну порцию сначала заморозить и через несколько дней разогреть. 14 минут для дюшес из размороженного при 220 °C — оценка: в каталоге время дано только из замороженного (20–25 минут)."
+  ]
+}
