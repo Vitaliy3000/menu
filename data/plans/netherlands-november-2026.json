@@ -2,7 +2,7 @@
   "$schema": "../../schemas/cook-plan.schema.json",
   "id": "netherlands-november-2026",
   "title": "Нидерланды-Ноябрь-2026",
-  "summary": "Меню на 14 дней для двоих — русское, американское и европейское. Обеды из микроволновки: борщ, чили с рисом или кукурузой, паста аль форно. Ужины за 20 минут: котлеты с тушёной капустой, пулд-порк в своей бриоши, лосось в фисташковой корочке с картофелем дюшес. Уходят остатки: лосось, демиглас, фузилли, фасоль, рис для суши.",
+  "summary": "Меню на 14 дней для двоих — русское, американское и европейское. Обеды из микроволновки: борщ, чили с рисом или кукурузой, паста аль форно. Ужины за 20 минут: котлеты с тушёной капустой, пулд-порк в своей бриоши, лосось в фисташковой корочке с картофелем дюшес. Уходят остатки: лосось, демиглас, фузилли, фасоль, томаты, пармезан, рис для суши.",
   "start": "09:00",
   "duration": {
     "total": 480,
@@ -321,23 +321,20 @@
       "id": "foil",
       "name": "Алюминиевая фольга",
       "kind": "consumable",
-      "note": "AH Aluminiumfolie — накрыть пулд-порк",
-      "buy": true
+      "note": "Из излишков — накрыть пулд-порк"
     },
     {
       "id": "film",
       "name": "Пищевая плёнка",
       "kind": "consumable",
-      "note": "AH Vershoudfolie — рис",
-      "buy": true
+      "note": "Из излишков — рис"
     },
     {
       "id": "zip-bags",
-      "name": "Пакеты с застёжкой 1 л",
+      "name": "Пакеты с застёжкой 1,2 л",
       "kind": "consumable",
       "count": 30,
-      "note": "Toppits Safeloc diepvrieszakken, 2 × 20: капуста, подлива, пулд-порк",
-      "buy": true
+      "note": "Из излишков: капуста, подлива, пулд-порк"
     },
     {
       "id": "piping",
@@ -568,7 +565,7 @@
       "id": "pasta",
       "name": "Паста",
       "meal": "lunch",
-      "description": "Паста аль форно: фузилли с рагу из свиных колбасок, пассаты и вяленых томатов, под моцареллой и пармезаном.",
+      "description": "Паста аль форно: фузилли с рагу из свиных колбасок, рубленых и вяленых томатов, под моцареллой и пармезаном.",
       "yield": {
         "amount": 2.85,
         "unit": "kg"
@@ -995,28 +992,12 @@
       "note": "1-я. Mutti Tomaten concentraat dubbel, 2 × 140 г"
     },
     {
-      "id": "pelati",
-      "name": "Томаты в собственном соку",
-      "amount": 800,
-      "unit": "g",
-      "section": "grocery",
-      "note": "1-я. Mutti Pomodori pelati, 2 × 400 г"
-    },
-    {
       "id": "kidney",
       "name": "Фасоль кидни",
       "amount": 2,
       "unit": "can",
       "section": "grocery",
-      "note": "1-я. AH Terra Kidneybonen, 2 × 400 г"
-    },
-    {
-      "id": "passata",
-      "name": "Пассата",
-      "amount": 1145,
-      "unit": "ml",
-      "section": "grocery",
-      "note": "1-я. Mutti Passata: 720 мл + 425 мл"
+      "note": "1-я. Hak Kidneybonen, 2 × 380 г"
     },
     {
       "id": "fusilli",
@@ -1033,14 +1014,6 @@
       "unit": "pcs",
       "section": "dairy",
       "note": "1-я. Galbani Mozzarella, 2 × 225 г — ≈ 125 г сыра без рассола"
-    },
-    {
-      "id": "parmesan",
-      "name": "Пармезан",
-      "amount": 150,
-      "unit": "g",
-      "section": "dairy",
-      "note": "1-я. Zanetti Parmigiano Reggiano 150 г"
     },
     {
       "id": "white-bread",
@@ -1131,14 +1104,6 @@
       "note": "1-я. Van Gilse Donkere basterdsuiker"
     },
     {
-      "id": "ketchup",
-      "name": "Кетчуп",
-      "amount": 300,
-      "unit": "g",
-      "section": "grocery",
-      "note": "1-я. Heinz Tomato ketchup 400 мл"
-    },
-    {
       "id": "cider-vinegar",
       "name": "Яблочный уксус",
       "amount": 160,
@@ -1169,14 +1134,6 @@
       "unit": "ml",
       "section": "grocery",
       "note": "1-я. AH Biologisch Rode wijnazijn 250 мл"
-    },
-    {
-      "id": "panko",
-      "name": "Панко",
-      "amount": 60,
-      "unit": "g",
-      "section": "grocery",
-      "note": "1-я. AH Panko broodkruim 200 г"
     },
     {
       "id": "bay",
@@ -1271,6 +1228,15 @@
       "note": "Из излишков"
     },
     {
+      "id": "parmesan",
+      "name": "Пармезан",
+      "amount": 150,
+      "unit": "g",
+      "section": "dairy",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
       "id": "gelatin",
       "name": "Желатин",
       "amount": 7,
@@ -1287,6 +1253,33 @@
       "section": "grocery",
       "staple": true,
       "note": "2 банки по 250 г"
+    },
+    {
+      "id": "polpa",
+      "name": "Томаты Mutti Polpa",
+      "amount": 2,
+      "unit": "kg",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков: 5 банок по 400 г"
+    },
+    {
+      "id": "ketchup",
+      "name": "Кетчуп",
+      "amount": 300,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "panko",
+      "name": "Панко",
+      "amount": 60,
+      "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
     },
     {
       "id": "sundried",
@@ -1423,7 +1416,7 @@
       "amount": 400,
       "unit": "g",
       "section": "grocery",
-      "note": "2-я. AH Augurken zuur 670 г — не сладкие"
+      "note": "2-я. Maille Cornichons extra fins, 2 × 400 г — не сладкие"
     },
     {
       "id": "fried-onion",
@@ -1623,7 +1616,7 @@
       "amount": 20,
       "unit": "g",
       "section": "grocery",
-      "note": "2-я. AH Biologisch Kappertjes 100 г"
+      "note": "2-я. Carbonell Kappertjes nonpareilles 100 г"
     }
   ],
   "beforeStart": [
@@ -3164,12 +3157,12 @@
       "id": "c-ragu-sauce",
       "at": 229,
       "duration": 5,
-      "title": "Паста: чеснок, вяленые томаты, пассата",
+      "title": "Паста: чеснок, вяленые томаты, Polpa",
       "role": "chef",
       "zones": [
         "hot"
       ],
-      "details": "Чеснок «Паста» — минута. Вяленые томаты с маслом и всю пассату, довести до кипения. Огонь — самый слабый, крышку сдвинуть. Соль не нужна: она есть в колбасках, пробуем в конце.",
+      "details": "Чеснок «Паста» — минута. Вяленые томаты с маслом и 3 банки Polpa, довести до кипения. Огонь — самый слабый, крышку сдвинуть. Соль не нужна: она есть в колбасках, пробуем в конце.",
       "dishes": [
         "pasta"
       ],
@@ -3180,9 +3173,9 @@
       ],
       "uses": [
         {
-          "ingredient": "passata",
-          "amount": 1145,
-          "unit": "ml"
+          "ingredient": "polpa",
+          "amount": 1200,
+          "unit": "g"
         }
       ],
       "heat": "минимальный огонь, 2/9"
@@ -3324,7 +3317,7 @@
       "zones": [
         "hot"
       ],
-      "details": "Фарш с соком из миски, 2 банки томатов — раздавить лопаткой, 300 мл фонда, фасоль из дуршлага, миска «Чили: соус». Довести до кипения. Кастрюля полна на ¾ — больше не доливать.",
+      "details": "Фарш с соком из миски, 2 банки Polpa, 300 мл фонда, фасоль из дуршлага, миска «Чили: соус». Довести до кипения. Кастрюля полна на ¾ — больше не доливать.",
       "dishes": [
         "chili"
       ],
@@ -3337,7 +3330,7 @@
       ],
       "uses": [
         {
-          "ingredient": "pelati",
+          "ingredient": "polpa",
           "amount": 800,
           "unit": "g"
         },
