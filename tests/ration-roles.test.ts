@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { doneStepCount, gotCount, mySteps, roleTimes, shoppingKeys } from '../src/lib/plan.ts';
+import { doneStepCount, gotCount, mySteps, purchaseKeys, roleTimes, shoppingKeys } from '../src/lib/plan.ts';
 import type { PlanProgress } from '../src/lib/progress.ts';
 import { personDay, rationToday, thawTonight } from '../src/lib/ration.ts';
 import type { CookPlan } from '../src/types/cook-plan.gen.ts';
@@ -30,7 +30,10 @@ const plan: CookPlan = {
       ],
     },
   ],
-  ingredients: [{ id: 'carrot', name: 'Морковь', amount: 1, unit: 'kg', section: 'produce' }],
+  ingredients: [
+    { id: 'carrot', name: 'Морковь', amount: 1, unit: 'kg', section: 'produce', purchase: 1 },
+    { id: 'apples', name: 'Яблоки', amount: 1, unit: 'kg', section: 'produce', purchase: 2 },
+  ],
   steps: [
     { id: 'cut', at: 0, duration: 10, title: 'Нарезать морковь', role: 'helper', dishes: ['soup'] },
     { id: 'boil', at: 0, duration: 30, title: 'Сварить суп', role: 'chef', dishes: ['soup'] },
@@ -100,9 +103,11 @@ describe('длительность по ролям', () => {
 });
 
 describe('список покупок', () => {
-  it('включает инвентарь с buy под отдельным ключом', () => {
-    expect(shoppingKeys(plan)).toEqual(['carrot', 'eq:foil']);
-    expect(gotCount(plan, progress({ got: ['eq:foil', 'oven'] }))).toBe(1);
+  it('включает инвентарь с buy под отдельным ключом — в первую закупку', () => {
+    expect(purchaseKeys(plan, 1)).toEqual(['carrot', 'eq:foil']);
+    expect(purchaseKeys(plan, 2)).toEqual(['apples']);
+    expect(shoppingKeys(plan)).toEqual(['carrot', 'eq:foil', 'apples']);
+    expect(gotCount(purchaseKeys(plan, 1), progress({ got: ['eq:foil', 'oven', 'apples'] }))).toBe(1);
   });
 });
 

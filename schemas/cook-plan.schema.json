@@ -553,7 +553,8 @@
         "name",
         "amount",
         "unit",
-        "section"
+        "section",
+        "purchase"
       ],
       "properties": {
         "id": {
@@ -574,6 +575,11 @@
         },
         "section": {
           "$ref": "#/$defs/ShopSection"
+        },
+        "purchase": {
+          "type": "integer",
+          "enum": [1, 2],
+          "description": "Закупка: 1 — к дню готовки, 2 — когда начинаем есть партию (завтраки, перекусы, свежее к подаче). У продуктов из дома — в какой закупке их проверить."
         },
         "staple": {
           "type": "boolean",

@@ -1,6 +1,6 @@
 /** Производные значения техкарты для отображения. Никакого планирования — только арифметика над готовыми данными. */
-import type { CookPlan, PlanStep, Role } from '../types/cook-plan.gen.ts';
-import { DISH_TONES } from './labels.ts';
+import type { CookPlan, PlanIngredient, PlanStep, Role } from '../types/cook-plan.gen.ts';
+import { DISH_TONES, PURCHASE_ORDER } from './labels.ts';
 import type { PlanProgress } from './progress.ts';
 
 export const totalPortions = (plan: CookPlan) => plan.dishes.reduce((sum, d) => sum + d.portions, 0);
@@ -33,14 +33,22 @@ export function currentStepIndex(steps: PlanStep[], done: string[]): number {
 /** Ключ инвентаря в progress.got — с префиксом, чтобы не совпасть с id продукта. */
 export const buyKey = (equipmentId: string) => `eq:${equipmentId}`;
 
-/** Всё, что надо купить: продукты и инвентарь с buy. Ключи — как в progress.got. */
-export const shoppingKeys = (plan: CookPlan) => [
-  ...plan.ingredients.map((i) => i.id),
-  ...plan.equipment.filter((e) => e.buy).map((e) => buyKey(e.id)),
+export type Purchase = PlanIngredient['purchase'];
+
+export const purchaseIngredients = (plan: CookPlan, purchase: Purchase) => plan.ingredients.filter((i) => i.purchase === purchase);
+
+/** Инвентарь с buy нужен к дню готовки — он в первой закупке. */
+export const purchaseEquipment = (plan: CookPlan, purchase: Purchase) => (purchase === 1 ? plan.equipment.filter((e) => e.buy) : []);
+
+/** Что собрать к закупке. Ключи — как в progress.got. */
+export const purchaseKeys = (plan: CookPlan, purchase: Purchase) => [
+  ...purchaseIngredients(plan, purchase).map((i) => i.id),
+  ...purchaseEquipment(plan, purchase).map((e) => buyKey(e.id)),
 ];
 
-export const gotCount = (plan: CookPlan, progress: PlanProgress) =>
-  shoppingKeys(plan).filter((key) => progress.got.includes(key)).length;
+export const shoppingKeys = (plan: CookPlan) => PURCHASE_ORDER.flatMap((p) => purchaseKeys(plan, p));
+
+export const gotCount = (keys: string[], progress: PlanProgress) => keys.filter((key) => progress.got.includes(key)).length;
 
 /** Роль, выбранная на этом устройстве, — только если она есть в техкарте. */
 export const activeRole = (plan: CookPlan, progress: PlanProgress): Role | undefined =>

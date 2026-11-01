@@ -40,7 +40,7 @@ export function PlanPage({ plan }: { plan: CookPlan }) {
   const tones = dishTones(plan);
   const base = planBase(plan, progress.startedAt);
   const doneCount = doneStepCount(plan, progress);
-  const gotCount = countGot(plan, progress);
+  const gotCount = countGot(shoppingKeys(plan), progress);
   const role = activeRole(plan, progress);
   const steps = mySteps(plan, progress);
   const current = steps[currentStepIndex(steps, progress.done)] ?? steps[steps.length - 1]!;

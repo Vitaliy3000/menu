@@ -457,6 +457,10 @@
 /* Продукты                                                            */
 /* ------------------------------------------------------------------ */
 
+.products-tabs {
+  margin-bottom: 16px;
+}
+
 .products-bar {
   display: flex;
   flex-wrap: wrap;

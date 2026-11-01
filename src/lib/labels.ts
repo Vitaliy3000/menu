@@ -31,7 +31,7 @@ import {
   type LucideIcon,
 } from 'lucide-preact';
 import type { Diet, Difficulty, RecipeCategory, ReheatMethod } from '../types/recipe.gen.ts';
-import type { EquipmentKind, MealSlot, ShopSection, StorageKind } from '../types/cook-plan.gen.ts';
+import type { EquipmentKind, MealSlot, PlanIngredient, ShopSection, StorageKind } from '../types/cook-plan.gen.ts';
 import type { Attempt, BakeKind } from '../types/bake.gen.ts';
 
 export interface CategoryMeta {
@@ -114,6 +114,21 @@ export const SHOP_SECTIONS: Record<ShopSection, string> = {
 export const SHOP_SECTION_ORDER: ShopSection[] = [
   'produce', 'meat', 'fish', 'dairy', 'bakery', 'grocery', 'frozen', 'spices', 'other',
 ];
+
+export const PURCHASE_ORDER: PlanIngredient['purchase'][] = [1, 2];
+
+export const PURCHASES: Record<PlanIngredient['purchase'], { label: string; hint: string; done: string }> = {
+  1: {
+    label: '1-я закупка',
+    hint: 'К дню готовки: всё для блюд в заморозку. Количества — уже под объёмы этой техкарты. Отмечайте, что купили и выставили на стол.',
+    done: 'Всё собрано — можно начинать.',
+  },
+  2: {
+    label: '2-я закупка',
+    hint: 'Когда начинаем есть партию: завтраки, перекусы и свежее к подаче — на все дни рациона.',
+    done: 'Всё собрано.',
+  },
+};
 
 export const EQUIPMENT_KINDS: Record<EquipmentKind, { label: string; icon: LucideIcon }> = {
   oven: { label: 'Духовка', icon: ChefHat },

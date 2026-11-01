@@ -216,7 +216,8 @@
     ],
     "choose": [
       { "item": "Сухая паста", "pick": "De Cecco или лучше", "note": "Собственные марки магазинов и пасту проще De Cecco не берём" },
-      { "item": "Чёрные оливки без косточки", "pick": "Carbonell Zwarte olijven zonder pit", "note": "Банка 340 г, есть в AH" }
+      { "item": "Чёрные оливки без косточки", "pick": "Carbonell Zwarte olijven zonder pit", "note": "Банка 340 г, есть в AH" },
+      { "item": "Йогурт-закваска для сметаны", "pick": "Pur Natur Biologisch yoghurt", "note": "500 г, есть в AH" }
     ],
     "avoid": [
       { "item": "Марка AH: соевое молоко, кварк, рис, йогурт, мягкий сыр", "note": "AH, AH Biologisch, AH Excellent, AH Terra, De Zaanse Hoeve — берём другую марку, даже без био. Ветчина, яйца, гауда, мясо, рыба, хлеб, овощи и фрукты AH — можно" },
@@ -371,6 +372,8 @@
     { "item": "Коричневый сахар", "amount": "300 г" },
     { "item": "Свой хлеб на пулише", "amount": "2 кг", "note": "Замороженный" },
     { "item": "Чеснок", "amount": "1 упаковка" },
+    { "item": "Творожный сыр", "amount": "90 г" },
+    { "item": "Кунжутное масло", "amount": "1 бутылка" },
     { "item": "Лавровый лист", "amount": "1 упаковка" },
     { "item": "Слегка рассыпчатый картофель (iets kruimig)", "amount": "500 г" },
     { "item": "Морковь", "amount": "500 г" },

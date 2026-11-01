@@ -375,6 +375,7 @@
       "amount": 1.5,
       "unit": "kg",
       "section": "meat",
+      "purchase": 1,
       "note": "Biologisch half-om-half gehakt — фарш только био, 3 упаковки по 500 г"
     },
     {
@@ -383,6 +384,7 @@
       "amount": 1.6,
       "unit": "kg",
       "section": "meat",
+      "purchase": 1,
       "note": "Runderriblappen или sukadelappen — куском, режем сами"
     },
     {
@@ -391,6 +393,7 @@
       "amount": 3.7,
       "unit": "kg",
       "section": "meat",
+      "purchase": 1,
       "note": "Kipdijfilet, целые филе: 2 кг — по-охотничьи, 1,7 кг — с лимоном"
     },
     {
@@ -399,6 +402,7 @@
       "amount": 1.3,
       "unit": "kg",
       "section": "fish",
+      "purchase": 1,
       "note": "Zalmfilet zonder vel, одним куском — порционируем сами"
     },
     {
@@ -407,62 +411,68 @@
       "amount": 6,
       "unit": "pcs",
       "section": "produce",
+      "purchase": 1,
       "note": "Uien: по 2 — рагу, курица по-охотничьи, говядина"
     },
-    { "id": "red-onions", "name": "Красный лук", "amount": 3, "unit": "pcs", "section": "produce", "note": "Rode uien — к лососю" },
+    { "id": "red-onions", "name": "Красный лук", "amount": 3, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Rode uien — к лососю" },
     {
       "id": "carrots",
       "name": "Морковь",
       "amount": 1.75,
       "unit": "kg",
       "section": "produce",
+      "purchase": 1,
       "note": "Winterpeen: 200 г — рагу, 500 г — говядина, 700 г — к лососю, 2 морковки — к тости"
     },
-    { "id": "celery", "name": "Стеблевой сельдерей", "amount": 1, "unit": "bunch", "section": "produce", "note": "Bleekselderij — нужно 3 стебля" },
-    { "id": "garlic", "name": "Чеснок", "amount": 20, "unit": "clove", "section": "produce", "note": "Knoflook — 2 головки" },
-    { "id": "peppers", "name": "Красный сладкий перец", "amount": 4, "unit": "pcs", "section": "produce", "note": "Paprika rood — курица по-охотничьи" },
+    { "id": "celery", "name": "Стеблевой сельдерей", "amount": 1, "unit": "bunch", "section": "produce", "purchase": 1, "note": "Bleekselderij — нужно 3 стебля" },
+    { "id": "garlic", "name": "Чеснок", "amount": 20, "unit": "clove", "section": "produce", "purchase": 1, "note": "Knoflook — 2 головки" },
+    { "id": "peppers", "name": "Красный сладкий перец", "amount": 4, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Paprika rood — курица по-охотничьи" },
     {
       "id": "potatoes",
       "name": "Картофель, не разваривающийся",
       "amount": 2,
       "unit": "kg",
       "section": "produce",
+      "purchase": 1,
       "note": "Vastkokende aardappelen — ≈ 1,8 кг после чистки"
     },
-    { "id": "mushrooms", "name": "Коричневые шампиньоны", "amount": 600, "unit": "g", "section": "produce", "note": "Kastanjechampignons, целые" },
-    { "id": "broccoli", "name": "Брокколи", "amount": 1.5, "unit": "kg", "section": "produce", "note": "Broccoli — 3–4 кочана" },
-    { "id": "fennel", "name": "Фенхель", "amount": 3, "unit": "pcs", "section": "produce", "note": "Venkel, ≈ 750 г" },
-    { "id": "rosemary", "name": "Розмарин", "amount": 6, "unit": "sprig", "section": "produce", "note": "Rozemarijn — 1 упаковка" },
-    { "id": "parsley", "name": "Петрушка листовая", "amount": 1, "unit": "bunch", "section": "produce", "note": "Bladpeterselie, ≈ 30 г" },
-    { "id": "lemons", "name": "Лимоны", "amount": 4, "unit": "pcs", "section": "produce", "note": "Citroenen: 3 — курица, 1 — гремолата" },
-    { "id": "apples", "name": "Яблоки", "amount": 14, "unit": "pcs", "section": "produce", "note": "Appels Elstar или Jonagold — перекусы Светы" },
-    { "id": "pears", "name": "Груши", "amount": 16, "unit": "pcs", "section": "produce", "note": "Peren Conference, твёрдые — перекусы Виталия и к йогурту" },
+    { "id": "mushrooms", "name": "Коричневые шампиньоны", "amount": 600, "unit": "g", "section": "produce", "purchase": 1, "note": "Kastanjechampignons, целые" },
+    { "id": "broccoli", "name": "Брокколи", "amount": 1.5, "unit": "kg", "section": "produce", "purchase": 1, "note": "Broccoli — 3–4 кочана" },
+    { "id": "fennel", "name": "Фенхель", "amount": 3, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Venkel, ≈ 750 г" },
+    { "id": "rosemary", "name": "Розмарин", "amount": 6, "unit": "sprig", "section": "produce", "purchase": 1, "note": "Rozemarijn — 1 упаковка" },
+    { "id": "parsley", "name": "Петрушка листовая", "amount": 1, "unit": "bunch", "section": "produce", "purchase": 1, "note": "Bladpeterselie, ≈ 30 г" },
+    { "id": "lemons", "name": "Лимоны", "amount": 4, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Citroenen: 3 — курица, 1 — гремолата" },
+    { "id": "apples", "name": "Яблоки", "amount": 14, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Appels Elstar или Jonagold — перекусы Светы" },
+    { "id": "pears", "name": "Груши", "amount": 16, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Peren Conference, твёрдые — перекусы Виталия и к йогурту" },
     {
       "id": "cherry",
       "name": "Помидоры черри",
       "amount": 500,
       "unit": "g",
       "section": "produce",
+      "purchase": 1,
       "note": "Cherrytomaten, 2 по 250 г — к яичнице; вторую в день покупки в морозилку, на день 13"
     },
-    { "id": "chives", "name": "Шнитт-лук", "amount": 1, "unit": "bunch", "section": "produce", "note": "Bieslook — в омлет; половину пучка в день покупки — целиком в морозилку, на день 9" },
-    { "id": "dill", "name": "Укроп", "amount": 1, "unit": "bunch", "section": "produce", "note": "Dille — к бутербродам с лососем; половину пучка — целиком в морозилку, на день 12" },
-    { "id": "kiwi", "name": "Киви", "amount": 14, "unit": "pcs", "section": "produce", "note": "Kiwi, твёрдые — только Виталию, по 1 в день" },
+    { "id": "chives", "name": "Шнитт-лук", "amount": 1, "unit": "bunch", "section": "produce", "purchase": 1, "note": "Bieslook — в омлет; половину пучка в день покупки — целиком в морозилку, на день 9" },
+    { "id": "dill", "name": "Укроп", "amount": 1, "unit": "bunch", "section": "produce", "purchase": 1, "note": "Dille — к бутербродам с лососем; половину пучка — целиком в морозилку, на день 12" },
+    { "id": "kiwi", "name": "Киви", "amount": 14, "unit": "pcs", "section": "produce", "purchase": 1, "note": "Kiwi, твёрдые — только Виталию, по 1 в день" },
     {
       "id": "mandarins",
       "name": "Мандарины",
       "amount": 32,
       "unit": "pcs",
       "section": "produce",
+      "purchase": 1,
       "note": "Mandarijnen или clementines, ≈ 2,3 кг — перекусы Светы и к завтраку"
     },
-    { "id": "milk", "name": "Молоко 1,5 %", "amount": 250, "unit": "ml", "section": "dairy", "note": "Halfvolle melk, самая маленькая упаковка — в рагу" },
+    { "id": "milk", "name": "Молоко 1,5 %", "amount": 250, "unit": "ml", "section": "dairy", "purchase": 1, "note": "Halfvolle melk, самая маленькая упаковка — в рагу" },
     {
       "id": "butter",
       "name": "Сливочное масло",
       "amount": 200,
       "unit": "g",
       "section": "dairy",
+      "purchase": 1,
       "staple": true,
       "note": "Roomboter: 140 г — готовка, 60 г — завтраки"
     },
@@ -472,6 +482,7 @@
       "amount": 170,
       "unit": "g",
       "section": "dairy",
+      "purchase": 1,
       "note": "Parmigiano Reggiano, кусок ≈ 200 г: 110 г — паста, 60 г — полента"
     },
     {
@@ -480,16 +491,18 @@
       "amount": 4.6,
       "unit": "kg",
       "section": "dairy",
+      "purchase": 1,
       "note": "Magere kwark, 10 по 500 г — перекусы, с самым длинным сроком"
     },
-    { "id": "eggs", "name": "Яйца", "amount": 30, "unit": "pcs", "section": "dairy", "note": "Eieren, 3 упаковки по 10 — завтраки" },
-    { "id": "cheese", "name": "Гауда 30+ ломтиками", "amount": 600, "unit": "g", "section": "dairy", "note": "Goudse 30+ kaas plakken, несколько упаковок — открывать по одной" },
+    { "id": "eggs", "name": "Яйца", "amount": 30, "unit": "pcs", "section": "dairy", "purchase": 1, "note": "Eieren, 3 упаковки по 10 — завтраки" },
+    { "id": "cheese", "name": "Гауда 30+ ломтиками", "amount": 600, "unit": "g", "section": "dairy", "purchase": 1, "note": "Goudse 30+ kaas plakken, несколько упаковок — открывать по одной" },
     {
       "id": "greek-yogurt",
       "name": "Греческий йогурт 5 %",
       "amount": 1,
       "unit": "kg",
       "section": "dairy",
+      "purchase": 1,
       "note": "Griekse yoghurt, 2 по 500 г — по одной на неделю"
     },
     {
@@ -498,24 +511,27 @@
       "amount": 110,
       "unit": "g",
       "section": "dairy",
+      "purchase": 1,
       "note": "Roomkaas naturel, 2 маленькие упаковки — по одной на неделю"
     },
-    { "id": "ricotta", "name": "Рикотта", "amount": 250, "unit": "g", "section": "dairy", "note": "Ricotta, 1 упаковка — завтраки дней 7 и 8" },
+    { "id": "ricotta", "name": "Рикотта", "amount": 250, "unit": "g", "section": "dairy", "purchase": 1, "note": "Ricotta, 1 упаковка — завтраки дней 7 и 8" },
     {
       "id": "protein-yogurt",
       "name": "Протеиновый йогурт",
       "amount": 2,
       "unit": "pcs",
       "section": "dairy",
+      "purchase": 1,
       "note": "Proteïne yoghurt: Arla Protein или YoPRO, по 200 г — Виталию"
     },
-    { "id": "fruit-yogurt", "name": "Йогурт на вкус Светы", "amount": 2, "unit": "pcs", "section": "dairy", "note": "Yoghurt ≈ 150 г, любой" },
+    { "id": "fruit-yogurt", "name": "Йогурт на вкус Светы", "amount": 2, "unit": "pcs", "section": "dairy", "purchase": 1, "note": "Yoghurt ≈ 150 г, любой" },
     {
       "id": "ham",
       "name": "Ветчина нарезкой",
       "amount": 220,
       "unit": "g",
       "section": "meat",
+      "purchase": 1,
       "note": "Achterham, 2 упаковки по ≈ 110 г — вторую в день покупки в морозилку"
     },
     {
@@ -524,6 +540,7 @@
       "amount": 100,
       "unit": "g",
       "section": "meat",
+      "purchase": 1,
       "note": "Ontbijtspek, 1 упаковка — половину в день покупки в морозилку, в плёнке"
     },
     {
@@ -532,6 +549,7 @@
       "amount": 250,
       "unit": "g",
       "section": "fish",
+      "purchase": 1,
       "note": "Gerookte zalm, 2 по 125 г — вторую в день покупки в морозилку"
     },
     {
@@ -540,6 +558,7 @@
       "amount": 7,
       "unit": "l",
       "section": "dairy",
+      "purchase": 1,
       "note": "Sojadrink ongezoet — коктейль Виталия, 500 мл в день"
     },
     {
@@ -548,35 +567,39 @@
       "amount": 2,
       "unit": "kg",
       "section": "bakery",
+      "purchase": 1,
       "note": "Volkorenbrood gesneden: 2 буханки по 800 г + половинка — в день покупки всё в морозилку"
     },
-    { "id": "rigatoni", "name": "Ригатони", "amount": 850, "unit": "g", "section": "grocery", "note": "Rigatoni, пачка 1 кг" },
+    { "id": "rigatoni", "name": "Ригатони", "amount": 850, "unit": "g", "section": "grocery", "purchase": 1, "note": "Rigatoni, пачка 1 кг" },
     {
       "id": "polenta",
       "name": "Полента быстрого приготовления",
       "amount": 600,
       "unit": "g",
       "section": "grocery",
+      "purchase": 1,
       "note": "Polenta istantanea, 2 пачки"
     },
-    { "id": "rice", "name": "Рис басмати", "amount": 1.3, "unit": "kg", "section": "grocery", "note": "Basmatirijst: пачки 1 кг + 500 г" },
-    { "id": "passata", "name": "Пассата", "amount": 700, "unit": "g", "section": "grocery", "note": "Passata di pomodoro, бутылка 680–700 г" },
+    { "id": "rice", "name": "Рис басмати", "amount": 1.3, "unit": "kg", "section": "grocery", "purchase": 1, "note": "Basmatirijst: пачки 1 кг + 500 г" },
+    { "id": "passata", "name": "Пассата", "amount": 700, "unit": "g", "section": "grocery", "purchase": 1, "note": "Passata di pomodoro, бутылка 680–700 г" },
     {
       "id": "pelati",
       "name": "Томаты целые очищенные",
       "amount": 2,
       "unit": "can",
       "section": "grocery",
+      "purchase": 1,
       "note": "Gepelde tomaten (pelati), 2 банки по 400 г"
     },
-    { "id": "tomato-paste", "name": "Томатная паста", "amount": 4, "unit": "tbsp", "section": "grocery", "note": "Tomatenpuree" },
-    { "id": "white-wine", "name": "Сухое белое вино", "amount": 650, "unit": "ml", "section": "grocery", "note": "Droge witte wijn — бутылка 0,75 л" },
+    { "id": "tomato-paste", "name": "Томатная паста", "amount": 4, "unit": "tbsp", "section": "grocery", "purchase": 1, "note": "Tomatenpuree" },
+    { "id": "white-wine", "name": "Сухое белое вино", "amount": 650, "unit": "ml", "section": "grocery", "purchase": 1, "note": "Droge witte wijn — бутылка 0,75 л" },
     {
       "id": "red-wine",
       "name": "Сухое красное вино",
       "amount": 375,
       "unit": "ml",
       "section": "grocery",
+      "purchase": 1,
       "note": "Droge rode wijn: Chianti или Sangiovese — полбутылки"
     },
     {
@@ -585,6 +608,7 @@
       "amount": 100,
       "unit": "g",
       "section": "grocery",
+      "purchase": 1,
       "note": "Zwarte olijven zonder pit, целые"
     },
     {
@@ -593,6 +617,7 @@
       "amount": 4,
       "unit": "tbsp",
       "section": "grocery",
+      "purchase": 1,
       "note": "Kappertjes, баночка: 2 ст. л. — курица, 4 ч. л. — бутерброды с лососем"
     },
     {
@@ -601,31 +626,34 @@
       "amount": 2,
       "unit": "pcs",
       "section": "grocery",
+      "purchase": 1,
       "note": "Bouillonblokjes: 1 говяжий, 1 куриный"
     },
-    { "id": "granola", "name": "Гранола", "amount": 140, "unit": "g", "section": "grocery", "note": "Granola — пачка ≈ 375 г, к йогурту" },
-    { "id": "walnuts", "name": "Грецкие орехи", "amount": 600, "unit": "g", "section": "grocery", "note": "Walnoten ongebrand — завтраки и перекусы" },
+    { "id": "granola", "name": "Гранола", "amount": 140, "unit": "g", "section": "grocery", "purchase": 1, "note": "Granola — пачка ≈ 375 г, к йогурту" },
+    { "id": "walnuts", "name": "Грецкие орехи", "amount": 600, "unit": "g", "section": "grocery", "purchase": 1, "note": "Walnoten ongebrand — завтраки и перекусы" },
     {
       "id": "olive-oil",
       "name": "Оливковое масло",
       "amount": 300,
       "unit": "ml",
       "section": "grocery",
+      "purchase": 1,
       "staple": true,
       "note": "Olijfolie extra vergine"
     },
-    { "id": "flour", "name": "Пшеничная мука", "amount": 5, "unit": "tbsp", "section": "grocery", "staple": true, "note": "Bloem" },
-    { "id": "honey", "name": "Мёд", "amount": 250, "unit": "g", "section": "grocery", "staple": true, "note": "Honing — к йогурту, рикотте и кварку" },
-    { "id": "salt", "name": "Соль", "amount": 1, "unit": "pack", "section": "spices", "staple": true, "note": "Zout" },
-    { "id": "pepper", "name": "Чёрный перец", "amount": 1, "unit": "pack", "section": "spices", "staple": true, "note": "Zwarte peper" },
-    { "id": "nutmeg", "name": "Мускатный орех", "amount": 1, "unit": "pinch", "section": "spices", "staple": true, "note": "Nootmuskaat" },
-    { "id": "bay", "name": "Лавровый лист", "amount": 3, "unit": "leaf", "section": "spices", "staple": true, "note": "Laurierblaadjes" },
+    { "id": "flour", "name": "Пшеничная мука", "amount": 5, "unit": "tbsp", "section": "grocery", "purchase": 1, "staple": true, "note": "Bloem" },
+    { "id": "honey", "name": "Мёд", "amount": 250, "unit": "g", "section": "grocery", "purchase": 1, "staple": true, "note": "Honing — к йогурту, рикотте и кварку" },
+    { "id": "salt", "name": "Соль", "amount": 1, "unit": "pack", "section": "spices", "purchase": 1, "staple": true, "note": "Zout" },
+    { "id": "pepper", "name": "Чёрный перец", "amount": 1, "unit": "pack", "section": "spices", "purchase": 1, "staple": true, "note": "Zwarte peper" },
+    { "id": "nutmeg", "name": "Мускатный орех", "amount": 1, "unit": "pinch", "section": "spices", "purchase": 1, "staple": true, "note": "Nootmuskaat" },
+    { "id": "bay", "name": "Лавровый лист", "amount": 3, "unit": "leaf", "section": "spices", "purchase": 1, "staple": true, "note": "Laurierblaadjes" },
     {
       "id": "protein",
       "name": "Сывороточный протеин",
       "amount": 850,
       "unit": "g",
       "section": "other",
+      "purchase": 1,
       "staple": true,
       "note": "Whey proteïne: 60 г в день — коктейль Виталия"
     }

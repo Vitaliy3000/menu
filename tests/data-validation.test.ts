@@ -21,8 +21,8 @@ const plan = (): CookPlan => ({
   equipment: [{ id: 'oven', name: 'Духовка', kind: 'oven' }],
   dishes: [{ id: 'soup', name: 'Суп', yield: { amount: 2, unit: 'l' }, portions: 4, packaging: [{ container: 'Банка 1 л', count: 2, storage: 'fridge', days: 3 }] }],
   ingredients: [
-    { id: 'pumpkin', name: 'Тыква', amount: 1, unit: 'kg', section: 'produce' },
-    { id: 'salt', name: 'Соль', amount: 1, unit: 'pack', section: 'spices', staple: true },
+    { id: 'pumpkin', name: 'Тыква', amount: 1, unit: 'kg', section: 'produce', purchase: 1 },
+    { id: 'salt', name: 'Соль', amount: 1, unit: 'pack', section: 'spices', purchase: 1, staple: true },
   ],
   steps: [
     { id: 's1', at: 0, duration: 20, title: 'Нарезать тыкву', dishes: ['soup'], uses: [{ ingredient: 'pumpkin', amount: 600, unit: 'g' }] },
@@ -120,7 +120,7 @@ describe('смысловые проверки CookPlan', () => {
 
   it('предупреждает о неиспользуемых продуктах и блюдах', () => {
     const p = plan();
-    p.ingredients.push({ id: 'lime', name: 'Лайм', amount: 1, unit: 'pcs', section: 'produce' });
+    p.ingredients.push({ id: 'lime', name: 'Лайм', amount: 1, unit: 'pcs', section: 'produce', purchase: 1 });
     p.dishes.push({ ...p.dishes[0]!, id: 'bread', name: 'Хлеб' });
     const text = messages(checkPlan(p, file));
     expect(text).toContain('«lime» не используется');

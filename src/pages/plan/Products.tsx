@@ -1,8 +1,8 @@
 import { Check, Home, ShoppingBag } from 'lucide-preact';
 import { useState } from 'preact/hooks';
 import { formatAmount } from '../../lib/format.ts';
-import { SHOP_SECTION_ORDER, SHOP_SECTIONS } from '../../lib/labels.ts';
-import { buyKey, gotCount, shoppingKeys } from '../../lib/plan.ts';
+import { PURCHASE_ORDER, PURCHASES, SHOP_SECTION_ORDER, SHOP_SECTIONS } from '../../lib/labels.ts';
+import { buyKey, gotCount, type Purchase, purchaseEquipment, purchaseIngredients, purchaseKeys } from '../../lib/plan.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
 import type { CookPlan, Equipment, PlanIngredient } from '../../types/cook-plan.gen.ts';
 
@@ -14,18 +14,21 @@ interface Props {
 
 export function Products({ plan, progress, toggle }: Props) {
   const [hideGot, setHideGot] = useState(false);
-  const got = gotCount(plan, progress);
-  const total = shoppingKeys(plan).length;
-  const toBuy = plan.equipment.filter((e) => e.buy);
+  const [purchase, setPurchase] = useState<Purchase>(1);
+  const purchases = PURCHASE_ORDER.filter((p) => purchaseIngredients(plan, p).length > 0);
+  const keys = purchaseKeys(plan, purchase);
+  const got = gotCount(keys, progress);
+  const ingredients = purchaseIngredients(plan, purchase);
+  const toBuy = purchaseEquipment(plan, purchase);
   const visibleToBuy = hideGot ? toBuy.filter((e) => !progress.got.includes(buyKey(e.id))) : toBuy;
 
   const groups = [
     ...SHOP_SECTION_ORDER.map((section) => ({
       key: section,
       title: SHOP_SECTIONS[section],
-      items: plan.ingredients.filter((i) => i.section === section && !i.staple),
+      items: ingredients.filter((i) => i.section === section && !i.staple),
     })),
-    { key: 'staple', title: 'Обычно есть дома', items: plan.ingredients.filter((i) => i.staple) },
+    { key: 'staple', title: 'Обычно есть дома', items: ingredients.filter((i) => i.staple) },
   ].filter((g) => g.items.length > 0);
 
   const renderGroup = (g: (typeof groups)[number]) => {
@@ -48,12 +51,28 @@ export function Products({ plan, progress, toggle }: Props) {
 
   return (
     <div class="products">
+      {purchases.length > 1 && (
+        <div class="chip-row products-tabs" role="group" aria-label="Закупка">
+          {purchases.map((p) => {
+            const own = purchaseKeys(plan, p);
+            return (
+              <button key={p} class="chip" type="button" aria-pressed={purchase === p} onClick={() => setPurchase(p)}>
+                {PURCHASES[p].label}
+                <span class="chip-count">
+                  {gotCount(own, progress)}/{own.length}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       <div class="products-bar">
         <div class="progress-line" aria-hidden="true">
-          <span style={{ transform: `scaleX(${total ? got / total : 0})` }} />
+          <span style={{ transform: `scaleX(${keys.length ? got / keys.length : 0})` }} />
         </div>
         <p class="num">
-          Собрано <strong>{got}</strong> из {total}
+          Собрано <strong>{got}</strong> из {keys.length}
         </p>
         <button type="button" class={`switch${hideGot ? ' is-on' : ''}`} role="switch" aria-checked={hideGot} onClick={() => setHideGot((v) => !v)}>
           <span class="switch-track">
@@ -63,9 +82,7 @@ export function Products({ plan, progress, toggle }: Props) {
         </button>
       </div>
 
-      <p class="muted products-hint">
-        Количества — на весь день, уже под объёмы этой техкарты. Отмечайте, что купили и выставили на стол.
-      </p>
+      <p class="muted products-hint">{PURCHASES[purchase].hint}</p>
 
       <div class="product-groups">
         {groups.filter((g) => g.key !== 'staple').map(renderGroup)}
@@ -89,7 +106,7 @@ export function Products({ plan, progress, toggle }: Props) {
         )}
         {groups.filter((g) => g.key === 'staple').map(renderGroup)}
       </div>
-      {hideGot && got === total && <p class="empty">Всё собрано — можно начинать.</p>}
+      {hideGot && got === keys.length && <p class="empty">{PURCHASES[purchase].done}</p>}
     </div>
   );
 }
