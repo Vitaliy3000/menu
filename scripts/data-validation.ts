@@ -13,7 +13,7 @@ import type { CookPlan, IngredientUse, Ration, Unit } from '../src/types/cook-pl
 import { deviation, personDay } from '../src/lib/ration.ts';
 import { ZONE_LABELS, zoneConflicts } from '../src/lib/zones.ts';
 import { equipmentOveruse } from './equipment-use.ts';
-import { idleGaps, stageConflicts } from './role-flow.ts';
+import { idleGaps, restIntrusions, stageConflicts } from './role-flow.ts';
 import type { Kitchen } from '../src/types/kitchen.gen.ts';
 import type { Bake } from '../src/types/bake.gen.ts';
 import type { Baking } from '../src/types/baking.gen.ts';
@@ -609,6 +609,12 @@ export function checkPlan(p: CookPlan, file: string): Issue[] {
     }
     for (const g of idleGaps(p.steps)) {
       error(`/steps/${g.index}/at`, `у роли «${g.role}» с ${g.from}-й по ${g.to}-ю минуту нет шага — паузу оформите отдыхом с таймером (rest)`);
+    }
+    for (const r of restIntrusions(p.steps)) {
+      error(
+        `/steps/${r.index}/at`,
+        `«${r.step.id}» начинается на ${r.step.at}-й минуте, во время отдыха «${r.rest.id}»: шаги той же минуты ставьте до отдыха, следующий — после его таймера`,
+      );
     }
   }
 

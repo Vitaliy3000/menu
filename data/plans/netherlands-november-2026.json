@@ -2551,20 +2551,6 @@
       ]
     },
     {
-      "id": "chef-pause-1",
-      "at": 105,
-      "duration": 8,
-      "title": "Отдых",
-      "role": "chef",
-      "details": "Следующий шаг — «Борщ: свёклу нарезать соломкой»: начать по таймеру.",
-      "passive": true,
-      "rest": true,
-      "timer": {
-        "minutes": 8,
-        "label": "Отдых"
-      }
-    },
-    {
       "id": "w-cabbage",
       "at": 105,
       "duration": 84,
@@ -2584,6 +2570,20 @@
       "timer": {
         "minutes": 84,
         "label": "Капуста"
+      }
+    },
+    {
+      "id": "chef-pause-1",
+      "at": 105,
+      "duration": 8,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Борщ: свёклу нарезать соломкой»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 8,
+        "label": "Отдых"
       }
     },
     {
@@ -3281,20 +3281,6 @@
       }
     },
     {
-      "id": "chef-pause-2",
-      "at": 234,
-      "duration": 3,
-      "title": "Отдых",
-      "role": "chef",
-      "details": "Следующий шаг — «Борщ: попробовать и снять с огня»: начать по таймеру.",
-      "passive": true,
-      "rest": true,
-      "timer": {
-        "minutes": 3,
-        "label": "Отдых"
-      }
-    },
-    {
       "id": "w-ragu",
       "at": 234,
       "duration": 81,
@@ -3314,6 +3300,20 @@
       "timer": {
         "minutes": 81,
         "label": "Паста: рагу"
+      }
+    },
+    {
+      "id": "chef-pause-2",
+      "at": 234,
+      "duration": 3,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Борщ: попробовать и снять с огня»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 3,
+        "label": "Отдых"
       }
     },
     {
@@ -3460,7 +3460,7 @@
       "title": "Чили томится",
       "role": "chef",
       "passive": true,
-      "details": "Слабый огонь, крышку сдвинуть. Раз в 20 минут перемешать со дна.",
+      "details": "Слабый огонь, крышку сдвинуть. Раз в полчаса перемешать со дна.",
       "dishes": [
         "chili"
       ],
@@ -3473,20 +3473,6 @@
       "timer": {
         "minutes": 75,
         "label": "Чили"
-      }
-    },
-    {
-      "id": "c-lunch",
-      "at": 255,
-      "duration": 60,
-      "title": "Обед",
-      "role": "chef",
-      "details": "Час на обед: бутерброды с ветчиной и гаудой на хлебе на пулише. Чили, рагу и пулд-порк томятся сами.",
-      "passive": true,
-      "rest": true,
-      "timer": {
-        "minutes": 60,
-        "label": "Обед"
       }
     },
     {
@@ -3511,6 +3497,20 @@
       }
     },
     {
+      "id": "c-lunch",
+      "at": 255,
+      "duration": 30,
+      "title": "Обед",
+      "role": "chef",
+      "details": "Полчаса на обед: бутерброды с ветчиной и гаудой на хлебе на пулише. Чили, рагу и пулд-порк томятся сами.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 30,
+        "label": "Обед"
+      }
+    },
+    {
       "id": "h-cabbage-bags",
       "at": 284,
       "duration": 15,
@@ -3530,6 +3530,42 @@
         "plastic-boxes",
         "ice-packs"
       ]
+    },
+    {
+      "id": "c-stir",
+      "at": 285,
+      "duration": 2,
+      "title": "Чили и рагу: перемешать",
+      "role": "chef",
+      "zones": [
+        "hot"
+      ],
+      "details": "Оба — со дна: чили чёрной лопаткой, рагу серой. Булькает сильнее, чем едва, — огонь убавить.",
+      "dishes": [
+        "chili",
+        "pasta"
+      ],
+      "equipment": [
+        "pot-4",
+        "saute",
+        "hob",
+        "black-spatula",
+        "grey-spatula"
+      ]
+    },
+    {
+      "id": "chef-pause-lunch",
+      "at": 287,
+      "duration": 28,
+      "title": "Отдых",
+      "role": "chef",
+      "details": "Следующий шаг — «Паста: рагу попробовать и снять»: начать по таймеру.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 28,
+        "label": "Отдых"
+      }
     },
     {
       "id": "h-borscht-pack",
@@ -3583,14 +3619,17 @@
       "zones": [
         "hot"
       ],
-      "details": "Рагу густое. Попробовать: пресно — +3 г соли из миски «Запас». Выключить огонь, накрыть: ждёт фузилли.",
+      "details": "Рагу густое. Попробовать: пресно — +3 г соли из миски «Запас». Выключить огонь, накрыть: ждёт фузилли. Чили перемешать со дна.",
       "dishes": [
-        "pasta"
+        "pasta",
+        "chili"
       ],
       "equipment": [
         "saute",
+        "pot-4",
         "hob",
-        "grey-spatula"
+        "grey-spatula",
+        "black-spatula"
       ]
     },
     {
@@ -4152,27 +4191,15 @@
       ]
     },
     {
-      "id": "chef-pause-6",
-      "at": 386,
-      "duration": 7,
-      "title": "Отдых",
-      "role": "chef",
-      "details": "Следующий шаг — «Паста: собрать в противни»: начать по таймеру.",
-      "passive": true,
-      "rest": true,
-      "timer": {
-        "minutes": 7,
-        "label": "Отдых"
-      }
-    },
-    {
-      "id": "w-pasta-cook",
+      "id": "c-pasta-cook",
       "at": 386,
       "duration": 7,
       "title": "Паста: фузилли варятся",
       "role": "chef",
-      "passive": true,
-      "details": "Дважды перемешать шумовкой.",
+      "zones": [
+        "hot"
+      ],
+      "details": "У плиты: дважды перемешать шумовкой, чтобы не слиплись.",
       "dishes": [
         "pasta"
       ],
@@ -4314,20 +4341,6 @@
       "heat": "200 °C, конвекция"
     },
     {
-      "id": "c-break-2",
-      "at": 407,
-      "duration": 10,
-      "title": "Перерыв",
-      "role": "chef",
-      "details": "Сесть на 10 минут.",
-      "passive": true,
-      "rest": true,
-      "timer": {
-        "minutes": 10,
-        "label": "Перерыв"
-      }
-    },
-    {
       "id": "w-pasta-bake",
       "at": 407,
       "duration": 20,
@@ -4345,6 +4358,20 @@
       "timer": {
         "minutes": 20,
         "label": "Паста"
+      }
+    },
+    {
+      "id": "c-break-2",
+      "at": 407,
+      "duration": 10,
+      "title": "Перерыв",
+      "role": "chef",
+      "details": "Сесть на 10 минут.",
+      "passive": true,
+      "rest": true,
+      "timer": {
+        "minutes": 10,
+        "label": "Перерыв"
       }
     },
     {

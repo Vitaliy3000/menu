@@ -1,4 +1,4 @@
-/** Ход работ каждой роли: паузы без шага «Отдых» и стадии у плиты или в духовке, которые ведут двое. */
+/** Ход работ каждой роли: паузы без шага «Отдых», работа во время отдыха и стадии у плиты или в духовке, которые ведут двое. */
 import type { CookPlan, PlanStep } from '../src/types/cook-plan.gen.ts';
 
 export interface IdleGap {
@@ -20,6 +20,26 @@ export function idleGaps(steps: PlanStep[]): IdleGap[] {
     busyUntil.set(step.role, Math.max(from, step.at + step.duration));
   });
   return gaps;
+}
+
+export interface RestIntrusion {
+  rest: PlanStep;
+  /** Шаг той же роли после отдыха, который начинается раньше, чем отдых кончится. */
+  step: PlanStep;
+  /** Индекс step в plan.steps — для пути к ошибке. */
+  index: number;
+}
+
+/** Отдых — это отдых: всё, что роль начинает в ту же минуту, стоит до него, а следующий шаг ждёт его таймера. */
+export function restIntrusions(steps: PlanStep[]): RestIntrusion[] {
+  const intrusions: RestIntrusion[] = [];
+  steps.forEach((rest, i) => {
+    if (!rest.rest) return;
+    steps.forEach((step, index) => {
+      if (index > i && step.role === rest.role && step.at < rest.at + rest.duration) intrusions.push({ rest, step, index });
+    });
+  });
+  return intrusions;
 }
 
 export interface StageConflict {

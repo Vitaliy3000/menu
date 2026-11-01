@@ -270,6 +270,27 @@ describe('роли поваров', () => {
     expect(messages(checkPlan(p, file))).toBe('отдых «pause» — пассивный шаг: нужен passive: true');
   });
 
+  it('после отдыха — только то, что начинается, когда он кончился', () => {
+    const p = withRoles();
+    const [cut, bake] = p.steps;
+    const pause = { id: 'pause', at: 10, duration: 5, title: 'Отдых', role: 'chef', passive: true, rest: true, timer: { minutes: 5, label: 'Отдых' } };
+    const simmer = { id: 'simmer', at: 10, duration: 20, title: 'Томится', role: 'chef', passive: true, timer: { minutes: 20, label: 'Суп' } };
+    p.steps = [
+      cut!,
+      { id: 'heat', at: 0, duration: 10, title: 'Разогреть сковороду', role: 'chef', zones: ['hot'] },
+      pause,
+      simmer,
+      { id: 'taste', at: 15, duration: 5, title: 'Попробовать соль', role: 'chef', zones: ['hot'] },
+      bake!,
+    ];
+    expect(messages(checkPlan(p, file))).toBe(
+      '«simmer» начинается на 10-й минуте, во время отдыха «pause»: шаги той же минуты ставьте до отдыха, следующий — после его таймера',
+    );
+
+    p.steps.splice(2, 2, simmer, pause);
+    expect(checkPlan(p, file)).toEqual([]);
+  });
+
   it('кто ставит в духовку, тот ведёт таймер', () => {
     const p = withRoles();
     const [cut, bake] = p.steps;
