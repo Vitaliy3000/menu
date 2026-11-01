@@ -1120,28 +1120,12 @@
       "note": "1-я. Maille Dijonmosterd 215 г"
     },
     {
-      "id": "red-wine-vinegar",
-      "name": "Красный винный уксус",
-      "amount": 45,
-      "unit": "ml",
-      "section": "grocery",
-      "note": "1-я. AH Biologisch Rode wijnazijn 250 мл"
-    },
-    {
       "id": "bay",
       "name": "Лавровый лист",
       "amount": 5,
       "unit": "leaf",
       "section": "spices",
       "note": "1-я. Verstegen Laurier heel"
-    },
-    {
-      "id": "paprika",
-      "name": "Сладкая паприка",
-      "amount": 24,
-      "unit": "g",
-      "section": "spices",
-      "note": "1-я. AH Paprika mild gemalen 48 г"
     },
     {
       "id": "smoked-paprika",
@@ -1166,14 +1150,6 @@
       "unit": "g",
       "section": "spices",
       "note": "1-я. AH Oregano"
-    },
-    {
-      "id": "garlic-powder",
-      "name": "Чесночный порошок",
-      "amount": 6,
-      "unit": "g",
-      "section": "spices",
-      "note": "1-я. Verstegen Knoflookpoeder"
     },
     {
       "id": "onion-powder",
@@ -1279,6 +1255,33 @@
       "amount": 15,
       "unit": "ml",
       "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "red-wine-vinegar",
+      "name": "Красный винный уксус",
+      "amount": 45,
+      "unit": "ml",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "paprika",
+      "name": "Сладкая паприка",
+      "amount": 24,
+      "unit": "g",
+      "section": "spices",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "garlic-powder",
+      "name": "Чесночный порошок",
+      "amount": 6,
+      "unit": "g",
+      "section": "spices",
       "staple": true,
       "note": "Из излишков"
     },
