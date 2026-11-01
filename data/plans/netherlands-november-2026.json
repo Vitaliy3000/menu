@@ -870,7 +870,7 @@
       "unit": "kg",
       "section": "meat",
       "purchase": 1,
-      "note": "AH Greenfields Runder riblap, 2 уп. ≈ 755 г: травяной откорм"
+      "note": "AH Greenfields Runder riblap 2-pack, ≈ 2 × 755 г: травяной откорм"
     },
     {
       "id": "beef-mince",
@@ -933,7 +933,7 @@
       "unit": "kg",
       "section": "produce",
       "purchase": 1,
-      "note": "AH Gele uien, 2 × 1 кг"
+      "note": "AH Biologisch Gele uien, 3 × 500 г"
     },
     {
       "id": "carrots",
@@ -942,7 +942,7 @@
       "unit": "kg",
       "section": "produce",
       "purchase": 1,
-      "note": "500 г из излишков + AH Winterpeen, 3 шт. 600 г — в день готовки, 250 г — коулслоу"
+      "note": "500 г из излишков + AH Biologisch Winterpeen 750 г. 600 г — в день готовки, 250 г — коулслоу"
     },
     {
       "id": "red-pepper",
@@ -951,7 +951,7 @@
       "unit": "pcs",
       "section": "produce",
       "purchase": 1,
-      "note": "AH Paprika rood"
+      "note": "AH Biologisch Paprika rood"
     },
     {
       "id": "corn",
@@ -970,15 +970,6 @@
       "section": "produce",
       "purchase": 1,
       "note": "AH Kruimige aardappelen, 2 × 1 кг, ≈ 8 крупных"
-    },
-    {
-      "id": "dill",
-      "name": "Укроп",
-      "amount": 2,
-      "unit": "bunch",
-      "section": "produce",
-      "purchase": 1,
-      "note": "AH Dille 20 г × 2"
     },
     {
       "id": "kidney",
@@ -1023,7 +1014,7 @@
       "unit": "g",
       "section": "dairy",
       "purchase": 1,
-      "note": "AH Goudse jong 48+ plakken, 2 × 190 г"
+      "note": "AH Biologisch Jong 50+ plakken, 2 × ≈ 205 г"
     },
     {
       "id": "milk",
@@ -1551,6 +1542,15 @@
       "section": "produce",
       "purchase": 2,
       "note": "AH Bieslook 25 г × 2"
+    },
+    {
+      "id": "dill",
+      "name": "Укроп",
+      "amount": 2,
+      "unit": "bunch",
+      "section": "produce",
+      "purchase": 2,
+      "note": "AH Dille 20 г × 2"
     },
     {
       "id": "parsley",
