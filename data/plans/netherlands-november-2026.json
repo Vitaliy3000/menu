@@ -1112,14 +1112,6 @@
       "note": "1-я. Tromp&Rueb Appelazijn 0,75 л"
     },
     {
-      "id": "worcester",
-      "name": "Вустерширский соус",
-      "amount": 15,
-      "unit": "ml",
-      "section": "grocery",
-      "note": "1-я. Lea & Perrins"
-    },
-    {
       "id": "dijon",
       "name": "Дижонская горчица",
       "amount": 50,
@@ -1277,6 +1269,15 @@
       "name": "Панко",
       "amount": 60,
       "unit": "g",
+      "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "worcester",
+      "name": "Вустерширский соус",
+      "amount": 15,
+      "unit": "ml",
       "section": "grocery",
       "staple": true,
       "note": "Из излишков"
