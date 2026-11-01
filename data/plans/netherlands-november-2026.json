@@ -933,7 +933,7 @@
       "amount": 1,
       "unit": "kg",
       "section": "produce",
-      "note": "1-я. AH Winterpeen 1 кг: 600 г — в день готовки, остальное — коулслоу"
+      "note": "500 г из излишков + 1-я: AH Winterpeen, 3 шт. 600 г — в день готовки, 250 г — коулслоу"
     },
     {
       "id": "garlic",
@@ -1021,7 +1021,7 @@
       "amount": 1,
       "unit": "pcs",
       "section": "bakery",
-      "note": "1-я. AH Casino wit half — нужно 175 г без корки"
+      "note": "1-я. AH Liefde & Passie Petit beurre gesneden 300 г — нужно 175 г без корки"
     },
     {
       "id": "sourdough",
@@ -1069,7 +1069,7 @@
       "amount": 500,
       "unit": "g",
       "section": "dairy",
-      "note": "1-я. AH Roomboter ongezouten, 2 × 250 г"
+      "note": "1-я. De Zaanse Hoeve Ongezouten roomboter 500 г"
     },
     {
       "id": "cream",
@@ -1077,7 +1077,7 @@
       "amount": 750,
       "unit": "ml",
       "section": "dairy",
-      "note": "Для сметаны. AH Slagroom, 3 × 250 мл"
+      "note": "Для сметаны. AH Slagroom, 2 × 0,5 л"
     },
     {
       "id": "bio-yogurt",
@@ -1093,7 +1093,7 @@
       "amount": 7,
       "unit": "g",
       "section": "grocery",
-      "note": "Для булочек. Dr. Oetker Gist, пакетик 7 г"
+      "note": "Для булочек. Il Molino Droge gist 21 г"
     },
     {
       "id": "brown-sugar",
@@ -1112,28 +1112,12 @@
       "note": "1-я. Tromp&Rueb Appelazijn 0,75 л"
     },
     {
-      "id": "bay",
-      "name": "Лавровый лист",
-      "amount": 5,
-      "unit": "leaf",
-      "section": "spices",
-      "note": "1-я. Verstegen Laurier heel"
-    },
-    {
       "id": "smoked-paprika",
       "name": "Копчёная сладкая паприка",
       "amount": 19,
       "unit": "g",
       "section": "spices",
       "note": "1-я. La Chinata Smoked paprika sweet 70 г"
-    },
-    {
-      "id": "cumin",
-      "name": "Молотая зира",
-      "amount": 7,
-      "unit": "g",
-      "section": "spices",
-      "note": "1-я. Verstegen Komijnzaad gemalen"
     },
     {
       "id": "oregano",
@@ -1283,6 +1267,24 @@
       "amount": 50,
       "unit": "g",
       "section": "grocery",
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "cumin",
+      "name": "Зира",
+      "amount": 7,
+      "unit": "g",
+      "section": "spices",
+      "staple": true,
+      "note": "Из излишков, семенами"
+    },
+    {
+      "id": "bay",
+      "name": "Лавровый лист",
+      "amount": 5,
+      "unit": "leaf",
+      "section": "spices",
       "staple": true,
       "note": "Из излишков"
     },
@@ -3270,7 +3272,7 @@
       "zones": [
         "hot"
       ],
-      "details": "Вымытая кастрюля 4 л, 1 ст. л. масла, средний огонь. Лук и перец «Чили» — 7 минут. Чеснок, 2 ст. л. сладкой паприки, 1 ст. л. копчёной, 1 ст. л. зиры, 1 ч. л. орегано, 50 г томатной пасты — минута, помешивая.",
+      "details": "Вымытая кастрюля 4 л, 1 ст. л. масла, средний огонь. 1 ст. л. зиры семенами — 30 секунд, до аромата. Лук и перец «Чили» — 7 минут. Чеснок, 2 ст. л. сладкой паприки, 1 ст. л. копчёной, 1 ч. л. орегано, 50 г томатной пасты — минута, помешивая.",
       "dishes": [
         "chili"
       ],
