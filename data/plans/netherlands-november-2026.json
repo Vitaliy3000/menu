@@ -10,7 +10,7 @@
   },
   "audience": "2 взрослых: завтраки, обеды, ужины и перекусы на 14 дней",
   "cost": {
-    "amount": 404,
+    "amount": 396,
     "currency": "EUR",
     "store": "AH",
     "date": "2026-11-01",
@@ -1663,11 +1663,11 @@
     {
       "id": "walnuts",
       "name": "Грецкие орехи",
-      "amount": 500,
+      "amount": 200,
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
-      "note": "AH Terra Ongebrande walnoten 500 г"
+      "note": "AH Terra Walnoten ongebrand 200 г"
     },
     {
       "id": "soy-milk",
@@ -1677,15 +1677,6 @@
       "section": "dairy",
       "purchase": 2,
       "note": "Alpro Sojadrink original, 7 × 1 л"
-    },
-    {
-      "id": "dark-choc",
-      "name": "Тёмный шоколад",
-      "amount": 300,
-      "unit": "g",
-      "section": "grocery",
-      "purchase": 2,
-      "note": "AH Reep extra puur, 3 × 100 г"
     },
     {
       "id": "capers",
@@ -1928,18 +1919,13 @@
         },
         {
           "ingredient": "walnuts",
-          "amount": 470,
+          "amount": 190,
           "unit": "g"
         },
         {
           "ingredient": "soy-milk",
           "amount": 7,
           "unit": "l"
-        },
-        {
-          "ingredient": "dark-choc",
-          "amount": 280,
-          "unit": "g"
         },
         {
           "ingredient": "capers",
@@ -4755,7 +4741,7 @@
         "id": "sveta",
         "name": "Света",
         "target": {
-          "kcal": 1800
+          "kcal": 1600
         },
         "portions": [
           {
@@ -5043,44 +5029,30 @@
         ]
       },
       {
-        "id": "s-fruit",
-        "name": "Яблоко и мандарины",
+        "id": "s-apple",
+        "name": "Яблоко",
         "meal": "snack",
         "how": "Из холодильника.",
         "servings": [
           {
             "person": "sveta",
-            "text": "1 яблоко и 2 мандарина",
-            "kcal": 158,
-            "protein": 2
+            "text": "1 яблоко",
+            "kcal": 88,
+            "protein": 0.5
           }
         ]
       },
       {
-        "id": "s-nuts",
-        "name": "Грецкие орехи",
+        "id": "s-mandarins",
+        "name": "Мандарины",
         "meal": "snack",
-        "how": "Из шкафа.",
+        "how": "Из холодильника.",
         "servings": [
           {
             "person": "sveta",
-            "text": "20 г",
-            "kcal": 131,
-            "protein": 3
-          }
-        ]
-      },
-      {
-        "id": "s-choc",
-        "name": "Тёмный шоколад",
-        "meal": "snack",
-        "how": "Из шкафа.",
-        "servings": [
-          {
-            "person": "sveta",
-            "text": "20 г",
-            "kcal": 112,
-            "protein": 2
+            "text": "2 мандарина",
+            "kcal": 70,
+            "protein": 1.5
           }
         ]
       }
@@ -5094,15 +5066,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "note": "Борщ и лоток лосося — из холодильника: их не замораживали. Чили на завтра — тоже в холодильнике."
@@ -5115,15 +5086,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "thaw": [
@@ -5138,15 +5108,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       },
@@ -5158,15 +5127,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       },
@@ -5178,15 +5146,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "thaw": [
@@ -5202,15 +5169,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       },
@@ -5222,15 +5188,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "thaw": [
@@ -5245,15 +5210,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "note": "Укроп и шнитт-лук второй недели — из морозилки: режем замороженными.",
@@ -5269,15 +5233,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       },
@@ -5289,15 +5252,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       },
@@ -5309,15 +5271,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "thaw": [
@@ -5333,15 +5294,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       },
@@ -5353,15 +5313,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         },
         "thaw": [
@@ -5376,15 +5335,14 @@
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-fruit"
+            "s-apple"
           ],
           "afternoon": [
             "v-nuts",
-            "s-nuts"
+            "s-mandarins"
           ],
           "evening": [
-            "v-shake",
-            "s-choc"
+            "v-shake"
           ]
         }
       }
