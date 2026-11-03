@@ -1631,7 +1631,8 @@
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
-      "note": "AH Granola noten 500 г"
+      "staple": true,
+      "note": "Из излишков"
     },
     {
       "id": "bacon",
