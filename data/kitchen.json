@@ -29,7 +29,10 @@
         { "item": "Киви", "level": "never" },
         { "item": "Шпинат", "level": "never" },
         { "item": "Яйца всмятку", "level": "never" },
-        { "item": "Бренд Pur Natur Biologische", "level": "dislike" }
+        { "item": "Бренд Pur Natur Biologische", "level": "dislike" },
+        { "item": "Кварк", "level": "dislike", "note": "Вместо него — покупной йогурт" },
+        { "item": "Греческий йогурт", "level": "dislike", "note": "Покупной йогурт — можно" },
+        { "item": "Овсянка", "level": "dislike" }
       ]
     }
   ],

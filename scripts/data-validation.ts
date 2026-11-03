@@ -705,7 +705,7 @@ function checkRation(
   ration.days.forEach((day, i) => {
     const path = `/ration/days/${i}`;
     if (day.day !== i + 1) error(`${path}/day`, `дни должны идти подряд с 1-го: на месте ${i + 1}-го стоит ${day.day}-й`);
-    if (day.breakfast) checkExtra(day.breakfast, 'breakfast', `${path}/breakfast`);
+    day.breakfast?.forEach((id, j) => checkExtra(id, 'breakfast', `${path}/breakfast/${j}`));
     const daySnacks = new Set<string>();
     for (const slot of ['morning', 'afternoon', 'evening'] as const) {
       day.snacks?.[slot]?.forEach((id, j) => {
@@ -727,6 +727,8 @@ function checkRation(
 
     ration.people.forEach((person) => {
       const total = personDay(p, ration, day, person.id);
+      const breakfasts = total.lines.find((line) => line.slot === 'breakfast')?.items.length ?? 0;
+      if (day.breakfast && breakfasts !== 1) error(`${path}/breakfast`, `день ${day.day}: у ${person.name} завтраков ${breakfasts}, а нужен один`);
       const off = deviation(total.kcal, person.target.kcal);
       if (Math.abs(off) > RATION_TOLERANCE) {
         warn(path, `день ${day.day}, ${person.name}: ${round(total.kcal)} ккал при цели ${person.target.kcal} (${off > 0 ? '+' : ''}${Math.round(off * 100)} %)`);

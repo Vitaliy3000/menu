@@ -347,7 +347,7 @@ describe('рацион техкарты', () => {
           { id: 'porridge', name: 'Каша', meal: 'breakfast', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
           { id: 'yogurt', name: 'Йогурт', meal: 'snack', servings: [{ person: 'ann', text: '200 г', kcal: 150, protein: 15 }] },
         ],
-        days: [{ day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'stew', snacks: { afternoon: ['yogurt'] } }],
+        days: [{ day: 1, breakfast: ['porridge'], lunch: 'soup', dinner: 'stew', snacks: { afternoon: ['yogurt'] } }],
       },
     };
   };
@@ -360,7 +360,7 @@ describe('рацион техкарты', () => {
 
   it('ловит ссылки на несуществующие блюда, перекусы и людей', () => {
     const p = withRation();
-    p.ration!.days[0] = { day: 2, breakfast: 'yogurt', lunch: 'pie', dinner: 'stew', snacks: { morning: ['cake', 'yogurt'], evening: ['yogurt'] } };
+    p.ration!.days[0] = { day: 2, breakfast: ['yogurt'], lunch: 'pie', dinner: 'stew', snacks: { morning: ['cake', 'yogurt'], evening: ['yogurt'] } };
     p.ration!.extras[1]!.servings.push({ person: 'bob', text: '100 г', kcal: 50, protein: 5 });
     const text = messages(checkPlan(p, file));
     expect(text).toContain('дни должны идти подряд с 1-го');
@@ -376,6 +376,13 @@ describe('рацион техкарты', () => {
     const p = withRation();
     p.ration!.people[0]!.portions = [{ ...soupPortion }];
     expect(messages(checkPlan(p, file))).toContain('у Аня нет порции блюда «stew»');
+  });
+
+  it('у каждого человека — ровно один завтрак дня', () => {
+    const p = withRation();
+    p.ration!.extras.push({ id: 'toast', name: 'Тост', meal: 'breakfast', servings: [{ person: 'ann', text: '1 тост', kcal: 100, protein: 3 }] });
+    p.ration!.days[0]!.breakfast = ['porridge', 'toast'];
+    expect(messages(checkPlan(p, file))).toContain('день 1: у Аня завтраков 2, а нужен один');
   });
 
   it('предупреждает, если день далеко от цели по калориям и белку', () => {

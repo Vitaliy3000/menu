@@ -50,12 +50,13 @@ const plan: CookPlan = {
     ],
     extras: [
       { id: 'porridge', name: 'Каша', meal: 'breakfast', how: 'Сварить на воде', servings: [{ person: 'ann', text: '60 г овсянки', kcal: 250, protein: 10 }] },
+      { id: 'eggs', name: 'Яичница', meal: 'breakfast', servings: [{ person: 'bob', text: '3 яйца', kcal: 270, protein: 19 }] },
       { id: 'shake', name: 'Коктейль', meal: 'snack', servings: [{ person: 'bob', text: '30 г протеина', kcal: 120, protein: 24 }] },
       { id: 'apple', name: 'Яблоко', meal: 'snack', servings: [{ person: 'ann', text: '1 яблоко', kcal: 80, protein: 0 }] },
       { id: 'nuts', name: 'Орехи', meal: 'snack', servings: [{ person: 'ann', text: '20 г', kcal: 130, protein: 3 }] },
     ],
     days: [
-      { day: 1, breakfast: 'porridge', lunch: 'soup', dinner: 'soup', snacks: { morning: ['shake'], evening: ['apple', 'nuts'] } },
+      { day: 1, breakfast: ['porridge', 'eggs'], lunch: 'soup', dinner: 'soup', snacks: { morning: ['shake'], evening: ['apple', 'nuts'] } },
       { day: 2, lunch: 'soup', dinner: 'soup' },
     ],
   },
@@ -112,7 +113,7 @@ describe('список покупок', () => {
 });
 
 describe('рацион', () => {
-  it('идёт по порядку дня и складывает в перекус только свои позиции', () => {
+  it('идёт по порядку дня и складывает в завтрак и перекус только свои позиции', () => {
     const day = personDay(plan, plan.ration!, plan.ration!.days[0]!, 'ann');
     expect(day.lines.map((l) => [l.slot, l.items.map((i) => i.name)])).toEqual([
       ['breakfast', ['Каша']],

@@ -1075,8 +1075,13 @@
           "description": "Номер дня; 1 — следующий после дня готовки."
         },
         "breakfast": {
-          "$ref": "#/$defs/LocalId",
-          "description": "id завтрака из extras."
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          },
+          "description": "Завтраки дня из extras: каждый ест тот, где есть его порция, — ровно один. Обычно завтрак один на всех; кому нужен другой — свой завтрак рядом."
         },
         "lunch": {
           "$ref": "#/$defs/LocalId",

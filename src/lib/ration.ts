@@ -51,7 +51,7 @@ export function personDay(plan: CookPlan, ration: Ration, day: RationDay, person
   const snack = (slot: keyof RationSnacks) => (day.snacks?.[slot] ?? []).flatMap(extra);
 
   const slots: [MealSlot, MealItem[]][] = [
-    ['breakfast', day.breakfast ? extra(day.breakfast) : []],
+    ['breakfast', (day.breakfast ?? []).flatMap(extra)],
     ['morning', snack('morning')],
     ['lunch', dish('lunch')],
     ['afternoon', snack('afternoon')],

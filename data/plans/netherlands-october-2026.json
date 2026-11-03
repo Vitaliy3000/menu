@@ -1942,21 +1942,21 @@
     "days": [
       {
         "day": 1,
-        "breakfast": "bf-omelet",
+        "breakfast": ["bf-omelet"],
         "lunch": "bolognese",
         "dinner": "cacciatora",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-nuts", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] }
       },
       {
         "day": 2,
-        "breakfast": "bf-yogurt",
+        "breakfast": ["bf-yogurt"],
         "lunch": "lemon-chicken",
         "dinner": "beef",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] }
       },
       {
         "day": 3,
-        "breakfast": "bf-tosti",
+        "breakfast": ["bf-tosti"],
         "lunch": "cacciatora",
         "dinner": "bolognese",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -1964,7 +1964,7 @@
       },
       {
         "day": 4,
-        "breakfast": "bf-salmon",
+        "breakfast": ["bf-salmon"],
         "lunch": "beef",
         "dinner": "salmon",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -1972,14 +1972,14 @@
       },
       {
         "day": 5,
-        "breakfast": "bf-bacon",
+        "breakfast": ["bf-bacon"],
         "lunch": "bolognese",
         "dinner": "lemon-chicken",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-nuts", "s-nuts"], "evening": ["shakes", "s-kwark"] }
       },
       {
         "day": 6,
-        "breakfast": "bf-ready",
+        "breakfast": ["bf-ready"],
         "lunch": "cacciatora",
         "dinner": "beef",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -1987,7 +1987,7 @@
       },
       {
         "day": 7,
-        "breakfast": "bf-ricotta",
+        "breakfast": ["bf-ricotta"],
         "lunch": "lemon-chicken",
         "dinner": "salmon",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["s-toast"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -1995,7 +1995,7 @@
       },
       {
         "day": 8,
-        "breakfast": "bf-ricotta",
+        "breakfast": ["bf-ricotta"],
         "lunch": "beef",
         "dinner": "bolognese",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["s-toast"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -2003,7 +2003,7 @@
       },
       {
         "day": 9,
-        "breakfast": "bf-omelet",
+        "breakfast": ["bf-omelet"],
         "lunch": "cacciatora",
         "dinner": "lemon-chicken",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -2011,7 +2011,7 @@
       },
       {
         "day": 10,
-        "breakfast": "bf-yogurt",
+        "breakfast": ["bf-yogurt"],
         "lunch": "bolognese",
         "dinner": "salmon",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "evening": ["shakes", "s-kwark"] },
@@ -2019,7 +2019,7 @@
       },
       {
         "day": 11,
-        "breakfast": "bf-tosti",
+        "breakfast": ["bf-tosti"],
         "lunch": "lemon-chicken",
         "dinner": "cacciatora",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -2028,7 +2028,7 @@
       },
       {
         "day": 12,
-        "breakfast": "bf-salmon",
+        "breakfast": ["bf-salmon"],
         "lunch": "beef",
         "dinner": "bolognese",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -2037,7 +2037,7 @@
       },
       {
         "day": 13,
-        "breakfast": "bf-bacon",
+        "breakfast": ["bf-bacon"],
         "lunch": "cacciatora",
         "dinner": "salmon",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
@@ -2045,7 +2045,7 @@
       },
       {
         "day": 14,
-        "breakfast": "bf-ready",
+        "breakfast": ["bf-ready"],
         "lunch": "lemon-chicken",
         "dinner": "beef",
         "snacks": { "morning": ["v-fruit", "s-fruit"], "afternoon": ["v-toast", "v-nuts", "s-toast", "s-nuts"], "evening": ["shakes", "v-kwark", "s-kwark"] },
