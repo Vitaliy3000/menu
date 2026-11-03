@@ -10,7 +10,7 @@
   },
   "audience": "2 взрослых: завтраки, обеды, ужины и перекусы на 14 дней",
   "cost": {
-    "amount": 396,
+    "amount": 399,
     "currency": "EUR",
     "store": "AH",
     "date": "2026-11-01",
@@ -1627,7 +1627,7 @@
     {
       "id": "granola",
       "name": "Гранола",
-      "amount": 220,
+      "amount": 160,
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
@@ -1652,13 +1652,13 @@
       "note": "Campina Magere milde kwark naturel 500 г"
     },
     {
-      "id": "activia",
-      "name": "Йогурт Activia",
-      "amount": 500,
-      "unit": "g",
+      "id": "boern-muesli",
+      "name": "Йогурт Boer'n muesli",
+      "amount": 3,
+      "unit": "pcs",
       "section": "dairy",
       "purchase": 2,
-      "note": "Activia Yoghurt 4 × 125 г — вкус на выбор Светы"
+      "note": "Zuivelhoeve Boer'n muesli aardbei 170 г × 3"
     },
     {
       "id": "pancakes",
@@ -1917,7 +1917,7 @@
         },
         {
           "ingredient": "granola",
-          "amount": 220,
+          "amount": 160,
           "unit": "g"
         },
         {
@@ -1931,9 +1931,9 @@
           "unit": "g"
         },
         {
-          "ingredient": "activia",
-          "amount": 375,
-          "unit": "g"
+          "ingredient": "boern-muesli",
+          "amount": 3,
+          "unit": "pcs"
         },
         {
           "ingredient": "pancakes",
@@ -5011,16 +5011,16 @@
         ]
       },
       {
-        "id": "bf-activia",
-        "name": "Йогурт Activia с гранолой и грушей",
+        "id": "bf-boern",
+        "name": "Йогурт Boer'n muesli с гранолой и грушей",
         "meal": "breakfast",
         "how": "Йогурт — в миску, сверху гранола и груша ломтиками.",
         "servings": [
           {
             "person": "sveta",
-            "text": "1 стаканчик Activia, 40 г гранолы, ½ груши",
-            "kcal": 344,
-            "protein": 10
+            "text": "1 стаканчик Boer'n muesli, 20 г гранолы, ½ груши",
+            "kcal": 364,
+            "protein": 11
           }
         ]
       },
@@ -5239,7 +5239,7 @@
         "day": 7,
         "breakfast": [
           "bf-kwark",
-          "bf-activia"
+          "bf-boern"
         ],
         "lunch": "borscht",
         "dinner": "kotlety",
@@ -5310,7 +5310,7 @@
         "day": 10,
         "breakfast": [
           "bf-oats",
-          "bf-activia"
+          "bf-boern"
         ],
         "lunch": "borscht",
         "dinner": "kotlety",
@@ -5406,7 +5406,7 @@
         "day": 14,
         "breakfast": [
           "bf-kwark",
-          "bf-activia"
+          "bf-boern"
         ],
         "lunch": "chili",
         "dinner": "pulled-pork",
