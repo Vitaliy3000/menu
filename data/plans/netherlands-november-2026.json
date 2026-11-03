@@ -1627,7 +1627,7 @@
     {
       "id": "granola",
       "name": "Гранола",
-      "amount": 160,
+      "amount": 100,
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
@@ -1917,7 +1917,7 @@
         },
         {
           "ingredient": "granola",
-          "amount": 160,
+          "amount": 100,
           "unit": "g"
         },
         {
@@ -5012,15 +5012,15 @@
       },
       {
         "id": "bf-boern",
-        "name": "Йогурт Boer'n muesli с гранолой и грушей",
+        "name": "Йогурт Boer'n muesli с грушей",
         "meal": "breakfast",
-        "how": "Йогурт — в миску, сверху гранола и груша ломтиками.",
+        "how": "Йогурт — в миску, сверху груша ломтиками.",
         "servings": [
           {
             "person": "sveta",
-            "text": "1 стаканчик Boer'n muesli, 20 г гранолы, ½ груши",
-            "kcal": 364,
-            "protein": 11
+            "text": "1 стаканчик Boer'n muesli, ½ груши",
+            "kcal": 271,
+            "protein": 8.5
           }
         ]
       },
