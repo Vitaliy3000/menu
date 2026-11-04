@@ -10,7 +10,7 @@
   },
   "audience": "2 взрослых: завтраки, обеды, ужины и перекусы на 14 дней",
   "cost": {
-    "amount": 399,
+    "amount": 388,
     "currency": "EUR",
     "store": "AH",
     "date": "2026-11-01",
@@ -652,11 +652,11 @@
               "meal": "dinner"
             },
             {
-              "day": 5,
+              "day": 4,
               "meal": "dinner"
             },
             {
-              "day": 7,
+              "day": 6,
               "meal": "dinner"
             },
             {
@@ -664,7 +664,7 @@
               "meal": "dinner"
             },
             {
-              "day": 13,
+              "day": 14,
               "meal": "dinner"
             }
           ]
@@ -682,11 +682,11 @@
               "meal": "dinner"
             },
             {
-              "day": 5,
+              "day": 4,
               "meal": "dinner"
             },
             {
-              "day": 7,
+              "day": 6,
               "meal": "dinner"
             },
             {
@@ -694,7 +694,7 @@
               "meal": "dinner"
             },
             {
-              "day": 13,
+              "day": 14,
               "meal": "dinner"
             }
           ]
@@ -722,11 +722,11 @@
           "person": "vitaly",
           "meals": [
             {
-              "day": 3,
+              "day": 5,
               "meal": "dinner"
             },
             {
-              "day": 6,
+              "day": 7,
               "meal": "dinner"
             },
             {
@@ -734,11 +734,11 @@
               "meal": "dinner"
             },
             {
-              "day": 12,
+              "day": 11,
               "meal": "dinner"
             },
             {
-              "day": 14,
+              "day": 13,
               "meal": "dinner"
             }
           ]
@@ -752,11 +752,11 @@
           "person": "sveta",
           "meals": [
             {
-              "day": 3,
+              "day": 5,
               "meal": "dinner"
             },
             {
-              "day": 6,
+              "day": 7,
               "meal": "dinner"
             },
             {
@@ -764,11 +764,11 @@
               "meal": "dinner"
             },
             {
-              "day": 12,
+              "day": 11,
               "meal": "dinner"
             },
             {
-              "day": 14,
+              "day": 13,
               "meal": "dinner"
             }
           ]
@@ -803,22 +803,32 @@
         },
         {
           "container": "Алюминиевый лоток",
-          "count": 3,
+          "count": 1,
+          "storage": "fridge",
+          "days": 3,
+          "note": "4 розочки дюшес; кусок лосося ≈ 180 г — из ларя вечером дня 2",
+          "person": "vitaly",
+          "meals": [
+            {
+              "day": 3,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Алюминиевый лоток",
+          "count": 2,
           "storage": "freezer",
           "days": 90,
           "note": "4 розочки дюшес и кусок лосося ≈ 180 г",
           "person": "vitaly",
           "meals": [
             {
-              "day": 4,
-              "meal": "dinner"
-            },
-            {
               "day": 8,
               "meal": "dinner"
             },
             {
-              "day": 11,
+              "day": 12,
               "meal": "dinner"
             }
           ]
@@ -839,22 +849,32 @@
         },
         {
           "container": "Алюминиевый лоток",
-          "count": 3,
+          "count": 1,
+          "storage": "fridge",
+          "days": 3,
+          "note": "3 розочки дюшес; кусок лосося ≈ 130 г — из ларя вечером дня 2",
+          "person": "sveta",
+          "meals": [
+            {
+              "day": 3,
+              "meal": "dinner"
+            }
+          ]
+        },
+        {
+          "container": "Алюминиевый лоток",
+          "count": 2,
           "storage": "freezer",
           "days": 90,
           "note": "3 розочки дюшес и кусок лосося ≈ 130 г",
           "person": "sveta",
           "meals": [
             {
-              "day": 4,
-              "meal": "dinner"
-            },
-            {
               "day": 8,
               "meal": "dinner"
             },
             {
-              "day": 11,
+              "day": 12,
               "meal": "dinner"
             }
           ]
@@ -1001,16 +1021,16 @@
     {
       "id": "ham",
       "name": "Био ветчина",
-      "amount": 300,
+      "amount": 200,
       "unit": "g",
       "section": "meat",
       "purchase": 1,
-      "note": "AH Biologisch Achterham, 3 × ≈ 100 г: две — сразу в морозилку, к тостам дней 6 и 12"
+      "note": "AH Biologisch Achterham, 2 × ≈ 100 г: вторая — сразу в морозилку, к тостам дня 3"
     },
     {
       "id": "gouda",
       "name": "Гауда",
-      "amount": 380,
+      "amount": 400,
       "unit": "g",
       "section": "dairy",
       "purchase": 1,
@@ -1073,12 +1093,12 @@
     {
       "id": "rice-vinegar",
       "name": "Рисовый уксус",
-      "amount": 160,
+      "amount": 190,
       "unit": "ml",
       "section": "grocery",
       "purchase": 1,
       "staple": true,
-      "note": "Из излишков, без сахара и соли: пулд-порк, соус барбекю, коулслоу"
+      "note": "Из излишков, без сахара и соли: пулд-порк, соус барбекю, коулслоу, бёр блан дней 1 и 3"
     },
     {
       "id": "smoked-paprika",
@@ -1150,12 +1170,12 @@
     {
       "id": "parmesan",
       "name": "Пармезан",
-      "amount": 100,
+      "amount": 250,
       "unit": "g",
       "section": "dairy",
       "purchase": 1,
       "staple": true,
-      "note": "Из излишков"
+      "note": "Из излишков: паста и перекус Виталия до 2-й закупки"
     },
     {
       "id": "gelatin",
@@ -1203,7 +1223,7 @@
       "amount": 60,
       "unit": "g",
       "section": "grocery",
-      "purchase": 2,
+      "purchase": 1,
       "staple": true,
       "note": "Из излишков"
     },
@@ -1250,7 +1270,7 @@
     {
       "id": "dijon",
       "name": "Дижонская горчица",
-      "amount": 50,
+      "amount": 65,
       "unit": "g",
       "section": "grocery",
       "purchase": 1,
@@ -1280,7 +1300,7 @@
     {
       "id": "brown-sugar",
       "name": "Коричневый сахар",
-      "amount": 70,
+      "amount": 80,
       "unit": "g",
       "section": "grocery",
       "purchase": 1,
@@ -1290,12 +1310,12 @@
     {
       "id": "poolish-bread",
       "name": "Свой хлеб на пулише",
-      "amount": 1.45,
+      "amount": 1.6,
       "unit": "kg",
       "section": "bakery",
       "purchase": 1,
       "staple": true,
-      "note": "Из излишков, нарезкой в морозилке: ≈ 800 г размораживают накануне — котлеты и еда в день готовки, ≈ 650 г — тосты"
+      "note": "Из излишков, нарезкой в морозилке: ≈ 800 г размораживают накануне — котлеты и еда в день готовки, ≈ 800 г — тосты"
     },
     {
       "id": "stock-cubes",
@@ -1348,12 +1368,32 @@
       "note": "Из излишков — на булочки"
     },
     {
+      "id": "pears",
+      "name": "Груши",
+      "amount": 24,
+      "unit": "pcs",
+      "section": "produce",
+      "purchase": 1,
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
+      "id": "mandarins",
+      "name": "Мандарины",
+      "amount": 48,
+      "unit": "pcs",
+      "section": "produce",
+      "purchase": 1,
+      "staple": true,
+      "note": "Из излишков"
+    },
+    {
       "id": "oats",
       "name": "Овсянка",
       "amount": 120,
       "unit": "g",
       "section": "grocery",
-      "purchase": 2,
+      "purchase": 1,
       "staple": true,
       "note": "Из излишков"
     },
@@ -1363,7 +1403,7 @@
       "amount": 40,
       "unit": "g",
       "section": "grocery",
-      "purchase": 2,
+      "purchase": 1,
       "staple": true,
       "note": "Из излишков"
     },
@@ -1373,19 +1413,19 @@
       "amount": 76,
       "unit": "g",
       "section": "grocery",
-      "purchase": 2,
+      "purchase": 1,
       "staple": true,
       "note": "Из излишков"
     },
     {
       "id": "good-olive-oil",
       "name": "Дорогое оливковое масло",
-      "amount": 40,
+      "amount": 55,
       "unit": "ml",
       "section": "grocery",
-      "purchase": 2,
+      "purchase": 1,
       "staple": true,
-      "note": "Из излишков: с базиликом — Свете к пасте"
+      "note": "Из излишков: с базиликом — Свете к пасте, в день 3 — вместо базилика"
     },
     {
       "id": "oil",
@@ -1430,7 +1470,7 @@
       "amount": 840,
       "unit": "g",
       "section": "other",
-      "purchase": 2,
+      "purchase": 1,
       "staple": true,
       "note": "Для коктейля, 60 г в день"
     },
@@ -1447,7 +1487,7 @@
     {
       "id": "cheddar",
       "name": "Тёртый чеддер",
-      "amount": 100,
+      "amount": 60,
       "unit": "g",
       "section": "dairy",
       "purchase": 2,
@@ -1492,7 +1532,7 @@
     {
       "id": "shallots",
       "name": "Шалот",
-      "amount": 120,
+      "amount": 60,
       "unit": "g",
       "section": "produce",
       "purchase": 2,
@@ -1501,7 +1541,7 @@
     {
       "id": "white-wine",
       "name": "Сухое белое вино",
-      "amount": 200,
+      "amount": 100,
       "unit": "ml",
       "section": "grocery",
       "purchase": 2,
@@ -1510,7 +1550,7 @@
     {
       "id": "white-wine-vinegar",
       "name": "Белый винный уксус",
-      "amount": 60,
+      "amount": 30,
       "unit": "ml",
       "section": "grocery",
       "purchase": 2,
@@ -1519,20 +1559,11 @@
     {
       "id": "lemons",
       "name": "Лимоны",
-      "amount": 4,
+      "amount": 2,
       "unit": "pcs",
       "section": "produce",
       "purchase": 2,
-      "note": "AH Citroen 500 г"
-    },
-    {
-      "id": "chives",
-      "name": "Шнитт-лук",
-      "amount": 2,
-      "unit": "bunch",
-      "section": "produce",
-      "purchase": 2,
-      "note": "AH Bieslook 25 г × 2"
+      "note": "AH Citroen, 2 × per stuk"
     },
     {
       "id": "dill",
@@ -1562,31 +1593,13 @@
       "note": "AH Basilicum 22 г × 2 — сразу рубим с маслом и в морозилку"
     },
     {
-      "id": "pears",
-      "name": "Груши",
-      "amount": 19,
-      "unit": "pcs",
-      "section": "produce",
-      "purchase": 2,
-      "note": "AH Conference bak 1 кг × 4 — твёрдые"
-    },
-    {
-      "id": "mandarins",
-      "name": "Мандарины",
-      "amount": 48,
-      "unit": "pcs",
-      "section": "produce",
-      "purchase": 2,
-      "note": "AH Mandarijnen 1 кг × 4"
-    },
-    {
       "id": "apples",
       "name": "Яблоки",
-      "amount": 14,
+      "amount": 9,
       "unit": "pcs",
       "section": "produce",
       "purchase": 2,
-      "note": "AH Elstar zak 1,5 кг × 2 — Свете"
+      "note": "AH Elstar zak 1,5 кг — Свете, дни 6–14"
     },
     {
       "id": "cherry",
@@ -1644,6 +1657,15 @@
       "note": "AH Ontbijtspek ≈ 100 г — Beter Leven 3 ster"
     },
     {
+      "id": "ham-2",
+      "name": "Био ветчина",
+      "amount": 100,
+      "unit": "g",
+      "section": "meat",
+      "purchase": 2,
+      "note": "AH Biologisch Achterham ≈ 100 г — сразу в морозилку, к тостам дня 11"
+    },
+    {
       "id": "kwark",
       "name": "Обезжиренный кварк",
       "amount": 500,
@@ -1655,25 +1677,25 @@
     {
       "id": "boern-muesli",
       "name": "Йогурт Boer'n muesli",
-      "amount": 3,
+      "amount": 2,
       "unit": "pcs",
       "section": "dairy",
       "purchase": 2,
-      "note": "Zuivelhoeve Boer'n muesli aardbei 170 г × 3"
+      "note": "Zuivelhoeve Boer'n muesli aardbei 170 г × 2"
     },
     {
       "id": "pancakes",
       "name": "Американские панкейки",
-      "amount": 6,
+      "amount": 4,
       "unit": "pcs",
       "section": "bakery",
       "purchase": 2,
-      "note": "AH American pancakes naturel, 6 шт — Свете"
+      "note": "AH American pancakes naturel, 6 шт — Свете на 2 завтрака, 2 лишних"
     },
     {
       "id": "honey",
       "name": "Мёд",
-      "amount": 54,
+      "amount": 36,
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
@@ -1682,7 +1704,7 @@
     {
       "id": "walnuts",
       "name": "Грецкие орехи",
-      "amount": 200,
+      "amount": 120,
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
@@ -1691,11 +1713,11 @@
     {
       "id": "soy-milk",
       "name": "Соевое молоко",
-      "amount": 7,
+      "amount": 5,
       "unit": "l",
       "section": "dairy",
       "purchase": 2,
-      "note": "Alpro Sojadrink original, 7 × 1 л"
+      "note": "Alpro Sojadrink original, 5 × 1 л"
     },
     {
       "id": "capers",
@@ -1716,7 +1738,7 @@
     {
       "id": "buy",
       "when": "за 2–4 дня",
-      "text": "Первая закупка — вкладка «1-я закупка» в «Продуктах». Мясо, птица, яйца и гастрономия — не с 1 звездой Beter Leven: в AH обычные бекон, ветчина и свиная лопатка — 1 звезда, берём био. Фарш — только био. Срок на мясе — не раньше дня готовки. Две упаковки ветчины из трёх — сразу в морозилку: к тостам дней 6 и 12."
+      "text": "Первая закупка — вкладка «1-я закупка» в «Продуктах». Мясо, птица, яйца и гастрономия — не с 1 звездой Beter Leven: в AH обычные бекон, ветчина и свиная лопатка — 1 звезда, берём био. Фарш — только био. Срок на мясе — не раньше дня готовки. Вторую упаковку ветчины — сразу в морозилку: к тостам дня 3."
     },
     {
       "id": "ice",
@@ -1801,13 +1823,129 @@
       ]
     },
     {
+      "id": "first-days",
+      "when": "дни 1–5",
+      "text": "2-я закупка — только к ужину дня 5: до неё едим из 1-й закупки и запасов. Груши и мандарины — из дома на все 14 дней: в холодильник, по 2–3 груши — на стол дозревать. Чего до дня 5 нет — огурцов, жареного лука, укропа, лимона, петрушки, шалота, вина, чеддера и базилика, — тем заменяем из дома: что чем, сказано в заметке дня. Коктейль Виталия — на молоке с водой, днём вместо орехов — пармезан.",
+      "uses": [
+        {
+          "ingredient": "eggs",
+          "amount": 10,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "gouda",
+          "amount": 350,
+          "unit": "g",
+          "note": "≈ 120 г — завтрак и обед в день готовки"
+        },
+        {
+          "ingredient": "ham",
+          "amount": 165,
+          "unit": "g",
+          "note": "100 г — завтрак и обед в день готовки"
+        },
+        {
+          "ingredient": "milk",
+          "amount": 1400,
+          "unit": "ml",
+          "note": "овсянка и коктейли"
+        },
+        {
+          "ingredient": "butter",
+          "amount": 130,
+          "unit": "g",
+          "note": "соус, котлеты и завтраки"
+        },
+        {
+          "ingredient": "poolish-bread",
+          "amount": 480,
+          "unit": "g",
+          "note": "тосты — из морозилки"
+        },
+        {
+          "ingredient": "oats",
+          "amount": 120,
+          "unit": "g"
+        },
+        {
+          "ingredient": "peanut-paste",
+          "amount": 40,
+          "unit": "g"
+        },
+        {
+          "ingredient": "brown-sugar",
+          "amount": 10,
+          "unit": "g"
+        },
+        {
+          "ingredient": "pears",
+          "amount": 12,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "mandarins",
+          "amount": 17,
+          "unit": "pcs"
+        },
+        {
+          "ingredient": "protein",
+          "amount": 240,
+          "unit": "g"
+        },
+        {
+          "ingredient": "salmon",
+          "amount": 930,
+          "unit": "g",
+          "note": "куски к ужинам 3, 8, 12"
+        },
+        {
+          "ingredient": "onions",
+          "amount": 60,
+          "unit": "g",
+          "note": "бёр блан вместо шалота"
+        },
+        {
+          "ingredient": "rice-vinegar",
+          "amount": 30,
+          "unit": "ml",
+          "note": "бёр блан вместо винного уксуса"
+        },
+        {
+          "ingredient": "dijon",
+          "amount": 35,
+          "unit": "g",
+          "note": "корочка лосося и к котлетам"
+        },
+        {
+          "ingredient": "panko",
+          "amount": 22,
+          "unit": "g"
+        },
+        {
+          "ingredient": "pistachio-paste",
+          "amount": 28,
+          "unit": "g"
+        },
+        {
+          "ingredient": "good-olive-oil",
+          "amount": 15,
+          "unit": "ml"
+        },
+        {
+          "ingredient": "parmesan",
+          "amount": 150,
+          "unit": "g"
+        }
+      ]
+    },
+    {
       "id": "stock",
-      "when": "вечером в день готовки",
-      "text": "Вторая закупка — вкладка «2-я закупка»: завтраки, перекусы и свежее к подаче. Сразу в морозилку: бейглы, 4 панкейка, вторую упаковку копчёного лосося, половину укропа и шнитт-лука — рубленными, в контейнере. Ещё 2 панкейка — в холодильник: Свете на завтрак дня 1. Базилик — мелко порубить с 40 мл хорошего оливкового масла, плоско в пакет с застёжкой и продавить на 4 дольки — тоже в морозилку: Свете к пасте. Груши, мандарины и яблоки — в холодильник, по 2–3 груши — на стол дозревать.",
+      "when": "день 5, к ужину",
+      "text": "Вторая закупка — вкладка «2-я закупка»: завтраки, перекусы и свежее к подаче на дни 5–14. Сразу в морозилку: бейглы, 4 панкейка, ветчину, вторую упаковку копчёного лосося, половину укропа — рубленым, в контейнере. Ещё 2 панкейка — в холодильник: Свете на завтрак дня 7. Базилик — мелко порубить с 40 мл хорошего оливкового масла, плоско в пакет с застёжкой и продавить на 3 дольки — тоже в морозилку: Свете к пасте. Яблоки — в холодильник.",
       "uses": [
         {
           "ingredient": "cheddar",
-          "amount": 100,
+          "amount": 60,
           "unit": "g"
         },
         {
@@ -1838,28 +1976,23 @@
         },
         {
           "ingredient": "shallots",
-          "amount": 120,
+          "amount": 60,
           "unit": "g"
         },
         {
           "ingredient": "white-wine",
-          "amount": 200,
+          "amount": 100,
           "unit": "ml"
         },
         {
           "ingredient": "white-wine-vinegar",
-          "amount": 60,
+          "amount": 30,
           "unit": "ml"
         },
         {
           "ingredient": "lemons",
-          "amount": 4,
-          "unit": "pcs"
-        },
-        {
-          "ingredient": "chives",
           "amount": 2,
-          "unit": "bunch"
+          "unit": "pcs"
         },
         {
           "ingredient": "parsley",
@@ -1878,17 +2011,17 @@
         },
         {
           "ingredient": "pears",
-          "amount": 19,
+          "amount": 12,
           "unit": "pcs"
         },
         {
           "ingredient": "mandarins",
-          "amount": 48,
+          "amount": 31,
           "unit": "pcs"
         },
         {
           "ingredient": "apples",
-          "amount": 14,
+          "amount": 9,
           "unit": "pcs"
         },
         {
@@ -1933,27 +2066,27 @@
         },
         {
           "ingredient": "boern-muesli",
-          "amount": 3,
+          "amount": 2,
           "unit": "pcs"
         },
         {
           "ingredient": "pancakes",
-          "amount": 6,
+          "amount": 4,
           "unit": "pcs"
         },
         {
           "ingredient": "honey",
-          "amount": 54,
+          "amount": 36,
           "unit": "g"
         },
         {
           "ingredient": "walnuts",
-          "amount": 170,
+          "amount": 120,
           "unit": "g"
         },
         {
           "ingredient": "soy-milk",
-          "amount": 7,
+          "amount": 5,
           "unit": "l"
         },
         {
@@ -1962,18 +2095,8 @@
           "unit": "g"
         },
         {
-          "ingredient": "oats",
-          "amount": 120,
-          "unit": "g"
-        },
-        {
-          "ingredient": "peanut-paste",
-          "amount": 40,
-          "unit": "g"
-        },
-        {
           "ingredient": "pistachio-paste",
-          "amount": 76,
+          "amount": 48,
           "unit": "g"
         },
         {
@@ -1983,58 +2106,45 @@
         },
         {
           "ingredient": "protein",
-          "amount": 840,
+          "amount": 600,
           "unit": "g"
         },
         {
-          "ingredient": "salmon",
-          "amount": 930,
-          "unit": "g",
-          "note": "куски к ужинам 4, 8, 11"
-        },
-        {
           "ingredient": "panko",
-          "amount": 44,
+          "amount": 22,
           "unit": "g"
         },
         {
           "ingredient": "dijon",
-          "amount": 30,
+          "amount": 15,
           "unit": "g"
         },
         {
           "ingredient": "butter",
-          "amount": 200,
+          "amount": 105,
           "unit": "g",
           "note": "соус, котлеты и завтраки"
         },
         {
-          "ingredient": "milk",
-          "amount": 400,
-          "unit": "ml"
-        },
-        {
           "ingredient": "eggs",
-          "amount": 20,
+          "amount": 10,
           "unit": "pcs"
         },
         {
           "ingredient": "gouda",
-          "amount": 380,
-          "unit": "g",
-          "note": "≈ 120 г — завтрак и обед в день готовки"
+          "amount": 50,
+          "unit": "g"
         },
         {
-          "ingredient": "ham",
-          "amount": 230,
-          "unit": "g",
-          "note": "100 г — завтрак и обед в день готовки"
+          "ingredient": "ham-2",
+          "amount": 65,
+          "unit": "g"
         },
         {
           "ingredient": "poolish-bread",
-          "amount": 650,
+          "amount": 320,
           "unit": "g",
-          "note": "тосты на завтраки — из морозилки"
+          "note": "тосты — из морозилки"
         }
       ]
     }
@@ -4634,7 +4744,7 @@
       "duration": 3,
       "title": "Через 4 часа — заморозка",
       "role": "helper",
-      "details": "Остыло — термощуп в центре контейнера не выше 5 °C. Сегодня в ларе только котлеты. Утром дня 1 в ларь — борщ, пасту и пулд-порк (≈ 8,6 кг), в морозилку холодильника — чили (≈ 3,2 кг). Утром дня 2 — лотки дюшес дней 4, 8, 11, положив в каждый кусок лосося из ларя.",
+      "details": "Остыло — термощуп в центре контейнера не выше 5 °C. Сегодня в ларе только котлеты. Утром дня 1 в ларь — борщ, пасту и пулд-порк (≈ 8,6 кг), в морозилку холодильника — чили (≈ 3,2 кг). Утром дня 2 — лотки дюшес дней 8 и 12, положив в каждый кусок лосося из ларя. Лотки дня 3 остаются в холодильнике.",
       "passive": true,
       "dishes": [
         "borscht",
@@ -4648,7 +4758,7 @@
         "minutes": 240,
         "label": "Заморозка"
       },
-      "warning": "Тёплое в морозилку не ставить. Борщ и лотки лосося дня 1, чили дня 2 — не замораживать: их едят первыми. Быструю заморозку выключить через сутки после последней закладки."
+      "warning": "Тёплое в морозилку не ставить. Борщ и лотки лосося дней 1 и 3, чили дня 2 — не замораживать: их едят первыми. Быструю заморозку выключить через сутки после последней закладки."
     }
   ],
   "ration": {
@@ -4879,11 +4989,11 @@
         "id": "bf-oats",
         "name": "Овсянка с арахисовой пастой и грушей",
         "meal": "breakfast",
-        "how": "Овсянку с молоком — в кастрюлю 1,5 л, средний огонь, помешивая, 5 минут. В тарелке — арахисовая паста, мёд и груша ломтиками.",
+        "how": "Овсянку с молоком — в кастрюлю 1,5 л, средний огонь, помешивая, 5 минут. В тарелке — арахисовая паста, коричневый сахар и груша ломтиками.",
         "servings": [
           {
             "person": "vitaly",
-            "text": "60 г овсянки, 200 мл молока, 20 г арахисовой пасты, 1 ч. л. мёда, ½ груши",
+            "text": "60 г овсянки, 200 мл молока, 20 г арахисовой пасты, 1 ч. л. коричневого сахара, ½ груши",
             "kcal": 547,
             "protein": 20
           }
@@ -4891,19 +5001,19 @@
       },
       {
         "id": "bf-omelet",
-        "name": "Омлет с гаудой и шнитт-луком, тост",
+        "name": "Омлет с гаудой, тост",
         "meal": "breakfast",
-        "how": "Из морозилки — хлеб на пулише: ломтик сразу в тостер. Яйца взбить вилкой. На серой антипригарной сковороде на слабом огне растопить немного масла, вылить яйца и помешивать 2–3 минуты. На половину — гауду и шнитт-лук, сложить. Тост — с маслом.",
+        "how": "Из морозилки — хлеб на пулише: ломтик сразу в тостер. Яйца взбить вилкой. На серой антипригарной сковороде на слабом огне растопить немного масла, вылить яйца и помешивать 2–3 минуты. На половину — гауду, сложить. Тост — с маслом.",
         "servings": [
           {
             "person": "vitaly",
-            "text": "3 яйца, 25 г гауды, шнитт-лук; тост с маслом",
+            "text": "3 яйца, 25 г гауды; тост с маслом",
             "kcal": 474,
             "protein": 31
           },
           {
             "person": "sveta",
-            "text": "2 яйца, 15 г гауды, шнитт-лук; тост с маслом",
+            "text": "2 яйца, 15 г гауды; тост с маслом",
             "kcal": 360,
             "protein": 21
           }
@@ -4984,6 +5094,20 @@
         ]
       },
       {
+        "id": "bf-cheese-toast",
+        "name": "Тосты с гаудой и грушей",
+        "meal": "breakfast",
+        "how": "Хлеб из морозилки — в тостер, намазать маслом, сверху гауда. Рядом — груша ломтиками.",
+        "servings": [
+          {
+            "person": "sveta",
+            "text": "2 ломтика хлеба с маслом, 30 г гауды; ½ груши",
+            "kcal": 425,
+            "protein": 15
+          }
+        ]
+      },
+      {
         "id": "bf-kwark",
         "name": "Кварк с мёдом, орехами, гранолой и мандарином",
         "meal": "breakfast",
@@ -5054,6 +5178,20 @@
         ]
       },
       {
+        "id": "v-parmesan",
+        "name": "Пармезан",
+        "meal": "snack",
+        "how": "Утром отломить и взять с собой в стеклянном контейнере 180 мл: до 2-й закупки — вместо орехов.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "30 г",
+            "kcal": 118,
+            "protein": 10
+          }
+        ]
+      },
+      {
         "id": "v-shake",
         "name": "Протеиновый коктейль",
         "meal": "snack",
@@ -5068,6 +5206,20 @@
         ]
       },
       {
+        "id": "v-shake-milk",
+        "name": "Протеиновый коктейль на молоке",
+        "meal": "snack",
+        "how": "В шейкер — 250 мл молока, 250 мл воды и 60 г протеина, встряхнуть и выпить сразу. Соевое молоко придёт со 2-й закупкой.",
+        "servings": [
+          {
+            "person": "vitaly",
+            "text": "60 г протеина на 250 мл молока и 250 мл воды",
+            "kcal": 377,
+            "protein": 56.5
+          }
+        ]
+      },
+      {
         "id": "s-apple",
         "name": "Яблоко",
         "meal": "snack",
@@ -5077,6 +5229,20 @@
             "person": "sveta",
             "text": "1 яблоко",
             "kcal": 88,
+            "protein": 0.5
+          }
+        ]
+      },
+      {
+        "id": "s-pear",
+        "name": "Груша",
+        "meal": "snack",
+        "how": "Из холодильника.",
+        "servings": [
+          {
+            "person": "sveta",
+            "text": "1 груша",
+            "kcal": 100,
             "protein": 0.5
           }
         ]
@@ -5101,24 +5267,24 @@
         "day": 1,
         "breakfast": [
           "bf-oats",
-          "bf-pancakes"
+          "bf-cheese-toast"
         ],
         "lunch": "borscht",
         "dinner": "salmon",
         "snacks": {
           "morning": [
             "v-fruit",
-            "s-apple"
+            "s-pear"
           ],
           "afternoon": [
-            "v-nuts",
+            "v-parmesan",
             "s-mandarins"
           ],
           "evening": [
-            "v-shake"
+            "v-shake-milk"
           ]
         },
-        "note": "Борщ и лоток лосося — из холодильника: их не замораживали. Чили на завтра — тоже в холодильнике."
+        "note": "Борщ и лоток лосося — из холодильника, чили на завтра — тоже. До 2-й закупки: лосось без цедры и петрушки, бёр блан — на луке и рисовом уксусе."
       },
       {
         "day": 2,
@@ -5126,6 +5292,102 @@
           "bf-omelet"
         ],
         "lunch": "chili",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-pear"
+          ],
+          "afternoon": [
+            "v-parmesan",
+            "s-mandarins"
+          ],
+          "evening": [
+            "v-shake-milk"
+          ]
+        },
+        "note": "Виталию в чили — 20 г гауды ломтиками вместо чеддера. К котлетам — ложка дижонской горчицы вместо огурцов, жареного лука и укропа.",
+        "thaw": [
+          "упаковка ветчины к тостам",
+          "2 куска лосося из ларя — в лотки дюшес дня 3"
+        ]
+      },
+      {
+        "day": 3,
+        "breakfast": [
+          "bf-toast"
+        ],
+        "lunch": "pasta",
+        "dinner": "salmon",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-pear"
+          ],
+          "afternoon": [
+            "v-parmesan",
+            "s-mandarins"
+          ],
+          "evening": [
+            "v-shake-milk"
+          ]
+        },
+        "note": "Лоток лосося — из холодильника, соус и корочка — как в день 1. Свете в пасту вместо базилика — ложка хорошего оливкового масла."
+      },
+      {
+        "day": 4,
+        "breakfast": [
+          "bf-omelet"
+        ],
+        "lunch": "borscht",
+        "dinner": "kotlety",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-pear"
+          ],
+          "afternoon": [
+            "v-parmesan",
+            "s-mandarins"
+          ],
+          "evening": [
+            "v-shake-milk"
+          ]
+        },
+        "note": "Борщ — без укропа. К котлетам — ложка дижонской горчицы вместо огурцов, жареного лука и укропа.",
+        "thaw": [
+          "2 булочки бриошь к пулд-порку"
+        ]
+      },
+      {
+        "day": 5,
+        "breakfast": [
+          "bf-oats",
+          "bf-cheese-toast"
+        ],
+        "lunch": "chili",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-pear"
+          ],
+          "afternoon": [
+            "v-parmesan",
+            "s-mandarins"
+          ],
+          "evening": [
+            "v-shake"
+          ]
+        },
+        "note": "Виталию в чили — гауда вместо чеддера. 2-я закупка — к ужину: огурцы, жареный лук, коулслоу и соевое молоко — уже из неё."
+      },
+      {
+        "day": 6,
+        "breakfast": [
+          "bf-eggs"
+        ],
+        "lunch": "pasta",
         "dinner": "kotlety",
         "snacks": {
           "morning": [
@@ -5145,82 +5407,12 @@
         ]
       },
       {
-        "day": 3,
-        "breakfast": [
-          "bf-bagel"
-        ],
-        "lunch": "pasta",
-        "dinner": "pulled-pork",
-        "snacks": {
-          "morning": [
-            "v-fruit",
-            "s-apple"
-          ],
-          "afternoon": [
-            "v-nuts",
-            "s-mandarins"
-          ],
-          "evening": [
-            "v-shake"
-          ]
-        },
-        "thaw": [
-          "2 панкейка Свете к завтраку"
-        ]
-      },
-      {
-        "day": 4,
+        "day": 7,
         "breakfast": [
           "bf-yogurt",
           "bf-pancakes"
         ],
         "lunch": "borscht",
-        "dinner": "salmon",
-        "snacks": {
-          "morning": [
-            "v-fruit",
-            "s-apple"
-          ],
-          "afternoon": [
-            "v-nuts",
-            "s-mandarins"
-          ],
-          "evening": [
-            "v-shake"
-          ]
-        }
-      },
-      {
-        "day": 5,
-        "breakfast": [
-          "bf-eggs"
-        ],
-        "lunch": "chili",
-        "dinner": "kotlety",
-        "snacks": {
-          "morning": [
-            "v-fruit",
-            "s-apple"
-          ],
-          "afternoon": [
-            "v-nuts",
-            "s-mandarins"
-          ],
-          "evening": [
-            "v-shake"
-          ]
-        },
-        "thaw": [
-          "2 булочки бриошь к пулд-порку",
-          "упаковка ветчины к тостам"
-        ]
-      },
-      {
-        "day": 6,
-        "breakfast": [
-          "bf-toast"
-        ],
-        "lunch": "pasta",
         "dinner": "pulled-pork",
         "snacks": {
           "morning": [
@@ -5235,31 +5427,6 @@
             "v-shake"
           ]
         }
-      },
-      {
-        "day": 7,
-        "breakfast": [
-          "bf-kwark",
-          "bf-boern"
-        ],
-        "lunch": "borscht",
-        "dinner": "kotlety",
-        "snacks": {
-          "morning": [
-            "v-fruit",
-            "s-apple"
-          ],
-          "afternoon": [
-            "v-nuts",
-            "s-mandarins"
-          ],
-          "evening": [
-            "v-shake"
-          ]
-        },
-        "thaw": [
-          "вторая упаковка копчёного лосося"
-        ]
       },
       {
         "day": 8,
@@ -5281,7 +5448,6 @@
             "v-shake"
           ]
         },
-        "note": "Укроп и шнитт-лук второй недели — из морозилки: режем замороженными.",
         "thaw": [
           "2 булочки бриошь к пулд-порку"
         ]
@@ -5310,7 +5476,7 @@
       {
         "day": 10,
         "breakfast": [
-          "bf-oats",
+          "bf-kwark",
           "bf-boern"
         ],
         "lunch": "borscht",
@@ -5327,39 +5493,19 @@
           "evening": [
             "v-shake"
           ]
-        }
-      },
-      {
-        "day": 11,
-        "breakfast": [
-          "bf-omelet"
-        ],
-        "lunch": "chili",
-        "dinner": "salmon",
-        "snacks": {
-          "morning": [
-            "v-fruit",
-            "s-apple"
-          ],
-          "afternoon": [
-            "v-nuts",
-            "s-mandarins"
-          ],
-          "evening": [
-            "v-shake"
-          ]
         },
+        "note": "Укроп — из морозилки: режем замороженным.",
         "thaw": [
           "2 булочки бриошь к пулд-порку",
           "упаковка ветчины к тостам"
         ]
       },
       {
-        "day": 12,
+        "day": 11,
         "breakfast": [
           "bf-toast"
         ],
-        "lunch": "pasta",
+        "lunch": "chili",
         "dinner": "pulled-pork",
         "snacks": {
           "morning": [
@@ -5379,13 +5525,13 @@
         ]
       },
       {
-        "day": 13,
+        "day": 12,
         "breakfast": [
           "bf-yogurt",
           "bf-pancakes"
         ],
-        "lunch": "borscht",
-        "dinner": "kotlety",
+        "lunch": "pasta",
+        "dinner": "salmon",
         "snacks": {
           "morning": [
             "v-fruit",
@@ -5400,8 +5546,30 @@
           ]
         },
         "thaw": [
-          "2 булочки бриошь к пулд-порку"
+          "2 булочки бриошь к пулд-порку",
+          "вторая упаковка копчёного лосося"
         ]
+      },
+      {
+        "day": 13,
+        "breakfast": [
+          "bf-bagel"
+        ],
+        "lunch": "borscht",
+        "dinner": "pulled-pork",
+        "snacks": {
+          "morning": [
+            "v-fruit",
+            "s-apple"
+          ],
+          "afternoon": [
+            "v-nuts",
+            "s-mandarins"
+          ],
+          "evening": [
+            "v-shake"
+          ]
+        }
       },
       {
         "day": 14,
@@ -5410,7 +5578,7 @@
           "bf-boern"
         ],
         "lunch": "chili",
-        "dinner": "pulled-pork",
+        "dinner": "kotlety",
         "snacks": {
           "morning": [
             "v-fruit",
@@ -5428,6 +5596,7 @@
     ]
   },
   "notes": [
+    "2-я закупка — в день 5. До неё рацион — из 1-й закупки и запасов: Свете — груша вместо яблока, Виталию — коктейль на молоке с водой и пармезан вместо орехов, к ужинам — замены из дома, они в заметках дней.",
     "Сметана и булочки бриошь — свои, по отдельным рецептам: их делают заранее, в день готовки на них нет ни места, ни духовки.",
     "Сырой свёклы в AH нет, борщ — на варёной: её кладут в конце и не кипятят сильно, а уксус держит цвет.",
     "Рис для суши после заморозки чуть твердеет (каталог: 80 из 100); Виталий греет его отдельно, в плёнке, с ложкой воды.",
