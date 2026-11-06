@@ -1,5 +1,5 @@
 /** Рацион техкарты: что человек ест в конкретный день, откуда это взять и сколько это в сумме. Только арифметика над готовыми данными. */
-import type { CookPlan, Dish, MealSlot, PackMeal, Packaging, Ration, RationDay, RationSnacks } from '../types/cook-plan.gen.ts';
+import type { CookPlan, Dish, MealSlot, PackMeal, Packaging, Ration, RationCookingDay, RationDay, RationSnacks } from '../types/cook-plan.gen.ts';
 
 /** Одна позиция приёма пищи: блюдо техкарты, завтрак или часть перекуса. */
 export interface MealItem {
@@ -33,29 +33,48 @@ const total = (xs: { kcal: number; protein: number }[]) => ({
   protein: xs.reduce((sum, x) => sum + x.protein, 0),
 });
 
-/** Приёмы пищи одного человека в порядке дня: завтрак, перекус, обед, перекус, ужин, перекус. Чего у человека нет — пропускается. */
-export function personDay(plan: CookPlan, ration: Ration, day: RationDay, personId: string): PersonDay {
-  const person = ration.people.find((p) => p.id === personId);
-
-  const extra = (id: string): MealItem[] => {
+/** Позиция extras в порции человека; кого нет в servings, тому — ничего. */
+const extraItems =
+  (ration: Ration, personId: string) =>
+  (id: string): MealItem[] => {
     const e = ration.extras.find((x) => x.id === id);
     const serving = e?.servings.find((s) => s.person === personId);
     return e && serving ? [{ name: e.name, detail: serving.text, kcal: serving.kcal, protein: serving.protein, how: e.how }] : [];
   };
+
+/** Приёмы пищи одного человека в порядке дня: завтрак, перекус, обед, перекус, ужин, перекус. Чего у человека нет — пропускается. */
+export function personDay(plan: CookPlan, ration: Ration, day: RationDay, personId: string): PersonDay {
+  const person = ration.people.find((p) => p.id === personId);
   const dish = (meal: PackMeal['meal']): MealItem[] => {
     const d = plan.dishes.find((x) => x.id === day[meal]);
     const portion = person?.portions.find((p) => p.dish === day[meal]);
     if (!d || !portion) return [];
     return [{ name: d.name, detail: portion.size, kcal: portion.kcal, protein: portion.protein, how: portion.reheat.text, pack: packFor(d, personId, day.day, meal) }];
   };
-  const snack = (slot: keyof RationSnacks) => (day.snacks?.[slot] ?? []).flatMap(extra);
+  return collectDay(ration, personId, day, dish('lunch'), dish('dinner'));
+}
 
+/** День готовки: блюда ещё готовятся, поэтому обед и ужин — тоже из extras. */
+export function cookingDayMeals(ration: Ration, day: RationCookingDay, personId: string): PersonDay {
+  const extra = extraItems(ration, personId);
+  return collectDay(ration, personId, day, day.lunch.flatMap(extra), day.dinner.flatMap(extra));
+}
+
+function collectDay(
+  ration: Ration,
+  personId: string,
+  day: Pick<RationDay, 'breakfast' | 'snacks'>,
+  lunch: MealItem[],
+  dinner: MealItem[],
+): PersonDay {
+  const extra = extraItems(ration, personId);
+  const snack = (slot: keyof RationSnacks) => (day.snacks?.[slot] ?? []).flatMap(extra);
   const slots: [MealSlot, MealItem[]][] = [
     ['breakfast', (day.breakfast ?? []).flatMap(extra)],
     ['morning', snack('morning')],
-    ['lunch', dish('lunch')],
+    ['lunch', lunch],
     ['afternoon', snack('afternoon')],
-    ['dinner', dish('dinner')],
+    ['dinner', dinner],
     ['evening', snack('evening')],
   ];
   const lines = slots.filter(([, items]) => items.length > 0).map(([slot, items]) => ({ slot, items, ...total(items) }));

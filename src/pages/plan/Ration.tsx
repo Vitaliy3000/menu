@@ -1,11 +1,11 @@
 import { Info, Refrigerator, Snowflake, Target } from 'lucide-preact';
-import { Fragment } from 'preact';
+import { type ComponentChildren, Fragment } from 'preact';
 import { formatNumber } from '../../lib/format.ts';
 import { MEALS } from '../../lib/labels.ts';
 import type { PlanProgress } from '../../lib/progress.ts';
-import { deviation, type MealLine, personDay, rationToday, thawTonight } from '../../lib/ration.ts';
+import { cookingDayMeals, deviation, type MealLine, type PersonDay, personDay, rationToday, thawTonight } from '../../lib/ration.ts';
 import { setQuery, useLocation } from '../../lib/router.tsx';
-import type { CookPlan, Packaging, Ration as RationData, RationDay, RationPerson } from '../../types/cook-plan.gen.ts';
+import type { CookPlan, Packaging, Ration as RationData, RationCookingDay, RationDay, RationPerson } from '../../types/cook-plan.gen.ts';
 
 /** В пределах ±5 % от цели — «в цели». */
 const ON_TARGET = 0.05;
@@ -21,6 +21,7 @@ export function Ration({ plan, ration, tones, progress }: Props) {
   const { query } = useLocation();
   const person = ration.people.find((p) => p.id === query.get('who')) ?? ration.people[0];
   const today = rationToday(progress.startedAt, ration.days.length);
+  const shown = today ?? (ration.cookingDay ? 0 : 1);
   const dishName = (id: string) => plan.dishes.find((d) => d.id === id)?.name ?? id;
 
   return (
@@ -45,8 +46,9 @@ export function Ration({ plan, ration, tones, progress }: Props) {
         {today && <strong> Сегодня — день {today}.</strong>}
       </p>
       <div class="ration-days" role="tabpanel">
+        {ration.cookingDay && <CookingDayCard ration={ration} day={ration.cookingDay} person={person} open={shown === 0} />}
         {ration.days.map((day) => (
-          <DayCard
+          <PlanDayCard
             key={day.day}
             plan={plan}
             ration={ration}
@@ -55,7 +57,7 @@ export function Ration({ plan, ration, tones, progress }: Props) {
             tones={tones}
             dishName={dishName}
             isToday={day.day === today}
-            open={today ? day.day === today : day.day === 1}
+            open={day.day === shown}
           />
         ))}
       </div>
@@ -68,7 +70,7 @@ function targetLabel(person: RationPerson) {
   return `${formatNumber(kcal)} ккал${protein ? ` · ${formatNumber(protein)} г белка` : ''}`;
 }
 
-function DayCard({
+function PlanDayCard({
   plan,
   ration,
   day,
@@ -90,31 +92,85 @@ function DayCard({
   const total = personDay(plan, ration, day, person.id);
   const thaw = thawTonight(plan, ration, day, person.id);
   const atWork = total.lines.filter((line) => person.atWork?.includes(line.slot));
+  const dishes = (
+    <>
+      <span class={`tone-${tones.get(day.lunch)}`}>
+        <span class="dot" /> {dishName(day.lunch)}
+      </span>
+      <span class={`tone-${tones.get(day.dinner)}`}>
+        <span class="dot" /> {dishName(day.dinner)}
+      </span>
+    </>
+  );
 
+  return (
+    <DayCard num={day.day} summary={dishes} total={total} person={person} note={day.note} atWork={atWork} isToday={isToday} open={open}>
+      {(thaw.length > 0 || day.thaw) && (
+        <li class="ration-aside">
+          <span class="ration-meal">Вечером</span>
+          <span class="ration-item">
+            <span class="ration-name">Разморозить на завтра — из морозилки в холодильник</span>
+            {thaw.map((item) => (
+              <span key={item.slot} class="ration-detail">
+                {MEALS[item.slot]}: {item.name} · {item.pack.container}
+              </span>
+            ))}
+            {day.thaw?.map((what) => (
+              <span key={what} class="ration-detail">
+                {what}
+              </span>
+            ))}
+          </span>
+        </li>
+      )}
+    </DayCard>
+  );
+}
+
+/** День 0: едят дома, пока готовят, — с собой ничего не берут. */
+function CookingDayCard({ ration, day, person, open }: { ration: RationData; day: RationCookingDay; person: RationPerson; open: boolean }) {
+  const total = cookingDayMeals(ration, day, person.id);
+  return <DayCard num={0} summary={<span>день готовки</span>} total={total} person={person} atWork={[]} isToday={false} open={open} />;
+}
+
+function DayCard({
+  num,
+  summary,
+  total,
+  person,
+  note,
+  atWork,
+  isToday,
+  open,
+  children,
+}: {
+  num: number;
+  summary: ComponentChildren;
+  total: PersonDay;
+  person: RationPerson;
+  note?: string;
+  atWork: MealLine[];
+  isToday: boolean;
+  open: boolean;
+  children?: ComponentChildren;
+}) {
   return (
     <details class={`card ration-day${isToday ? ' is-today' : ''}`} open={open}>
       <summary>
         <span class="ration-day-head">
-          <span class="display ration-day-num">День {day.day}</span>
+          <span class="display ration-day-num">День {num}</span>
           {isToday && <span class="badge badge-accent">сегодня</span>}
         </span>
-        <span class="ration-day-dishes">
-          <span class={`tone-${tones.get(day.lunch)}`}>
-            <span class="dot" /> {dishName(day.lunch)}
-          </span>
-          <span class={`tone-${tones.get(day.dinner)}`}>
-            <span class="dot" /> {dishName(day.dinner)}
-          </span>
-        </span>
+        <span class="ration-day-dishes">{summary}</span>
         <span class="ration-day-totals">
           <TotalChip person={person} kcal={total.kcal} protein={total.protein} />
         </span>
       </summary>
       <div class="ration-day-body">
-        {day.note && (
+        {note && (
           <p class="ration-day-note">
             <Info aria-hidden="true" />
-            {day.note}
+            {note}
           </p>
         )}
         <ul class="ration-meals">
@@ -124,24 +180,7 @@ function DayCard({
               <MealRow line={line} atWork={atWork.includes(line)} />
             </Fragment>
           ))}
-          {(thaw.length > 0 || day.thaw) && (
-            <li class="ration-aside">
-              <span class="ration-meal">Вечером</span>
-              <span class="ration-item">
-                <span class="ration-name">Разморозить на завтра — из морозилки в холодильник</span>
-                {thaw.map((item) => (
-                  <span key={item.slot} class="ration-detail">
-                    {MEALS[item.slot]}: {item.name} · {item.pack.container}
-                  </span>
-                ))}
-                {day.thaw?.map((what) => (
-                  <span key={what} class="ration-detail">
-                    {what}
-                  </span>
-                ))}
-              </span>
-            </li>
-          )}
+          {children}
           <li class="ration-sum">
             <span class="ration-meal">Итого</span>
             <span class="ration-item">

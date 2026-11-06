@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { checkMacros, checkPlan, checkRecipe, checkUniqueTitles, sumInUnit, validateProject, validateSources } from '../scripts/data-validation.ts';
+import { checkPlan, checkRecipe, checkUniqueTitles, sumInUnit, validateProject, validateSources } from '../scripts/data-validation.ts';
+import { checkMacros } from '../scripts/validation-helpers.ts';
 import type { CookPlan, Packaging, RationPortion } from '../src/types/cook-plan.gen.ts';
 import type { Recipe } from '../src/types/recipe.gen.ts';
 
@@ -366,7 +367,7 @@ describe('рацион техкарты', () => {
     expect(text).toContain('дни должны идти подряд с 1-го');
     expect(text).toContain('«yogurt» — перекус, а стоит в завтраке');
     expect(text).toContain('нет блюда с id «pie»');
-    expect(text).toContain('нет завтрака или перекуса с id «cake»');
+    expect(text).toContain('нет позиции extras с id «cake»');
     expect(text).toContain('«yogurt» уже стоит в другом перекусе дня 2');
     expect(text).toContain('нет человека с id «bob»');
     expect(text).toContain('«porridge» не стоит ни в одном дне');
@@ -383,6 +384,24 @@ describe('рацион техкарты', () => {
     p.ration!.extras.push({ id: 'toast', name: 'Тост', meal: 'breakfast', servings: [{ person: 'ann', text: '1 тост', kcal: 100, protein: 3 }] });
     p.ration!.days[0]!.breakfast = ['porridge', 'toast'];
     expect(messages(checkPlan(p, file))).toContain('день 1: у Аня завтраков 2, а нужен один');
+  });
+
+  it('день готовки — из extras: у каждого ровно один завтрак, обед и ужин', () => {
+    const p = withRation();
+    p.ration!.extras.push(
+      { id: 'sandwich', name: 'Бутерброд', meal: 'lunch', servings: [{ person: 'ann', text: '2 ломтика хлеба, 30 г сыра', kcal: 300, protein: 15 }] },
+      { id: 'pot', name: 'Суп из кастрюли', meal: 'dinner', servings: [{ person: 'ann', text: '400 мл', kcal: 450, protein: 35 }] },
+    );
+    p.ration!.cookingDay = { breakfast: ['porridge'], lunch: ['sandwich'], dinner: ['pot'] };
+    expect(checkPlan(p, file)).toEqual([]);
+    p.ration!.extras.at(-1)!.servings[0]!.kcal = 2000;
+    expect(checkPlan(p, file)).toEqual([]);
+
+    p.ration!.cookingDay = { breakfast: ['porridge'], lunch: ['sandwich', 'pot'], dinner: ['yogurt'] };
+    const text = messages(checkPlan(p, file));
+    expect(text).toContain('«pot» — ужин, а стоит в обеде');
+    expect(text).toContain('«yogurt» — перекус, а стоит в ужине');
+    expect(text).toContain('день 0: у Аня обедов 2, а нужен один');
   });
 
   it('предупреждает, если день далеко от цели по калориям и белку', () => {

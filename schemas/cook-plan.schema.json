@@ -823,6 +823,9 @@
           "items": {
             "$ref": "#/$defs/RationDay"
           }
+        },
+        "cookingDay": {
+          "$ref": "#/$defs/RationCookingDay"
         }
       }
     },
@@ -1007,9 +1010,11 @@
           "type": "string",
           "enum": [
             "breakfast",
+            "lunch",
+            "dinner",
             "snack"
           ],
-          "description": "breakfast — завтрак, snack — перекус или коктейль."
+          "description": "breakfast — завтрак, snack — перекус или коктейль. lunch — обед и dinner — ужин только для дня готовки: в остальные дни обед и ужин — блюда техкарты."
         },
         "servings": {
           "type": "array",
@@ -1107,6 +1112,43 @@
             "type": "string",
             "minLength": 2,
             "maxLength": 80
+          }
+        }
+      }
+    },
+    "RationCookingDay": {
+      "title": "RationCookingDay",
+      "description": "День 0 — сам день готовки: блюда техкарты ещё готовятся, поэтому все приёмы пищи — из extras. У каждого человека — ровно один завтрак, обед и ужин. С целями день не сверяют: он особый.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "breakfast",
+        "lunch",
+        "dinner"
+      ],
+      "properties": {
+        "breakfast": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          }
+        },
+        "lunch": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
+          }
+        },
+        "dinner": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/LocalId"
           }
         }
       }

@@ -515,6 +515,7 @@ export interface Ration {
    * @minItems 1
    */
   days: [RationDay, ...RationDay[]];
+  cookingDay?: RationCookingDay;
 }
 /**
  * This interface was referenced by `CookPlan`'s JSON-Schema
@@ -612,9 +613,9 @@ export interface RationExtra {
   id: LocalId;
   name: string;
   /**
-   * breakfast — завтрак, snack — перекус или коктейль.
+   * breakfast — завтрак, snack — перекус или коктейль. lunch — обед и dinner — ужин только для дня готовки: в остальные дни обед и ужин — блюда техкарты.
    */
-  meal: 'breakfast' | 'snack';
+  meal: 'breakfast' | 'lunch' | 'dinner' | 'snack';
   /**
    * Кто это ест и сколько. Кого нет в списке — тот это не ест.
    *
@@ -693,4 +694,24 @@ export interface RationSnacks {
    * @minItems 1
    */
   evening?: [LocalId, ...LocalId[]];
+}
+/**
+ * День 0 — сам день готовки: блюда техкарты ещё готовятся, поэтому все приёмы пищи — из extras. У каждого человека — ровно один завтрак, обед и ужин. С целями день не сверяют: он особый.
+ *
+ * This interface was referenced by `CookPlan`'s JSON-Schema
+ * via the `definition` "RationCookingDay".
+ */
+export interface RationCookingDay {
+  /**
+   * @minItems 1
+   */
+  breakfast: [LocalId, ...LocalId[]];
+  /**
+   * @minItems 1
+   */
+  lunch: [LocalId, ...LocalId[]];
+  /**
+   * @minItems 1
+   */
+  dinner: [LocalId, ...LocalId[]];
 }

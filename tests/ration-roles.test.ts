@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { doneStepCount, gotCount, mySteps, purchaseKeys, roleTimes, shoppingKeys } from '../src/lib/plan.ts';
 import type { PlanProgress } from '../src/lib/progress.ts';
-import { personDay, rationToday, thawTonight } from '../src/lib/ration.ts';
-import type { CookPlan } from '../src/types/cook-plan.gen.ts';
+import { cookingDayMeals, personDay, rationToday, thawTonight } from '../src/lib/ration.ts';
+import type { CookPlan, RationExtra } from '../src/types/cook-plan.gen.ts';
 
 const plan: CookPlan = {
   id: 'two-cooks',
@@ -131,6 +131,23 @@ describe('рацион', () => {
     expect(breakfast).toMatchObject({ how: 'Сварить на воде' });
     expect(breakfast!.pack).toBeUndefined();
     expect(lunch).toMatchObject({ how: 'В микроволновке 3 минуты', pack: { container: 'Банка 1 л', storage: 'fridge' } });
+  });
+
+  it('в день готовки обед и ужин — тоже из extras, без фасовки', () => {
+    const extras: RationExtra[] = [
+      { id: 'sandwich', name: 'Бутерброд', meal: 'lunch', servings: [{ person: 'ann', text: '2 ломтика', kcal: 300, protein: 12 }] },
+      { id: 'pot', name: 'Суп из кастрюли', meal: 'dinner', how: 'Подогреть на плите', servings: [{ person: 'ann', text: '400 мл', kcal: 350, protein: 20 }] },
+    ];
+    const ration = { ...plan.ration!, extras: [...plan.ration!.extras, ...extras] };
+    const day = cookingDayMeals(ration, { breakfast: ['porridge', 'eggs'], lunch: ['sandwich'], dinner: ['pot'] }, 'ann');
+    expect(day.lines.map((l) => [l.slot, l.items.map((i) => i.name)])).toEqual([
+      ['breakfast', ['Каша']],
+      ['lunch', ['Бутерброд']],
+      ['dinner', ['Суп из кастрюли']],
+    ]);
+    expect(day.lines[2]!.items[0]).toMatchObject({ how: 'Подогреть на плите' });
+    expect(day.lines[2]!.items[0]!.pack).toBeUndefined();
+    expect(day.kcal).toBe(900);
   });
 
   it('вечером — переложить из морозилки завтрашние обед и ужин', () => {
