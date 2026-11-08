@@ -1599,7 +1599,7 @@
       "unit": "pcs",
       "section": "produce",
       "purchase": 2,
-      "note": "AH Elstar zak 1,5 кг — Свете, дни 6–14"
+      "note": "AH Biologisch Gala schaal, 3 × 4 шт — Свете, дни 6–14"
     },
     {
       "id": "cherry",
@@ -1608,7 +1608,7 @@
       "unit": "g",
       "section": "produce",
       "purchase": 2,
-      "note": "AH Cherry tomaten 400 г"
+      "note": "AH Cherrytomaten, 2 × 250 г"
     },
     {
       "id": "bagels",
@@ -1663,7 +1663,7 @@
       "unit": "g",
       "section": "meat",
       "purchase": 2,
-      "note": "AH Biologisch Achterham ≈ 100 г — сразу в морозилку, к тостам дня 11"
+      "note": "AH Biologisch Yorkham ≈ 100 г, не копчёная — сразу в морозилку, к тостам дня 11"
     },
     {
       "id": "kwark",
