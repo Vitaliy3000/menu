@@ -1509,7 +1509,7 @@
       "unit": "g",
       "section": "grocery",
       "purchase": 2,
-      "note": "Hellmann's Real 430 мл"
+      "note": "Hellmann's Real 250 мл"
     },
     {
       "id": "pickles",
@@ -1536,7 +1536,7 @@
       "unit": "g",
       "section": "produce",
       "purchase": 2,
-      "note": "AH Sjalotten 500 г"
+      "note": "AH Biologisch Sjalotten 250 г"
     },
     {
       "id": "white-wine",
@@ -1608,7 +1608,7 @@
       "unit": "g",
       "section": "produce",
       "purchase": 2,
-      "note": "AH Cherrytomaten, 2 × 250 г"
+      "note": "AH Cherry tomaten 400 г"
     },
     {
       "id": "bagels",
