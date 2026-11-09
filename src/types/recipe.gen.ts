@@ -264,6 +264,23 @@ export interface Step {
    * Подсказка к шагу: признак готовности, частая ошибка.
    */
   tip?: string;
+  table?: StepTable;
+}
+/**
+ * Справочная таблица к шагу: режимы, температуры, время. В каждой строке столько ячеек, сколько колонок.
+ *
+ * This interface was referenced by `Recipe`'s JSON-Schema
+ * via the `definition` "StepTable".
+ */
+export interface StepTable {
+  /**
+   * @minItems 2
+   */
+  columns: [string, string, ...string[]];
+  /**
+   * @minItems 1
+   */
+  rows: [[string, string, ...string[]], ...[string, string, ...string[]][]];
 }
 /**
  * Когда блюдо уместнее всего. Все 12 месяцев = круглый год.

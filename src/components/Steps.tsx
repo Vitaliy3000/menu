@@ -1,6 +1,7 @@
 import { Check, Lightbulb, Thermometer, Timer } from 'lucide-preact';
 import { formatDurationRange, formatTemp } from '../lib/format.ts';
 import { startTimer, useTimers } from '../lib/timers.ts';
+import type { StepTable } from '../types/recipe.gen.ts';
 
 export interface StepItem {
   text: string;
@@ -10,6 +11,7 @@ export interface StepItem {
   tip?: string;
   temp?: number;
   tempMax?: number;
+  table?: StepTable;
 }
 
 export interface StepGroupItem {
@@ -62,6 +64,7 @@ export function Steps({
                     <p class="step-text" onClick={() => onToggle(i)}>
                       {step.text}
                     </p>
+                    {step.table && <StepTableView table={step.table} />}
                     {step.tip && (
                       <div class="callout callout-tip">
                         <Lightbulb aria-hidden="true" />
@@ -98,5 +101,30 @@ export function Steps({
         </div>
       ))}
     </div>
+  );
+}
+
+function StepTableView({ table }: { table: StepTable }) {
+  return (
+    <table class="step-table">
+      <thead>
+        <tr>
+          {table.columns.map((c) => (
+            <th key={c} scope="col">
+              {c}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {table.rows.map((row, i) => (
+          <tr key={i}>
+            {row.map((cell, j) => (
+              <td key={j}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

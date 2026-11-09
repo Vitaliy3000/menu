@@ -456,6 +456,54 @@ li:last-child > .ingredient {
   opacity: 0.6;
 }
 
+/* Справочная таблица шага: режимы и время */
+.step-table {
+  border-collapse: collapse;
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.step-table th,
+.step-table td {
+  padding: 8px 14px 8px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.step-table th:last-child,
+.step-table td:last-child {
+  padding-right: 0;
+}
+
+.step-table th {
+  padding-top: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom-color: var(--line-strong);
+}
+
+.step-table td:not(:last-child) {
+  white-space: nowrap;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.step-table td:last-child {
+  color: var(--ink-2);
+}
+
+.step-table tr:last-child td {
+  border-bottom: none;
+}
+
+.step.is-done .step-table {
+  opacity: 0.6;
+}
+
 /* Переключатель */
 .switch {
   display: inline-flex;

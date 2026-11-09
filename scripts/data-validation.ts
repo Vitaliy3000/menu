@@ -346,6 +346,16 @@ export function checkRecipe(r: Recipe, file: string): Issue[] {
     warn('/steps', 'если этапов несколько, у каждого должно быть название');
   }
 
+  r.steps.forEach((group, g) =>
+    group.steps.forEach(({ table }, s) =>
+      table?.rows.forEach((row, i) => {
+        if (row.length !== table.columns.length) {
+          error(`/steps/${g}/steps/${s}/table/rows/${i}`, `в строке ${row.length} ячеек, а колонок ${table.columns.length}`);
+        }
+      }),
+    ),
+  );
+
   const kcalIssue = checkMacros(r.nutrition);
   if (kcalIssue) warn('/nutrition', kcalIssue);
 
