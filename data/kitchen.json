@@ -220,7 +220,8 @@
     "choose": [
       { "item": "Сухая паста", "pick": "De Cecco или лучше", "note": "Собственные марки магазинов и пасту проще De Cecco не берём" },
       { "item": "Чёрные оливки без косточки", "pick": "Carbonell Zwarte olijven zonder pit", "note": "Банка 340 г, есть в AH" },
-      { "item": "Йогурт-закваска для сметаны", "pick": "Pur Natur Biologisch yoghurt", "note": "500 г, есть в AH" }
+      { "item": "Йогурт-закваска для сметаны", "pick": "Pur Natur Biologisch yoghurt", "note": "500 г, есть в AH" },
+      { "item": "Репчатый лук", "pick": "AH Uienstreng или AH Gele uien", "note": "Только крупный, даже без био. В AH: Uienstreng 1 кг, Gele uien 1 кг, 2 кг или 3 шт." }
     ],
     "avoid": [
       { "item": "Марка AH: соевое молоко, кварк, рис, йогурт, мягкий сыр", "note": "AH, AH Biologisch, AH Excellent, AH Terra, De Zaanse Hoeve — берём другую марку, даже без био. Ветчина, яйца, гауда, мясо, рыба, хлеб, овощи и фрукты AH — можно" },
