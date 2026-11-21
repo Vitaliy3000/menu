@@ -488,6 +488,12 @@ describe('смысловые проверки Recipe', () => {
     expect(messages(checkRecipe({ ...base, time: { active: 30, total: 20 } }, 'data/recipes/x.json'))).toContain('больше полного');
   });
 
+  it('партия под кухню проверяется так же, как рецепт', () => {
+    const batch = { time: { active: 90, total: 60 }, ingredients: base.ingredients, steps: base.steps };
+    const issues = checkRecipe({ ...base, batch } as unknown as Recipe, 'data/recipes/x.json');
+    expect(issues.find((i) => i.path === '/batch/time')?.message).toContain('больше полного');
+  });
+
   it('в строке таблицы шага — столько ячеек, сколько колонок', () => {
     const table = { columns: ['Ванна', 'Время'], rows: [['40 °C', '8 ч'], ['43 °C']] };
     const r = { ...base, steps: [{ steps: [{ text: 'Сквасить', table }] }] } as unknown as Recipe;

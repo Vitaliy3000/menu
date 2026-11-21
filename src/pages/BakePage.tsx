@@ -3,12 +3,13 @@ import { useState } from 'preact/hooks';
 import { BakePlate } from '../components/BakePlate.tsx';
 import { SectionNav } from '../components/SectionNav.tsx';
 import { Steps } from '../components/Steps.tsx';
+import { VariantTabs } from '../components/VariantTabs.tsx';
 import { WakeLockToggle } from '../components/WakeLockToggle.tsx';
-import { useBakeSteps } from '../lib/bakeProgress.ts';
+import { useSavedSteps } from '../lib/savedSteps.ts';
 import { actualLoad, bakerPercent, doughGrams, flourGrams, inFinal, inPart, partGrams, roundGrams } from '../lib/baking.ts';
 import { countLabel, formatDuration, formatNumber } from '../lib/format.ts';
 import { ATTEMPT_OUTCOMES, BAKE_KINDS } from '../lib/labels.ts';
-import { Link, setQuery, useLocation } from '../lib/router.tsx';
+import { Link, useLocation } from '../lib/router.tsx';
 import type { Bake, BakeMethod, Formula, Pan } from '../types/bake.gen.ts';
 
 const PANS = ['форма', 'формы', 'форм'] as const;
@@ -30,7 +31,7 @@ export function BakePage({ bake: b }: { bake: Bake }) {
   const method = b.methods.find((m) => m.id === query.get('method')) ?? b.methods[0];
   const isDefault = method === b.methods[0];
   const path = `/baking/${b.id}/${isDefault ? '' : `?method=${method.id}`}`;
-  const [done, steps] = useBakeSteps(b.id, method.id);
+  const [done, steps] = useSavedSteps(`menu:bake:${b.id}:${method.id}:v1`);
   const kind = BAKE_KINDS[b.kind];
   const dough = doughGrams(method.formula);
   const pan = method.pan;
@@ -69,22 +70,13 @@ export function BakePage({ bake: b }: { bake: Bake }) {
       </header>
 
       {b.methods.length > 1 && (
-        <div class="bake-methods">
-          <div class="tabs" role="tablist" aria-label="Способ">
-            {b.methods.map((m, i) => (
-              <button
-                key={m.id}
-                type="button"
-                role="tab"
-                aria-selected={m === method}
-                onClick={() => setQuery({ method: i === 0 ? null : m.id })}
-              >
-                {m.title}
-              </button>
-            ))}
-          </div>
-          {method.note && <p class="muted">{method.note}</p>}
-        </div>
+        <VariantTabs
+          label="Способ"
+          param="method"
+          tabs={b.methods.map((m) => ({ id: m.id, label: m.title }))}
+          active={method.id}
+          note={method.note}
+        />
       )}
 
       <dl class="facts" style={{ '--facts': facts }}>

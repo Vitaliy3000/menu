@@ -323,13 +323,29 @@ export function checkRecipe(r: Recipe, file: string): Issue[] {
   const expectedId = basename(file, '.json');
   if (r.id !== expectedId) error('/id', `id «${r.id}» должен совпадать с именем файла «${expectedId}»`);
 
-  if (r.time.active > r.time.total) {
-    error('/time', `активное время (${r.time.active}) больше полного (${r.time.total})`);
+  checkRecipeVariant(r, '', error, warn);
+  if (r.batch) checkRecipeVariant(r.batch, '/batch', error, warn);
+
+  const kcalIssue = checkMacros(r.nutrition);
+  if (kcalIssue) warn('/nutrition', kcalIssue);
+
+  return issues;
+}
+
+/** Обычный рецепт и партия под кухню (`batch`) проверяются одинаково. */
+function checkRecipeVariant(
+  v: Pick<Recipe, 'time' | 'ingredients' | 'steps'>,
+  base: string,
+  error: (path: string, message: string) => void,
+  warn: (path: string, message: string) => void,
+) {
+  if (v.time.active > v.time.total) {
+    error(`${base}/time`, `активное время (${v.time.active}) больше полного (${v.time.total})`);
   }
 
-  r.ingredients.forEach((group, g) =>
+  v.ingredients.forEach((group, g) =>
     group.items.forEach((item, i) => {
-      const path = `/ingredients/${g}/items/${i}`;
+      const path = `${base}/ingredients/${g}/items/${i}`;
       if (item.amountMax !== undefined && item.amount !== undefined && item.amountMax <= item.amount) {
         error(path, `amountMax (${item.amountMax}) должен быть больше amount (${item.amount})`);
       }
@@ -339,27 +355,22 @@ export function checkRecipe(r: Recipe, file: string): Issue[] {
     }),
   );
 
-  if (r.ingredients.length > 1 && r.ingredients.some((g) => !g.title)) {
-    warn('/ingredients', 'если групп ингредиентов несколько, у каждой должно быть название');
+  if (v.ingredients.length > 1 && v.ingredients.some((g) => !g.title)) {
+    warn(`${base}/ingredients`, 'если групп ингредиентов несколько, у каждой должно быть название');
   }
-  if (r.steps.length > 1 && r.steps.some((g) => !g.title)) {
-    warn('/steps', 'если этапов несколько, у каждого должно быть название');
+  if (v.steps.length > 1 && v.steps.some((g) => !g.title)) {
+    warn(`${base}/steps`, 'если этапов несколько, у каждого должно быть название');
   }
 
-  r.steps.forEach((group, g) =>
+  v.steps.forEach((group, g) =>
     group.steps.forEach(({ table }, s) =>
       table?.rows.forEach((row, i) => {
         if (row.length !== table.columns.length) {
-          error(`/steps/${g}/steps/${s}/table/rows/${i}`, `в строке ${row.length} ячеек, а колонок ${table.columns.length}`);
+          error(`${base}/steps/${g}/steps/${s}/table/rows/${i}`, `в строке ${row.length} ячеек, а колонок ${table.columns.length}`);
         }
       }),
     ),
   );
-
-  const kcalIssue = checkMacros(r.nutrition);
-  if (kcalIssue) warn('/nutrition', kcalIssue);
-
-  return issues;
 }
 
 /* ------------------------------------------------------------------ */

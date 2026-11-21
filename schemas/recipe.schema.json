@@ -129,6 +129,9 @@
     "reheating": {
       "$ref": "#/$defs/Reheating"
     },
+    "batch": {
+      "$ref": "#/$defs/RecipeBatch"
+    },
     "image": {
       "$ref": "#/$defs/Image"
     },
@@ -439,6 +442,66 @@
           "minItems": 1,
           "items": {
             "$ref": "#/$defs/Step"
+          }
+        }
+      }
+    },
+    "RecipeBatch": {
+      "title": "RecipeBatch",
+      "description": "Большая партия под посуду и технику нашей кухни (data/kitchen.json): своя закладка, ход работ, фасовка, охлаждение и заморозка. На странице — вторым табом рядом с обычным рецептом. Хранение, заморозка, разогрев и КБЖУ порции — общие с рецептом.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "note",
+        "servings",
+        "time",
+        "equipment",
+        "ingredients",
+        "steps"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "description": "Название таба по главной посуде: «Кастрюля 12 л»."
+        },
+        "note": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 300,
+          "description": "Чем партия отличается от обычного рецепта: под что рассчитана, сколько выходит, куда фасуется."
+        },
+        "servings": {
+          "$ref": "#/$defs/Servings"
+        },
+        "time": {
+          "$ref": "#/$defs/RecipeTime"
+        },
+        "equipment": {
+          "type": "array",
+          "description": "Посуда, техника и тара — названные так, как в справочнике кухни.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        },
+        "ingredients": {
+          "type": "array",
+          "description": "Закладка на всю партию. Порции не пересчитываются: она привязана к посуде.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/IngredientGroup"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "description": "Этапы от подготовки до заморозки, включая фасовку и охлаждение.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/StepGroup"
           }
         }
       }

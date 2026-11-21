@@ -121,6 +121,7 @@ export interface Recipe {
   storage: Storage;
   freezing: Freezing;
   reheating: Reheating;
+  batch?: RecipeBatch;
   image?: Image;
   source?: Source;
 }
@@ -387,6 +388,42 @@ export interface ReheatMethod {
   method: 'stovetop' | 'microwave' | 'oven' | 'airfryer' | 'steam';
   instructions: string;
   minutes?: number;
+}
+/**
+ * Большая партия под посуду и технику нашей кухни (data/kitchen.json): своя закладка, ход работ, фасовка, охлаждение и заморозка. На странице — вторым табом рядом с обычным рецептом. Хранение, заморозка, разогрев и КБЖУ порции — общие с рецептом.
+ *
+ * This interface was referenced by `Recipe`'s JSON-Schema
+ * via the `definition` "RecipeBatch".
+ */
+export interface RecipeBatch {
+  /**
+   * Название таба по главной посуде: «Кастрюля 12 л».
+   */
+  title: string;
+  /**
+   * Чем партия отличается от обычного рецепта: под что рассчитана, сколько выходит, куда фасуется.
+   */
+  note: string;
+  servings: Servings;
+  time: RecipeTime;
+  /**
+   * Посуда, техника и тара — названные так, как в справочнике кухни.
+   *
+   * @minItems 1
+   */
+  equipment: [string, ...string[]];
+  /**
+   * Закладка на всю партию. Порции не пересчитываются: она привязана к посуде.
+   *
+   * @minItems 1
+   */
+  ingredients: [IngredientGroup, ...IngredientGroup[]];
+  /**
+   * Этапы от подготовки до заморозки, включая фасовку и охлаждение.
+   *
+   * @minItems 1
+   */
+  steps: [StepGroup, ...StepGroup[]];
 }
 /**
  * This interface was referenced by `Recipe`'s JSON-Schema

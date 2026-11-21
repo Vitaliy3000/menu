@@ -35,6 +35,14 @@
   margin-top: 4px;
 }
 
+/* Варианты: способы выпечки, обычный рецепт и партия под кухню */
+.variant-tabs {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  margin-bottom: 16px;
+}
+
 /* ------------------------------------------------------------------ */
 /* Ключевые цифры                                                      */
 /* ------------------------------------------------------------------ */
@@ -312,6 +320,18 @@ li:last-child > .ingredient {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 20px;
+}
+
+.method-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.method-actions .btn svg {
+  width: 15px;
+  height: 15px;
 }
 
 .steps {

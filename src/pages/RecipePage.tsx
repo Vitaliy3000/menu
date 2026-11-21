@@ -10,6 +10,7 @@ import {
   Minus,
   Plus,
   Refrigerator,
+  RotateCcw,
   Snowflake,
   Sun,
   Users,
@@ -20,18 +21,26 @@ import { MonthStrip } from '../components/MonthStrip.tsx';
 import { Plate } from '../components/Plate.tsx';
 import { SectionNav } from '../components/SectionNav.tsx';
 import { Steps } from '../components/Steps.tsx';
+import { VariantTabs } from '../components/VariantTabs.tsx';
 import { WakeLockToggle } from '../components/WakeLockToggle.tsx';
 import { countLabel, formatAmount, formatDuration, formatNumber, MONTHS_IN, roundAmount } from '../lib/format.ts';
 import { CATEGORIES, DIETS, DIFFICULTY, REHEAT } from '../lib/labels.ts';
 import { isSeasonal } from '../lib/recipeFilters.ts';
-import { Link } from '../lib/router.tsx';
-import type { Ingredient, Recipe } from '../types/recipe.gen.ts';
+import { Link, useLocation } from '../lib/router.tsx';
+import { useSavedSteps } from '../lib/savedSteps.ts';
+import type { Ingredient, Recipe, RecipeBatch } from '../types/recipe.gen.ts';
 
 const PORTIONS = ['порция', 'порции', 'порций'] as const;
 
+/** Часть рецепта, которая у партии под кухню своя. */
+type RecipeVariant = Pick<Recipe, 'servings' | 'time' | 'equipment' | 'ingredients' | 'steps'>;
+
 export function RecipePage({ recipe: r }: { recipe: Recipe }) {
+  const { query } = useLocation();
+  const batch = query.get('v') === 'batch' ? r.batch : undefined;
+  const v: RecipeVariant = batch ?? r;
   const [servings, setServings] = useState(r.servings.count);
-  const factor = servings / r.servings.count;
+  const factor = batch ? 1 : servings / r.servings.count;
   const category = CATEGORIES[r.category];
   const month = new Date().getMonth() + 1;
 
@@ -80,16 +89,29 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
         </div>
       </header>
 
+      {r.batch && (
+        <VariantTabs
+          label="Вариант рецепта"
+          param="v"
+          tabs={[
+            { id: 'recipe', label: 'Обычный' },
+            { id: 'batch', label: r.batch.title },
+          ]}
+          active={batch ? 'batch' : 'recipe'}
+          note={batch?.note}
+        />
+      )}
+
       <dl class="facts">
         <div class="fact">
           <dt>
             <Clock aria-hidden="true" />
             Время
           </dt>
-          <dd class="display num">{formatDuration(r.time.total)}</dd>
+          <dd class="display num">{formatDuration(v.time.total)}</dd>
           <dd class="fact-sub">
-            активно {formatDuration(r.time.active)}
-            {r.time.note && <> · {r.time.note}</>}
+            активно {formatDuration(v.time.active)}
+            {v.time.note && <> · {v.time.note}</>}
           </dd>
         </div>
         <div class="fact">
@@ -97,8 +119,8 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
             <Users aria-hidden="true" />
             Порции
           </dt>
-          <dd class="display num">{r.servings.count}</dd>
-          {r.servings.yield && <dd class="fact-sub">{r.servings.yield}</dd>}
+          <dd class="display num">{v.servings.count}</dd>
+          {v.servings.yield && <dd class="fact-sub">{v.servings.yield}</dd>}
         </div>
         <div class="fact">
           <dt>
@@ -106,7 +128,7 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
             Сложность
           </dt>
           <dd class="display">{DIFFICULTY[r.difficulty]}</dd>
-          <dd class="fact-sub">{countLabel(r.steps.reduce((n, g) => n + g.steps.length, 0), ['шаг', 'шага', 'шагов'])}</dd>
+          <dd class="fact-sub">{countLabel(v.steps.reduce((n, g) => n + g.steps.length, 0), ['шаг', 'шага', 'шагов'])}</dd>
         </div>
         <div class="fact">
           <dt>
@@ -132,20 +154,22 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
 
       <div class="recipe-body">
         <aside class="recipe-aside">
-          <section id="ingredients" class="card card-pad ingredients">
+          <section key={batch ? 'batch' : 'recipe'} id="ingredients" class="card card-pad ingredients">
             <div class="ingredients-head">
               <h2 class="display h3">Ингредиенты</h2>
-              <div class="stepper" role="group" aria-label="Количество порций">
-                <button type="button" onClick={() => setServings((s) => Math.max(1, s - 1))} aria-label="Меньше порций" disabled={servings <= 1}>
-                  <Minus />
-                </button>
-                <span class="num" aria-live="polite">
-                  {countLabel(servings, PORTIONS)}
-                </span>
-                <button type="button" onClick={() => setServings((s) => Math.min(99, s + 1))} aria-label="Больше порций">
-                  <Plus />
-                </button>
-              </div>
+              {!batch && (
+                <div class="stepper" role="group" aria-label="Количество порций">
+                  <button type="button" onClick={() => setServings((s) => Math.max(1, s - 1))} aria-label="Меньше порций" disabled={servings <= 1}>
+                    <Minus />
+                  </button>
+                  <span class="num" aria-live="polite">
+                    {countLabel(servings, PORTIONS)}
+                  </span>
+                  <button type="button" onClick={() => setServings((s) => Math.min(99, s + 1))} aria-label="Больше порций">
+                    <Plus />
+                  </button>
+                </div>
+              )}
             </div>
             {factor !== 1 && (
               <p class="scaled-note">
@@ -155,7 +179,7 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
                 </button>
               </p>
             )}
-            {r.ingredients.map((group, gi) => (
+            {v.ingredients.map((group, gi) => (
               <div key={gi} class="ingredient-group">
                 {group.title && <h3 class="eyebrow">{group.title}</h3>}
                 <ul>
@@ -169,17 +193,7 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
         </aside>
 
         <section id="method" class="method">
-          <div class="method-head">
-            <h2 class="display h2">Приготовление</h2>
-            <WakeLockToggle />
-          </div>
-          {r.equipment && r.equipment.length > 0 && (
-            <p class="equipment-line">
-              <span class="eyebrow">Понадобится</span>
-              {r.equipment.join(' · ')}
-            </p>
-          )}
-          <RecipeSteps recipe={r} />
+          {batch ? <BatchMethod recipe={r} batch={batch} /> : <RecipeMethod recipe={r} />}
         </section>
       </div>
 
@@ -341,8 +355,8 @@ function IngredientRow({ item, factor }: { item: Ingredient; factor: number }) {
   );
 }
 
-/** Отметки шагов живут, пока открыта страница. */
-function RecipeSteps({ recipe: r }: { recipe: Recipe }) {
+/** Отметки шагов рецепта живут, пока открыта страница. */
+function RecipeMethod({ recipe: r }: { recipe: Recipe }) {
   const [done, setDone] = useState<Set<number>>(new Set());
   const toggle = (i: number) =>
     setDone((prev) => {
@@ -351,7 +365,65 @@ function RecipeSteps({ recipe: r }: { recipe: Recipe }) {
       else next.add(i);
       return next;
     });
-  return <Steps groups={r.steps} path={`/recipes/${r.id}/`} title={r.title} done={done} onToggle={toggle} />;
+  return <Method title={r.title} variant={r} path={`/recipes/${r.id}/`} done={done} onToggle={toggle} />;
+}
+
+/** Партия тянется часами, до самой заморозки: отметки сохраняются. */
+function BatchMethod({ recipe: r, batch }: { recipe: Recipe; batch: RecipeBatch }) {
+  const [done, steps] = useSavedSteps(`menu:recipe:${r.id}:batch:v1`);
+  return (
+    <Method
+      title={r.title}
+      variant={batch}
+      path={`/recipes/${r.id}/?v=batch`}
+      timerPrefix="batch:"
+      done={done}
+      onToggle={steps.toggle}
+      onReset={done.size > 0 ? steps.reset : undefined}
+    />
+  );
+}
+
+function Method({
+  title,
+  variant: v,
+  path,
+  timerPrefix,
+  done,
+  onToggle,
+  onReset,
+}: {
+  title: string;
+  variant: RecipeVariant;
+  path: string;
+  timerPrefix?: string;
+  done: ReadonlySet<number>;
+  onToggle: (i: number) => void;
+  onReset?: () => void;
+}) {
+  return (
+    <>
+      <div class="method-head">
+        <h2 class="display h2">Приготовление</h2>
+        <div class="method-actions">
+          {onReset && (
+            <button type="button" class="btn btn-quiet btn-sm" onClick={onReset}>
+              <RotateCcw aria-hidden="true" />
+              Сбросить отметки
+            </button>
+          )}
+          <WakeLockToggle />
+        </div>
+      </div>
+      {v.equipment && v.equipment.length > 0 && (
+        <p class="equipment-line">
+          <span class="eyebrow">Понадобится</span>
+          {v.equipment.join(' · ')}
+        </p>
+      )}
+      <Steps groups={v.steps} path={path} title={title} done={done} onToggle={onToggle} timerPrefix={timerPrefix} />
+    </>
+  );
 }
 
 function StorageSummary({ recipe: r }: { recipe: Recipe }) {
