@@ -23,7 +23,7 @@ import { SectionNav } from '../components/SectionNav.tsx';
 import { Steps } from '../components/Steps.tsx';
 import { VariantTabs } from '../components/VariantTabs.tsx';
 import { WakeLockToggle } from '../components/WakeLockToggle.tsx';
-import { countLabel, formatAmount, formatDuration, formatNumber, MONTHS_IN, roundAmount } from '../lib/format.ts';
+import { countLabel, formatAmount, formatDuration, formatNumber, formatPrice, MONTHS_IN, roundAmount } from '../lib/format.ts';
 import { CATEGORIES, DIETS, DIFFICULTY, REHEAT } from '../lib/labels.ts';
 import { isSeasonal } from '../lib/recipeFilters.ts';
 import { Link, useLocation } from '../lib/router.tsx';
@@ -33,7 +33,7 @@ import type { Ingredient, Recipe, RecipeBatch } from '../types/recipe.gen.ts';
 const PORTIONS = ['порция', 'порции', 'порций'] as const;
 
 /** Часть рецепта, которая у партии под кухню своя. */
-type RecipeVariant = Pick<Recipe, 'servings' | 'time' | 'equipment' | 'ingredients' | 'steps'>;
+type RecipeVariant = Pick<Recipe, 'servings' | 'time' | 'cost' | 'equipment' | 'ingredients' | 'steps'>;
 
 export function RecipePage({ recipe: r }: { recipe: Recipe }) {
   const { query } = useLocation();
@@ -139,6 +139,11 @@ export function RecipePage({ recipe: r }: { recipe: Recipe }) {
           <dd class="fact-sub num">
             Б {formatNumber(r.nutrition.protein)} · Ж {formatNumber(r.nutrition.fat)} · У {formatNumber(r.nutrition.carbs)}
           </dd>
+          {v.cost && (
+            <dd class="fact-sub num" title={v.cost.note}>
+              ≈ {formatPrice(v.cost.amount, v.cost.currency)} в {v.cost.store}
+            </dd>
+          )}
         </div>
       </dl>
 

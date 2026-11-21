@@ -7,6 +7,7 @@ import {
   formatDuration,
   formatDurationRange,
   formatMoney,
+  formatPrice,
   formatTemp,
   formatWeekdayShort,
   plural,
@@ -52,6 +53,13 @@ describe('formatMoney', () => {
   it('целыми, валюта после числа через неразрывный пробел', () => {
     expect(formatMoney(587.6, 'EUR')).toBe(`588${NB}€`);
     expect(formatMoney(1234, 'EUR')).toBe(`1${NB}234${NB}€`);
+  });
+});
+
+describe('formatPrice', () => {
+  it('с центами', () => {
+    expect(formatPrice(3.45, 'EUR')).toBe(`3,45${NB}€`);
+    expect(formatPrice(3, 'EUR')).toBe(`3,00${NB}€`);
   });
 });
 

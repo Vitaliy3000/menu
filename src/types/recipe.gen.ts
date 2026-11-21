@@ -97,6 +97,7 @@ export interface Recipe {
   servings: Servings;
   time: RecipeTime;
   nutrition: Nutrition;
+  cost?: RecipeCost;
   /**
    * Нужная посуда и техника.
    */
@@ -188,6 +189,34 @@ export interface Nutrition {
    * Клетчатка, г.
    */
   fiber?: number;
+}
+/**
+ * Примерная стоимость продуктов на одну порцию: сколько каждого продукта уходит в рецепт × цена за кг, л или штуку по обычным ценам магазина, без акций. Остатки упаковок не считаются, домашние запасы — по доле; посуда, тара и энергия не входят.
+ *
+ * This interface was referenced by `Recipe`'s JSON-Schema
+ * via the `definition` "RecipeCost".
+ */
+export interface RecipeCost {
+  /**
+   * Стоимость одной порции, в валюте currency.
+   */
+  amount: number;
+  /**
+   * Код валюты ISO 4217: «EUR».
+   */
+  currency: string;
+  /**
+   * Где сверяли цены: «AH».
+   */
+  store: string;
+  /**
+   * Когда сверяли цены, YYYY-MM-DD.
+   */
+  date: string;
+  /**
+   * Что учтено и что нет: «без риса и добавок к подаче».
+   */
+  note?: string;
 }
 /**
  * This interface was referenced by `Recipe`'s JSON-Schema
@@ -406,6 +435,7 @@ export interface RecipeBatch {
   note: string;
   servings: Servings;
   time: RecipeTime;
+  cost?: RecipeCost;
   /**
    * Посуда, техника и тара — названные так, как в справочнике кухни.
    *

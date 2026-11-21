@@ -22,6 +22,10 @@ export const formatNumber = (n: number) => numberFormat.format(n).replace(/ /g,
 export const formatMoney = (amount: number, currency: string) =>
   new Intl.NumberFormat('ru-RU', { style: 'currency', currency, maximumFractionDigits: 0 }).format(amount).replace(/\s/g, '\u00a0');
 
+/** \u00ab3,45 \u20ac\u00bb \u2014 \u0441 \u0446\u0435\u043d\u0442\u0430\u043c\u0438: \u0446\u0435\u043d\u0430 \u043f\u043e\u0440\u0446\u0438\u0438. */
+export const formatPrice = (amount: number, currency: string) =>
+  new Intl.NumberFormat('ru-RU', { style: 'currency', currency }).format(amount).replace(/\s/g, '\u00a0');
+
 /**
  * Неразрывные пробелы там, где перенос строки выглядит неряшливо:
  * «200 °C», «35 мин», «1,5 кг», «суп — это», «д. 5». Применяется к текстам данных при загрузке.
